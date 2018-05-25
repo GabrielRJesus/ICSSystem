@@ -7,8 +7,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="617.0" prefWidth="370.0" style="-fx-border-color: #000; -fx-border-width: 2;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="view.GerenciarFuncionarioController">
+<AnchorPane id="AnchorPane" prefHeight="617.0" prefWidth="370.0" style="-fx-border-color: #000; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GerenciarFuncionarioController">
    <children>
       <JFXTextField fx:id="txtCodigo" editable="false" layoutX="26.0" layoutY="27.0" prefHeight="25.0" prefWidth="44.0" promptText="Código:" />
       <JFXTextField fx:id="txtNome" editable="false" layoutX="26.0" layoutY="70.0" prefHeight="25.0" prefWidth="290.0" promptText="Nome:" />
@@ -25,23 +24,23 @@
       <JFXTextField fx:id="txtCep" editable="false" layoutX="196.0" layoutY="200.0" prefHeight="25.0" prefWidth="124.0" promptText="CEP:" />
       <JFXComboBox fx:id="cbCidade" layoutX="26.0" layoutY="243.0" prefHeight="25.0" prefWidth="186.0" promptText="Cidade:" />
       <JFXComboBox fx:id="cbEstado" layoutX="225.0" layoutY="243.0" prefHeight="25.0" prefWidth="91.0" promptText="Estado:" />
-      <JFXButton fx:id="btNovo" layoutX="17.0" layoutY="550.0" prefWidth="64.0" style="-fx-border-color: #000;" text="Novo" />
-      <JFXButton fx:id="btGravar" layoutX="84.0" layoutY="550.0" prefWidth="64.0" style="-fx-border-color: #000;" text="Gravar">
+      <JFXButton fx:id="btNovo" layoutX="17.0" layoutY="550.0" onAction="#clkNovo" prefWidth="64.0" style="-fx-border-color: #000;" text="Novo" />
+      <JFXButton fx:id="btGravar" layoutX="84.0" layoutY="550.0" onAction="#clkGravar" prefWidth="64.0" style="-fx-border-color: #000;" text="Gravar">
          <opaqueInsets>
             <Insets left="3.0" />
          </opaqueInsets>
       </JFXButton>
-      <JFXButton fx:id="btLimpar" layoutX="151.0" layoutY="550.0" prefWidth="64.0" style="-fx-border-color: #000;" text="Limpar">
+      <JFXButton fx:id="btLimpar" layoutX="151.0" layoutY="550.0" onAction="#clkLimpar" prefWidth="64.0" style="-fx-border-color: #000;" text="Limpar">
          <opaqueInsets>
             <Insets left="3.0" />
          </opaqueInsets>
       </JFXButton>
-      <JFXButton fx:id="btLocalizar" layoutX="218.0" layoutY="550.0" prefWidth="64.0" style="-fx-border-color: #000;" text="Localizar">
+      <JFXButton fx:id="btLocalizar" layoutX="218.0" layoutY="550.0" onAction="#clkLocalizar" prefWidth="64.0" style="-fx-border-color: #000;" text="Localizar">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </JFXButton>
-      <JFXButton fx:id="btSair" layoutX="285.0" layoutY="550.0" prefWidth="64.0" style="-fx-border-color: #000;" text="Sair" />
+      <JFXButton fx:id="btSair" layoutX="285.0" layoutY="550.0" onAction="#clkSair" prefWidth="64.0" style="-fx-border-color: #000;" text="Sair" />
       <JFXTextField fx:id="txtLogin" editable="false" layoutX="26.0" layoutY="416.0" prefHeight="25.0" prefWidth="132.0" promptText="Login:" />
       <JFXTextField fx:id="txtSenha" editable="false" layoutX="184.0" layoutY="416.0" prefHeight="25.0" prefWidth="132.0" promptText="Senha:" />
       <JFXDatePicker fx:id="dpDataAdm" layoutX="25.0" layoutY="459.0" prefHeight="25.0" prefWidth="146.0" promptText="Data de Admissão" />

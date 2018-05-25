@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="617.0" prefWidth="370.0" style="-fx-border-color: #000; -fx-border-width: 2;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="view.GerenciarFuncionarioController">
+   <children>
+      <JFXTextField fx:id="txtCodigo" editable="false" layoutX="26.0" layoutY="27.0" prefHeight="25.0" prefWidth="44.0" promptText="Código:" />
+      <JFXTextField fx:id="txtNome" editable="false" layoutX="26.0" layoutY="70.0" prefHeight="25.0" prefWidth="290.0" promptText="Nome:" />
+      <JFXTextField fx:id="txtCpf" editable="false" layoutX="26.0" layoutY="113.0" prefHeight="25.0" prefWidth="132.0" promptText="CPF:" />
+      <JFXTextField fx:id="txtRg" editable="false" layoutX="184.0" layoutY="113.0" prefHeight="25.0" prefWidth="132.0" promptText="RG:" />
+      <JFXTextField fx:id="txtTelefone" editable="false" layoutX="25.0" layoutY="284.0" prefHeight="25.0" prefWidth="132.0" promptText="Telefone:" />
+      <JFXTextField fx:id="txtCelular" editable="false" layoutX="183.0" layoutY="284.0" prefHeight="25.0" prefWidth="132.0" promptText="Celular:" />
+      <JFXDatePicker fx:id="dpData" layoutX="25.0" layoutY="327.0" promptText="Data de Nascimento" />
+      <JFXComboBox fx:id="cbSexo" layoutX="221.0" layoutY="327.0" prefHeight="25.0" prefWidth="97.0" promptText="Sexo:" />
+      <JFXTextField fx:id="txtEmail" editable="false" layoutX="25.0" layoutY="370.0" prefHeight="25.0" prefWidth="290.0" promptText="E-mail:" />
+      <JFXTextField fx:id="txtEndereco" editable="false" layoutX="25.0" layoutY="157.0" prefHeight="25.0" prefWidth="206.0" promptText="Endereço:" />
+      <JFXTextField fx:id="txtNumero" layoutX="242.0" layoutY="157.0" prefHeight="25.0" prefWidth="76.0" promptText="Numero:" />
+      <JFXTextField fx:id="txtBairro" editable="false" layoutX="26.0" layoutY="200.0" prefHeight="25.0" prefWidth="157.0" promptText="Bairro:" />
+      <JFXTextField fx:id="txtCep" editable="false" layoutX="196.0" layoutY="200.0" prefHeight="25.0" prefWidth="124.0" promptText="CEP:" />
+      <JFXComboBox fx:id="cbCidade" layoutX="26.0" layoutY="243.0" prefHeight="25.0" prefWidth="186.0" promptText="Cidade:" />
+      <JFXComboBox fx:id="cbEstado" layoutX="225.0" layoutY="243.0" prefHeight="25.0" prefWidth="91.0" promptText="Estado:" />
+      <JFXButton fx:id="btNovo" layoutX="17.0" layoutY="550.0" prefWidth="64.0" style="-fx-border-color: #000;" text="Novo" />
+      <JFXButton fx:id="btGravar" layoutX="84.0" layoutY="550.0" prefWidth="64.0" style="-fx-border-color: #000;" text="Gravar">
+         <opaqueInsets>
+            <Insets left="3.0" />
+         </opaqueInsets>
+      </JFXButton>
+      <JFXButton fx:id="btLimpar" layoutX="151.0" layoutY="550.0" prefWidth="64.0" style="-fx-border-color: #000;" text="Limpar">
+         <opaqueInsets>
+            <Insets left="3.0" />
+         </opaqueInsets>
+      </JFXButton>
+      <JFXButton fx:id="btLocalizar" layoutX="218.0" layoutY="550.0" prefWidth="64.0" style="-fx-border-color: #000;" text="Localizar">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </JFXButton>
+      <JFXButton fx:id="btSair" layoutX="285.0" layoutY="550.0" prefWidth="64.0" style="-fx-border-color: #000;" text="Sair" />
+      <JFXTextField fx:id="txtLogin" editable="false" layoutX="26.0" layoutY="416.0" prefHeight="25.0" prefWidth="132.0" promptText="Login:" />
+      <JFXTextField fx:id="txtSenha" editable="false" layoutX="184.0" layoutY="416.0" prefHeight="25.0" prefWidth="132.0" promptText="Senha:" />
+      <JFXDatePicker fx:id="dpDataAdm" layoutX="25.0" layoutY="459.0" prefHeight="25.0" prefWidth="146.0" promptText="Data de Admissão" />
+      <JFXDatePicker fx:id="dpDataDem" layoutX="183.0" layoutY="459.0" prefHeight="25.0" prefWidth="140.0" promptText="Data de Demissão" />
+      <JFXTextField fx:id="txtSalario" editable="false" layoutX="26.0" layoutY="502.0" prefHeight="25.0" prefWidth="132.0" promptText="Salario R$:" />
+      <JFXTextField fx:id="txtCargo" editable="false" layoutX="184.0" layoutY="502.0" prefHeight="25.0" prefWidth="132.0" promptText="Cargo:" />
+   </children>
+</AnchorPane>

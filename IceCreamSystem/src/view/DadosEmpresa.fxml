@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="509.0" prefWidth="379.0" style="-fx-border-color: #000; -fx-border-width: 2px;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="view.DadosEmpresaController">
+   <children>
+      <TextField fx:id="txtCodigo" layoutX="24.0" layoutY="22.0" prefHeight="25.0" prefWidth="65.0" promptText="Código" />
+      <TextField fx:id="txtNomeFantasia" layoutX="24.0" layoutY="63.0" prefHeight="25.0" prefWidth="330.0" promptText="Nome Fantasia:" />
+      <TextField fx:id="txtRazao" layoutX="24.0" layoutY="100.0" prefHeight="25.0" prefWidth="330.0" promptText="Razão Social:" />
+      <TextField fx:id="txtCNPJ" layoutX="24.0" layoutY="138.0" prefHeight="25.0" prefWidth="171.0" promptText="CNPJ:" />
+      <TextField fx:id="txtIE" layoutX="205.0" layoutY="138.0" promptText="IE:" />
+      <TextField fx:id="txtTelefone" layoutX="24.0" layoutY="178.0" prefHeight="25.0" prefWidth="171.0" promptText="Telefone:" />
+      <JFXDatePicker fx:id="dpDtFundacao" layoutX="24.0" layoutY="217.0" prefHeight="25.0" prefWidth="267.0" promptText="data de fundação:" />
+      <Label layoutX="24.0" layoutY="257.0" text="Logo:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btLocaliza" layoutX="225.0" layoutY="383.0" onAction="#clkLocaliza" style="-fx-border-color: #000;" text="Localizar Logo" />
+      <AnchorPane layoutX="24.0" layoutY="274.0" prefHeight="142.0" prefWidth="195.0" style="-fx-border-color: #000;">
+         <children>
+            <ImageView fx:id="imageView" fitHeight="131.0" fitWidth="171.0" layoutX="12.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+      <JFXButton fx:id="btNovo" layoutX="24.0" layoutY="440.0" onAction="#clkNovo" prefHeight="27.0" prefWidth="85.0" style="-fx-border-color: #000;" text="Novo" />
+      <JFXButton fx:id="btSalvar" layoutX="147.0" layoutY="441.0" onAction="#clkSalvar" prefHeight="27.0" prefWidth="85.0" style="-fx-border-color: #000;" text="Salvar" />
+      <JFXButton fx:id="btSair" layoutX="269.0" layoutY="441.0" onAction="#clkSair" prefHeight="27.0" prefWidth="85.0" style="-fx-border-color: #000;" text="Sair" />
+   </children>
+</AnchorPane>

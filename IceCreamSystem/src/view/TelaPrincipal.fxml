@@ -40,7 +40,10 @@
                 <MenuItem mnemonicParsing="false" text="Action 1" />
               </items>
             </Menu>
-            <Menu fx:id="menuSair" mnemonicParsing="false" onAction="#sair" text="Sair" />
+            <Menu mnemonicParsing="false" text="Outros">
+               <items>
+                  <MenuItem fx:id="menuSair" mnemonicParsing="false" onAction="#sair" text="Sair" />
+               </items></Menu>
         </menus>
       </MenuBar>
       <JFXButton fx:id="btNovaComanda" layoutX="37.0" layoutY="465.0" style="-fx-border-color: #000;" text="Nova Comanda" />

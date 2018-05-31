@@ -1,0 +1,4 @@
+Cores Sistema
+
+cor fundo logo = #99f3f3 #aff paleturquoise hsl(180,78,77) rgb(153,243,243)
+cor contraste logo = #2b2553 #325 midnightblue hsl(247,38,23) rgb(43,37,83)

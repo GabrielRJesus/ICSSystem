@@ -6,7 +6,7 @@ import java.util.Date;
  *
  * @author gabri
  */
-public class Funcionario extends PFisica{
+public class Funcionario extends Cliente{
     private String login;
     private String senha;
     private Date dtAdmiss;

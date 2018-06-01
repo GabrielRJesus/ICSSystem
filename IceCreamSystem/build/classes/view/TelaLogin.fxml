@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="277.0" prefWidth="629.0" style="-fx-background-color: #99f3f3; -fx-border-color: #2b2553; -fx-border-width: 2px;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaLoginController">
+   <children>
+      <ImageView fitHeight="271.0" fitWidth="329.0" layoutX="7.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Logo.jpg" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="tvLogin" alignment="CENTER" focusColor="#2b2553" layoutX="362.0" layoutY="69.0" prefHeight="25.0" prefWidth="208.0" promptText="Login:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="btEntrar" layoutX="362.0" layoutY="197.0" onAction="#clkEntrar" prefHeight="31.0" prefWidth="98.0" style="-fx-border-color: #2b2553;" text="Entrar" textFill="#2b2553">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btSair" layoutX="472.0" layoutY="197.0" onAction="#clkSair" prefHeight="31.0" prefWidth="98.0" style="-fx-border-color: #2b2553;" text="Sair" textFill="#2b2553">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXPasswordField fx:id="tvSenha" alignment="CENTER" focusColor="#2b2553" layoutX="362.0" layoutY="126.0" prefHeight="25.0" prefWidth="208.0" promptText="Senha:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXPasswordField>
+   </children>
+</AnchorPane>

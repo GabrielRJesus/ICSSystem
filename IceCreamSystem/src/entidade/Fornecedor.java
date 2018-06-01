@@ -6,7 +6,7 @@ import java.util.Date;
  *
  * @author gabri
  */
-public class PJuridica extends Pessoa{
+public class Fornecedor extends Pessoa{
     private String cnpj;
     private String ie;
     private String razaosocial;
@@ -17,7 +17,7 @@ public class PJuridica extends Pessoa{
     private String ramoAtiv;
     private String observacoes;
 
-    public PJuridica() {
+    public Fornecedor() {
     }
 
     public String getCnpj() {

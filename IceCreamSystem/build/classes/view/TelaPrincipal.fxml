@@ -4,11 +4,14 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="523.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaPrincipalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="858.0" prefWidth="1298.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaPrincipalController">
    <children>
-      <MenuBar fx:id="menuBar" layoutY="2.0" prefHeight="25.0" prefWidth="746.0">
+      <MenuBar fx:id="menuBar" layoutY="2.0" prefHeight="29.0" prefWidth="1298.0" stylesheets="@estilo.css">
         <menus>
           <Menu fx:id="menuGerenciar" mnemonicParsing="false" text="Gerenciar ">
             <items>
@@ -46,6 +49,14 @@
                </items></Menu>
         </menus>
       </MenuBar>
-      <JFXButton fx:id="btNovaComanda" layoutX="37.0" layoutY="465.0" style="-fx-border-color: #000;" text="Nova Comanda" />
+      <JFXButton fx:id="btNovaComanda" layoutX="26.0" layoutY="791.0" prefHeight="35.0" prefWidth="130.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Nova Comanda" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></JFXButton>
+      <ImageView fitHeight="592.0" fitWidth="990.0" layoutX="312.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Logo.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

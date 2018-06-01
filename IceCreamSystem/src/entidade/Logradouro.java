@@ -1,5 +1,10 @@
 package entidade;
 
+import DAO.LogradouroDAO;
+import exception.DAOException;
+import exception.EntidadeException;
+import java.sql.Connection;
+
 /**
  *
  * @author gabri
@@ -64,5 +69,12 @@ public class Logradouro {
         this.cidade = cidade;
     }
     
+    public int insert(Connection con) throws EntidadeException{
+        try{
+            return new LogradouroDAO().insert(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
     
 }

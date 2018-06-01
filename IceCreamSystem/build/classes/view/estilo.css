@@ -1,0 +1,40 @@
+.corTexto{
+	-fx-text-fill: #2b2553;
+}
+
+.background{
+	-fx-background-color: #99f3f3;
+}
+
+.comboBox{
+	-fx-text-fill: #2b2553;
+	-fx-text-size: 15pt;
+	-fx-font-family: "Arial";
+}
+
+.menu-bar {
+    -fx-background-color: #fd5a79;
+}
+
+.context-menu {
+    -fx-background-color: #99f3f3;
+}
+
+.menu-bar .labelTitulo {
+    -fx-font-size: 13pt;
+    -fx-font-family: "Arial";
+    -fx-text-fill: white;
+    -fx-opacity: 0.8;
+}
+
+.menu-bar .label {
+    -fx-font-size: 13pt;
+    -fx-font-family: "Arial";
+    -fx-text-fill: #2b2553;
+    -fx-opacity: 0.8;
+}
+
+.menu .left-container {
+    -fx-background-color: black;
+}
+

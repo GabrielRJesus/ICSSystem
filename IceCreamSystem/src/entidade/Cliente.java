@@ -1,19 +1,23 @@
 package entidade;
 
+import DAO.ClienteDAO;
+import exception.DAOException;
+import exception.EntidadeException;
+import java.sql.Connection;
 import java.util.Date;
 
 /**
  *
  * @author gabri
  */
-public class PFisica extends Pessoa{
+public class Cliente extends Pessoa{
    private String cpf;
    private String rg;
    private String celular;
    private Date dtNasc;
    private char sexo;
 
-    public PFisica() {
+    public Cliente() {
     }
 
     public String getCpf() {
@@ -56,5 +60,13 @@ public class PFisica extends Pessoa{
         this.sexo = sexo;
     }
    
-   
+    public int insert(Connection con) throws EntidadeException{
+        try{
+            return new ClienteDAO().insert(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+
+    
 }

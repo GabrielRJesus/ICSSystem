@@ -56,11 +56,11 @@ public class GerenciarClienteController implements Initializable {
     @FXML
     private JFXButton btGravar;
     @FXML
-    private JFXButton btLimpar;
-    @FXML
     private JFXButton btLocalizar;
     @FXML
     private JFXButton btSair;
+    @FXML
+    private JFXButton btCancelar;
 
     /**
      * Initializes the controller class.

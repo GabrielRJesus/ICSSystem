@@ -8,9 +8,11 @@ package view;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -56,15 +58,13 @@ public class GerenciarFuncionarioController implements Initializable {
     @FXML
     private JFXButton btGravar;
     @FXML
-    private JFXButton btLimpar;
-    @FXML
     private JFXButton btLocalizar;
     @FXML
     private JFXButton btSair;
     @FXML
     private JFXTextField txtLogin;
     @FXML
-    private JFXTextField txtSenha;
+    private JFXPasswordField txtSenha;
     @FXML
     private JFXDatePicker dpDataAdm;
     @FXML
@@ -73,6 +73,8 @@ public class GerenciarFuncionarioController implements Initializable {
     private JFXTextField txtSalario;
     @FXML
     private JFXTextField txtCargo;
+    @FXML
+    private JFXButton btCancelar;
 
     /**
      * Initializes the controller class.
@@ -81,5 +83,25 @@ public class GerenciarFuncionarioController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void clkNovo(ActionEvent event) {
+    }
+
+    @FXML
+    private void clkGravar(ActionEvent event) {
+    }
+
+    @FXML
+    private void clkCancelar(ActionEvent event) {
+    }
+
+    @FXML
+    private void clkLocalizar(ActionEvent event) {
+    }
+
+    @FXML
+    private void clkSair(ActionEvent event) {
+    }
     
 }

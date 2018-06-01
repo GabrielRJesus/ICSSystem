@@ -7,6 +7,7 @@ package view;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -22,17 +23,28 @@ import javafx.scene.image.ImageView;
 public class DadosEmpresaController implements Initializable {
 
     @FXML
+    private JFXTextField tvCodigo;
+    @FXML
+    private JFXTextField tvNome;
+    @FXML
+    private JFXTextField tvRazaoSocial;
+    @FXML
+    private JFXTextField tvCNPJ;
+    @FXML
+    private JFXTextField tvIe;
+    @FXML
+    private JFXTextField tvTelefone;
+    @FXML
     private JFXDatePicker dpDtFundacao;
-    @FXML
-    private JFXButton btLocaliza;
-    @FXML
-    private ImageView imageView;
     @FXML
     private JFXButton btNovo;
     @FXML
-    private JFXButton btSalvar;
+    private JFXButton btGravar;
+    @FXML
+    private JFXButton btCancelar;
     @FXML
     private JFXButton btSair;
+
 
     /**
      * Initializes the controller class.
@@ -43,19 +55,20 @@ public class DadosEmpresaController implements Initializable {
     }    
 
     @FXML
-    private void clkLocaliza(ActionEvent event) {
-    }
-
-    @FXML
     private void clkNovo(ActionEvent event) {
     }
 
     @FXML
-    private void clkSalvar(ActionEvent event) {
+    private void clkGravar(ActionEvent event) {
+    }
+
+    @FXML
+    private void clkCancelar(ActionEvent event) {
     }
 
     @FXML
     private void clkSair(ActionEvent event) {
     }
+
     
 }

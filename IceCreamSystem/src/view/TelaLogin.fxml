@@ -1,26 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.TextField?>
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.Label?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="277.0" prefWidth="426.0" style="-fx-border-color: #000; -fx-border-width: 2px;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="view.TelaLoginController">
+<AnchorPane id="AnchorPane" prefHeight="277.0" prefWidth="629.0" style="-fx-background-color: #99f3f3; -fx-border-color: #2b2553; -fx-border-width: 2px;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaLoginController">
    <children>
-      <Label layoutX="62.0" layoutY="14.0" text="Nápoles Sorveteria">
+      <ImageView fitHeight="271.0" fitWidth="329.0" layoutX="7.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Logo.jpg" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="tvLogin" alignment="CENTER" focusColor="#2b2553" layoutX="362.0" layoutY="69.0" prefHeight="25.0" prefWidth="208.0" promptText="Login:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
-            <Font name="System Bold" size="34.0" />
+            <Font name="Arial" size="15.0" />
          </font>
-      </Label>
-      <AnchorPane layoutX="62.0" layoutY="85.0" prefHeight="150.0" prefWidth="303.0">
-         <children>
-            <TextField fx:id="txtLogin" layoutX="72.0" layoutY="22.0" prefHeight="25.0" prefWidth="160.0" promptText="Login:" />
-            <TextField fx:id="txtSenha" layoutX="72.0" layoutY="63.0" prefHeight="25.0" prefWidth="160.0" promptText="Senha:" />
-            <JFXButton fx:id="btEntrar" layoutX="72.0" layoutY="101.0" onAction="#clkEntrar" style="-fx-border-color: #000;" text="Entrar" />
-            <JFXButton fx:id="btEsqueci" layoutX="129.0" layoutY="101.0" onAction="#clkEsqueci" prefHeight="25.0" prefWidth="103.0" style="-fx-border-color: #000;" text="Esqueci a Senha" />
-         </children>
-      </AnchorPane>
+      </JFXTextField>
+      <JFXButton fx:id="btEntrar" layoutX="362.0" layoutY="197.0" onAction="#clkEntrar" prefHeight="31.0" prefWidth="98.0" style="-fx-border-color: #2b2553;" text="Entrar" textFill="#2b2553">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btSair" layoutX="472.0" layoutY="197.0" onAction="#clkSair" prefHeight="31.0" prefWidth="98.0" style="-fx-border-color: #2b2553;" text="Sair" textFill="#2b2553">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXPasswordField fx:id="tvSenha" alignment="CENTER" focusColor="#2b2553" layoutX="362.0" layoutY="126.0" prefHeight="25.0" prefWidth="208.0" promptText="Senha:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXPasswordField>
    </children>
 </AnchorPane>

@@ -4,43 +4,95 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="481.0" prefWidth="370.0" style="-fx-border-width: 2; -fx-border-color: #000;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="view.GerenciarClienteController">
+<AnchorPane id="AnchorPane" prefHeight="641.0" prefWidth="907.0" style="-fx-border-width: 2; -fx-border-color: #2b2553;" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GerenciarClienteController">
    <children>
-      <JFXTextField fx:id="txtCodigo" editable="false" layoutX="26.0" layoutY="23.0" prefHeight="25.0" prefWidth="44.0" promptText="Código:" />
-      <JFXTextField fx:id="txtNome" editable="false" layoutX="26.0" layoutY="66.0" prefHeight="25.0" prefWidth="290.0" promptText="Nome:" />
-      <JFXTextField fx:id="txtCpf" editable="false" layoutX="26.0" layoutY="109.0" prefHeight="25.0" prefWidth="132.0" promptText="CPF:" />
-      <JFXTextField fx:id="txtRg" editable="false" layoutX="184.0" layoutY="109.0" prefHeight="25.0" prefWidth="132.0" promptText="RG:" />
-      <JFXTextField fx:id="txtTelefone" editable="false" layoutX="25.0" layoutY="280.0" prefHeight="25.0" prefWidth="132.0" promptText="Telefone:" />
-      <JFXTextField fx:id="txtCelular" editable="false" layoutX="183.0" layoutY="280.0" prefHeight="25.0" prefWidth="132.0" promptText="Celular:" />
-      <JFXDatePicker fx:id="dpData" layoutX="25.0" layoutY="323.0" promptText="Data de Nascimento" />
-      <JFXComboBox fx:id="cbSexo" layoutX="221.0" layoutY="323.0" prefHeight="25.0" prefWidth="97.0" promptText="Sexo:" />
-      <JFXTextField fx:id="txtEmail" editable="false" layoutX="25.0" layoutY="366.0" prefHeight="25.0" prefWidth="290.0" promptText="E-mail:" />
-      <JFXTextField fx:id="txtEndereco" editable="false" layoutX="25.0" layoutY="153.0" prefHeight="25.0" prefWidth="206.0" promptText="Endereço:" />
-      <JFXTextField fx:id="txtNumero" layoutX="242.0" layoutY="153.0" prefHeight="25.0" prefWidth="76.0" promptText="Numero:" />
-      <JFXTextField fx:id="txtBairro" editable="false" layoutX="26.0" layoutY="196.0" prefHeight="25.0" prefWidth="157.0" promptText="Bairro:" />
-      <JFXTextField fx:id="txtCep" editable="false" layoutX="196.0" layoutY="196.0" prefHeight="25.0" prefWidth="124.0" promptText="CEP:" />
-      <JFXComboBox fx:id="cbCidade" layoutX="26.0" layoutY="239.0" prefHeight="25.0" prefWidth="186.0" promptText="Cidade:" />
-      <JFXComboBox fx:id="cbEstado" layoutX="225.0" layoutY="239.0" prefHeight="25.0" prefWidth="91.0" promptText="Estado:" />
-      <JFXButton fx:id="btNovo" layoutX="19.0" layoutY="412.0" prefWidth="64.0" style="-fx-border-color: #000;" text="Novo" />
-      <JFXButton fx:id="btGravar" layoutX="86.0" layoutY="412.0" prefWidth="64.0" style="-fx-border-color: #000;" text="Gravar">
-         <opaqueInsets>
-            <Insets left="3.0" />
-         </opaqueInsets>
+      <JFXTextField fx:id="txtCodigo" editable="false" focusColor="#2b2553" layoutX="66.0" layoutY="113.0" prefHeight="29.0" prefWidth="76.0" promptText="Código:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtNome" focusColor="#2b2553" layoutX="66.0" layoutY="166.0" prefHeight="25.0" prefWidth="517.0" promptText="Nome:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtCpf" layoutX="66.0" layoutY="211.0" prefHeight="25.0" prefWidth="253.0" promptText="CPF:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtRg" focusColor="#2b2553" layoutX="339.0" layoutY="211.0" prefHeight="25.0" prefWidth="245.0" promptText="RG:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtTelefone" focusColor="#2b2553" layoutX="66.0" layoutY="382.0" prefHeight="25.0" prefWidth="263.0" promptText="Telefone:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font size="15.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtCelular" focusColor="#2b2553" layoutX="344.0" layoutY="382.0" prefHeight="25.0" prefWidth="245.0" promptText="Celular:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font size="15.0" />
+         </font></JFXTextField>
+      <JFXDatePicker fx:id="dpData" defaultColor="#2b2553" layoutX="63.0" layoutY="425.0" prefHeight="28.0" prefWidth="322.0" promptText="Data de Nascimento" />
+      <JFXComboBox fx:id="cbSexo" focusColor="#2b2553" layoutX="405.0" layoutY="427.0" prefHeight="25.0" prefWidth="186.0" promptText="Sexo:" styleClass="comboBox" stylesheets="@estilo.css" />
+      <JFXTextField fx:id="txtEmail" editable="false" focusColor="#2b2553" layoutX="66.0" layoutY="473.0" prefHeight="25.0" prefWidth="528.0" promptText="E-mail:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font size="15.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtEndereco" focusColor="#2b2553" layoutX="66.0" layoutY="255.0" prefHeight="25.0" prefWidth="429.0" promptText="Endereço:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtNumero" focusColor="#2b2553" layoutX="511.0" layoutY="255.0" prefHeight="25.0" prefWidth="76.0" promptText="Numero:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtBairro" focusColor="#2b2553" layoutX="66.0" layoutY="298.0" prefHeight="25.0" prefWidth="322.0" promptText="Bairro:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txtCep" focusColor="#2b2553" layoutX="403.0" layoutY="298.0" prefHeight="25.0" prefWidth="186.0" promptText="CEP:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></JFXTextField>
+      <JFXComboBox fx:id="cbCidade" focusColor="#2b2553" layoutX="63.0" layoutY="341.0" prefHeight="25.0" prefWidth="346.0" promptText="Cidade:" styleClass="comboBox" stylesheets="@estilo.css" />
+      <JFXComboBox fx:id="cbEstado" focusColor="#2b2553" layoutX="424.0" layoutY="341.0" prefHeight="25.0" prefWidth="162.0" promptText="Estado:" styleClass="comboBox" stylesheets="@estilo.css" />
+      <JFXButton fx:id="btNovo" layoutX="70.0" layoutY="562.0" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Novo" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></JFXButton>
+      <Label layoutX="223.0" layoutY="14.0" text="Gerenciar Cliente" textFill="#2b2553">
+         <font>
+            <Font name="Arial Black" size="48.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btGravar" layoutX="168.0" layoutY="562.0" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Gravar" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
       </JFXButton>
-      <JFXButton fx:id="btLimpar" layoutX="153.0" layoutY="412.0" prefWidth="64.0" style="-fx-border-color: #000;" text="Limpar">
-         <opaqueInsets>
-            <Insets left="3.0" />
-         </opaqueInsets>
+      <JFXButton fx:id="btCancelar" layoutX="266.0" layoutY="562.0" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Cancelar" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
       </JFXButton>
-      <JFXButton fx:id="btLocalizar" layoutX="220.0" layoutY="412.0" prefWidth="64.0" style="-fx-border-color: #000;" text="Localizar">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
+      <JFXButton fx:id="btLocalizar" layoutX="364.0" layoutY="562.0" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Localizar" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
       </JFXButton>
-      <JFXButton fx:id="btSair" layoutX="287.0" layoutY="412.0" prefWidth="64.0" style="-fx-border-color: #000;" text="Sair" />
+      <ImageView fitHeight="243.0" fitWidth="253.0" layoutX="630.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Logo.jpg" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="btSair" layoutX="774.0" layoutY="562.0" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Sair" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

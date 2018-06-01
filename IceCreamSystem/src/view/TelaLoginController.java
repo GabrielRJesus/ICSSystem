@@ -1,6 +1,8 @@
 package view;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -11,9 +13,13 @@ import javafx.fxml.Initializable;
 public class TelaLoginController implements Initializable {
 
     @FXML
+    private JFXTextField tvLogin;
+    @FXML
+    private JFXPasswordField tvSenha;
+    @FXML
     private JFXButton btEntrar;
     @FXML
-    private JFXButton btEsqueci;
+    private JFXButton btSair;
 
     /**
      * Initializes the controller class.
@@ -28,7 +34,8 @@ public class TelaLoginController implements Initializable {
     }
 
     @FXML
-    private void clkEsqueci(ActionEvent event) {
+    private void clkSair(ActionEvent event) {
     }
+
     
 }

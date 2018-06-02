@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="672.0" prefWidth="817.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GerenciarMarcaController">
+   <children>
+      <Label layoutX="153.0" layoutY="14.0" text="Gerenciar Marcas" textFill="#2b2553">
+         <font>
+            <Font name="Arial Black" size="53.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtCodigo" focusColor="#2b2553" layoutX="132.0" layoutY="153.0" prefHeight="25.0" prefWidth="106.0" promptText="Código:">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtMarca" focusColor="#2b2553" layoutX="255.0" layoutY="153.0" prefHeight="25.0" prefWidth="428.0" promptText="Marca">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <TableView fx:id="tableaMarcas" layoutX="132.0" layoutY="226.0" onMouseClicked="#selecionaMarca" prefHeight="344.0" prefWidth="554.0" stylesheets="@estilo.css">
+        <columns>
+          <TableColumn fx:id="colCodigo" prefWidth="122.0" text="Código" />
+          <TableColumn fx:id="colMarca" prefWidth="431.0" text="Marca" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="btNovo" layoutX="132.0" layoutY="598.0" onAction="#clkNovo" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Novo" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btGravar" layoutX="230.0" layoutY="598.0" onAction="#clkGravar" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Gravar" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btCancelar" layoutX="328.0" layoutY="598.0" onAction="#clkCancelar" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Cancelar" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btLocalizar" layoutX="426.0" layoutY="598.0" onAction="#clkLocalizar" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Localizar" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btSair" layoutX="596.0" layoutY="598.0" onAction="#clkSair" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Sair" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

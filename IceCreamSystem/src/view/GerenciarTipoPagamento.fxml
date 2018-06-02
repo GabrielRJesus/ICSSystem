@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="629.0" prefWidth="866.0" styleClass="background" stylesheets="@estilo.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="view.GerenciarTipoPagamentoController">
+   <children>
+      <Label layoutX="53.0" layoutY="14.0" text="Gerenciar Tipos de Pagamento" textFill="#2b2553">
+         <font>
+            <Font name="Arial Black" size="45.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtCodigo" focusColor="#2b2553" layoutX="148.0" layoutY="126.0" prefHeight="25.0" prefWidth="106.0" promptText="Código:">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtDescricao" focusColor="#2b2553" layoutX="271.0" layoutY="126.0" prefHeight="25.0" prefWidth="428.0" promptText="Descrição:">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <TableView fx:id="tableaTipoPag" layoutX="148.0" layoutY="187.0" onMouseClicked="#selecionaTipoPagamento" prefHeight="344.0" prefWidth="554.0" stylesheets="@estilo.css">
+         <columns>
+            <TableColumn fx:id="colCodigo" prefWidth="122.0" text="Código" />
+            <TableColumn fx:id="colMarca" prefWidth="431.0" text="Descrição" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="btNovo" layoutX="148.0" layoutY="571.0" onAction="#clkNovo" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Novo" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btGravar" layoutX="246.0" layoutY="571.0" onAction="#clkGravar" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Gravar" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btCancelar" layoutX="344.0" layoutY="571.0" onAction="#clkCancelar" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Cancelar" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btLocalizar" layoutX="442.0" layoutY="571.0" onAction="#clkLocalizar" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Localizar" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btSair" layoutX="636.0" layoutY="571.0" onAction="#clkSair" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Sair" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btExcluir" layoutX="539.0" layoutY="571.0" onAction="#clkExcluir" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Excluir" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

@@ -4,6 +4,8 @@
 
 .background{
 	-fx-background-color: #99f3f3;
+	-fx-border-color: #2b2553;
+	-fx-border-width: 2pt;
 }
 
 .comboBox{
@@ -36,5 +38,42 @@
 
 .menu .left-container {
     -fx-background-color: black;
+}
+
+.table-view {
+    -fx-base: #fd5a79;
+    -fx-control-inner-background: #1d1d1d;
+    -fx-background-color: #fd5a79;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color: 
+        transparent
+        transparent
+        derive(-fx-base, 80%) 
+        transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 15pt;
+    -fx-font-family: "Arial";
+    -fx-text-fill: white;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
 }
 

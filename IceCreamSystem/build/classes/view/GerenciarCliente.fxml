@@ -50,7 +50,7 @@
             <Font name="Arial" size="15.0" />
          </font></JFXTextField>
       <JFXComboBox fx:id="cbCidade" focusColor="#2b2553" layoutX="248.0" layoutY="342.0" prefHeight="31.0" prefWidth="346.0" promptText="Cidade:" styleClass="comboBox" stylesheets="@estilo.css" />
-      <JFXComboBox fx:id="cbEstado" focusColor="#2b2553" layoutX="70.0" layoutY="342.0" onMouseClicked="#mudaEstado" prefHeight="31.0" prefWidth="162.0" promptText="Estado:" styleClass="comboBox" stylesheets="@estilo.css" />
+      <JFXComboBox fx:id="cbEstado" focusColor="#2b2553" layoutX="70.0" layoutY="342.0" prefHeight="31.0" prefWidth="162.0" promptText="Estado:" styleClass="comboBox" stylesheets="@estilo.css" />
       <JFXTextField fx:id="txtTelefone" focusColor="#2b2553" layoutX="66.0" layoutY="382.0" prefHeight="25.0" prefWidth="263.0" promptText="Telefone:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font size="15.0" />

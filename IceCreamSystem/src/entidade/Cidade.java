@@ -1,5 +1,11 @@
 package entidade;
 
+import DAO.CidadeDAO;
+import exception.DAOException;
+import exception.EntidadeException;
+import java.sql.Connection;
+import java.util.List;
+
 /**
  *
  * @author gabri
@@ -36,6 +42,25 @@ public class Cidade {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
     
+    public Cidade select(Connection con)throws EntidadeException{
+        try{
+            return new CidadeDAO().select(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
     
+    public List<Cidade> lista(Connection con)throws EntidadeException{
+        try{
+            return new CidadeDAO().listaTodas(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
 }

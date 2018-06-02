@@ -2,12 +2,15 @@ package control;
 
 import entidade.Cidade;
 import entidade.Cliente;
+import entidade.Estado;
 import entidade.Logradouro;
 import exception.ControlException;
 import exception.EntidadeException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import sql.Banco;
 import util.Erro;
 import util.Validadores;
@@ -103,6 +106,24 @@ public class PessoaControl {
         }
         
         return 0;
+    }
+    
+    public List<Cidade> buscaCidades(Estado est) throws ControlException{
+        try{
+            Cidade c = new Cidade();
+            c.setEstado(est);
+            return c.lista(con);
+        }catch(EntidadeException ex){
+            throw new ControlException(ex.getMessage());
+        }
+    }
+    
+    public List<Estado> buscaEstados() throws ControlException{
+        try{
+            return new Estado().lista(con);
+        }catch(EntidadeException ex){
+            throw new ControlException(ex.getMessage());
+        }
     }
     
 }

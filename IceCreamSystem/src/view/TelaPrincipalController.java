@@ -113,5 +113,33 @@ public class TelaPrincipalController implements Initializable {
         Stage stage = (Stage) menuBar.getScene().getWindow();
         stage.close();
     }
+
+    @FXML
+    private void gerProduto(ActionEvent event) {
+    }
+
+    @FXML
+    private void gerMarca(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarMarca.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Cadastro Marcas");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
+    }
+
+    @FXML
+    private void gerLote(ActionEvent event) {
+    }
+
+    @FXML
+    private void gerTipoDespesas(ActionEvent event) {
+    }
+
+    @FXML
+    private void gerUnidadeMedida(ActionEvent event) {
+    }
     
 }

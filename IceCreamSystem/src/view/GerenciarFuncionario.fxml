@@ -96,27 +96,27 @@
             <Font name="Arial" size="15.0" />
          </font>
       </JFXPasswordField>
-      <JFXButton fx:id="btNovo" layoutX="54.0" layoutY="701.0" onAction="#clkNovo" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Novo" textFill="#2b2553">
+      <JFXButton fx:id="btNovo" layoutX="54.0" layoutY="701.0" onAction="#clkNovo" prefWidth="90.0" stylesheets="@estilo.css" text="Novo" textFill="#2b2553">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btGravar" layoutX="152.0" layoutY="701.0" onAction="#clkGravar" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Gravar" textFill="#2b2553">
+      <JFXButton fx:id="btGravar" layoutX="152.0" layoutY="701.0" onAction="#clkGravar" prefWidth="90.0" stylesheets="@estilo.css" text="Gravar" textFill="#2b2553">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btCancelar" layoutX="250.0" layoutY="701.0" onAction="#clkCancelar" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Cancelar" textFill="#2b2553">
+      <JFXButton fx:id="btCancelar" layoutX="250.0" layoutY="701.0" onAction="#clkCancelar" prefWidth="90.0" text="Cancelar" textFill="#2b2553">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btLocalizar" layoutX="348.0" layoutY="701.0" onAction="#clkLocalizar" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Localizar" textFill="#2b2553">
+      <JFXButton fx:id="btLocalizar" layoutX="348.0" layoutY="701.0" onAction="#clkLocalizar" prefWidth="90.0" text="Localizar" textFill="#2b2553">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btSair" layoutX="758.0" layoutY="701.0" onAction="#clkSair" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Sair" textFill="#2b2553">
+      <JFXButton fx:id="btSair" layoutX="758.0" layoutY="701.0" onAction="#clkSair" prefWidth="90.0" text="Sair" textFill="#2b2553">
          <font>
             <Font name="Arial" size="15.0" />
          </font>

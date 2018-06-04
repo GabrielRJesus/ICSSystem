@@ -49,7 +49,7 @@
                </items></Menu>
         </menus>
       </MenuBar>
-      <JFXButton fx:id="btNovaComanda" layoutX="22.0" layoutY="672.0" prefHeight="35.0" prefWidth="130.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" text="Nova Comanda" textFill="#2b2553">
+      <JFXButton fx:id="btNovaComanda" layoutX="22.0" layoutY="672.0" prefHeight="35.0" prefWidth="130.0" text="Nova Comanda" textFill="#2b2553">
          <font>
             <Font name="Arial" size="15.0" />
          </font></JFXButton>

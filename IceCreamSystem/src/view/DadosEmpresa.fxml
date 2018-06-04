@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="702.0" prefWidth="724.0" style="-fx-border-color: #2b2553; -fx-border-width: 2px;" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DadosEmpresaController">
+<AnchorPane id="AnchorPane" prefHeight="635.0" prefWidth="724.0" style="-fx-border-color: #2b2553; -fx-border-width: 2px;" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DadosEmpresaController">
    <children>
       <Label layoutX="128.0" layoutY="14.0" text="Dados da Empresa" textFill="#2b2553">
          <font>
@@ -52,22 +52,22 @@
             <Image url="@Logo.jpg" />
          </image>
       </ImageView>
-      <JFXButton fx:id="btNovo" layoutX="63.0" layoutY="572.0" onAction="#clkNovo" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2px;" text="Novo" textFill="#2b2553">
+      <JFXButton fx:id="btNovo" layoutX="63.0" layoutY="572.0" onAction="#clkNovo" prefWidth="90.0" stylesheets="@estilo.css" text="Novo" textFill="#2b2553">
          <font>
             <Font size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btGravar" layoutX="163.0" layoutY="572.0" onAction="#clkGravar" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2px;" text="Gravar" textFill="#2b2553">
+      <JFXButton fx:id="btGravar" layoutX="163.0" layoutY="572.0" onAction="#clkGravar" prefWidth="90.0" text="Gravar" textFill="#2b2553">
          <font>
             <Font size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btCancelar" layoutX="263.0" layoutY="572.0" onAction="#clkCancelar" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2px;" text="Cancelar" textFill="#2b2553">
+      <JFXButton fx:id="btCancelar" layoutX="263.0" layoutY="572.0" onAction="#clkCancelar" prefWidth="90.0" text="Cancelar" textFill="#2b2553">
          <font>
             <Font size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btSair" layoutX="562.0" layoutY="572.0" onAction="#clkSair" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2px;" text="Sair" textFill="#2b2553">
+      <JFXButton fx:id="btSair" layoutX="562.0" layoutY="572.0" onAction="#clkSair" prefWidth="90.0" text="Sair" textFill="#2b2553">
          <font>
             <Font size="15.0" />
          </font>

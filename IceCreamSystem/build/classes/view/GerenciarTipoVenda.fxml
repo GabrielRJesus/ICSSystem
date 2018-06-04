@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="618.0" prefWidth="844.0" styleClass="background" stylesheets="@estilo.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="view.GerenciarTipoVendaController">
+<AnchorPane id="AnchorPane" prefHeight="618.0" prefWidth="844.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GerenciarTipoVendaController">
    <children>
       <Label layoutX="76.0" layoutY="14.0" text="Gerenciar Tipos de Venda" textFill="#2b2553">
          <font>
@@ -32,32 +31,32 @@
           <TableColumn fx:id="colTipoVenda" prefWidth="485.0" text="Tipo de Venda" />
         </columns>
       </TableView>
-      <JFXButton fx:id="btNovo" layoutX="129.0" layoutY="539.0" onAction="#clkNovo" prefHeight="31.0" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2pt;" stylesheets="@estilo.css" text="Novo" textFill="#2b2553">
+      <JFXButton fx:id="btNovo" layoutX="129.0" layoutY="539.0" onAction="#clkNovo" prefHeight="31.0" prefWidth="90.0" stylesheets="@estilo.css" text="Novo" textFill="#2b2553">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btGravar" layoutX="229.0" layoutY="539.0" onAction="#clkGravar" prefHeight="31.0" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2pt;" stylesheets="@estilo.css" text="Gravar" textFill="#2b2553">
+      <JFXButton fx:id="btGravar" layoutX="229.0" layoutY="539.0" onAction="#clkGravar" prefHeight="31.0" prefWidth="90.0" stylesheets="@estilo.css" text="Gravar" textFill="#2b2553">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btCancelar" layoutX="326.0" layoutY="539.0" onAction="#clkCancelar" prefHeight="31.0" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2pt;" stylesheets="@estilo.css" text="Cancelar" textFill="#2b2553">
+      <JFXButton fx:id="btCancelar" layoutX="326.0" layoutY="539.0" onAction="#clkCancelar" prefHeight="31.0" prefWidth="90.0" stylesheets="@estilo.css" text="Cancelar" textFill="#2b2553">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btLocalizar" layoutX="422.0" layoutY="539.0" onAction="#clkLocalizar" prefHeight="31.0" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2pt;" stylesheets="@estilo.css" text="Localizar" textFill="#2b2553">
+      <JFXButton fx:id="btLocalizar" layoutX="422.0" layoutY="539.0" onAction="#clkLocalizar" prefHeight="31.0" prefWidth="90.0" stylesheets="@estilo.css" text="Localizar" textFill="#2b2553">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btExcluir" layoutX="519.0" layoutY="539.0" onAction="#clkExcluir" prefHeight="31.0" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2pt;" stylesheets="@estilo.css" text="Excluir" textFill="#2b2553">
+      <JFXButton fx:id="btExcluir" layoutX="519.0" layoutY="539.0" onAction="#clkExcluir" prefHeight="31.0" prefWidth="90.0" stylesheets="@estilo.css" text="Excluir" textFill="#2b2553">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btSair" layoutX="616.0" layoutY="539.0" onAction="#clkSair" prefHeight="31.0" prefWidth="90.0" style="-fx-border-color: #2b2553; -fx-border-width: 2pt;" stylesheets="@estilo.css" text="Sair" textFill="#2b2553">
+      <JFXButton fx:id="btSair" layoutX="616.0" layoutY="539.0" onAction="#clkSair" prefHeight="31.0" prefWidth="90.0" stylesheets="@estilo.css" text="Sair" textFill="#2b2553">
          <font>
             <Font name="Arial" size="15.0" />
          </font>

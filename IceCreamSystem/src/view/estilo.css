@@ -14,6 +14,14 @@
 	-fx-font-family: "Arial";
 }
 
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-background-color: #fd5a79;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
 .menu-bar {
     -fx-background-color: #fd5a79;
 }
@@ -49,7 +57,7 @@
 }
 
 .table-view .column-header-background{
-    -fx-background-color: #2b2553;
+    -fx-background-color: #005797;
 }
 
 .table-view .column-header-background .label{
@@ -74,7 +82,7 @@
 }
 
 .table-row-cell:odd{
-    -fx-background-color: -fx-table-cell-border-color, whitesmoke;
+    -fx-background-color: -fx-table-cell-border-color, #f48fb1;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em; /* 0 */  
 }

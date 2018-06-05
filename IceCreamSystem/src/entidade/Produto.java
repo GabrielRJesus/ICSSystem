@@ -1,5 +1,6 @@
 package entidade;
 
+import DAO.ProdutoDAO;
 import exception.DAOException;
 import exception.EntidadeException;
 import java.sql.Connection;
@@ -128,7 +129,7 @@ public class Produto {
         }
     }
     
-    public TipoDespesas select(Connection con) throws EntidadeException{
+    public Produto select(Connection con) throws EntidadeException{
         try{
             return new ProdutoDAO().select(this,con);
         }catch(DAOException ex){
@@ -136,7 +137,7 @@ public class Produto {
         }
     }
     
-    public List<TipoDespesas> lista(Connection con) throws EntidadeException{
+    public List<Produto> lista(Connection con) throws EntidadeException{
         try{
             return new ProdutoDAO().lista(this,con);
         }catch(DAOException ex){

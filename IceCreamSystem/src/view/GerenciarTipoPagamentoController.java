@@ -40,8 +40,6 @@ public class GerenciarTipoPagamentoController implements Initializable {
     @FXML
     private JFXButton btCancelar;
     @FXML
-    private JFXButton btLocalizar;
-    @FXML
     private JFXButton btSair;
     @FXML
     private JFXButton btExcluir;
@@ -70,9 +68,6 @@ public class GerenciarTipoPagamentoController implements Initializable {
     private void clkCancelar(ActionEvent event) {
     }
 
-    @FXML
-    private void clkLocalizar(ActionEvent event) {
-    }
 
     @FXML
     private void clkSair(ActionEvent event) {

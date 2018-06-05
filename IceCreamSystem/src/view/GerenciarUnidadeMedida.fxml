@@ -1,11 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1">
-    
+<AnchorPane id="AnchorPane" prefHeight="534.0" prefWidth="619.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GerenciarUnidadeMedidaController">
+   <children>
+      <Label layoutX="75.0" layoutY="14.0" text="Gerenciar Unidade de Medida" textFill="#2b2553">
+         <font>
+            <Font name="Arial Black" size="29.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtCodigo" focusColor="#2b2553" layoutX="86.0" layoutY="78.0" prefHeight="25.0" prefWidth="89.0" promptText="Código:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtDescricao" focusColor="#2b2553" layoutX="188.0" layoutY="78.0" prefHeight="25.0" prefWidth="245.0" promptText="Descrição:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtAbreviacao" focusColor="#2b2553" layoutX="445.0" layoutY="78.0" prefHeight="25.0" prefWidth="89.0" promptText="Abreviação:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <TableView fx:id="tabelaUnidadeMedida" layoutX="86.0" layoutY="119.0" onMouseClicked="#selecionarUnidadeMedida" prefHeight="349.0" prefWidth="447.0">
+        <columns>
+          <TableColumn fx:id="colCodigo" prefWidth="84.0" text="Código" />
+          <TableColumn fx:id="colDescricao" prefWidth="248.0" text="Descrição" />
+            <TableColumn fx:id="colAbreviacao" prefWidth="112.0" text="Abreviação" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="btNovo" layoutX="34.0" layoutY="485.0" onAction="#clkNovo" prefWidth="90.0" text="Novo" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btGravar" layoutX="132.0" layoutY="485.0" onAction="#clkGravar" prefWidth="90.0" text="Gravar" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btCancelar" layoutX="230.0" layoutY="485.0" onAction="#clkCancelar" prefWidth="90.0" text="Cancelar" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btSair" layoutX="498.0" layoutY="485.0" onAction="#clkSair" prefWidth="90.0" text="Sair" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btExcluir" layoutX="329.0" layoutY="485.0" onAction="#clkExcluir" prefWidth="90.0" text="Excluir" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+   </children>
 </AnchorPane>

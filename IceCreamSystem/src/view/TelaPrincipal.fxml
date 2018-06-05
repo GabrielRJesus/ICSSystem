@@ -23,9 +23,9 @@
                   <MenuItem fx:id="gerenciarLotes" mnemonicParsing="false" onAction="#gerLote" text="Gerenciar Lotes de Produtos" />
                   <MenuItem fx:id="gerenciarTipos" mnemonicParsing="false" onAction="#gerTipoDespesas" text="Gerenciar Tipos de Despesas" />
                   <MenuItem fx:id="gerenciarUnidades" mnemonicParsing="false" onAction="#gerUnidadeMedida" text="Gerenciar Unidades de Medidas" />
-                  <MenuItem fx:id="gerenciarCategorias" mnemonicParsing="false" text="Gerenciar Categoria do Produto" />
+                  <MenuItem fx:id="gerenciarCategorias" mnemonicParsing="false" onAction="#gerTipoProduto" text="Gerenciar Categoria do Produto" />
                   <MenuItem fx:id="gerenciarModalidades" mnemonicParsing="false" onAction="#gerTipoVenda" text="Gerenciar Modalidade de Venda" />
-                  <MenuItem fx:id="gerenciarPagamentos" mnemonicParsing="false" text="Gerenciar Tipo de Pagamento" />
+                  <MenuItem fx:id="gerenciarPagamentos" mnemonicParsing="false" onAction="#gerTipoPagamento" text="Gerenciar Tipo de Pagamento" />
             </items>
           </Menu>
           <Menu fx:id="menuLocalizar" mnemonicParsing="false" text="Localizar">

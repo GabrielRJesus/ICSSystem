@@ -135,11 +135,27 @@ public class TelaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void gerTipoDespesas(ActionEvent event) {
+    private void gerTipoDespesas(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarTipoDespesas.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Gerenciar Tipos de Despesas");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
     }
 
     @FXML
-    private void gerUnidadeMedida(ActionEvent event) {
+    private void gerUnidadeMedida(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarUnidadeMedida.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Gerenciar Unidade de Medida");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
     }
 
     @FXML
@@ -149,6 +165,30 @@ public class TelaPrincipalController implements Initializable {
         Stage stage = (Stage) menuBar.getScene().getWindow();
         stage.setScene(scene);
         stage.setTitle("Gerenciar Tipo de Venda");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
+    }
+
+    @FXML
+    private void gerTipoProduto(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarTipoProduto.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Gerenciar Categoria do Produto");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
+    }
+
+    @FXML
+    private void gerTipoPagamento(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarTipoPagamento.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Gerenciar Tipo de Pagamento");
         stage.setResizable(false);
         stage.showAndWait();
         stage.close();

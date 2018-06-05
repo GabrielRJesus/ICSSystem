@@ -78,7 +78,7 @@ public class TelaPrincipalController implements Initializable {
         Scene scene = new Scene(root);
         Stage stage = (Stage) menuBar.getScene().getWindow();
         stage.setScene(scene);
-        stage.setTitle("Cadastro Cliente");
+        stage.setTitle("Gerenciar Cliente");
         stage.setResizable(false);
         stage.showAndWait();
         stage.close();
@@ -90,7 +90,7 @@ public class TelaPrincipalController implements Initializable {
         Scene scene = new Scene(root);
         Stage stage = (Stage) menuBar.getScene().getWindow();
         stage.setScene(scene);
-        stage.setTitle("Cadastro Funcionario");
+        stage.setTitle("Gerenciar Funcionario");
         stage.setResizable(false);
         stage.showAndWait();
         stage.close();
@@ -102,7 +102,7 @@ public class TelaPrincipalController implements Initializable {
         Scene scene = new Scene(root);
         Stage stage = (Stage) menuBar.getScene().getWindow();
         stage.setScene(scene);
-        stage.setTitle("Cadastro Fornecedor");
+        stage.setTitle("Gerenciar Fornecedor");
         stage.setResizable(false);
         stage.showAndWait();
         stage.close();
@@ -124,7 +124,7 @@ public class TelaPrincipalController implements Initializable {
         Scene scene = new Scene(root);
         Stage stage = (Stage) menuBar.getScene().getWindow();
         stage.setScene(scene);
-        stage.setTitle("Cadastro Marcas");
+        stage.setTitle("Gerenciar Marcas");
         stage.setResizable(false);
         stage.showAndWait();
         stage.close();
@@ -140,6 +140,18 @@ public class TelaPrincipalController implements Initializable {
 
     @FXML
     private void gerUnidadeMedida(ActionEvent event) {
+    }
+
+    @FXML
+    private void gerTipoVenda(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarTipoVenda.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Gerenciar Tipo de Venda");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
     }
     
 }

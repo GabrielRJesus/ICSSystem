@@ -154,7 +154,7 @@ public class GerenciarMarcaController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Resposta do Servidor");
             alert.setHeaderText(null);
-            alert.setContentText("Erro na hora de gravar os dados!");
+            alert.setContentText("Erro na hora de excluir os dados!");
             alert.showAndWait();
         }
     }
@@ -166,7 +166,7 @@ public class GerenciarMarcaController implements Initializable {
         btExcluir.setDisable(estado);
         btNovo.setDisable(!estado);
         tableaMarcas.setDisable(estado);
-        
+        txtCodigo.setDisable(estado);
     }
     
     public void limpatela(){

@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
@@ -165,7 +166,7 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
         return null;
     }
     
-    public List<LoteProduto> lista(LoteProduto obj, Connection con) throws DAOException {
+    public List<LoteProduto> lista(LoteProduto obj, Date inicio, Date fim, Connection con) throws DAOException {
         List<LoteProduto> lista = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -194,11 +195,22 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
                 }
             }
             
-            if(obj!=null && obj.getValidade()!=null){
-                if(ultimo)
-                    select+=" and ltp_validade = ?";
+            if(obj!=null && (inicio!=null || fim!=null)){
+                if(ultimo){
+                    if(inicio!=null && fim==null)
+                        select+=" and ltp_validade > ?";
+                    if(inicio==null && fim!=null)
+                        select+=" and ltp_validade < ?";
+                    else
+                        select+=" and ltp_validade between ? and ?";
+                }
                 else{
-                    select+=" where ltp_validade = ?";
+                    if(inicio!=null && fim==null)
+                        select+=" where ltp_validade > ?";
+                    if(inicio==null && fim!=null)  
+                        select+=" where ltp_validade < ?";
+                    else
+                        select+=" where ltp_validade between ? and ?";
                     ultimo = true;
                 }
             }
@@ -226,8 +238,16 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
                     ps.setString(++cont, obj.getDescricao());
                 if(obj!=null && obj.getNumeroLote()!=null && !obj.getNumeroLote().isEmpty())
                     ps.setString(++cont, obj.getNumeroLote());
-                if(obj!=null && obj.getValidade()!=null)
-                    ps.setDate(++cont, new java.sql.Date(obj.getValidade().getTime()));
+                if(obj!=null && (inicio!=null || fim!=null)){
+                    if(inicio!=null && fim==null)
+                        ps.setDate(++cont, new java.sql.Date(inicio.getTime()));
+                    if(inicio==null && fim!=null)
+                        ps.setDate(++cont, new java.sql.Date(fim.getTime()));
+                    else{
+                        ps.setDate(++cont, new java.sql.Date(inicio.getTime()));
+                        ps.setDate(++cont, new java.sql.Date(fim.getTime()));
+                    }
+                }
                 if(obj!=null && obj.getQtdeCompra()!=0)
                     ps.setInt(++cont, obj.getQtdeCompra());
                 if(obj!=null && obj.getQtdRemanescente()!=0)

@@ -131,7 +131,15 @@ public class TelaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void gerLote(ActionEvent event) {
+    private void gerLote(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarLoteProduto.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Gerenciar Tipos de Despesas");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
     }
 
     @FXML

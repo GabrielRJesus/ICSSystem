@@ -14,6 +14,8 @@ public class LoteProduto {
     private Date validade;
     private int qtdeCompra;
     private int qtdRemanescente;
+    
+    private static LoteProduto loteSelecionado;
 
     public LoteProduto() {
     }
@@ -65,6 +67,14 @@ public class LoteProduto {
     public void setQtdRemanescente(int qtdRemanescente) {
         this.qtdRemanescente = qtdRemanescente;
     }
+
+    public static LoteProduto getLoteSelecionado() {
+        return loteSelecionado;
+    }
+
+    public static void setLoteSelecionado(LoteProduto loteSelecionado) {
+        LoteProduto.loteSelecionado = loteSelecionado;
+    }
     
     public int insert(Connection con) throws EntidadeException{
         try{
@@ -98,9 +108,9 @@ public class LoteProduto {
         }
     }
     
-    public List<LoteProduto> lista(Connection con) throws EntidadeException{
+    public List<LoteProduto> lista(Date inicio, Date fim, Connection con) throws EntidadeException{
         try{
-            return new LoteProdutoDAO().lista(this,con);
+            return new LoteProdutoDAO().lista(this,inicio,fim,con);
         }catch(DAOException ex){
             throw new EntidadeException(ex.getMessage());
         }

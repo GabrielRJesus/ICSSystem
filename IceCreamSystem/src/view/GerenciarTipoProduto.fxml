@@ -28,7 +28,7 @@
       <TableView fx:id="tableaTipoProd" layoutX="86.0" layoutY="119.0" onMouseClicked="#selecionaTipoProd" prefHeight="349.0" prefWidth="447.0" stylesheets="@estilo.css">
          <columns>
             <TableColumn fx:id="colCodigo" prefWidth="122.0" text="Código" />
-            <TableColumn fx:id="colMarca" prefWidth="321.0" text="Descrição" />
+            <TableColumn fx:id="colDescricao" prefWidth="321.0" text="Descrição" />
          </columns>
       </TableView>
       <JFXButton fx:id="btNovo" layoutX="34.0" layoutY="485.0" onAction="#clkNovo" prefWidth="90.0" text="Novo" textFill="#2b2553">
@@ -46,7 +46,7 @@
             <Font name="Arial" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btLocalizar" layoutX="328.0" layoutY="485.0" onAction="#clkLocalizar" prefWidth="90.0" text="Localizar" textFill="#2b2553">
+      <JFXButton fx:id="btExcluir" layoutX="328.0" layoutY="485.0" onAction="#clkExcluir" prefWidth="90.0" text="Excluir" textFill="#2b2553">
          <font>
             <Font name="Arial" size="15.0" />
          </font>

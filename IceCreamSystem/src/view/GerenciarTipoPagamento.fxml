@@ -28,7 +28,7 @@
       <TableView fx:id="tableaTipoPag" layoutX="86.0" layoutY="119.0" onMouseClicked="#selecionaTipoPagamento" prefHeight="349.0" prefWidth="447.0" stylesheets="@estilo.css">
          <columns>
             <TableColumn fx:id="colCodigo" prefWidth="101.0" text="Código" />
-            <TableColumn fx:id="colMarca" prefWidth="345.0" text="Descrição" />
+            <TableColumn fx:id="colDescricao" prefWidth="345.0" text="Descrição" />
          </columns>
       </TableView>
       <JFXButton fx:id="btNovo" layoutX="34.0" layoutY="485.0" onAction="#clkNovo" prefWidth="90.0" text="Novo" textFill="#2b2553">

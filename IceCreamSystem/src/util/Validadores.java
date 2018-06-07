@@ -1,5 +1,9 @@
 package util;
 
+import control.PessoaControl;
+import entidade.Funcionario;
+import exception.ControlException;
+import exception.EntidadeException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -223,15 +227,15 @@ public class Validadores {
             return true;
     }
     
-//    public boolean logindisponivel(String login) throws ControlException{
-//        FuncionarioControl fc = new FuncionarioControl();
-//        Funcionario f = new Funcionario();
-//        f = fc.verificalogin(login);
-//        if(f==null)
-//            return true;
-//        else
-//            return false;
-//    }
+    public boolean logindisponivel(String login) throws ControlException, EntidadeException{
+        PessoaControl pc = new PessoaControl();
+        Funcionario f = new Funcionario();
+        f = pc.verificalogin(login);
+        if(f==null)
+            return true;
+        else
+            return false;
+    }
     
     public boolean validadtadmin(LocalDate data){
         LocalDate localdate1 = LocalDate.now();

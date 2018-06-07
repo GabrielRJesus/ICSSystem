@@ -77,4 +77,12 @@ public class Logradouro {
         }
     }
     
+    public Logradouro select(Connection con) throws EntidadeException{
+        try{
+            return new LogradouroDAO().select(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
 }

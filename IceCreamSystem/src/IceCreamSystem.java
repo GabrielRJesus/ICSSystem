@@ -24,12 +24,16 @@ public class IceCreamSystem extends Application {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.initStyle(StageStyle.UNDECORATED);
+            stage.setX(300);
+            stage.setY(4);
             stage.show();
         }else{
             Parent root = FXMLLoader.load(getClass().getResource("view/DadosEmpresa.fxml"));  
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.initStyle(StageStyle.UNDECORATED);
+            stage.setX(300);
+            stage.setY(4);
             stage.show();
         }
         

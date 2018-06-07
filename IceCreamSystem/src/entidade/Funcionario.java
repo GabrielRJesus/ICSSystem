@@ -1,5 +1,9 @@
 package entidade;
 
+import DAO.FuncionarioDAO;
+import exception.DAOException;
+import exception.EntidadeException;
+import java.sql.Connection;
 import java.util.Date;
 
 /**
@@ -73,4 +77,13 @@ public class Funcionario extends Cliente{
     public void setSalario(double salario) {
         this.salario = salario;
     }
+    
+    public Funcionario select(Connection con) throws EntidadeException{
+        try{
+            return new FuncionarioDAO().select(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
 }

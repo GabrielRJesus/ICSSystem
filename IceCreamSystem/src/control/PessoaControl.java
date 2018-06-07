@@ -3,6 +3,7 @@ package control;
 import entidade.Cidade;
 import entidade.Cliente;
 import entidade.Estado;
+import entidade.Funcionario;
 import entidade.Logradouro;
 import exception.ControlException;
 import exception.EntidadeException;
@@ -126,4 +127,96 @@ public class PessoaControl {
         }
     }
     
+    public int gravarFuncionario(Integer codigo, String nome, String cpf, String rg, String telefone, String celular, Date dataNasc, String sexo, String email, Logradouro log,
+            String login, String senha, Date dtadm, Date dtdem, double salario, String cargo) throws ControlException, SQLException, EntidadeException{
+        Erro e = new Erro();
+        Validadores v = new Validadores();
+        
+        if(nome==null || nome.isEmpty())
+            e.add("Nome Incorreto!");
+        if(!v.validanome(nome))
+            e.add("Nome possui muitos caracteres ou caracteres invalidos");
+        if(cpf==null || cpf.isEmpty())
+            e.add("CPF incorreto");
+        if(!v.ValidaCPF(cpf))
+            e.add("CPF incorreto ou invalido");
+        if(rg==null || rg.isEmpty())
+            e.add("RG incorreto");
+        if(rg.length()>14)
+            e.add("Campo RG possui muitos caracteres");
+        if(telefone==null || telefone.isEmpty())
+            e.add("Telefone Incorreto!");
+        if(telefone.length()>14)
+            e.add("Campo telefone possui muitos caracteres");
+        if(celular==null || celular.isEmpty())
+            e.add("Celular incorreto");
+        if(celular.length()>15)
+            e.add("Campo celular possui muitos caracteres");
+        if(dataNasc==null)
+            e.add("Data de Nascimento incorreto");
+        if(sexo==null || sexo.isEmpty())
+            e.add("Selecione um sexo!");
+        if(email==null || email.isEmpty())
+            e.add("Email incorreto");
+        if(email.length()>100)
+            e.add("Campo email possui muitos caracteres");
+        if(!v.logindisponivel(login))
+            e.add("Login ja esta sendo utilizado!");
+        if(login==null || login.isEmpty())
+            e.add("login incorreto");
+        if(login.length()>20)
+            e.add("Campo login possui muitos caracteres");
+        if(senha==null || senha.isEmpty())
+            e.add("senha incorreto");
+        if(senha.length()>14)
+            e.add("Campo senha possui muitos caracteres");
+        if(cargo==null || cargo.isEmpty())
+            e.add("cargo incorreto");
+        if(cargo.length()>14)
+            e.add("Campo cargo possui muitos caracteres");
+        if(!cargo.equalsIgnoreCase("Administrador") && !cargo.equalsIgnoreCase("Gerente") && !cargo.equalsIgnoreCase("Funcionario") )
+            e.add("cargo incorreto");
+        
+        
+        
+        if(!e.isTemErro()){
+            Funcionario f = new Funcionario();
+            if(codigo!=null && codigo!=0)
+                f.setCodigo(codigo);
+            f.setNome(nome);
+            f.setCpf(cpf);
+            f.setRg(rg);
+            f.setTelefone(telefone);
+            f.setCelular(celular);
+            f.setDtNasc(dataNasc);
+            f.setSexo(sexo.charAt(0));
+            f.setEmail(email);
+            f.setLogin(login);
+            f.setSenha(senha);
+            f.setDtAdmiss(dtadm);
+            f.setDtDemiss(dtdem);
+            f.setSalario(salario);
+            f.setCargo(cargo);
+            try{
+                con.setAutoCommit(false);
+                int chave = log.insert(con);
+                log.setCodigo(chave);
+                f.setLogradouro(log);
+                f.insert(con);
+                con.commit();
+                return 1;
+            }catch(EntidadeException ex){
+                con.rollback();
+                throw new ControlException(ex.getMessage());
+            }
+        }
+        return 0;
+    }
+    
+    public Funcionario verificalogin(String login) throws EntidadeException{
+        Funcionario f = new Funcionario();
+        f.setLogin(login);
+        f = f.select(con);
+        return f;
+    }
 }

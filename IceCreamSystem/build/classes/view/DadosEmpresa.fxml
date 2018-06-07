@@ -36,12 +36,12 @@
             <Font size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="tvIe" focusColor="#2b2553" layoutX="63.0" layoutY="347.0" prefHeight="25.0" prefWidth="275.0" promptText="IE:">
+      <JFXTextField fx:id="tvIe" focusColor="#2b2553" layoutX="63.0" layoutY="347.0" prefHeight="25.0" prefWidth="275.0" promptText="IE:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="tvTelefone" focusColor="#2b2553" layoutX="63.0" layoutY="407.0" prefHeight="25.0" prefWidth="275.0" promptText="Telefone:">
+      <JFXTextField fx:id="tvTelefone" focusColor="#2b2553" layoutX="63.0" layoutY="407.0" prefHeight="25.0" prefWidth="275.0" promptText="Telefone:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>

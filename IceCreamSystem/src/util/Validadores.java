@@ -14,7 +14,7 @@ import java.util.List;
 public class Validadores {
     
     private char[] numeros = {'1','2','3','4','5','6','7','8','9','0'};
-    private char[] alfabeto = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+    private char[] alfabeto = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',' '};
     private char[] alfabeto2 = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',' ','1','2','3','4','5','6','7','8','9','0'};
     
     public boolean validacamposlogin(String login){
@@ -45,6 +45,8 @@ public class Validadores {
     }
     
     public boolean ValidaCPF(String CPF) {
+        CPF = CPF.replace(".", "");
+        CPF = CPF.replace("-", "");
         // considera-se erro CPF's formados por uma sequencia de numeros iguais
         if (CPF.equals("00000000000") || CPF.equals("11111111111")
                 || CPF.equals("22222222222") || CPF.equals("33333333333")

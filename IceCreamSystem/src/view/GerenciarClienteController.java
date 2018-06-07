@@ -33,8 +33,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.input.InputMethodEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -206,6 +204,7 @@ public class GerenciarClienteController implements Initializable {
     }
     
     public void carregacbCidade(Estado est) throws ControlException{
+        cbCidade.getItems().clear();
         PessoaControl pc = new PessoaControl();
         List<Cidade> lista = new ArrayList<>();
         lista = pc.buscaCidades(est);
@@ -219,6 +218,12 @@ public class GerenciarClienteController implements Initializable {
         lista = pc.buscaEstados();
         ObservableList<Estado> colection = FXCollections.observableArrayList(lista);
         cbEstado.getItems().addAll(colection);
+    }
+
+    @FXML
+    private void selectEstado(ActionEvent event) throws ControlException {
+        if(cbEstado.getSelectionModel().getSelectedItem()!=null)
+            carregacbCidade(cbEstado.getSelectionModel().getSelectedItem());
     }
     
 }

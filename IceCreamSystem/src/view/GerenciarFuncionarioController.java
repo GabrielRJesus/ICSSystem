@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXTextField;
 import control.PessoaControl;
 import entidade.Cidade;
 import entidade.Estado;
+import entidade.Funcionario;
 import exception.ControlException;
 import exception.EntidadeException;
 import java.io.IOException;
@@ -97,12 +98,45 @@ public class GerenciarFuncionarioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        PessoaControl pc = new PessoaControl();
         inicializa(true);
         carregacb();
         try {
             carregacbEstado();
         } catch (ControlException ex) {
             System.out.println(ex.getMessage());
+        }
+        if(pc.retornaFuncBusca()!=null){
+            LocalDate data = null, dataadm = null, datadem = null;
+            if(pc.retornaFuncBusca().getDtNasc()!=null)
+             data = new java.sql.Date( pc.retornaFuncBusca().getDtNasc().getTime() ).toLocalDate();
+            if(pc.retornaFuncBusca().getDtAdmiss()!=null)
+                dataadm = new java.sql.Date( pc.retornaFuncBusca().getDtAdmiss().getTime() ).toLocalDate();
+            if(pc.retornaFuncBusca().getDtDemiss()!=null)
+                datadem = new java.sql.Date( pc.retornaFuncBusca().getDtDemiss().getTime() ).toLocalDate();
+            txtBairro.setText(pc.retornaFuncBusca().getLogradouro().getBairro());
+            txtCelular.setText(pc.retornaFuncBusca().getCelular());
+            txtCep.setText(pc.retornaFuncBusca().getLogradouro().getCep());
+            txtCodigo.setText(pc.retornaFuncBusca().getCodigo()+"");
+            txtCpf.setText(pc.retornaFuncBusca().getCpf());
+            txtEmail.setText(pc.retornaFuncBusca().getEmail());
+            txtEndereco.setText(pc.retornaFuncBusca().getLogradouro().getEndereco());
+            txtNome.setText(pc.retornaFuncBusca().getNome());
+            txtNumero.setText(pc.retornaFuncBusca().getLogradouro().getNumero());
+            txtRg.setText(pc.retornaFuncBusca().getRg());
+            txtTelefone.setText(pc.retornaFuncBusca().getTelefone());
+            dpData.setValue(data);
+            cbCidade.setValue(pc.retornaFuncBusca().getLogradouro().getCidade());
+            cbEstado.setValue(pc.retornaFuncBusca().getLogradouro().getCidade().getEstado());
+            if(pc.retornaFuncBusca().getSexo()=='M')
+                cbSexo.setValue("Mascuino");
+            if(pc.retornaFuncBusca().getSexo()=='F')
+            txtLogin.setText(pc.retornaFuncBusca().getLogin());
+            txtSenha.setText(pc.retornaFuncBusca().getSenha());
+            txtCargo.setText(pc.retornaFuncBusca().getCargo());
+            txtSalario.setText(pc.retornaFuncBusca().getSalario()+"");
+            dpDataAdm.setValue(dataadm);
+            dpDataDem.setValue(datadem);
         }
     }    
 
@@ -160,7 +194,15 @@ public class GerenciarFuncionarioController implements Initializable {
     }
 
     @FXML
-    private void clkLocalizar(ActionEvent event) {
+    private void clkLocalizar(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarFuncionario.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) btSair.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Localizar Funcionario");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
     }
 
     @FXML

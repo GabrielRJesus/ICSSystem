@@ -9,6 +9,7 @@ import java.sql.SQLException;
 public class ClienteDAO {
     
     private String insert = "insert into cliente(cli_nome, cli_cpf, cli_rg, cli_celular, cli_dtnasc, cli_sexo, cli_telefone, cli_email, log_codigo) values(?,?,?,?,?,?,?,?,?)";
+    private String select = "select * from cliente";
     
     public int insert(Cliente obj, Connection con) throws DAOException{
         PreparedStatement ps = null;

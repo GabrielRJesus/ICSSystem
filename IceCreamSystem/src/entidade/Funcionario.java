@@ -5,6 +5,7 @@ import exception.DAOException;
 import exception.EntidadeException;
 import java.sql.Connection;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Funcionario extends Cliente{
     private double salario;
     
     private static Funcionario funcLogado;
+    private static Funcionario funcSelecionado;
 
     public Funcionario() {
     }
@@ -87,7 +89,14 @@ public class Funcionario extends Cliente{
     public static void setFuncLogado(Funcionario funcLogado) {
         Funcionario.funcLogado = funcLogado;
     }
-    
+
+    public static Funcionario getFuncSelecionado() {
+        return funcSelecionado;
+    }
+
+    public static void setFuncSelecionado(Funcionario funcSelecionado) {
+        Funcionario.funcSelecionado = funcSelecionado;
+    }
     
     public Funcionario select(Connection con) throws EntidadeException{
         try{
@@ -100,6 +109,14 @@ public class Funcionario extends Cliente{
     public int insert(Connection con) throws EntidadeException{
         try{
             return new FuncionarioDAO().insert(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
+    public List<Funcionario> lista(Connection con) throws EntidadeException{
+        try{
+            return new FuncionarioDAO().lista(this,con);
         }catch(DAOException ex){
             throw new EntidadeException(ex.getMessage());
         }

@@ -230,4 +230,27 @@ public class PessoaControl {
     public void guardaSelecionado(Funcionario f){
         new Funcionario().setFuncLogado(f);
     }
+    
+    public void guardaBusca(Funcionario f){
+        new Funcionario().setFuncSelecionado(f);
+    }
+    
+    public Funcionario retornaFuncBusca(){
+        return new  Funcionario().getFuncSelecionado();
+    }
+    
+    public List<Funcionario> buscaFuncionario(Integer codigo, String nome, String cpf, String login,  String cargo, int nivel) throws ControlException{
+        try{
+            Funcionario f = new Funcionario();
+            f.setCodigo(codigo);
+            f.setNome(nome);
+            f.setCpf(cpf);
+            f.setLogin(login);
+            f.setCargo(cargo);
+            f.setNivel(nivel);
+            return f.lista(con);
+        }catch(EntidadeException ex){
+            throw new ControlException(ex.getMessage());
+        }
+    }
 }

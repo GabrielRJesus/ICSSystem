@@ -15,36 +15,50 @@
         <menus>
           <Menu fx:id="menuGerenciar" mnemonicParsing="false" text="Gerenciar ">
             <items>
-              <MenuItem fx:id="gerenciarCliente" mnemonicParsing="false" onAction="#gerCliente" text="Gerenciar Cliente" />
-                  <MenuItem fx:id="gerenciarFuncionario" mnemonicParsing="false" onAction="#gerFuncionario" text="Gerenciar Funcionário" />
-                  <MenuItem fx:id="gerenciarFornecedor" mnemonicParsing="false" onAction="#gerFornecedor" text="Gerenciar Fornecedor" />
-                  <MenuItem fx:id="gerenciarProduto" mnemonicParsing="false" onAction="#gerProduto" text="Gerenciar Produto" />
-                  <MenuItem fx:id="gerenciarMarcas" mnemonicParsing="false" onAction="#gerMarca" text="Gerenciar Marcas de Produtos" />
-                  <MenuItem fx:id="gerenciarLotes" mnemonicParsing="false" onAction="#gerLote" text="Gerenciar Lotes de Produtos" />
-                  <MenuItem fx:id="gerenciarTipos" mnemonicParsing="false" onAction="#gerTipoDespesas" text="Gerenciar Tipos de Despesas" />
-                  <MenuItem fx:id="gerenciarUnidades" mnemonicParsing="false" onAction="#gerUnidadeMedida" text="Gerenciar Unidades de Medidas" />
-                  <MenuItem fx:id="gerenciarCategorias" mnemonicParsing="false" onAction="#gerTipoProduto" text="Gerenciar Categoria do Produto" />
-                  <MenuItem fx:id="gerenciarModalidades" mnemonicParsing="false" onAction="#gerTipoVenda" text="Gerenciar Modalidade de Venda" />
-                  <MenuItem fx:id="gerenciarPagamentos" mnemonicParsing="false" onAction="#gerTipoPagamento" text="Gerenciar Tipo de Pagamento" />
+              <MenuItem fx:id="gerenciarCliente" mnemonicParsing="false" onAction="#gerCliente" text="Cliente" />
+                  <MenuItem fx:id="gerenciarFuncionario" mnemonicParsing="false" onAction="#gerFuncionario" text="Funcionário" />
+                  <MenuItem fx:id="gerenciarFornecedor" mnemonicParsing="false" onAction="#gerFornecedor" text="Fornecedor" />
+                  <MenuItem fx:id="gerenciarProduto" mnemonicParsing="false" onAction="#gerProduto" text="Produto" />
+                  <MenuItem fx:id="gerenciarMarcas" mnemonicParsing="false" onAction="#gerMarca" text="Marcas de Produtos" />
+                  <MenuItem fx:id="gerenciarLotes" mnemonicParsing="false" onAction="#gerLote" text="Lotes de Produtos" />
+                  <MenuItem fx:id="gerenciarTipos" mnemonicParsing="false" onAction="#gerTipoDespesas" text="Tipos de Despesas" />
+                  <MenuItem fx:id="gerenciarUnidades" mnemonicParsing="false" onAction="#gerUnidadeMedida" text="Unidades de Medidas" />
+                  <MenuItem fx:id="gerenciarCategorias" mnemonicParsing="false" onAction="#gerTipoProduto" text="Categoria do Produto" />
+                  <MenuItem fx:id="gerenciarModalidades" mnemonicParsing="false" onAction="#gerTipoVenda" text="Modalidade de Venda" />
+                  <MenuItem fx:id="gerenciarPagamentos" mnemonicParsing="false" onAction="#gerTipoPagamento" text="Tipo de Pagamento" />
             </items>
           </Menu>
           <Menu fx:id="menuLocalizar" mnemonicParsing="false" text="Localizar">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem fx:id="locCliente" mnemonicParsing="false" onAction="#locCliente" text="Cliente" />
+                  <MenuItem fx:id="locFuncionario" mnemonicParsing="false" onAction="#locFuncionario" text="Funcionario" />
+                  <MenuItem fx:id="locFornecedor" mnemonicParsing="false" onAction="#locFornecedor" text="Fornecedor" />
+                  <MenuItem fx:id="locProduto" mnemonicParsing="false" onAction="#locProduto" text="Produto" />
+                  <MenuItem fx:id="locLoteProduto" mnemonicParsing="false" onAction="#locLoteProduto" text="Lote Produto" />
             </items>
           </Menu>
           <Menu fx:id="menuFuncoes" mnemonicParsing="false" text="Funções Fundamentais">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" text="Abrir Caixa" />
+                  <MenuItem mnemonicParsing="false" text="Fechar Caixa" />
+                  <MenuItem mnemonicParsing="false" text="Realizar Compra" />
+                  <MenuItem mnemonicParsing="false" text="Realizar Venda" />
+                  <MenuItem mnemonicParsing="false" text="Lançar Contas a Pagar" />
+                  <MenuItem mnemonicParsing="false" text="Quitar Contas a Pagar" />
+                  <MenuItem mnemonicParsing="false" text="Quitar Contas a Receber" />
+                  <MenuItem mnemonicParsing="false" text="Baixa no estoque" />
             </items>
           </Menu>
             <Menu fx:id="menuRelatorios" mnemonicParsing="false" text="Relatórios">
               <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Vendas" />
+                  <MenuItem mnemonicParsing="false" text="Compras" />
+                  <MenuItem mnemonicParsing="false" text="Fornecedores" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Outros">
                <items>
+                  <MenuItem fx:id="dadosEmpresa" mnemonicParsing="false" onAction="#dadosEmpresa" text="Dados da Empresa" />
                   <MenuItem fx:id="menuSair" mnemonicParsing="false" onAction="#sair" text="Sair" />
                </items></Menu>
         </menus>

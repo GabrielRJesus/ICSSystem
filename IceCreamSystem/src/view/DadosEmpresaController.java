@@ -12,6 +12,8 @@ import control.EmpresaControl;
 import exception.ControlException;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -24,8 +26,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import util.MaskFieldUtil;
 
 /**
  * FXML Controller class
@@ -47,8 +49,6 @@ public class DadosEmpresaController implements Initializable {
     @FXML
     private JFXTextField tvTelefone;
     @FXML
-    private JFXDatePicker dpDtFundacao;
-    @FXML
     private JFXButton btNovo;
     @FXML
     private JFXButton btGravar;
@@ -56,6 +56,8 @@ public class DadosEmpresaController implements Initializable {
     private JFXButton btCancelar;
     @FXML
     private JFXButton btSair;
+    @FXML
+    private JFXTextField tvData;
 
 
     /**
@@ -65,6 +67,9 @@ public class DadosEmpresaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         tvCodigo.setDisable(true);
+        MaskFieldUtil.cnpjField(tvCNPJ);
+        MaskFieldUtil.foneField(tvTelefone);
+        MaskFieldUtil.dateField(tvData);
         EmpresaControl ec = new EmpresaControl();
         try {
             if(ec.retornaEmpresa()!=null){
@@ -74,8 +79,9 @@ public class DadosEmpresaController implements Initializable {
                 tvCNPJ.setText(ec.retornaEmpresa().getCnpj());
                 tvIe.setText(ec.retornaEmpresa().getIe());
                 tvTelefone.setText(ec.retornaEmpresa().getTelefone());
-                LocalDate ld = new java.sql.Date( ec.retornaEmpresa().getDataFundação().getTime() ).toLocalDate();
-                dpDtFundacao.setValue(ld);
+                SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+                String str = fmt.format(ec.retornaEmpresa().getDataFundação()); 
+                tvData.setText(str);
             }else{
                 inicializa(true);
             }
@@ -90,11 +96,12 @@ public class DadosEmpresaController implements Initializable {
     }
 
     @FXML
-    private void clkGravar(ActionEvent event) throws ControlException {
+    private void clkGravar(ActionEvent event) throws ControlException, ParseException {
         EmpresaControl ec = new EmpresaControl();
         Integer codigo = 0;
         Integer qtde = 0, qtdr = 0;
-        Date data = java.sql.Date.valueOf(dpDtFundacao.getValue());
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        java.sql.Date data = new java.sql.Date(format.parse(tvData.getText()).getTime());
         if(tvCodigo.getText()!=null && !tvCodigo.getText().isEmpty())
             codigo = Integer.parseInt(tvCodigo.getText());
         int result = ec.gravaEmpresa(codigo, tvNome.getText(), tvRazaoSocial.getText(), tvCNPJ.getText(), tvIe.getText(), tvTelefone.getText(), data);
@@ -138,7 +145,7 @@ public class DadosEmpresaController implements Initializable {
         tvCNPJ.setDisable(estado);
         tvIe.setDisable(estado);
         tvTelefone.setDisable(estado);
-        dpDtFundacao.setDisable(estado);
+        tvData.setDisable(estado);
     }
     
 }

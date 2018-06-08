@@ -16,6 +16,8 @@ import exception.ControlException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,6 +36,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import util.MaskFieldUtil;
 
 /**
  * FXML Controller class
@@ -54,8 +57,6 @@ public class GerenciarClienteController implements Initializable {
     private JFXTextField txtTelefone;
     @FXML
     private JFXTextField txtCelular;
-    @FXML
-    private JFXDatePicker dpData;
     @FXML
     private JFXComboBox<String> cbSexo;
     @FXML
@@ -82,6 +83,8 @@ public class GerenciarClienteController implements Initializable {
     private JFXButton btSair;
     @FXML
     private JFXButton btCancelar;
+    @FXML
+    private JFXTextField txtData;
 
     /**
      * Initializes the controller class.
@@ -89,6 +92,10 @@ public class GerenciarClienteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         inicializa(true);
+        MaskFieldUtil.cpfField(txtCpf);
+        MaskFieldUtil.dateField(txtData);
+        MaskFieldUtil.foneField(txtCelular);
+        MaskFieldUtil.foneField(txtTelefone);
         try {
             carregacb();
             carregacbEstado();
@@ -105,13 +112,14 @@ public class GerenciarClienteController implements Initializable {
     }
 
     @FXML
-    private void clkGravar(ActionEvent event) throws ControlException, SQLException {
+    private void clkGravar(ActionEvent event) throws ControlException, SQLException, ParseException {
         Integer codigo;
         if(txtCodigo.getText().toString()!=null && !txtCodigo.getText().toString().isEmpty())
             codigo = Integer.parseInt(txtCodigo.getText().toString());
         else
             codigo = null;
-        Date data = java.sql.Date.valueOf(dpData.getValue());
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        java.sql.Date data = new java.sql.Date(format.parse(txtData.getText()).getTime());
         PessoaControl pc = new PessoaControl();
         int rest = pc.gravarCliente(codigo, txtNome.getText().toString(), txtCpf.getText().toString(), txtRg.getText().toString(), txtTelefone.getText().toString(), 
                 txtCelular.getText().toString(),data, cbSexo.getValue(), txtEmail.getText().toString(), 
@@ -168,7 +176,7 @@ public class GerenciarClienteController implements Initializable {
         txtNumero.setDisable(estado);
         txtRg.setDisable(estado);
         txtTelefone.setDisable(estado);
-        dpData.setDisable(estado);
+        txtData.setDisable(estado);
         cbCidade.setDisable(estado);
         cbEstado.setDisable(estado);
         cbSexo.setDisable(estado);
@@ -189,7 +197,7 @@ public class GerenciarClienteController implements Initializable {
         txtNumero.setText("");
         txtRg.setText("");
         txtTelefone.setText("");
-        dpData.setValue(LocalDate.now());
+        txtData.setText("");
         cbCidade.setPromptText("Cidade");
         cbEstado.setPromptText("Estado");
         cbSexo.setPromptText("Sexo");

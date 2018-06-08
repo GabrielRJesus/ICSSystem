@@ -19,7 +19,11 @@ public class FuncionarioDAO implements GenericDAO<Funcionario>{
     private String select = "select * from funcionario f inner join cliente c on c.cli_codigo = f.cli_codigo";
     private String insert = "insert into cliente(cli_nome, cli_cpf, cli_rg, cli_celular, cli_dtnasc, cli_sexo, cli_telefone, cli_email, log_codigo) values(?,?,?,?,?,?,?,?,?)";
     private String insertf = "insert into funcionario(cli_codigo, fun_login, fun_senha, fun_dtadmis, fun_dtdemis, fun_nivel, fun_salario, fun_cargo) values(?,?,?,?,?,?,?,?)";
-
+    private String update = "update cliente set cli_nome = ?, cli_cpf = ?, cli_rg = ?, cli_celular = ?, cli_dtnasc = ?, cli_sexo = ?, cli_telefone = ?, log_codigo = ? where cli_codigo = ?";
+    private String updatef = "update funcionario set fun_login = ?, fun_senha = ?, fun_dtadmis = ?, fun_dtdemis = ?, fun_nivel = ?, fun_salario = ?, fun_cargo = ? where cli_codigo = ?";
+            
+    
+    
     @Override
     public int insert(Funcionario obj, Connection con) throws DAOException {
         PreparedStatement ps = null;
@@ -71,7 +75,48 @@ public class FuncionarioDAO implements GenericDAO<Funcionario>{
 
     @Override
     public int update(Funcionario obj, Connection con) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement ps = null;
+        PreparedStatement ps2 = null;
+        ResultSet rs = null;
+        int cont = 0;
+        int chave = -1;
+        if(con!=null){
+            try{
+                ps = con.prepareStatement(update);
+                ps.setString(++cont, obj.getNome());
+                ps.setString(++cont, obj.getCpf());
+                ps.setString(++cont, obj.getRg());
+                ps.setString(++cont, obj.getCelular());
+                if(obj.getDtNasc()!=null)
+                    ps.setDate(++cont, new java.sql.Date(obj.getDtNasc().getTime()));
+                else
+                    ps.setNull(++cont, java.sql.Types.DATE);
+                ps.setString(++cont, obj.getSexo()+"");
+                ps.setString(++cont, obj.getTelefone());
+                ps.setString(++cont, obj.getEmail());
+                ps.setInt(++cont, obj.getLogradouro().getCodigo());
+                ps.setInt(++cont, obj.getCodigo());
+                ps.executeUpdate();
+                cont = 0;
+                ps2 = con.prepareStatement(updatef);
+                ps2.setString(++cont, obj.getLogin());
+                ps2.setString(++cont, obj.getSenha());
+                ps2.setDate(++cont, new java.sql.Date(obj.getDtAdmiss().getTime()));
+                if(obj.getDtDemiss()!=null)
+                    ps2.setDate(++cont, new java.sql.Date(obj.getDtDemiss().getTime()));
+                else
+                    ps2.setNull(++cont, java.sql.Types.DATE);
+                ps2.setInt(++cont, obj.getNivel());
+                ps2.setDouble(++cont, obj.getSalario());
+                ps2.setString(++cont, obj.getCargo());
+                ps2.setInt(++cont, obj.getCodigo());
+                return ps2.executeUpdate();
+            }catch(SQLException ex){
+                throw new DAOException(ex.getMessage());
+            }
+        }else{
+            throw new DAOException("Erro na conexão!");
+        }
     }
 
     @Override
@@ -114,6 +159,14 @@ public class FuncionarioDAO implements GenericDAO<Funcionario>{
                     ultimo = true;
                 }
             }
+            if(obj!=null && obj.getSenha()!=null && !obj.getSenha().isEmpty()){
+                if(ultimo)
+                    select+=" and f.fun_senha = ?";
+                else{
+                    select+=" where f.fun_senha = ?";
+                    ultimo = true;
+                }
+            }
             if(obj!=null && obj.getSalario()!=0){
                 if(ultimo)
                     select+=" and f.fun_salario = ?";
@@ -141,6 +194,8 @@ public class FuncionarioDAO implements GenericDAO<Funcionario>{
                     ps.setString(++cont, obj.getCpf());
                 if(obj!=null && obj.getLogin()!=null && !obj.getLogin().isEmpty())
                     ps.setString(++cont, obj.getLogin());
+                if(obj!=null && obj.getSenha()!=null && !obj.getSenha().isEmpty())
+                    ps.setString(++cont, obj.getSenha());
                 if(obj!=null && obj.getSalario()!=0)
                     ps.setDouble(++cont, obj.getSalario());
                 if(obj!=null && obj.getCargo()!=null && !obj.getCargo().isEmpty())

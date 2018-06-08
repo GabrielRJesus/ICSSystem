@@ -63,6 +63,18 @@ public class TelaPrincipalController implements Initializable {
     private MenuItem menuSair;
     @FXML
     private JFXButton btNovaComanda;
+    @FXML
+    private MenuItem locCliente;
+    @FXML
+    private MenuItem locFuncionario;
+    @FXML
+    private MenuItem locFornecedor;
+    @FXML
+    private MenuItem locProduto;
+    @FXML
+    private MenuItem locLoteProduto;
+    @FXML
+    private MenuItem dadosEmpresa;
 
     /**
      * Initializes the controller class.
@@ -197,6 +209,54 @@ public class TelaPrincipalController implements Initializable {
         Stage stage = (Stage) menuBar.getScene().getWindow();
         stage.setScene(scene);
         stage.setTitle("Gerenciar Tipo de Pagamento");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
+    }
+
+    @FXML
+    private void locCliente(ActionEvent event) {
+    }
+
+    @FXML
+    private void locFuncionario(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarFuncionario.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Localizar Funcionário");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
+    }
+
+    @FXML
+    private void locFornecedor(ActionEvent event) {
+    }
+
+    @FXML
+    private void locProduto(ActionEvent event) {
+    }
+
+    @FXML
+    private void locLoteProduto(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarLoteProdutos.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Localizar Lotes de Produto");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
+    }
+
+    @FXML
+    private void dadosEmpresa(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/DadosEmpresa.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Dados da Empresa");
         stage.setResizable(false);
         stage.showAndWait();
         stage.close();

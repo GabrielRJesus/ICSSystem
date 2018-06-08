@@ -71,6 +71,8 @@ public class TelaLoginController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Login ou senha incorretos!");
             alert.showAndWait();
+            tvLogin.setText("");
+            tvSenha.setText("");
         }
     }
 

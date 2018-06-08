@@ -215,7 +215,15 @@ public class TelaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void locCliente(ActionEvent event) {
+    private void locCliente(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarCliente.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Localizar Funcionário");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
     }
 
     @FXML

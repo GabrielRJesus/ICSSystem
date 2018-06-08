@@ -7,7 +7,6 @@ package view;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import control.PessoaControl;
 import entidade.Cidade;
@@ -18,13 +17,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -91,11 +86,34 @@ public class GerenciarClienteController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        PessoaControl pc = new PessoaControl();
         inicializa(true);
         MaskFieldUtil.cpfField(txtCpf);
         MaskFieldUtil.dateField(txtData);
         MaskFieldUtil.foneField(txtCelular);
         MaskFieldUtil.foneField(txtTelefone);
+        if(pc.retornaCliBusca()!=null){
+            txtBairro.setText(pc.retornaCliBusca().getLogradouro().getBairro());
+            txtCelular.setText(pc.retornaCliBusca().getCelular());
+            txtCep.setText(pc.retornaCliBusca().getLogradouro().getCep());
+            txtCodigo.setText(pc.retornaCliBusca().getCodigo()+"");
+            txtCpf.setText(pc.retornaCliBusca().getCpf());
+            txtEmail.setText(pc.retornaCliBusca().getEmail());
+            txtEndereco.setText(pc.retornaCliBusca().getLogradouro().getEndereco());
+            txtNome.setText(pc.retornaCliBusca().getNome());
+            txtNumero.setText(pc.retornaCliBusca().getLogradouro().getNumero());
+            txtRg.setText(pc.retornaCliBusca().getRg());
+            txtTelefone.setText(pc.retornaCliBusca().getTelefone());
+            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+            String str = fmt.format(pc.retornaCliBusca().getDtNasc());
+            txtData.setText(str);
+            cbCidade.setValue(pc.retornaCliBusca().getLogradouro().getCidade());
+            cbEstado.setValue(pc.retornaCliBusca().getLogradouro().getCidade().getEstado());
+            if(pc.retornaCliBusca().getSexo()=='M')
+                cbSexo.setValue("Masculino");
+            if(pc.retornaCliBusca().getSexo()=='F')
+                cbSexo.setValue("Feminino");
+        }
         try {
             carregacb();
             carregacbEstado();
@@ -149,7 +167,15 @@ public class GerenciarClienteController implements Initializable {
     }
 
     @FXML
-    private void clkLocalizar(ActionEvent event) {
+    private void clkLocalizar(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarCliente.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) btSair.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Menu Principal");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
     }
 
     @FXML

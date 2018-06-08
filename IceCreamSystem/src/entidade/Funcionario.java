@@ -114,7 +114,7 @@ public class Funcionario extends Cliente{
         }
     }
     
-    public List<Funcionario> lista(Connection con) throws EntidadeException{
+    public List<Funcionario> listaFunc(Connection con) throws EntidadeException{
         try{
             return new FuncionarioDAO().lista(this,con);
         }catch(DAOException ex){

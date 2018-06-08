@@ -97,7 +97,10 @@ public class PessoaControl {
                 int chave = log.insert(con);
                 log.setCodigo(chave);
                 c.setLogradouro(log);
-                c.insert(con);
+                if(c.getCodigo()!=null && c.getCodigo()!=0)
+                    c.update(con);
+                else
+                    c.insert(con);    
                 con.commit();
                 return 1;
             }catch(EntidadeException ex){
@@ -248,9 +251,29 @@ public class PessoaControl {
             f.setLogin(login);
             f.setCargo(cargo);
             f.setNivel(nivel);
-            return f.lista(con);
+            return f.listaFunc(con);
         }catch(EntidadeException ex){
             throw new ControlException(ex.getMessage());
         }
+    }
+    
+    public List<Cliente> buscaCliente(Integer codigo, String nome, String cpf) throws ControlException{
+        try{
+            Cliente c = new Cliente();
+            c.setCodigo(codigo);
+            c.setNome(nome);
+            c.setCpf(cpf);
+            return c.lista(con);
+        }catch(EntidadeException ex){
+            throw new ControlException(ex.getMessage());
+        }
+    }
+    
+    public void guardaBusca(Cliente c){
+        new Cliente().setCliSelecionado(c);
+    }
+    
+    public Cliente retornaCliBusca(){
+        return new  Cliente().getCliSelecionado();
     }
 }

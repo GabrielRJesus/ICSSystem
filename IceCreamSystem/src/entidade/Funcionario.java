@@ -18,6 +18,8 @@ public class Funcionario extends Cliente{
     private int nivel;
     private String cargo;
     private double salario;
+    
+    private static Funcionario funcLogado;
 
     public Funcionario() {
     }
@@ -77,10 +79,27 @@ public class Funcionario extends Cliente{
     public void setSalario(double salario) {
         this.salario = salario;
     }
+
+    public static Funcionario getFuncLogado() {
+        return funcLogado;
+    }
+
+    public static void setFuncLogado(Funcionario funcLogado) {
+        Funcionario.funcLogado = funcLogado;
+    }
+    
     
     public Funcionario select(Connection con) throws EntidadeException{
         try{
             return new FuncionarioDAO().select(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
+    public int insert(Connection con) throws EntidadeException{
+        try{
+            return new FuncionarioDAO().insert(this,con);
         }catch(DAOException ex){
             throw new EntidadeException(ex.getMessage());
         }

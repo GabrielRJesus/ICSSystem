@@ -140,24 +140,16 @@ public class PessoaControl {
             e.add("CPF incorreto");
         if(!v.ValidaCPF(cpf))
             e.add("CPF incorreto ou invalido");
-        if(rg==null || rg.isEmpty())
-            e.add("RG incorreto");
         if(rg.length()>14)
             e.add("Campo RG possui muitos caracteres");
-        if(telefone==null || telefone.isEmpty())
-            e.add("Telefone Incorreto!");
+         if(telefone==null || telefone.isEmpty())
+            e.add("telefone incorreto");
         if(telefone.length()>14)
             e.add("Campo telefone possui muitos caracteres");
-        if(celular==null || celular.isEmpty())
-            e.add("Celular incorreto");
         if(celular.length()>15)
             e.add("Campo celular possui muitos caracteres");
-        if(dataNasc==null)
-            e.add("Data de Nascimento incorreto");
         if(sexo==null || sexo.isEmpty())
             e.add("Selecione um sexo!");
-        if(email==null || email.isEmpty())
-            e.add("Email incorreto");
         if(email.length()>100)
             e.add("Campo email possui muitos caracteres");
         if(!v.logindisponivel(login))
@@ -176,7 +168,8 @@ public class PessoaControl {
             e.add("Campo cargo possui muitos caracteres");
         if(!cargo.equalsIgnoreCase("Administrador") && !cargo.equalsIgnoreCase("Gerente") && !cargo.equalsIgnoreCase("Funcionario") )
             e.add("cargo incorreto");
-        
+        if(dtadm==null)
+            e.add("Selecione a data de admissão!");
         
         
         if(!e.isTemErro()){
@@ -197,6 +190,12 @@ public class PessoaControl {
             f.setDtDemiss(dtdem);
             f.setSalario(salario);
             f.setCargo(cargo);
+            if(cargo.equalsIgnoreCase("Administrador"))
+                f.setNivel(1);
+            if(cargo.equalsIgnoreCase("Gerente"))
+                f.setNivel(2);
+            if(cargo.equalsIgnoreCase("Funcionario"))
+                f.setNivel(3);
             try{
                 con.setAutoCommit(false);
                 int chave = log.insert(con);
@@ -218,5 +217,17 @@ public class PessoaControl {
         f.setLogin(login);
         f = f.select(con);
         return f;
+    }
+    
+    public Funcionario verificaUsuario(String login, String senha) throws EntidadeException{
+        Funcionario f = new Funcionario();
+        f.setLogin(login);
+        f.setSenha(senha);
+        f = f.select(con);
+        return f;
+    }
+    
+    public void guardaSelecionado(Funcionario f){
+        new Funcionario().setFuncLogado(f);
     }
 }

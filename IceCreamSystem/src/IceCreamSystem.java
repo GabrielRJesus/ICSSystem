@@ -18,25 +18,13 @@ public class IceCreamSystem extends Application {
     
     @Override
     public void start(Stage stage) throws IOException, ControlException {
-        EmpresaControl ec = new EmpresaControl();
-        if(ec.retornaEmpresa()!=null){
-            Parent root = FXMLLoader.load(getClass().getResource("view/TelaPrincipal.fxml"));  
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setX(300);
-            stage.setY(4);
-            stage.show();
-        }else{
-            Parent root = FXMLLoader.load(getClass().getResource("view/DadosEmpresa.fxml"));  
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setX(300);
-            stage.setY(4);
-            stage.show();
-        }
-        
+        Parent root = FXMLLoader.load(getClass().getResource("view/TelaLogin.fxml"));  
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setX(300);
+        stage.setY(4);
+        stage.show(); 
     }
 
     /**

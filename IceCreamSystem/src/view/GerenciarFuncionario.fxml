@@ -23,12 +23,12 @@
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtNome" focusColor="#2b2553" layoutX="75.0" layoutY="120.0" prefHeight="25.0" prefWidth="517.0" promptText="Nome:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtNome" focusColor="#2b2553" layoutX="75.0" layoutY="120.0" prefHeight="25.0" prefWidth="517.0" promptText="Nome:*" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtCpf" layoutX="75.0" layoutY="165.0" prefHeight="25.0" prefWidth="253.0" promptText="CPF:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtCpf" layoutX="75.0" layoutY="165.0" prefHeight="25.0" prefWidth="253.0" promptText="CPF:*" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
@@ -38,29 +38,29 @@
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtEndereco" focusColor="#2b2553" layoutX="75.0" layoutY="209.0" prefHeight="25.0" prefWidth="429.0" promptText="Endereço:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtEndereco" focusColor="#2b2553" layoutX="75.0" layoutY="209.0" prefHeight="25.0" prefWidth="429.0" promptText="Endereço:*" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtNumero" focusColor="#2b2553" layoutX="520.0" layoutY="209.0" prefHeight="25.0" prefWidth="76.0" promptText="Numero:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtNumero" focusColor="#2b2553" layoutX="520.0" layoutY="209.0" prefHeight="25.0" prefWidth="76.0" promptText="Numero:*" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtBairro" focusColor="#2b2553" layoutX="75.0" layoutY="252.0" prefHeight="25.0" prefWidth="322.0" promptText="Bairro:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtBairro" focusColor="#2b2553" layoutX="75.0" layoutY="252.0" prefHeight="25.0" prefWidth="322.0" promptText="Bairro:*" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtCep" focusColor="#2b2553" layoutX="412.0" layoutY="252.0" prefHeight="25.0" prefWidth="186.0" promptText="CEP:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtCep" focusColor="#2b2553" layoutX="412.0" layoutY="252.0" prefHeight="25.0" prefWidth="186.0" promptText="CEP:*" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXComboBox fx:id="cbCidade" focusColor="#2b2553" layoutX="254.0" layoutY="299.0" prefHeight="25.0" prefWidth="346.0" promptText="Cidade:" styleClass="comboBox" stylesheets="@estilo.css" />
-      <JFXComboBox fx:id="cbEstado" focusColor="#2b2553" layoutX="75.0" layoutY="299.0" onAction="#selectEstado" prefHeight="25.0" prefWidth="162.0" promptText="Estado:" styleClass="comboBox" stylesheets="@estilo.css" />
-      <JFXTextField fx:id="txtTelefone" focusColor="#2b2553" layoutX="75.0" layoutY="336.0" prefHeight="25.0" prefWidth="263.0" promptText="Telefone:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXComboBox fx:id="cbCidade" focusColor="#2b2553" layoutX="254.0" layoutY="299.0" prefHeight="25.0" prefWidth="346.0" promptText="Cidade:*" styleClass="comboBox" stylesheets="@estilo.css" />
+      <JFXComboBox fx:id="cbEstado" focusColor="#2b2553" layoutX="75.0" layoutY="299.0" onAction="#selectEstado" prefHeight="25.0" prefWidth="162.0" promptText="Estado:*" styleClass="comboBox" stylesheets="@estilo.css" />
+      <JFXTextField fx:id="txtTelefone" focusColor="#2b2553" layoutX="75.0" layoutY="336.0" prefHeight="25.0" prefWidth="263.0" promptText="Telefone:*" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font size="15.0" />
          </font>
@@ -71,28 +71,28 @@
          </font>
       </JFXTextField>
       <JFXDatePicker fx:id="dpData" defaultColor="#2b2553" layoutX="72.0" layoutY="379.0" prefHeight="28.0" prefWidth="322.0" promptText="Data de Nascimento" />
-      <JFXComboBox fx:id="cbSexo" focusColor="#2b2553" layoutX="414.0" layoutY="381.0" prefHeight="25.0" prefWidth="186.0" promptText="Sexo:" styleClass="comboBox" stylesheets="@estilo.css" />
-      <JFXTextField fx:id="txtEmail" editable="false" focusColor="#2b2553" layoutX="75.0" layoutY="427.0" prefHeight="25.0" prefWidth="528.0" promptText="E-mail:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXComboBox fx:id="cbSexo" focusColor="#2b2553" layoutX="414.0" layoutY="381.0" prefHeight="25.0" prefWidth="186.0" promptText="Sexo:*" styleClass="comboBox" stylesheets="@estilo.css" />
+      <JFXTextField fx:id="txtEmail" focusColor="#2b2553" layoutX="75.0" layoutY="427.0" prefHeight="25.0" prefWidth="528.0" promptText="E-mail:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtLogin" focusColor="#2b2553" layoutX="72.0" layoutY="472.0" prefHeight="29.0" prefWidth="263.0" promptText="Login:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtLogin" focusColor="#2b2553" layoutX="72.0" layoutY="472.0" prefHeight="29.0" prefWidth="263.0" promptText="Login:*" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font></JFXTextField>
-      <JFXPasswordField fx:id="txtSenha" focusColor="#2b2553" layoutX="349.0" layoutY="472.0" prefHeight="29.0" prefWidth="253.0" promptText="Senha:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXPasswordField fx:id="txtSenha" focusColor="#2b2553" layoutX="349.0" layoutY="472.0" prefHeight="29.0" prefWidth="253.0" promptText="Senha:*" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXPasswordField>
-      <JFXDatePicker fx:id="dpDataAdm" defaultColor="#2b2553" layoutX="72.0" layoutY="517.0" prefHeight="28.0" prefWidth="263.0" promptText="Data de Admissão" />
+      <JFXDatePicker fx:id="dpDataAdm" defaultColor="#2b2553" layoutX="72.0" layoutY="517.0" prefHeight="28.0" prefWidth="263.0" promptText="Data de Admissão*" />
       <JFXDatePicker fx:id="dpDataDem" defaultColor="#2b2553" layoutX="348.0" layoutY="517.0" prefHeight="28.0" prefWidth="253.0" promptText="Data de Demissão" />
       <JFXTextField fx:id="txtSalario" focusColor="#2b2553" layoutX="72.0" layoutY="560.0" prefHeight="25.0" prefWidth="253.0" promptText="Salario R$:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txtCargo" focusColor="#2b2553" layoutX="346.0" layoutY="560.0" prefHeight="25.0" prefWidth="263.0" promptText="Cargo:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtCargo" focusColor="#2b2553" layoutX="346.0" layoutY="560.0" prefHeight="25.0" prefWidth="263.0" promptText="Cargo:*" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font></JFXTextField>

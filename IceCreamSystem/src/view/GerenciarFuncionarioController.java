@@ -115,7 +115,7 @@ public class GerenciarFuncionarioController implements Initializable {
     private void clkGravar(ActionEvent event) throws ControlException, SQLException, EntidadeException {
         Integer codigo;
         Double salario;
-        Date datadem = null, dataadm = null;
+        Date datadem = null, dataadm = null, data = null;
         
         if(txtCodigo.getText()!=null && !txtCodigo.getText().isEmpty())
             codigo = Integer.parseInt(txtCodigo.getText());
@@ -125,11 +125,12 @@ public class GerenciarFuncionarioController implements Initializable {
             salario = Double.parseDouble(txtSalario.getText());
         else
             salario = 0.0;
-        Date data = java.sql.Date.valueOf(dpData.getValue());
+        if(dpData.getValue()!=null)
+            data = java.sql.Date.valueOf(dpData.getValue());
         if(dpDataAdm!=null)
-            dataadm = java.sql.Date.valueOf(dpData.getValue());
-        if(dpDataDem!=null)
-            datadem = java.sql.Date.valueOf(dpData.getValue());
+            dataadm = java.sql.Date.valueOf(dpDataAdm.getValue());
+        if(dpDataDem.getValue()!=null)
+            datadem = java.sql.Date.valueOf(dpDataDem.getValue());
         PessoaControl pc = new PessoaControl();
         int rest = pc.gravarFuncionario(codigo, txtNome.getText().toString(), txtCpf.getText().toString(), txtRg.getText().toString(), txtTelefone.getText().toString(), 
                 txtCelular.getText().toString(),data, cbSexo.getValue(), txtEmail.getText().toString(), 
@@ -213,7 +214,7 @@ public class GerenciarFuncionarioController implements Initializable {
         txtNumero.setText("");
         txtRg.setText("");
         txtTelefone.setText("");
-        dpData.setValue(LocalDate.now());
+        dpData.setValue(null);
         cbCidade.setPromptText("Cidade");
         cbEstado.setPromptText("Estado");
         cbSexo.setPromptText("Sexo");
@@ -221,8 +222,8 @@ public class GerenciarFuncionarioController implements Initializable {
         txtSenha.setText("");
         txtCargo.setText("");
         txtSalario.setText("");
-        dpDataAdm.setValue(LocalDate.now());
-        dpDataDem.setValue(LocalDate.now());
+        dpDataAdm.setValue(null);
+        dpDataDem.setValue(null);
     }
     
     public void carregacb(){

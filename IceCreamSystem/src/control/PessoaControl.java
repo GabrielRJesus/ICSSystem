@@ -114,7 +114,7 @@ public class PessoaControl {
     }
     
     public int gravarFuncionario(Integer codigo, String nome, String cpf, String rg, String telefone, String celular, Date dataNasc, String sexo, String email, Logradouro log,
-            String login, String senha, Date dtadm, Date dtdem, double salario, String cargo) throws ControlException, SQLException, EntidadeException{
+        String login, String senha, Date dtadm, Date dtdem, double salario, String cargo) throws ControlException, SQLException, EntidadeException{
         Erro e = new Erro();
         Validadores v = new Validadores();
         
@@ -198,8 +198,8 @@ public class PessoaControl {
         return 0;
     }
     
-        public int gravarFornecedor(Integer codigo, String nome, String razao, String cnpj, String ie, String nomeCon, int situ,
-            Date inicio, Date fim, String obs, String ramo, String telefone, String email, Logradouro log) throws ControlException, SQLException{
+    public int gravarFornecedor(Integer codigo, String nome, String razao, String cnpj, String ie, String nomeCon, int situ,
+        Date inicio, Date fim, String obs, String ramo, String telefone, String email, Logradouro log) throws ControlException, SQLException{
         Erro e = new Erro();
         Validadores v = new Validadores();
         
@@ -261,6 +261,61 @@ public class PessoaControl {
             throw new ControlException(e);
         }
     }
+        
+    public int excluirCliente(Integer codigo) throws ControlException{
+        Erro e = new Erro();
+        if(codigo==null || codigo==0)
+            e.add("Selecione um cliente para excluir!");
+        if(!e.isTemErro()){
+            try{
+                Cliente c = new Cliente();
+                c.setCodigo(codigo);
+                return c.delete(con);
+            }catch(EntidadeException ex){
+                throw new ControlException(ex.getMessage());
+            }
+        }else{
+            throw new ControlException(e.toString());
+        }
+    }  
+    
+    public int excluirFornecedor(Integer codigo) throws ControlException{
+        Erro e = new Erro();
+        if(codigo==null || codigo==0)
+            e.add("Selecione um cliente para excluir!");
+        if(!e.isTemErro()){
+            try{
+                Fornecedor f = new Fornecedor();
+                f.setCodigo(codigo);
+                return f.delete(con);
+            }catch(EntidadeException ex){
+                throw new ControlException(ex.getMessage());
+            }
+        }else{
+            throw new ControlException(e.toString());
+        }
+    } 
+    
+    public int excluirFuncionario(Integer codigo) throws ControlException{
+        Erro e = new Erro();
+        if(codigo==null || codigo==0)
+            e.add("Selecione um cliente para excluir!");
+        if(!e.isTemErro()){
+            try{
+                Cliente c = new Cliente();
+                Funcionario f = new Funcionario();
+                f.setCodigo(codigo);
+                f.delete(con);
+                c.setCodigo(codigo);
+                c.delete(con);
+                return 1;
+            }catch(EntidadeException ex){
+                throw new ControlException(ex.getMessage());
+            }
+        }else{
+            throw new ControlException(e.toString());
+        }
+    } 
     
     public List<Cidade> buscaCidades(Estado est) throws ControlException{
         try{

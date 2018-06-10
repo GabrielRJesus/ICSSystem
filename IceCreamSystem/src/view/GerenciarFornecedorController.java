@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,6 +32,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import util.MaskFieldUtil;
 
@@ -178,7 +180,7 @@ public class GerenciarFornecedorController implements Initializable {
         Scene scene = new Scene(root);
         Stage stage = (Stage) btSair.getScene().getWindow();
         stage.setScene(scene);
-        stage.setTitle("Menu Principal");
+        stage.setTitle("Localizar Fornecedor");
         stage.setResizable(false);
         stage.showAndWait();
         stage.close();
@@ -197,7 +199,42 @@ public class GerenciarFornecedorController implements Initializable {
     }
 
     @FXML
-    private void clkExcluir(ActionEvent event) {
+    private void clkExcluir(ActionEvent event) throws ControlException {
+        PessoaControl pc = new PessoaControl();
+        Integer codigo = 0;
+        if(txtCodigo.getText()!=null && !txtCodigo.getText().isEmpty())
+            codigo = Integer.parseInt(txtCodigo.getText());
+        if(codigo>0){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Deseja mesmo excluir esse fornecedor?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                 int resp = pc.excluirFornecedor(codigo);
+                 if(resp>0){
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Resposta do Servidor");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Fornecedor excluido com sucesso!");
+                    alert.showAndWait();
+                    limpatela();
+                    inicializa(true);
+                 }else{
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Resposta do Servidor");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Erro na hora de excluir!");
+                    alert.showAndWait();
+                 }
+            } else {
+                inicializa(true);
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Resposta do Servidor");
+            alert.setHeaderText(null);
+            alert.setContentText("Selecione um fornecedor para excluir!");
+            alert.showAndWait();
+        }
     }
     
     public void inicializa(boolean estado){

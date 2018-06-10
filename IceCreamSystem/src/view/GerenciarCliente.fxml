@@ -97,5 +97,10 @@
             <Font name="Arial" size="15.0" />
          </font>
       </JFXButton>
+      <JFXButton fx:id="btExcluir" layoutX="449.0" layoutY="505.0" onAction="#clkExcluir" prefWidth="90.0" text="Excluir" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

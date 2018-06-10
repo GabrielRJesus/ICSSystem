@@ -126,5 +126,10 @@
             <Image url="@Logo.jpg" />
          </image>
       </ImageView>
+      <JFXButton fx:id="btExcluir" layoutX="434.0" layoutY="619.0" onAction="#clkExcluir" prefWidth="90.0" text="Excluir" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

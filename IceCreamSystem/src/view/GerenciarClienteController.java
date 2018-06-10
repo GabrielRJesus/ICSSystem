@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,6 +31,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import util.MaskFieldUtil;
 
@@ -80,6 +82,8 @@ public class GerenciarClienteController implements Initializable {
     private JFXButton btCancelar;
     @FXML
     private JFXTextField txtData;
+    @FXML
+    private JFXButton btExcluir;
 
     /**
      * Initializes the controller class.
@@ -258,6 +262,45 @@ public class GerenciarClienteController implements Initializable {
     private void selectEstado(ActionEvent event) throws ControlException {
         if(cbEstado.getSelectionModel().getSelectedItem()!=null)
             carregacbCidade(cbEstado.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    private void clkExcluir(ActionEvent event) throws ControlException {
+        PessoaControl pc = new PessoaControl();
+        Integer codigo = 0;
+        if(txtCodigo.getText()!=null && !txtCodigo.getText().isEmpty())
+            codigo = Integer.parseInt(txtCodigo.getText());
+        if(codigo>0){
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setContentText("Deseja mesmo excluir esse cliente?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                 int resp = pc.excluirCliente(codigo);
+                 if(resp>0){
+                    alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Resposta do Servidor");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Cliente excluido com sucesso!");
+                    alert.showAndWait();
+                    limpatela();
+                    inicializa(true);
+                 }else{
+                    alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Resposta do Servidor");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Erro na hora de excluir!");
+                    alert.showAndWait();
+                 }
+            } else {
+                inicializa(true);
+            }
+        }else{
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Resposta do Servidor");
+            alert.setHeaderText(null);
+            alert.setContentText("Selecione um cliente para excluir!");
+            alert.showAndWait();
+        }
     }
     
 }

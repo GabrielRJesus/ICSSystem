@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +31,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 /**
@@ -91,6 +93,8 @@ public class GerenciarFuncionarioController implements Initializable {
     private JFXTextField txtCargo;
     @FXML
     private JFXButton btCancelar;
+    @FXML
+    private JFXButton btExcluir;
 
     /**
      * Initializes the controller class.
@@ -297,6 +301,45 @@ public class GerenciarFuncionarioController implements Initializable {
     private void selectEstado(ActionEvent event) throws ControlException {
         if(cbEstado.getSelectionModel().getSelectedItem()!=null)
             carregacbCidade(cbEstado.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    private void clkExcluir(ActionEvent event) throws ControlException {
+        PessoaControl pc = new PessoaControl();
+        Integer codigo = 0;
+        if(txtCodigo.getText()!=null && !txtCodigo.getText().isEmpty())
+            codigo = Integer.parseInt(txtCodigo.getText());
+        if(codigo>0){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Deseja mesmo excluir esse funcionario?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                 int resp = pc.excluirFuncionario(codigo);
+                 if(resp>0){
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Resposta do Servidor");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Funcionario excluido com sucesso!");
+                    alert.showAndWait();
+                    limpatela();
+                    inicializa(true);
+                 }else{
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Resposta do Servidor");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Erro na hora de excluir!");
+                    alert.showAndWait();
+                 }
+            } else {
+                inicializa(true);
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Resposta do Servidor");
+            alert.setHeaderText(null);
+            alert.setContentText("Selecione um funcionario para excluir!");
+            alert.showAndWait();
+        }
     }
     
 }

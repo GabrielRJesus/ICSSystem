@@ -13,7 +13,7 @@ import java.util.List;
 
 public class FornecedorDAO implements GenericDAO<Fornecedor>{
     private String insert = "insert into fornecedor(for_nomeFantasia, for_cnpj, for_ie, for_razaosocial, for_responsavel,"
-            + " for_situacao, for_inicioAtividades, for_finalAtividades, for_observacoes, for_ramoAtividade, for_telefone, for_email, log_coigo)"
+            + " for_situacao, for_inicioAtividades, for_finalAtividades, for_observacoes, for_ramoAtividade, for_telefone, for_email, log_codigo)"
             + " values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private String update = "update fornecedor set for_nomeFantasia = ?, for_npcj = ?, for_ie = ?, for_razaosocial = ?, for_responsavel = ?,"
             + " for_situacao = ?, for_inicioAtividades = ?, for_finalAtividades = ?, for_observacoes = ?, for_ramoAtividade = ?,"

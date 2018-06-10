@@ -3,6 +3,7 @@ package control;
 import entidade.Cidade;
 import entidade.Cliente;
 import entidade.Estado;
+import entidade.Fornecedor;
 import entidade.Funcionario;
 import entidade.Logradouro;
 import exception.ControlException;
@@ -112,24 +113,6 @@ public class PessoaControl {
         return 0;
     }
     
-    public List<Cidade> buscaCidades(Estado est) throws ControlException{
-        try{
-            Cidade c = new Cidade();
-            c.setEstado(est);
-            return c.lista(con);
-        }catch(EntidadeException ex){
-            throw new ControlException(ex.getMessage());
-        }
-    }
-    
-    public List<Estado> buscaEstados() throws ControlException{
-        try{
-            return new Estado().lista(con);
-        }catch(EntidadeException ex){
-            throw new ControlException(ex.getMessage());
-        }
-    }
-    
     public int gravarFuncionario(Integer codigo, String nome, String cpf, String rg, String telefone, String celular, Date dataNasc, String sexo, String email, Logradouro log,
             String login, String senha, Date dtadm, Date dtdem, double salario, String cargo) throws ControlException, SQLException, EntidadeException{
         Erro e = new Erro();
@@ -215,6 +198,88 @@ public class PessoaControl {
         return 0;
     }
     
+        public int gravarFornecedor(Integer codigo, String nome, String razao, String cnpj, String ie, String nomeCon, int situ,
+            Date inicio, Date fim, String obs, String ramo, String telefone, String email, Logradouro log) throws ControlException, SQLException{
+        Erro e = new Erro();
+        Validadores v = new Validadores();
+        
+        if(nome==null && nome.isEmpty())
+            e.add("Preencha o campo Nome Fantasia");
+        if(nome.length()>50)
+            e.add("Nome Fantasia possui muitos caracteres");
+        if(cnpj==null && cnpj.isEmpty())
+            e.add("Preencha o campo CNPJ");
+        if(cnpj.length()>18)
+            e.add("CNPJ possui muitos caracteres");
+        if(!v.validaCNPJ(cnpj))
+            e.add("Insira um CNPJ valido");
+        if(ie==null && ie.isEmpty())
+            e.add("Preencha o campo IE");
+        if(ie.length()>15)
+            e.add("IE possui muitos caracteres");
+        if(situ<0 || situ>1)
+            e.add("Situação esta invalida");
+        if(inicio==null)
+            e.add("Digite o inicio das atividades");
+        if(ramo==null && ramo.isEmpty())
+            e.add("Preencha o campo ramo de atividades");
+        if(ramo.length()>15)
+            e.add("Ramo de atividades possui muitos caracteres");
+        
+        if(!e.isTemErro()){
+            Fornecedor f = new Fornecedor();
+            if(codigo!=null && codigo!=0)
+                f.setCodigo(codigo);
+            f.setNome(nome);
+            f.setRazaosocial(razao);
+            f.setCnpj(cnpj);
+            f.setIe(ie);
+            f.setResponsavel(nomeCon);
+            f.setStatus(situ);
+            f.setInicioAtiv(inicio);
+            f.setFimAtiv(fim);
+            f.setObservacoes(obs);
+            f.setRamoAtiv(ramo);
+            f.setTelefone(telefone);
+            f.setEmail(email);
+            try{
+                con.setAutoCommit(false);
+                int chave = log.insert(con);
+                log.setCodigo(chave);
+                f.setLogradouro(log);
+                if(f.getCodigo()!=null && f.getCodigo()!=0)
+                    f.update(con);
+                else
+                    f.insert(con);    
+                con.commit();
+                return 1;
+            }catch(EntidadeException ex){
+                con.rollback();
+                throw new ControlException(ex.getMessage());
+            }
+        }else{
+            throw new ControlException(e);
+        }
+    }
+    
+    public List<Cidade> buscaCidades(Estado est) throws ControlException{
+        try{
+            Cidade c = new Cidade();
+            c.setEstado(est);
+            return c.lista(con);
+        }catch(EntidadeException ex){
+            throw new ControlException(ex.getMessage());
+        }
+    }
+    
+    public List<Estado> buscaEstados() throws ControlException{
+        try{
+            return new Estado().lista(con);
+        }catch(EntidadeException ex){
+            throw new ControlException(ex.getMessage());
+        }
+    }
+        
     public Funcionario verificalogin(String login) throws EntidadeException{
         Funcionario f = new Funcionario();
         f.setLogin(login);
@@ -276,4 +341,6 @@ public class PessoaControl {
     public Cliente retornaCliBusca(){
         return new  Cliente().getCliSelecionado();
     }
+    
+
 }

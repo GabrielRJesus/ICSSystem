@@ -52,6 +52,8 @@ public class TelaLoginController implements Initializable {
                 Stage stage = (Stage) btSair.getScene().getWindow();
                 stage.setScene(scene);
                 stage.setTitle("Menu Principal");
+                stage.setX(300);
+                stage.setY(4);
                 stage.setResizable(false);
                 stage.showAndWait();
                 stage.close();
@@ -61,6 +63,8 @@ public class TelaLoginController implements Initializable {
                 Stage stage = (Stage) btSair.getScene().getWindow();
                 stage.setScene(scene);
                 stage.setTitle("Dados da Empresa");
+                stage.setX(300);
+                stage.setY(4);
                 stage.setResizable(false);
                 stage.showAndWait();
                 stage.close();

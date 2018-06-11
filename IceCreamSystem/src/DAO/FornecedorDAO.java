@@ -18,7 +18,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor>{
     private String update = "update fornecedor set for_nomeFantasia = ?, for_npcj = ?, for_ie = ?, for_razaosocial = ?, for_responsavel = ?,"
             + " for_situacao = ?, for_inicioAtividades = ?, for_finalAtividades = ?, for_observacoes = ?, for_ramoAtividade = ?,"
             + " for_telefone = ?, for_email = ?, log_codigo = ? where for_codigo = ?";
-    private String delete = "delete from fornecedor";
+    private String delete = "delete from fornecedor where for_codigo = ?";
     private String select = "select * from fornecedor";
 
     @Override
@@ -309,19 +309,19 @@ public class FornecedorDAO implements GenericDAO<Fornecedor>{
             }
             try{
                 ps = con.prepareStatement(select);
-                if(obj!=null && obj.getCodigo()!=null & obj.getCodigo()!=0)
+                if(obj!=null && obj.getCodigo()!=null && obj.getCodigo()!=0)
                     ps.setInt(++cont, obj.getCodigo());
-                if(obj!=null && obj.getNome()!=null & !obj.getNome().isEmpty())
+                if(obj!=null && obj.getNome()!=null && !obj.getNome().isEmpty())
                     ps.setString(++cont, obj.getNome());
-                if(obj!=null && obj.getCnpj()!=null & !obj.getCnpj().isEmpty())
+                if(obj!=null && obj.getCnpj()!=null && !obj.getCnpj().isEmpty())
                     ps.setString(++cont, obj.getCnpj());
-                if(obj!=null && obj.getIe()!=null & !obj.getIe().isEmpty())
+                if(obj!=null && obj.getIe()!=null && !obj.getIe().isEmpty())
                     ps.setString(++cont, obj.getIe());
-                if(obj!=null && obj.getTelefone()!=null & !obj.getTelefone().isEmpty())
+                if(obj!=null && obj.getTelefone()!=null && !obj.getTelefone().isEmpty())
                     ps.setString(++cont, obj.getTelefone());
                 if(obj!=null && obj.getStatus()!=0)
                     ps.setInt(++cont, obj.getStatus());
-                if(obj!=null && obj.getEmail()!=null & !obj.getEmail().isEmpty())
+                if(obj!=null && obj.getEmail()!=null && !obj.getEmail().isEmpty())
                     ps.setString(++cont, obj.getEmail());
                 if(obj!=null && obj.getLogradouro().getCodigo()!=null && obj.getLogradouro().getCodigo()!=0)
                     ps.setInt(++cont, obj.getLogradouro().getCodigo());
@@ -330,14 +330,14 @@ public class FornecedorDAO implements GenericDAO<Fornecedor>{
                     Fornecedor f = new Fornecedor();
                     Logradouro log = new Logradouro();
                     f.setCodigo(rs.getInt("for_codigo"));
-                    f.setNome(rs.getString("for_nome"));
+                    f.setNome(rs.getString("for_nomeFantasia"));
                     f.setCnpj(rs.getString("for_cnpj"));
                     f.setIe(rs.getString("for_ie"));
                     f.setRazaosocial(rs.getString("for_razaosocial"));
                     f.setResponsavel(rs.getString("for_responsavel"));
-                    f.setStatus(rs.getInt("for_status"));
+                    f.setStatus(rs.getInt("for_situacao"));
                     f.setInicioAtiv(rs.getDate("for_inicioAtividades"));
-                    f.setFimAtiv(rs.getDate("for_fimAtividades"));
+                    f.setFimAtiv(rs.getDate("for_finalAtividades"));
                     f.setObservacoes(rs.getString("for_observacoes"));
                     f.setRamoAtiv(rs.getString("for_ramoAtividade"));
                     f.setTelefone(rs.getString("for_telefone"));

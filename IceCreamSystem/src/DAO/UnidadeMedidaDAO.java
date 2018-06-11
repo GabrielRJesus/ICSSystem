@@ -175,4 +175,56 @@ public class UnidadeMedidaDAO implements GenericDAO<UnidadeMedida>{
         }
     }
     
+    public List<String> listaString(UnidadeMedida obj, Connection con) throws DAOException {
+        List<String> lista = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean ultimo = false;
+        int cont = 0;
+        if(con!=null){
+            
+            if(obj!=null && obj.getCodigo()!=null && obj.getCodigo()!=0){
+                select+=" where um_codigo = ?";
+                ultimo = true;
+            }
+            if(obj!=null && obj.getDescricao()!=null && !obj.getDescricao().isEmpty()){
+                if(ultimo)
+                    select+=" and um_descricao like ?";
+                else{
+                    select+=" where um_descricao like ?";
+                    ultimo = true;
+                }
+            }
+            if(obj!=null && obj.getAbreviacao()!=null && !obj.getAbreviacao().isEmpty()){
+                if(ultimo)
+                    select+=" and um_sigla = ?";
+                else
+                    select+=" where um_sigla = ?";
+            }
+            
+            try{
+                ps = con.prepareStatement(select);
+                if(obj!=null && obj.getCodigo()!=null && obj.getCodigo()!=0)
+                    ps.setInt(++cont, obj.getCodigo());
+                if(obj!=null && obj.getDescricao()!=null && !obj.getDescricao().isEmpty())
+                    ps.setString(++cont, "%"+obj.getDescricao()+"%");
+                if(obj!=null && obj.getAbreviacao()!=null && !obj.getAbreviacao().isEmpty())
+                    ps.setString(++cont, obj.getAbreviacao());
+                rs = ps.executeQuery();
+                while(rs.next()){
+                    UnidadeMedida u = new UnidadeMedida();
+                    u.setCodigo(rs.getInt("um_codigo"));
+                    u.setDescricao(rs.getString("um_descricao"));
+                    u.setAbreviacao(rs.getString("um_sigla"));
+                    lista.add(u.toString());
+                }
+                return lista;
+            }catch(SQLException ex){
+                throw new DAOException(ex.getMessage());
+            }
+        }else{
+            throw new DAOException("Erro na conexão!");
+        }
+    }
+    
 }

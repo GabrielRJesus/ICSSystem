@@ -7,18 +7,26 @@ package view;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import control.PessoaControl;
 import entidade.Fornecedor;
+import exception.ControlException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -56,14 +64,32 @@ public class LocalizarFornecedorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        tabFornecedor.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        colNome.setCellValueFactory(new PropertyValueFactory("nome"));
+        colCnpj.setCellValueFactory(new PropertyValueFactory("cnpj"));
+        colIe.setCellValueFactory(new PropertyValueFactory("ie"));
+        colInicio.setCellValueFactory(new PropertyValueFactory("inicioAtiv"));
     }    
 
     @FXML
-    private void clkPesquisar(ActionEvent event) {
+    private void clkPesquisar(ActionEvent event) throws ControlException {
+        carregaTabela();
     }
 
     @FXML
-    private void selecionaFornecedor(MouseEvent event) {
+    private void selecionaFornecedor(MouseEvent event) throws IOException {
+        if (tabFornecedor.getSelectionModel().getSelectedIndex() >= 0){
+            PessoaControl pc = new PessoaControl();
+            pc.guardaBusca(tabFornecedor.getSelectionModel().getSelectedItem());
+            Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarFornecedor.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) btSair.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Gerenciar Fornecedor");
+            stage.setResizable(false);
+            stage.showAndWait();
+            stage.close();
+        }
     }
 
     @FXML
@@ -76,6 +102,20 @@ public class LocalizarFornecedorController implements Initializable {
         stage.setResizable(false);
         stage.showAndWait();
         stage.close();
+    }
+    
+    public void carregaTabela() throws ControlException{
+        PessoaControl pc = new PessoaControl();
+        List<Fornecedor> lista = new ArrayList<>();
+        Integer codigo = 0;
+        if(txtCodigo.getText()!=null && !txtCodigo.getText().isEmpty())
+            codigo = Integer.parseInt(txtCodigo.getText());
+        lista = pc.buscaFornecedor(codigo, txtNome.getText(), txtCnpj.getText());
+        if(lista!=null){
+            ObservableList<Fornecedor> modelo;
+            modelo = FXCollections.observableArrayList(lista);
+            tabFornecedor.setItems(modelo);
+        }
     }
     
 }

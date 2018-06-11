@@ -12,6 +12,7 @@ import control.PessoaControl;
 import entidade.Cidade;
 import entidade.Estado;
 import exception.ControlException;
+import exception.EntidadeException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -66,9 +67,9 @@ public class GerenciarFornecedorController implements Initializable {
     @FXML
     private JFXTextField txtCep;
     @FXML
-    private JFXComboBox<Estado> cbEstado;
+    private JFXComboBox<String> cbEstado;
     @FXML
-    private JFXComboBox<Cidade> cbCidade;
+    private JFXComboBox<String> cbCidade;
     @FXML
     private JFXTextField txtNomeContato;
     @FXML
@@ -100,6 +101,7 @@ public class GerenciarFornecedorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        PessoaControl pc = new PessoaControl();
         MaskFieldUtil.cepField(txtCep);
         MaskFieldUtil.cnpjField(txtCnpj);
         MaskFieldUtil.dateField(txtInicio);
@@ -111,14 +113,46 @@ public class GerenciarFornecedorController implements Initializable {
         try {
             carregacbEstado();
         } catch (ControlException ex) {
-            Logger.getLogger(GerenciarFornecedorController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
+        
+        if(pc.retornaForBusca()!=null){
+            txtCodigo.setText(pc.retornaForBusca().getCodigo()+"");
+            txtNome.setText(pc.retornaForBusca().getNome());
+            txtRazao.setText(pc.retornaForBusca().getRazaosocial());
+            txtCnpj.setText(pc.retornaForBusca().getCnpj());
+            txtIe.setText(pc.retornaForBusca().getIe());
+            txtTelefone.setText(pc.retornaForBusca().getTelefone());
+            txtEmail.setText(pc.retornaForBusca().getEmail());
+            txtEndereco.setText(pc.retornaForBusca().getLogradouro().getEndereco());
+            txtNumero.setText(pc.retornaForBusca().getLogradouro().getNumero());
+            txtBairro.setText(pc.retornaForBusca().getLogradouro().getBairro());
+            txtCep.setText(pc.retornaForBusca().getLogradouro().getCep());
+            cbEstado.setValue(pc.retornaForBusca().getLogradouro().getCidade().getEstado().toString());
+            cbCidade.setValue(pc.retornaForBusca().getLogradouro().getCidade().toString());
+            txtNomeContato.setText(pc.retornaForBusca().getResponsavel());
+            if(pc.retornaForBusca().getStatus()==0)
+                cbSituacao.setValue("Inativo");
+            if(pc.retornaForBusca().getStatus()==1)
+                cbSituacao.setValue("Ativo");
+            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+            String str = fmt.format(pc.retornaForBusca().getInicioAtiv());
+            txtInicio.setText(str);
+            if(pc.retornaForBusca().getFimAtiv()!=null){
+                str = fmt.format(pc.retornaForBusca().getFimAtiv());
+                txtFim.setText(str);
+            }else
+                txtFim.setText("");
+            txtObs.setText(pc.retornaForBusca().getObservacoes());
+            txtRamo.setText(pc.retornaForBusca().getRamoAtiv());
+        }
+        
     }    
 
     @FXML
     private void selectEstado(ActionEvent event) throws ControlException {
         if(cbEstado.getSelectionModel().getSelectedItem()!=null)
-            carregacbCidade(cbEstado.getSelectionModel().getSelectedItem());
+            carregacbCidade(cbEstado.getSelectionModel().getSelectedItem().toString());
     }
 
     @FXML
@@ -127,7 +161,7 @@ public class GerenciarFornecedorController implements Initializable {
     }
 
     @FXML
-    private void clkGravar(ActionEvent event) throws ParseException, ControlException, SQLException {
+    private void clkGravar(ActionEvent event) throws ParseException, ControlException, SQLException, EntidadeException {
         Integer codigo,situ;
         java.sql.Date dataf =null,datai=null;
         if(txtCodigo.getText().toString()!=null && !txtCodigo.getText().toString().isEmpty())
@@ -280,8 +314,8 @@ public class GerenciarFornecedorController implements Initializable {
         txtRamo.setText("");
         txtRazao.setText("");
         txtObs.setText("");
-        cbCidade.setPromptText("Cidade");
-        cbEstado.setPromptText("Estado");
+        cbCidade.setValue("");
+        cbEstado.setValue("");
         cbSituacao.setPromptText("Sexo");
     }
     
@@ -293,20 +327,20 @@ public class GerenciarFornecedorController implements Initializable {
         cbSituacao.getItems().addAll(colection);
     }
     
-    public void carregacbCidade(Estado est) throws ControlException{
+    public void carregacbCidade(String est) throws ControlException{
         cbCidade.getItems().clear();
         PessoaControl pc = new PessoaControl();
-        List<Cidade> lista = new ArrayList<>();
+        List<String> lista = new ArrayList<>();
         lista = pc.buscaCidades(est);
-        ObservableList<Cidade> colection = FXCollections.observableArrayList(lista);
+        ObservableList<String> colection = FXCollections.observableArrayList(lista);
         cbCidade.getItems().addAll(colection);
     }
     
     public void carregacbEstado() throws ControlException{
         PessoaControl pc = new PessoaControl();
-        List<Estado> lista = new ArrayList<>();
+        List<String> lista = new ArrayList<>();
         lista = pc.buscaEstados();
-        ObservableList<Estado> colection = FXCollections.observableArrayList(lista);
+        ObservableList<String> colection = FXCollections.observableArrayList(lista);
         cbEstado.getItems().addAll(colection);
     }
 }

@@ -28,6 +28,13 @@ public class Marca {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
+    
+    
     
     public int insert(Connection con) throws EntidadeException{
         try{
@@ -64,6 +71,14 @@ public class Marca {
     public List<Marca> lista(Connection con) throws EntidadeException{
         try{
             return new MarcaDAO().lista(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
+    public List<String> listaString(Connection con) throws EntidadeException{
+        try{
+            return new MarcaDAO().listaString(this,con);
         }catch(DAOException ex){
             throw new EntidadeException(ex.getMessage());
         }

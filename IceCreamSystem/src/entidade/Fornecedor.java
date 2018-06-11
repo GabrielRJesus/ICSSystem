@@ -21,6 +21,8 @@ public class Fornecedor extends Pessoa{
     private Date fimAtiv;
     private String ramoAtiv;
     private String observacoes;
+    
+    private static Fornecedor forSelecionado;
 
     public Fornecedor() {
     }
@@ -96,6 +98,15 @@ public class Fornecedor extends Pessoa{
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
     }
+
+    public static Fornecedor getForSelecionado() {
+        return forSelecionado;
+    }
+
+    public static void setForSelecionado(Fornecedor forSelecionado) {
+        Fornecedor.forSelecionado = forSelecionado;
+    }
+    
     
     public int insert(Connection con) throws EntidadeException{
         try{

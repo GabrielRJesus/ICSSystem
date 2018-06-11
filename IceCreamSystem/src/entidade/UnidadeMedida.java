@@ -34,6 +34,13 @@ public class UnidadeMedida {
         return abreviacao;
     }
 
+    @Override
+    public String toString() {
+        return abreviacao;
+    }
+    
+    
+
     public void setAbreviacao(String abreviacao) {
         this.abreviacao = abreviacao;
     }
@@ -73,6 +80,14 @@ public class UnidadeMedida {
     public List<UnidadeMedida> listaUM(Connection con) throws EntidadeException{
         try{
             return new UnidadeMedidaDAO().lista(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
+    public List<String> listaUMString(Connection con) throws EntidadeException{
+        try{
+            return new UnidadeMedidaDAO().listaString(this,con);
         }catch(DAOException ex){
             throw new EntidadeException(ex.getMessage());
         }

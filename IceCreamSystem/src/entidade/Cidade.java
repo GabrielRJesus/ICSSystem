@@ -42,6 +42,14 @@ public class Cidade {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
+    
+    public List<String> listaString(Connection con) throws EntidadeException{
+        try{
+            return new CidadeDAO().listaString(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
 
     @Override
     public String toString() {

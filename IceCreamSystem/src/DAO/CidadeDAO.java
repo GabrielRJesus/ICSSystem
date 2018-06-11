@@ -10,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -121,6 +119,41 @@ public class CidadeDAO implements GenericDAO<Cidade>{
                     e.setCodigo(rs.getInt("est_codigo"));
                     c.setEstado(e.select(con));
                     lista.add(c);
+                }
+                return lista;
+            }catch(SQLException ex){
+                throw new DAOException(ex.getMessage());
+            } catch (EntidadeException ex) {
+                throw new DAOException(ex.getMessage());
+            }
+        }else{
+            throw new DAOException("Erro na conexão!");
+        }
+    }
+    
+    public List<String> listaString(Cidade obj, Connection con) throws DAOException {
+        List<String> lista = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        if(obj!=null && obj.getEstado().getCodigo()!=null && obj.getEstado().getCodigo()!=0)
+            select+=" where est_codigo = ?";
+        
+        if(con!=null){
+            try{
+                ps = con.prepareStatement(select);
+                if(obj!=null && obj.getEstado().getCodigo()!=null && obj.getEstado().getCodigo()!=0)
+                    ps.setInt(1, obj.getEstado().getCodigo());
+                rs = ps.executeQuery();
+                
+                while(rs.next()){
+                    Cidade c = new Cidade();
+                    Estado e = new Estado();
+                    c.setCodigo(rs.getInt("cid_codigo"));
+                    c.setNome(rs.getString("cid_nome"));
+                    e.setCodigo(rs.getInt("est_codigo"));
+                    c.setEstado(e.select(con));
+                    lista.add(c.toString());
                 }
                 return lista;
             }catch(SQLException ex){

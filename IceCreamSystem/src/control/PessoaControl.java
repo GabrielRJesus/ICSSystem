@@ -22,10 +22,11 @@ public class PessoaControl {
     Banco conSing = Banco.getInstancia();
     Connection con = conSing.getConexao();
     
-    public Logradouro montaLogradouro(String endereco, String numero, String bairro, String cep, Cidade cidade) throws ControlException{
+    public Logradouro montaLogradouro(String endereco, String numero, String bairro, String cep, String cidade) throws ControlException, EntidadeException{
         Erro e = new Erro();
         Logradouro log = new Logradouro();
         int chave;
+        Cidade c = new Cidade();
         
         if(endereco==null || endereco.isEmpty())
             e.add("Endereco incorreto!");
@@ -35,7 +36,7 @@ public class PessoaControl {
             e.add("Bairro incorreto");
         if(cep==null || cep.isEmpty())
             e.add("CEP incorreto");
-        if(cidade==null || cidade.getNome()==null || cidade.getNome().isEmpty())
+        if(cidade==null || cidade.isEmpty())
             e.add("Cidade incorrerta");
         
         if(!e.isTemErro()){
@@ -47,9 +48,11 @@ public class PessoaControl {
                 log.setBairro(bairro);
             if(cep!=null && !cep.isEmpty())
                 log.setCep(cep);
-            if(cidade!=null && cidade.getNome()!=null && !cidade.getNome().isEmpty())
-                log.setCidade(cidade);
-            
+            if(cidade!=null && !cidade.isEmpty()){
+                c.setNome(cidade);
+                c = c.select(con);
+                log.setCidade(c.select(con));
+            }
            
             return log;
         }
@@ -317,19 +320,22 @@ public class PessoaControl {
         }
     } 
     
-    public List<Cidade> buscaCidades(Estado est) throws ControlException{
+    public List<String> buscaCidades(String est) throws ControlException{
         try{
+            Estado e = new Estado();
+            e.setNome(est);
+            e = e.select(con);
             Cidade c = new Cidade();
-            c.setEstado(est);
-            return c.lista(con);
+            c.setEstado(e);
+            return c.listaString(con);
         }catch(EntidadeException ex){
             throw new ControlException(ex.getMessage());
         }
     }
     
-    public List<Estado> buscaEstados() throws ControlException{
+    public List<String> buscaEstados() throws ControlException{
         try{
-            return new Estado().lista(con);
+            return new Estado().listaString(con);
         }catch(EntidadeException ex){
             throw new ControlException(ex.getMessage());
         }
@@ -352,6 +358,10 @@ public class PessoaControl {
     
     public void guardaSelecionado(Funcionario f){
         new Funcionario().setFuncLogado(f);
+    }
+    
+    public Funcionario retornaSelecionado(){
+        return new Funcionario().getFuncLogado();
     }
     
     public void guardaBusca(Funcionario f){
@@ -389,12 +399,32 @@ public class PessoaControl {
         }
     }
     
+    public List<Fornecedor> buscaFornecedor(Integer codigo, String nome, String cnpj) throws ControlException{
+        try{
+            Fornecedor f = new Fornecedor();
+            f.setCodigo(codigo);
+            f.setNome(nome);
+            f.setCnpj(cnpj);
+            return f.listaFor(con);
+        }catch(EntidadeException ex){
+            throw new ControlException(ex.getMessage());
+        }
+    }
+    
     public void guardaBusca(Cliente c){
         new Cliente().setCliSelecionado(c);
     }
     
     public Cliente retornaCliBusca(){
         return new  Cliente().getCliSelecionado();
+    }
+    
+    public void guardaBusca(Fornecedor f){
+        new Fornecedor().setForSelecionado(f);
+    }
+    
+    public Fornecedor retornaForBusca(){
+        return new  Fornecedor().getForSelecionado();
     }
     
 

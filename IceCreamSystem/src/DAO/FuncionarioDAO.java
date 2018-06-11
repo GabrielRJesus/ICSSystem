@@ -211,7 +211,8 @@ public class FuncionarioDAO implements GenericDAO<Funcionario>{
                     f.setRg(rs.getString("c.cli_rg"));
                     f.setDtNasc(rs.getDate("c.cli_dtnasc"));
                     f.setSexo(rs.getString("c.cli_sexo").charAt(0));
-                    f.setTelefone(rs.getString("c.cli_email"));
+                    f.setTelefone(rs.getString("c.cli_telefone"));
+                    f.setEmail(rs.getString("c.cli_email"));
                     l.setCodigo(rs.getInt("c.log_codigo"));
                     f.setLogradouro(l.select(con));
                     f.setLogin(rs.getString("f.fun_login"));
@@ -310,7 +311,8 @@ public class FuncionarioDAO implements GenericDAO<Funcionario>{
                     f.setRg(rs.getString("c.cli_rg"));
                     f.setDtNasc(rs.getDate("c.cli_dtnasc"));
                     f.setSexo(rs.getString("c.cli_sexo").charAt(0));
-                    f.setTelefone(rs.getString("c.cli_email"));
+                    f.setTelefone(rs.getString("c.cli_telefone"));
+                    f.setEmail(rs.getString("c.cli_email"));
                     l.setCodigo(rs.getInt("c.log_codigo"));
                     f.setLogradouro(l.select(con));
                     f.setLogin(rs.getString("f.fun_login"));

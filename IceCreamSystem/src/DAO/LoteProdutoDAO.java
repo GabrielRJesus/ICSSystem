@@ -272,5 +272,82 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
             throw new DAOException("Erro na conexão!");
         }
     }
+        
+    public List<String> listaString(LoteProduto obj, Connection con) throws DAOException {
+        List<String> lista = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean ultimo = false;
+        int cont = 0;
+        if(con!=null){
+            
+            if(obj!=null && obj.getCodigo()!=null && obj.getCodigo()!=0){
+                select+=" where ltp_codigo = ?";
+                ultimo = true;
+            }
+            if(obj!=null && obj.getDescricao()!=null && !obj.getDescricao().isEmpty()){
+                if(ultimo)
+                    select+=" and ltp_descricao like ?";
+                else{
+                    select+=" where ltp_descricao like ?";
+                    ultimo = true;
+                }
+            }
+            if(obj!=null && obj.getNumeroLote()!=null && !obj.getNumeroLote().isEmpty()){
+                if(ultimo)
+                    select+=" and ltp_numero like ?";
+                else{
+                    select+=" where ltp_numero like ?";
+                    ultimo = true;
+                }
+            }
+                
+            if(obj!=null && obj.getQtdeCompra()!=0){
+                if(ultimo)
+                    select+=" and ltp_qtdelote = ?";
+                else{
+                    select+=" where tp_qtdelote = ?";
+                    ultimo = true;
+                }
+            }
+            
+            if(obj!=null && obj.getQtdRemanescente()!=0){
+                if(ultimo)
+                    select+=" and ltp_qtderemanes = ?";
+                else
+                    select+=" where tp_qtderemanes = ?";
+            }    
+            try{
+                ps = con.prepareStatement(select);
+                if(obj!=null && obj.getCodigo()!=null && obj.getCodigo()!=0)
+                    ps.setInt(++cont, obj.getCodigo());
+                if(obj!=null && obj.getDescricao()!=null && !obj.getDescricao().isEmpty())
+                    ps.setString(++cont, obj.getDescricao());
+                if(obj!=null && obj.getNumeroLote()!=null && !obj.getNumeroLote().isEmpty())
+                    ps.setString(++cont, obj.getNumeroLote());
+                if(obj!=null && obj.getQtdeCompra()!=0)
+                    ps.setInt(++cont, obj.getQtdeCompra());
+                if(obj!=null && obj.getQtdRemanescente()!=0)
+                    ps.setInt(++cont, obj.getQtdRemanescente());
+                rs = ps.executeQuery();
+                
+                while(rs.next()){
+                    LoteProduto lp = new LoteProduto();
+                    lp.setCodigo(rs.getInt("ltp_codigo"));
+                    lp.setDescricao(rs.getString("ltp_descricao"));
+                    lp.setNumeroLote(rs.getString("ltp_numero"));
+                    lp.setValidade(rs.getDate("ltp_validade"));
+                    lp.setQtdeCompra(rs.getInt("ltp_qtdelote"));
+                    lp.setQtdRemanescente(rs.getInt("ltp_qtderemanes"));
+                    lista.add(lp.toString());
+                }
+                return lista;
+            }catch(SQLException ex){
+                throw new DAOException(ex.getMessage());
+            }
+        }else{
+            throw new DAOException("Erro na conexão!");
+        }
+    }
     
 }

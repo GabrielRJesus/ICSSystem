@@ -12,6 +12,7 @@ import control.PessoaControl;
 import entidade.Cidade;
 import entidade.Estado;
 import exception.ControlException;
+import exception.EntidadeException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -67,9 +68,9 @@ public class GerenciarClienteController implements Initializable {
     @FXML
     private JFXTextField txtCep;
     @FXML
-    private JFXComboBox<Cidade> cbCidade;
+    private JFXComboBox<String> cbCidade;
     @FXML
-    private JFXComboBox<Estado> cbEstado;
+    private JFXComboBox<String> cbEstado;
     @FXML
     private JFXButton btNovo;
     @FXML
@@ -96,6 +97,12 @@ public class GerenciarClienteController implements Initializable {
         MaskFieldUtil.dateField(txtData);
         MaskFieldUtil.foneField(txtCelular);
         MaskFieldUtil.foneField(txtTelefone);
+        try {
+            carregacb();
+            carregacbEstado();
+        } catch (ControlException ex) {
+            System.out.println(ex.getMessage());
+        }
         if(pc.retornaCliBusca()!=null){
             txtBairro.setText(pc.retornaCliBusca().getLogradouro().getBairro());
             txtCelular.setText(pc.retornaCliBusca().getCelular());
@@ -111,20 +118,13 @@ public class GerenciarClienteController implements Initializable {
             SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
             String str = fmt.format(pc.retornaCliBusca().getDtNasc());
             txtData.setText(str);
-            cbCidade.setValue(pc.retornaCliBusca().getLogradouro().getCidade());
-            cbEstado.setValue(pc.retornaCliBusca().getLogradouro().getCidade().getEstado());
+            cbCidade.setValue(pc.retornaCliBusca().getLogradouro().getCidade().toString());
+            cbEstado.setValue(pc.retornaCliBusca().getLogradouro().getCidade().getEstado().toString());
             if(pc.retornaCliBusca().getSexo()=='M')
                 cbSexo.setValue("Masculino");
             if(pc.retornaCliBusca().getSexo()=='F')
                 cbSexo.setValue("Feminino");
         }
-        try {
-            carregacb();
-            carregacbEstado();
-        } catch (ControlException ex) {
-            System.out.println(ex.getMessage());
-        }
-        
     }    
 
     @FXML
@@ -134,7 +134,7 @@ public class GerenciarClienteController implements Initializable {
     }
 
     @FXML
-    private void clkGravar(ActionEvent event) throws ControlException, SQLException, ParseException {
+    private void clkGravar(ActionEvent event) throws ControlException, SQLException, ParseException, EntidadeException {
         Integer codigo;
         if(txtCodigo.getText().toString()!=null && !txtCodigo.getText().toString().isEmpty())
             codigo = Integer.parseInt(txtCodigo.getText().toString());
@@ -228,8 +228,8 @@ public class GerenciarClienteController implements Initializable {
         txtRg.setText("");
         txtTelefone.setText("");
         txtData.setText("");
-        cbCidade.setPromptText("Cidade");
-        cbEstado.setPromptText("Estado");
+        cbCidade.setValue("");
+        cbEstado.setValue("");
         cbSexo.setPromptText("Sexo");
     }
     
@@ -241,27 +241,27 @@ public class GerenciarClienteController implements Initializable {
         cbSexo.getItems().addAll(colection);
     }
     
-    public void carregacbCidade(Estado est) throws ControlException{
+    public void carregacbCidade(String est) throws ControlException{
         cbCidade.getItems().clear();
         PessoaControl pc = new PessoaControl();
-        List<Cidade> lista = new ArrayList<>();
+        List<String> lista = new ArrayList<>();
         lista = pc.buscaCidades(est);
-        ObservableList<Cidade> colection = FXCollections.observableArrayList(lista);
+        ObservableList<String> colection = FXCollections.observableArrayList(lista);
         cbCidade.getItems().addAll(colection);
     }
     
     public void carregacbEstado() throws ControlException{
         PessoaControl pc = new PessoaControl();
-        List<Estado> lista = new ArrayList<>();
+        List<String> lista = new ArrayList<>();
         lista = pc.buscaEstados();
-        ObservableList<Estado> colection = FXCollections.observableArrayList(lista);
+        ObservableList<String> colection = FXCollections.observableArrayList(lista);
         cbEstado.getItems().addAll(colection);
     }
 
     @FXML
     private void selectEstado(ActionEvent event) throws ControlException {
         if(cbEstado.getSelectionModel().getSelectedItem()!=null)
-            carregacbCidade(cbEstado.getSelectionModel().getSelectedItem());
+            carregacbCidade(cbEstado.getSelectionModel().getSelectedItem().toString());
     }
 
     @FXML

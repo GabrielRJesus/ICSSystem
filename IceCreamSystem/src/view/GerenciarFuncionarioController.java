@@ -33,6 +33,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import util.MaskFieldUtil;
 
 /**
  * FXML Controller class
@@ -68,9 +69,9 @@ public class GerenciarFuncionarioController implements Initializable {
     @FXML
     private JFXTextField txtCep;
     @FXML
-    private JFXComboBox<Cidade> cbCidade;
+    private JFXComboBox<String> cbCidade;
     @FXML
-    private JFXComboBox<Estado> cbEstado;
+    private JFXComboBox<String> cbEstado;
     @FXML
     private JFXButton btNovo;
     @FXML
@@ -103,6 +104,10 @@ public class GerenciarFuncionarioController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         PessoaControl pc = new PessoaControl();
+        MaskFieldUtil.cepField(txtCep);
+        MaskFieldUtil.cpfField(txtCpf);
+        MaskFieldUtil.foneField(txtTelefone);
+        MaskFieldUtil.foneField(txtCelular);
         inicializa(true);
         carregacb();
         try {
@@ -130,11 +135,12 @@ public class GerenciarFuncionarioController implements Initializable {
             txtRg.setText(pc.retornaFuncBusca().getRg());
             txtTelefone.setText(pc.retornaFuncBusca().getTelefone());
             dpData.setValue(data);
-            cbCidade.setValue(pc.retornaFuncBusca().getLogradouro().getCidade());
-            cbEstado.setValue(pc.retornaFuncBusca().getLogradouro().getCidade().getEstado());
+            cbCidade.setValue(pc.retornaFuncBusca().getLogradouro().getCidade().toString());
+            cbEstado.setValue(pc.retornaFuncBusca().getLogradouro().getCidade().getEstado().toString());
             if(pc.retornaFuncBusca().getSexo()=='M')
                 cbSexo.setValue("Mascuino");
             if(pc.retornaFuncBusca().getSexo()=='F')
+                cbSexo.setValue("Feminino");
             txtLogin.setText(pc.retornaFuncBusca().getLogin());
             txtSenha.setText(pc.retornaFuncBusca().getSenha());
             txtCargo.setText(pc.retornaFuncBusca().getCargo());
@@ -261,8 +267,8 @@ public class GerenciarFuncionarioController implements Initializable {
         txtRg.setText("");
         txtTelefone.setText("");
         dpData.setValue(null);
-        cbCidade.setPromptText("Cidade");
-        cbEstado.setPromptText("Estado");
+        cbCidade.setValue("");
+        cbEstado.setValue("");
         cbSexo.setPromptText("Sexo");
         txtLogin.setText("");
         txtSenha.setText("");
@@ -280,20 +286,20 @@ public class GerenciarFuncionarioController implements Initializable {
         cbSexo.getItems().addAll(colection);
     }
     
-    public void carregacbCidade(Estado est) throws ControlException{
+    public void carregacbCidade(String est) throws ControlException{
         cbCidade.getItems().clear();
         PessoaControl pc = new PessoaControl();
-        List<Cidade> lista = new ArrayList<>();
+        List<String> lista = new ArrayList<>();
         lista = pc.buscaCidades(est);
-        ObservableList<Cidade> colection = FXCollections.observableArrayList(lista);
+        ObservableList<String> colection = FXCollections.observableArrayList(lista);
         cbCidade.getItems().addAll(colection);
     }
     
     public void carregacbEstado() throws ControlException{
         PessoaControl pc = new PessoaControl();
-        List<Estado> lista = new ArrayList<>();
+        List<String> lista = new ArrayList<>();
         lista = pc.buscaEstados();
-        ObservableList<Estado> colection = FXCollections.observableArrayList(lista);
+        ObservableList<String> colection = FXCollections.observableArrayList(lista);
         cbEstado.getItems().addAll(colection);
     }
 

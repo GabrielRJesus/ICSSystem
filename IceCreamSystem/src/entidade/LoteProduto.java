@@ -75,6 +75,13 @@ public class LoteProduto {
     public static void setLoteSelecionado(LoteProduto loteSelecionado) {
         LoteProduto.loteSelecionado = loteSelecionado;
     }
+
+    @Override
+    public String toString() {
+        return  numeroLote;
+    }
+    
+    
     
     public int insert(Connection con) throws EntidadeException{
         try{
@@ -111,6 +118,14 @@ public class LoteProduto {
     public List<LoteProduto> lista(Date inicio, Date fim, Connection con) throws EntidadeException{
         try{
             return new LoteProdutoDAO().lista(this,inicio,fim,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
+    public List<String> listaString(Connection con) throws EntidadeException{
+        try{
+            return new LoteProdutoDAO().listaString(this,con);
         }catch(DAOException ex){
             throw new EntidadeException(ex.getMessage());
         }

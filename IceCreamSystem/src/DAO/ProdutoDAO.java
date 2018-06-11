@@ -13,14 +13,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ProdutoDAO implements GenericDAO<Produto>{
     
-    private String insert = "insert into produto(tpp_codigo, ltp_codigo, um_codigo, mar_codigo, prod_precobase, prod_margemlucro, prod_preco, prod_qtdemin, prod_estoque)"
-            + " values(?,?,?,?,?,?,?,?,?)";
-    private String update = "update produto set tpp_codigo = ?, ltp_codigo = ?, um_codigo = ?, mar_codigo = ?, prod_precobae = ?, prod_margemlucro = ?,"
+    private String insert = "insert into produto(prod_descricao, tpp_codigo, ltp_codigo, um_codigo, mar_codigo, prod_precobase, prod_margemlucro, prod_preco, prod_qtdemin, prod_estoque)"
+            + " values(?,?,?,?,?,?,?,?,?,?)";
+    private String update = "update produto set prod_descricao = ?, tpp_codigo = ?, ltp_codigo = ?, um_codigo = ?, mar_codigo = ?, prod_precobase = ?, prod_margemlucro = ?,"
             + " prod_preco = ?, prod_qtdemin = ?, prod_estoque = ? where prod_codigo = ?";
     private String delete = "delete from produto where prod_codigo = ?";
     private String select = "select * from produto";
@@ -32,6 +30,7 @@ public class ProdutoDAO implements GenericDAO<Produto>{
         if(con!=null){
             try{
                 ps = con.prepareStatement(insert);
+                ps.setString(++cont, obj.getDescricao());
                 ps.setInt(++cont, obj.getCprod().getCodigo());
                 ps.setInt(++cont, obj.getLprod().getCodigo());
                 ps.setInt(++cont, obj.getUnimed().getCodigo());
@@ -57,6 +56,7 @@ public class ProdutoDAO implements GenericDAO<Produto>{
         if(con!=null){
             try{
                 ps = con.prepareStatement(update);
+                ps.setString(++cont, obj.getDescricao());
                 ps.setInt(++cont, obj.getCprod().getCodigo());
                 ps.setInt(++cont, obj.getLprod().getCodigo());
                 ps.setInt(++cont, obj.getUnimed().getCodigo());
@@ -105,6 +105,15 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                 select+=" where prod_codigo = ?";
                 ultimo = true;
             }
+            if(obj!=null && obj.getDescricao()!=null && !obj.getDescricao().isEmpty()){
+                if(ultimo)
+                    select+=" and prod_descricao like ?";
+                else{
+                    select+=" where prod_descricao like ?";
+                    ultimo = true;
+                }
+            }
+            
             if(obj!=null && obj.getCprod().getCodigo()!=null && obj.getCprod().getCodigo()!=0){
                 if(ultimo)
                     select+=" and tpp_codigo = ?";
@@ -184,6 +193,8 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                 ps = con.prepareStatement(select);
                 if(obj!=null && obj.getCodigo()!=null && obj.getCodigo()!=0)
                     ps.setInt(++cont, obj.getCodigo());
+                if(obj!=null && obj.getDescricao()!=null && !obj.getDescricao().isEmpty())
+                    ps.setString(++cont, obj.getDescricao());
                 if(obj!=null && obj.getCprod().getCodigo()!=null && obj.getCprod().getCodigo()!=0)
                     ps.setInt(++cont, obj.getCprod().getCodigo());
                 if(obj!=null && obj.getLprod().getCodigo()!=null && obj.getLprod().getCodigo()!=0)
@@ -210,6 +221,7 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                     UnidadeMedida um = new UnidadeMedida();
                     Marca m = new Marca();
                     p.setCodigo(rs.getInt("prod_codigo"));
+                    p.setDescricao(rs.getString("prod_descricao"));
                     cat.setCodigo(rs.getInt("tpp_codigo"));
                     p.setCprod(cat.select(con));
                     ltp.setCodigo(rs.getInt("ltp_codigo"));
@@ -247,6 +259,16 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                 select+=" where prod_codigo = ?";
                 ultimo = true;
             }
+            
+            if(obj!=null && obj.getDescricao()!=null && !obj.getDescricao().isEmpty()){
+                if(ultimo)
+                    select+=" and prod_descricao like ?";
+                else{
+                    select+=" where prod_descricao like ?";
+                    ultimo = true;
+                }
+            }
+            
             if(obj!=null && obj.getCprod().getCodigo()!=null && obj.getCprod().getCodigo()!=0){
                 if(ultimo)
                     select+=" and tpp_codigo = ?";
@@ -326,6 +348,8 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                 ps = con.prepareStatement(select);
                 if(obj!=null && obj.getCodigo()!=null && obj.getCodigo()!=0)
                     ps.setInt(++cont, obj.getCodigo());
+                if(obj!=null && obj.getDescricao()!=null && !obj.getDescricao().isEmpty())
+                    ps.setString(++cont, obj.getDescricao());
                 if(obj!=null && obj.getCprod().getCodigo()!=null && obj.getCprod().getCodigo()!=0)
                     ps.setInt(++cont, obj.getCprod().getCodigo());
                 if(obj!=null && obj.getLprod().getCodigo()!=null && obj.getLprod().getCodigo()!=0)
@@ -352,6 +376,7 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                     UnidadeMedida um = new UnidadeMedida();
                     Marca m = new Marca();
                     p.setCodigo(rs.getInt("prod_codigo"));
+                    p.setDescricao(rs.getString("prod_descricao"));
                     cat.setCodigo(rs.getInt("tpp_codigo"));
                     p.setCprod(cat.select(con));
                     ltp.setCodigo(rs.getInt("ltp_codigo"));

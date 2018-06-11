@@ -114,4 +114,30 @@ public class EstadoDAO implements GenericDAO<Estado>{
         }
     }
     
+    public List<String> listaString(Estado obj, Connection con) throws DAOException {
+        List<String> lista = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        if(con!=null){
+            try{
+                ps = con.prepareStatement(select);
+                rs = ps.executeQuery();
+                
+                while(rs.next()){
+                    Estado e = new Estado();
+                    e.setCodigo(rs.getInt("est_codigo"));
+                    e.setNome(rs.getString("est_nome"));
+                    e.setSigla(rs.getString("est_sigla"));
+                    lista.add(e.toString());
+                }
+                return lista;
+            }catch(SQLException ex){
+                throw new DAOException(ex.getMessage());
+            }
+        }else{
+            throw new DAOException("Erro na conexão!");
+        }
+    }
+    
 }

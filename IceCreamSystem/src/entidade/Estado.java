@@ -57,6 +57,14 @@ public class Estado {
             throw new EntidadeException(ex.getMessage());
         }
     }
+    
+    public List<String> listaString(Connection con) throws EntidadeException{
+        try{
+            return new EstadoDAO().listaString(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
 
     @Override
     public String toString() {

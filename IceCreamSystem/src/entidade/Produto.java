@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Produto {
     private Integer codigo;
+    private String descricao;
     private CategoriaProduto cprod;
     private LoteProduto lprod;
     private UnidadeMedida unimed;
@@ -17,6 +18,8 @@ public class Produto {
     private double preco;
     private int qtdeMin;
     private int qtdeEstoque;
+    
+    private static Produto prodSelecionado;
 
     public Produto() {
         cprod = new CategoriaProduto();
@@ -33,6 +36,14 @@ public class Produto {
         this.codigo = codigo;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+    
     public CategoriaProduto getCprod() {
         return cprod;
     }
@@ -104,6 +115,16 @@ public class Produto {
     public void setQtdeEstoque(int qtdeEstoque) {
         this.qtdeEstoque = qtdeEstoque;
     }
+
+    public static Produto getProdSelecionado() {
+        return prodSelecionado;
+    }
+
+    public static void setProdSelecionado(Produto prodSelecionado) {
+        Produto.prodSelecionado = prodSelecionado;
+    }
+    
+    
     
     public int insert(Connection con) throws EntidadeException{
         try{

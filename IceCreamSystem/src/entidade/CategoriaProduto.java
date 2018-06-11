@@ -28,6 +28,13 @@ public class CategoriaProduto {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    @Override
+    public String toString() {
+        return  descricao;
+    }
+    
+    
     
     public int insert(Connection con) throws EntidadeException{
         try{
@@ -64,6 +71,14 @@ public class CategoriaProduto {
     public List<CategoriaProduto> lista(Connection con) throws EntidadeException{
         try{
             return new CategoriaProdutoDAO().lista(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
+    public List<String> listaString(Connection con) throws EntidadeException{
+        try{
+            return new CategoriaProdutoDAO().listaString(this,con);
         }catch(DAOException ex){
             throw new EntidadeException(ex.getMessage());
         }

@@ -154,4 +154,47 @@ public class CategoriaProdutoDAO implements GenericDAO<CategoriaProduto>{
 
     }
     
+    public List<String> listaString(CategoriaProduto obj, Connection con) throws DAOException {
+        List<String> lista = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean ultimo = false;
+        int cont = 0;
+        if(con!=null){
+            
+            if(obj!=null && obj.getCodigo()!=null && obj.getCodigo()!=0){
+                select+=" where tpp_codigo = ?";
+                ultimo = true;
+            }
+            if(obj!=null && obj.getDescricao()!=null && !obj.getDescricao().isEmpty()){
+                if(ultimo)
+                    select+=" and tpp_descricao like ?";
+                else
+                    select+=" where tpp_descricao like ?";
+            }
+            
+            try{
+                ps = con.prepareStatement(select);
+                if(obj!=null && obj.getCodigo()!=null && obj.getCodigo()!=0)
+                    ps.setInt(++cont, obj.getCodigo());
+                if(obj!=null && obj.getDescricao()!=null && !obj.getDescricao().isEmpty())
+                    ps.setString(++cont, "%"+obj.getDescricao()+"%");
+                rs = ps.executeQuery();
+                
+                while(rs.next()){
+                    CategoriaProduto cp = new CategoriaProduto();
+                    cp.setCodigo(rs.getInt("tpp_codigo"));
+                    cp.setDescricao(rs.getString("tpp_descricao"));
+                    lista.add(cp.toString());
+                }
+                return lista;
+            }catch(SQLException ex){
+                throw new DAOException(ex.getMessage());
+            }
+        }else{
+            throw new DAOException("Erro na conexão!");
+        }
+
+    }
+    
 }

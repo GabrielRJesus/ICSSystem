@@ -6,6 +6,7 @@
 package view;
 
 import com.jfoenix.controls.JFXButton;
+import control.PessoaControl;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -82,6 +83,17 @@ public class TelaPrincipalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        PessoaControl pc = new PessoaControl();
+        if(pc.retornaSelecionado()!=null){
+            if(pc.retornaSelecionado().getCargo().equalsIgnoreCase("Funcionario")){
+                gerenciarFuncionario.setVisible(false);
+                gerenciarModalidades.setVisible(false);
+                gerenciarPagamentos.setVisible(false);
+                gerenciarFornecedor.setVisible(false);
+                locFornecedor.setVisible(false);
+                locFuncionario.setVisible(false);
+            }
+        }
     }    
 
     @FXML
@@ -127,7 +139,15 @@ public class TelaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void gerProduto(ActionEvent event) {
+    private void gerProduto(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarProduto.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Gerenciar Produto");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
     }
 
     @FXML
@@ -239,11 +259,27 @@ public class TelaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void locFornecedor(ActionEvent event) {
+    private void locFornecedor(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarFornecedor.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Localizar Fornecedor");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
     }
 
     @FXML
-    private void locProduto(ActionEvent event) {
+    private void locProduto(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LocalzarProduto.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Localizar Produto");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
     }
 
     @FXML

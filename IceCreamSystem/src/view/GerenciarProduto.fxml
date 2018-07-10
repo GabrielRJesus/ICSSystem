@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="522.0" prefWidth="604.0" styleClass="background" stylesheets="@estilo.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="view.GerenciarProdutoController">
+<AnchorPane id="AnchorPane" prefHeight="522.0" prefWidth="604.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GerenciarProdutoController">
    <children>
       <Label layoutX="148.0" layoutY="14.0" text="Gerenciar Produtos">
          <font>
@@ -25,10 +24,10 @@
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXComboBox fx:id="cbTipo" focusColor="#2b2553" layoutX="85.0" layoutY="180.0" prefHeight="25.0" prefWidth="210.0" promptText="Tipo Produto" styleClass="corTexto" stylesheets="@estilo.css" />
-      <JFXComboBox fx:id="cbMarca" focusColor="#2b2553" layoutX="306.0" layoutY="180.0" prefHeight="25.0" prefWidth="210.0" promptText="Marca Produto" styleClass="corTexto" stylesheets="@estilo.css" />
-      <JFXComboBox fx:id="cbLote" focusColor="#2b2553" layoutX="85.0" layoutY="233.0" prefHeight="25.0" prefWidth="202.0" promptText="Lote Produto" styleClass="corTexto" stylesheets="@estilo.css" />
-      <JFXComboBox fx:id="cbUm" focusColor="#2b2553" layoutX="306.0" layoutY="233.0" prefHeight="25.0" prefWidth="210.0" promptText="Unidade de Medida" styleClass="corTexto" stylesheets="@estilo.css" />
+      <JFXComboBox fx:id="cbTipo" focusColor="#2b2553" labelFloat="true" layoutX="85.0" layoutY="180.0" prefHeight="25.0" prefWidth="210.0" promptText="Tipo Produto" styleClass="corTexto" stylesheets="@estilo.css" />
+      <JFXComboBox fx:id="cbMarca" focusColor="#2b2553" labelFloat="true" layoutX="306.0" layoutY="180.0" prefHeight="25.0" prefWidth="210.0" promptText="Marca Produto" styleClass="corTexto" stylesheets="@estilo.css" />
+      <JFXComboBox fx:id="cbLote" focusColor="#2b2553" labelFloat="true" layoutX="85.0" layoutY="233.0" prefHeight="25.0" prefWidth="202.0" promptText="Lote Produto" styleClass="corTexto" stylesheets="@estilo.css" />
+      <JFXComboBox fx:id="cbUm" focusColor="#2b2553" labelFloat="true" layoutX="306.0" layoutY="233.0" prefHeight="25.0" prefWidth="210.0" promptText="Unidade de Medida" styleClass="corTexto" stylesheets="@estilo.css" />
       <JFXTextField fx:id="txtPrecoBase" focusColor="#2b2553" labelFloat="true" layoutX="85.0" layoutY="279.0" prefHeight="29.0" prefWidth="202.0" promptText="Preço Base:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
@@ -69,7 +68,7 @@
             <Font name="Arial" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btSair" layoutX="503.0" layoutY="456.0" onAction="#clkSair" prefWidth="90.0" text="Sair" textFill="#2b2553">
+      <JFXButton fx:id="btLocalizar" layoutX="309.0" layoutY="456.0" onAction="#clkLocalizar" prefWidth="90.0" text="Localizar" textFill="#2b2553">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
@@ -79,7 +78,7 @@
             <Font name="Arial" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btLocalizar" layoutX="309.0" layoutY="456.0" onAction="#clkLocalizar" prefWidth="90.0" text="Localizar" textFill="#2b2553">
+      <JFXButton fx:id="btSair" layoutX="503.0" layoutY="456.0" onAction="#clkSair" prefWidth="90.0" text="Sair" textFill="#2b2553">
          <font>
             <Font name="Arial" size="15.0" />
          </font>

@@ -20,27 +20,27 @@
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="tvNome" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="167.0" prefHeight="25.0" prefWidth="422.0" promptText="Nome Empresa:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="tvNome" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="167.0" prefHeight="25.0" prefWidth="422.0" promptText="*Nome Empresa:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="tvRazaoSocial" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="227.0" prefHeight="25.0" prefWidth="422.0" promptText="Razão Social:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="tvRazaoSocial" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="227.0" prefHeight="25.0" prefWidth="422.0" promptText="*Razão Social:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="tvCNPJ" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="287.0" prefHeight="29.0" prefWidth="275.0" promptText="CNPJ:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="tvCNPJ" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="287.0" prefHeight="29.0" prefWidth="275.0" promptText="*CNPJ:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="tvIe" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="347.0" prefHeight="25.0" prefWidth="275.0" promptText="IE:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="tvIe" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="347.0" prefHeight="25.0" prefWidth="275.0" promptText="*IE:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="tvTelefone" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="407.0" prefHeight="25.0" prefWidth="275.0" promptText="Telefone:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="tvTelefone" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="407.0" prefHeight="25.0" prefWidth="275.0" promptText="*Telefone:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
@@ -70,7 +70,7 @@
             <Font size="15.0" />
          </font>
       </JFXButton>
-      <JFXTextField fx:id="tvData" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="470.0" prefHeight="25.0" prefWidth="275.0" promptText="Data de Fundação:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="tvData" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="470.0" prefHeight="25.0" prefWidth="275.0" promptText="*Data de Fundação:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>

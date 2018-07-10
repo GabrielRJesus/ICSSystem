@@ -8,20 +8,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="542.0" prefWidth="581.0" styleClass="background" stylesheets="@estilo.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="view.LocalzarProdutoController">
+<AnchorPane id="AnchorPane" prefHeight="542.0" prefWidth="581.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LocalzarProdutoController">
    <children>
       <Label layoutX="137.0" layoutY="14.0" text="Localizar Produtos" textFill="#2b2553">
          <font>
             <Font name="Arial Black" size="30.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtCodigo" focusColor="#2b2553" layoutX="33.0" layoutY="70.0" prefHeight="25.0" prefWidth="136.0" promptText="Codigo:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtCodigo" focusColor="#2b2553" labelFloat="true" layoutX="33.0" layoutY="70.0" prefHeight="25.0" prefWidth="136.0" promptText="Codigo:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtDescricao" focusColor="#2b2553" layoutX="186.0" layoutY="70.0" prefHeight="25.0" prefWidth="252.0" promptText="Descrição:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtDescricao" focusColor="#2b2553" labelFloat="true" layoutX="186.0" layoutY="70.0" prefHeight="25.0" prefWidth="252.0" promptText="Descrição:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>

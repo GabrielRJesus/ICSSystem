@@ -8,35 +8,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="596.0" prefWidth="687.0" styleClass="background" stylesheets="@estilo.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="view.LocalizarFuncionarioController">
+<AnchorPane id="AnchorPane" prefHeight="596.0" prefWidth="687.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LocalizarFuncionarioController">
    <children>
       <Label layoutX="156.0" layoutY="14.0" text="Localizar Funcionario" textFill="#2b2553">
          <font>
             <Font name="Arial Black" size="30.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtCodigo" focusColor="#2b2553" layoutX="48.0" layoutY="71.0" prefHeight="25.0" prefWidth="95.0" promptText="Código:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtCodigo" focusColor="#2b2553" labelFloat="true" layoutX="48.0" layoutY="71.0" prefHeight="25.0" prefWidth="95.0" promptText="Código:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtNome" focusColor="#2b2553" layoutX="155.0" layoutY="71.0" prefHeight="25.0" prefWidth="238.0" promptText="Nome:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtNome" focusColor="#2b2553" labelFloat="true" layoutX="155.0" layoutY="71.0" prefHeight="25.0" prefWidth="238.0" promptText="Nome:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtCPF" focusColor="#2b2553" layoutX="400.0" layoutY="71.0" prefHeight="25.0" prefWidth="238.0" promptText="CPF:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtCPF" focusColor="#2b2553" labelFloat="true" layoutX="400.0" layoutY="71.0" prefHeight="25.0" prefWidth="238.0" promptText="CPF:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtLogin" focusColor="#2b2553" layoutX="130.0" layoutY="110.0" prefHeight="25.0" prefWidth="175.0" promptText="Login:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtLogin" focusColor="#2b2553" labelFloat="true" layoutX="130.0" layoutY="110.0" prefHeight="25.0" prefWidth="175.0" promptText="Login:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtCargo" focusColor="#2b2553" layoutX="333.0" layoutY="110.0" prefHeight="25.0" prefWidth="175.0" promptText="Cargo:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtCargo" focusColor="#2b2553" labelFloat="true" layoutX="333.0" layoutY="110.0" prefHeight="25.0" prefWidth="175.0" promptText="Cargo:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>

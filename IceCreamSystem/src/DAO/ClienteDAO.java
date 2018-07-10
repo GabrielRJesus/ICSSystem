@@ -19,6 +19,7 @@ public class ClienteDAO implements GenericDAO<Cliente>{
     private String select = "select * from cliente c inner join funcionario f on c.cli_codigo<>f.cli_codigo";
     private String update = "update cliente set cli_nome = ?, cli_cpf = ?, cli_rg = ?, cli_celular = ?, cli_dtnasc = ?, cli_sexo = ?, cli_telefone = ?, cli_email = ?, log_codigo = ? where cli_codigo = ?";
     private String delete = "delete from cliente where cli_codigo = ?";
+    private String selectc = "select * from cliente where cli_codigo not in (select cli_codigo from funcionario)";
     
     public int insert(Cliente obj, Connection con) throws DAOException{
         PreparedStatement ps = null;
@@ -236,84 +237,173 @@ public class ClienteDAO implements GenericDAO<Cliente>{
         int cont = 0;
         boolean ultimo = false;
         if(con!=null){
+                if(obj!=null && obj.getCodigo()!=null && obj.getCodigo()!=0){
+                    select+=" where cli_codigo = ?";
+                    ultimo = true;
+                }
+
+                if(obj!=null && obj.getNome()!=null && !obj.getNome().isEmpty()){
+                    if(ultimo)
+                        select+=" and cli_nome like ?";
+                    else{
+                        select +=" where cli_nome like ?";
+                        ultimo = true;
+                    }
+                }
+
+                if(obj!=null && obj.getCpf()!=null && !obj.getCpf().isEmpty()){
+                    if(ultimo)
+                        select+=" and cli_cpf = ?";
+                    else{
+                        select +=" where cli_cpf = ?";
+                        ultimo = true;
+                    }
+                }
+
+                if(obj!=null && obj.getRg()!=null && !obj.getRg().isEmpty()){
+                    if(ultimo)
+                        select+=" and cli_rg = ?";
+                    else{
+                        select +=" where cli_rg = ?";
+                        ultimo = true;
+                    }
+                }
+
+                if(obj!=null && obj.getCelular()!=null && !obj.getCelular().isEmpty()){
+                    if(ultimo)
+                        select+=" and cli_celular = ?";
+                    else{
+                        select +=" where cli_celular = ?";
+                        ultimo = true;
+                    }
+                }
+
+                if(obj!=null && obj.getDtNasc()!=null){
+                    if(ultimo)
+                        select+=" and cli_dtnasc = ?";
+                    else{
+                        select +=" where cli_dtnasc = ?";
+                        ultimo = true;
+                    }
+                }
+
+                if(obj!=null && obj.getTelefone()!=null && !obj.getTelefone().isEmpty()){
+                    if(ultimo)
+                        select+=" and cli_telefone = ?";
+                    else{
+                        select +=" where cli_telefone = ?";
+                        ultimo = true;
+                    }
+                }
+
+                if(obj!=null && obj.getEmail()!=null && !obj.getEmail().isEmpty()){
+                    if(ultimo)
+                        select+=" and cli_email = ?";
+                    else{
+                        select +=" where cli_email = ?";
+                        ultimo = true;
+                    }
+                }
+
+                if(obj!=null && obj.getLogradouro().getCodigo()!=null && obj.getLogradouro().getCodigo()!=0){
+                    if(ultimo)
+                        select+=" and cli_email = ?";
+                    else{
+                        select +=" where cli_email = ?";
+                        ultimo = true;
+                    }
+                }
+                try{
+                    ps = con.prepareStatement(select);
+                    if(obj!=null && obj.getCodigo()!=null && obj.getCodigo()!=0)
+                        ps.setInt(++cont, obj.getCodigo());
+                    if(obj!=null && obj.getNome()!=null && !obj.getNome().isEmpty())
+                        ps.setString(++cont, obj.getNome());
+                    if(obj!=null && obj.getCpf()!=null && !obj.getCpf().isEmpty())
+                        ps.setString(++cont, obj.getCpf());
+                    if(obj!=null && obj.getRg()!=null && !obj.getRg().isEmpty())
+                        ps.setString(++cont, obj.getRg());
+                    if(obj!=null && obj.getCelular()!=null && !obj.getCelular().isEmpty())
+                        ps.setString(++cont, obj.getCelular());
+                    if(obj!=null && obj.getDtNasc()!=null)
+                        ps.setDate(++cont, new java.sql.Date(obj.getDtNasc().getTime()));
+                    if(obj!=null && obj.getTelefone()!=null && !obj.getTelefone().isEmpty())
+                        ps.setString(++cont, obj.getTelefone());
+                    if(obj!=null && obj.getEmail()!=null && !obj.getEmail().isEmpty())
+                        ps.setString(++cont, obj.getEmail());
+                    if(obj!=null && obj.getLogradouro().getCodigo()!=null && obj.getLogradouro().getCodigo()!=0)
+                        ps.setInt(++cont, obj.getLogradouro().getCodigo());
+                    rs = ps.executeQuery();
+                    while(rs.next()){
+                        Cliente c = new Cliente();
+                        Logradouro log = new Logradouro();
+                        c.setCodigo(rs.getInt("cli_codigo"));
+                        c.setNome(rs.getString("cli_nome"));
+                        c.setCpf(rs.getString("cli_cpf"));
+                        c.setRg(rs.getString("cli_rg"));
+                        c.setTelefone(rs.getString("cli_telefone"));
+                        c.setCelular(rs.getString("cli_celular"));
+                        c.setDtNasc(rs.getDate("cli_dtnasc"));
+                        c.setSexo(rs.getString("cli_sexo").charAt(0));
+                        c.setEmail(rs.getString("cli_email"));
+                        log.setCodigo(rs.getInt("log_codigo"));
+                        c.setLogradouro(log.select(con));
+                        lista.add(c);
+                    }
+                    return lista;
+                }catch(SQLException ex){
+                    throw new DAOException(ex.getMessage());
+                } catch (EntidadeException ex) {
+                    throw new DAOException(ex.getMessage());
+                }
+            }else{
+                throw new DAOException("Erro na conexão!");
+            }
+        }
+        
+    public List<Cliente> listaSoClientes(Cliente obj, Connection con) throws DAOException {
+        List<Cliente> lista = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int cont = 0;
+        if(con!=null){
             if(obj!=null && obj.getCodigo()!=null && obj.getCodigo()!=0){
-                select+=" where cli_codigo = ?";
-                ultimo = true;
+                selectc+=" and cli_codigo = ?";
             }
             
             if(obj!=null && obj.getNome()!=null && !obj.getNome().isEmpty()){
-                if(ultimo)
-                    select+=" and cli_nome like ?";
-                else{
-                    select +=" where cli_nome like ?";
-                    ultimo = true;
-                }
+                selectc +=" and cli_nome like ?";
             }
             
             if(obj!=null && obj.getCpf()!=null && !obj.getCpf().isEmpty()){
-                if(ultimo)
-                    select+=" and cli_cpf = ?";
-                else{
-                    select +=" where cli_cpf = ?";
-                    ultimo = true;
-                }
+                selectc +=" and cli_cpf = ?";
             }
             
             if(obj!=null && obj.getRg()!=null && !obj.getRg().isEmpty()){
-                if(ultimo)
-                    select+=" and cli_rg = ?";
-                else{
-                    select +=" where cli_rg = ?";
-                    ultimo = true;
-                }
+                selectc +=" and cli_rg = ?";
             }
             
             if(obj!=null && obj.getCelular()!=null && !obj.getCelular().isEmpty()){
-                if(ultimo)
-                    select+=" and cli_celular = ?";
-                else{
-                    select +=" where cli_celular = ?";
-                    ultimo = true;
-                }
+                selectc +=" and cli_celular = ?";
             }
             
             if(obj!=null && obj.getDtNasc()!=null){
-                if(ultimo)
-                    select+=" and cli_dtnasc = ?";
-                else{
-                    select +=" where cli_dtnasc = ?";
-                    ultimo = true;
-                }
+                selectc +=" and cli_dtnasc = ?";
             }
             
             if(obj!=null && obj.getTelefone()!=null && !obj.getTelefone().isEmpty()){
-                if(ultimo)
-                    select+=" and cli_telefone = ?";
-                else{
-                    select +=" where cli_telefone = ?";
-                    ultimo = true;
-                }
+                selectc +=" and cli_telefone = ?";
             }
             
             if(obj!=null && obj.getEmail()!=null && !obj.getEmail().isEmpty()){
-                if(ultimo)
-                    select+=" and cli_email = ?";
-                else{
-                    select +=" where cli_email = ?";
-                    ultimo = true;
-                }
+                selectc +=" and cli_email = ?";
             }
             
             if(obj!=null && obj.getLogradouro().getCodigo()!=null && obj.getLogradouro().getCodigo()!=0){
-                if(ultimo)
-                    select+=" and cli_email = ?";
-                else{
-                    select +=" where cli_email = ?";
-                    ultimo = true;
-                }
+                selectc +=" and cli_email = ?";
             }
             try{
-                ps = con.prepareStatement(select);
+                ps = con.prepareStatement(selectc);
                 if(obj!=null && obj.getCodigo()!=null && obj.getCodigo()!=0)
                     ps.setInt(++cont, obj.getCodigo());
                 if(obj!=null && obj.getNome()!=null && !obj.getNome().isEmpty())

@@ -106,7 +106,7 @@ public class Cliente extends Pessoa{
     
     public List<Cliente> lista(Connection con) throws EntidadeException{
         try{
-            return new ClienteDAO().lista(this,con);
+            return new ClienteDAO().listaSoClientes(this,con);
         }catch(DAOException ex){
             throw new EntidadeException(ex.getMessage());
         }

@@ -21,7 +21,7 @@ public class FuncionarioDAO implements GenericDAO<Funcionario>{
     private String insertf = "insert into funcionario(cli_codigo, fun_login, fun_senha, fun_dtadmis, fun_dtdemis, fun_nivel, fun_salario, fun_cargo) values(?,?,?,?,?,?,?,?)";
     private String update = "update cliente set cli_nome = ?, cli_cpf = ?, cli_rg = ?, cli_celular = ?, cli_dtnasc = ?, cli_sexo = ?, cli_telefone = ?, log_codigo = ? where cli_codigo = ?";
     private String updatef = "update funcionario set fun_login = ?, fun_senha = ?, fun_dtadmis = ?, fun_dtdemis = ?, fun_nivel = ?, fun_salario = ?, fun_cargo = ? where cli_codigo = ?";
-            
+    private String selectsf = " select * from funcionario f inner join cliente c on c.cli_codigo = f.cli_codigo";
     
     
     @Override
@@ -335,4 +335,49 @@ public class FuncionarioDAO implements GenericDAO<Funcionario>{
         return null;
     }
     
+    
+    public List<Funcionario> listaFuncionarios(Funcionario obj, Connection con) throws DAOException {
+        List<Funcionario> lista = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int cont = 0;
+        boolean ultimo = false;
+        if(con!=null){
+            
+            
+            try{
+                ps = con.prepareStatement(selectsf);
+                rs = ps.executeQuery();
+                while(rs.next()){
+                    Funcionario f = new Funcionario();
+                    Logradouro l = new Logradouro();
+                    f.setCodigo(rs.getInt("c.cli_codigo"));
+                    f.setNome(rs.getString("c.cli_nome"));
+                    f.setCpf(rs.getString("c.cli_cpf"));
+                    f.setRg(rs.getString("c.cli_rg"));
+                    f.setDtNasc(rs.getDate("c.cli_dtnasc"));
+                    f.setSexo(rs.getString("c.cli_sexo").charAt(0));
+                    f.setTelefone(rs.getString("c.cli_telefone"));
+                    f.setEmail(rs.getString("c.cli_email"));
+                    l.setCodigo(rs.getInt("c.log_codigo"));
+                    f.setLogradouro(l.select(con));
+                    f.setLogin(rs.getString("f.fun_login"));
+                    f.setSenha(rs.getString("f.fun_senha"));
+                    f.setDtAdmiss(rs.getDate("f.fun_dtadmis"));
+                    f.setDtDemiss(rs.getDate("f.fun_dtdemis"));
+                    f.setSalario(rs.getDouble("f.fun_salario"));
+                    f.setCargo(rs.getString("f.fun_cargo"));
+                    lista.add(f);
+                }
+                return lista;
+            }catch(SQLException ex){
+                throw new DAOException(ex.getMessage());
+            } catch (EntidadeException ex) {
+                Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            throw new DAOException("Erro na conexão!");
+        }
+        return null;
+    }
 }

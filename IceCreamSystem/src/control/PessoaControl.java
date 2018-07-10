@@ -51,7 +51,7 @@ public class PessoaControl {
             if(cidade!=null && !cidade.isEmpty()){
                 c.setNome(cidade);
                 c = c.select(con);
-                log.setCidade(c.select(con));
+                log.setCidade(c);
             }
            
             return log;
@@ -354,6 +354,19 @@ public class PessoaControl {
         f.setSenha(senha);
         f = f.select(con);
         return f;
+    }
+    
+    public List<Funcionario> primeiroLogin() throws ControlException{
+        List<Funcionario> lista = new ArrayList<>();
+        try{
+            lista = new Funcionario().listaFuncionarios(con);
+            if(lista.size()>0)
+                return lista;
+            else
+                return null;
+        }catch(EntidadeException ex){
+            throw new ControlException(ex.getMessage());
+        }
     }
     
     public void guardaSelecionado(Funcionario f){

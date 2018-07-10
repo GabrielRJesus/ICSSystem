@@ -68,7 +68,7 @@ public class Estado {
 
     @Override
     public String toString() {
-        return nome + " - " + sigla;
+        return nome;
     }
     
     

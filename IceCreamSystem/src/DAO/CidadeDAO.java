@@ -59,9 +59,9 @@ public class CidadeDAO implements GenericDAO<Cidade>{
             
             if(obj!=null && obj.getEstado().getCodigo()!=null && obj.getEstado().getCodigo()!=0){
                 if(ultimo)
-                    select+=" and est_codigo = ?";
+                    select+=" and est_codig = ?";
                 else{
-                    select+=" where est_codigo = ?";
+                    select+=" where est_codig = ?";
                 }
             }
             
@@ -80,7 +80,7 @@ public class CidadeDAO implements GenericDAO<Cidade>{
                     Estado e = new Estado();
                     c.setCodigo(rs.getInt("cid_codigo"));
                     c.setNome(rs.getString("cid_nome"));
-                    e.setCodigo(rs.getInt("est_codigo"));
+                    e.setCodigo(rs.getInt("est_codig"));
                     c.setEstado(e.select(con));
                     return c;
                 }
@@ -102,7 +102,7 @@ public class CidadeDAO implements GenericDAO<Cidade>{
         ResultSet rs = null;
         
         if(obj!=null && obj.getEstado().getCodigo()!=null && obj.getEstado().getCodigo()!=0)
-            select+=" where est_codigo = ?";
+            select+=" where est_codig = ?";
         
         if(con!=null){
             try{
@@ -116,7 +116,7 @@ public class CidadeDAO implements GenericDAO<Cidade>{
                     Estado e = new Estado();
                     c.setCodigo(rs.getInt("cid_codigo"));
                     c.setNome(rs.getString("cid_nome"));
-                    e.setCodigo(rs.getInt("est_codigo"));
+                    e.setCodigo(rs.getInt("est_codig"));
                     c.setEstado(e.select(con));
                     lista.add(c);
                 }
@@ -137,7 +137,7 @@ public class CidadeDAO implements GenericDAO<Cidade>{
         ResultSet rs = null;
         
         if(obj!=null && obj.getEstado().getCodigo()!=null && obj.getEstado().getCodigo()!=0)
-            select+=" where est_codigo = ?";
+            select+=" where est_codig = ?";
         
         if(con!=null){
             try{
@@ -151,7 +151,7 @@ public class CidadeDAO implements GenericDAO<Cidade>{
                     Estado e = new Estado();
                     c.setCodigo(rs.getInt("cid_codigo"));
                     c.setNome(rs.getString("cid_nome"));
-                    e.setCodigo(rs.getInt("est_codigo"));
+                    e.setCodigo(rs.getInt("est_codig"));
                     c.setEstado(e.select(con));
                     lista.add(c.toString());
                 }

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="681.0" prefWidth="823.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PrimeiroAcessoController">
+   <children>
+      <Label layoutX="217.0" layoutY="24.0" text="Primeiro Acesso" textFill="#2b2553">
+         <font>
+            <Font name="Arial Black" size="35.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtCodigo" editable="false" focusColor="#2b2553" layoutX="47.0" layoutY="84.0" prefHeight="29.0" prefWidth="76.0" promptText="Código:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtNome" focusColor="#2b2553" layoutX="48.0" layoutY="123.0" prefHeight="25.0" prefWidth="517.0" promptText="Nome:*" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtCpf" layoutX="48.0" layoutY="168.0" prefHeight="25.0" prefWidth="253.0" promptText="CPF:*" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtRg" focusColor="#2b2553" layoutX="321.0" layoutY="168.0" prefHeight="25.0" prefWidth="245.0" promptText="RG:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtEndereco" focusColor="#2b2553" layoutX="48.0" layoutY="212.0" prefHeight="25.0" prefWidth="429.0" promptText="Endereço:*" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtNumero" focusColor="#2b2553" layoutX="493.0" layoutY="212.0" prefHeight="25.0" prefWidth="76.0" promptText="Numero:*" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtBairro" focusColor="#2b2553" layoutX="48.0" layoutY="255.0" prefHeight="25.0" prefWidth="322.0" promptText="Bairro:*" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtCep" focusColor="#2b2553" layoutX="385.0" layoutY="255.0" prefHeight="25.0" prefWidth="186.0" promptText="CEP:*" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXComboBox fx:id="cbCidade" focusColor="#2b2553" layoutX="227.0" layoutY="302.0" prefHeight="25.0" prefWidth="346.0" promptText="Cidade:*" styleClass="comboBox" stylesheets="@estilo.css" />
+      <JFXComboBox fx:id="cbEstado" focusColor="#2b2553" layoutX="48.0" layoutY="302.0" onAction="#selectEstado" prefHeight="25.0" prefWidth="162.0" promptText="Estado:*" styleClass="comboBox" stylesheets="@estilo.css" />
+      <JFXTextField fx:id="txtTelefone" focusColor="#2b2553" layoutX="48.0" layoutY="339.0" prefHeight="25.0" prefWidth="263.0" promptText="Telefone:*" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtCelular" focusColor="#2b2553" layoutX="326.0" layoutY="339.0" prefHeight="25.0" prefWidth="245.0" promptText="Celular:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXDatePicker fx:id="dpData" defaultColor="#2b2553" layoutX="45.0" layoutY="382.0" prefHeight="28.0" prefWidth="322.0" promptText="Data de Nascimento" />
+      <JFXComboBox fx:id="cbSexo" focusColor="#2b2553" layoutX="387.0" layoutY="384.0" prefHeight="25.0" prefWidth="186.0" promptText="Sexo:*" styleClass="comboBox" stylesheets="@estilo.css" />
+      <JFXTextField fx:id="txtEmail" focusColor="#2b2553" layoutX="48.0" layoutY="430.0" prefHeight="25.0" prefWidth="528.0" promptText="E-mail:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtLogin" focusColor="#2b2553" layoutX="45.0" layoutY="475.0" prefHeight="29.0" prefWidth="263.0" promptText="Login:*" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXPasswordField fx:id="txtSenha" focusColor="#2b2553" layoutX="322.0" layoutY="475.0" prefHeight="29.0" prefWidth="253.0" promptText="Senha:*" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXPasswordField>
+      <JFXDatePicker fx:id="dpDataAdm" defaultColor="#2b2553" layoutX="45.0" layoutY="520.0" prefHeight="28.0" prefWidth="263.0" promptText="Data de Admissão*" />
+      <JFXDatePicker fx:id="dpDataDem" defaultColor="#2b2553" layoutX="321.0" layoutY="520.0" prefHeight="28.0" prefWidth="253.0" promptText="Data de Demissão" />
+      <JFXTextField fx:id="txtSalario" focusColor="#2b2553" layoutX="45.0" layoutY="563.0" prefHeight="25.0" prefWidth="253.0" promptText="Salario R$:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtCargo" focusColor="#2b2553" layoutX="319.0" layoutY="563.0" prefHeight="25.0" prefWidth="263.0" promptText="Cargo:*" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="btGravar" layoutX="48.0" layoutY="622.0" onAction="#clkGravar" prefWidth="90.0" stylesheets="@estilo.css" text="Gravar" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btCancelar" layoutX="146.0" layoutY="622.0" onAction="#clkCancelar" prefWidth="90.0" text="Cancelar" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btSair" layoutX="696.0" layoutY="622.0" onAction="#clkSair" prefWidth="90.0" text="Sair" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="218.0" fitWidth="245.0" layoutX="574.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Logo.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

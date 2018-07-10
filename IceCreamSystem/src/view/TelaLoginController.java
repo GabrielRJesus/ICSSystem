@@ -44,40 +44,41 @@ public class TelaLoginController implements Initializable {
     private void clkEntrar(ActionEvent event) throws EntidadeException, ControlException, IOException {
         PessoaControl pc = new PessoaControl();
         EmpresaControl ec = new EmpresaControl();
-        if(pc.verificaUsuario(tvLogin.getText(), tvSenha.getText())!=null){
-            pc.guardaSelecionado(pc.verificaUsuario(tvLogin.getText(), tvSenha.getText()));
-            if(ec.retornaEmpresa()!=null){
-                Parent root = FXMLLoader.load(getClass().getResource("/view/TelaPrincipal.fxml"));
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) btSair.getScene().getWindow();
-                stage.setScene(scene);
-                stage.setTitle("Menu Principal");
-                stage.setX(300);
-                stage.setY(4);
-                stage.setResizable(false);
-                stage.showAndWait();
-                stage.close();
+        //fazer Login - Verifica login e senha
+            if(pc.verificaUsuario(tvLogin.getText(), tvSenha.getText())!=null){
+                pc.guardaSelecionado(pc.verificaUsuario(tvLogin.getText(), tvSenha.getText()));
+                if(ec.retornaEmpresa()!=null){
+                    Parent root = FXMLLoader.load(getClass().getResource("/view/TelaPrincipal.fxml"));
+                    Scene scene = new Scene(root);
+                    Stage stage = (Stage) btSair.getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.setTitle("Menu Principal");
+                    stage.setX(300);
+                    stage.setY(4);
+                    stage.setResizable(false);
+                    stage.showAndWait();
+                    stage.close();
+                }else{
+                    Parent root = FXMLLoader.load(getClass().getResource("/view/DadosEmpresa.fxml"));
+                    Scene scene = new Scene(root);
+                    Stage stage = (Stage) btSair.getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.setTitle("Dados da Empresa");
+                    stage.setX(300);
+                    stage.setY(4);
+                    stage.setResizable(false);
+                    stage.showAndWait();
+                    stage.close();
+                }
             }else{
-                Parent root = FXMLLoader.load(getClass().getResource("/view/DadosEmpresa.fxml"));
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) btSair.getScene().getWindow();
-                stage.setScene(scene);
-                stage.setTitle("Dados da Empresa");
-                stage.setX(300);
-                stage.setY(4);
-                stage.setResizable(false);
-                stage.showAndWait();
-                stage.close();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Resposta do Servidor");
+                alert.setHeaderText(null);
+                alert.setContentText("Login ou senha incorretos!");
+                alert.showAndWait();
+                tvLogin.setText("");
+                tvSenha.setText("");
             }
-        }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Resposta do Servidor");
-            alert.setHeaderText(null);
-            alert.setContentText("Login ou senha incorretos!");
-            alert.showAndWait();
-            tvLogin.setText("");
-            tvSenha.setText("");
-        }
     }
 
     @FXML

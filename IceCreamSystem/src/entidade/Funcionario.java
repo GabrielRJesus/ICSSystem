@@ -122,4 +122,12 @@ public class Funcionario extends Cliente{
         }
     }
     
+    public List<Funcionario> listaFuncionarios(Connection con) throws EntidadeException{
+        try{
+            return new FuncionarioDAO().listaFuncionarios(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
 }

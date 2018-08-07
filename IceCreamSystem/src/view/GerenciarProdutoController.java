@@ -17,7 +17,10 @@ import exception.ControlException;
 import exception.EntidadeException;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -32,6 +35,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import util.MaskFieldUtil;
 
 /**
  * FXML Controller class
@@ -48,8 +52,6 @@ public class GerenciarProdutoController implements Initializable {
     private JFXComboBox<String> cbTipo;
     @FXML
     private JFXComboBox<String> cbMarca;
-    @FXML
-    private JFXComboBox<String> cbLote;
     @FXML
     private JFXComboBox<String> cbUm;
     @FXML
@@ -74,6 +76,18 @@ public class GerenciarProdutoController implements Initializable {
     private JFXButton btExcluir;
     @FXML
     private JFXButton btLocalizar;
+    @FXML
+    private JFXTextField txtDescricaoLote;
+    @FXML
+    private JFXTextField txtNumeroLote;
+    @FXML
+    private JFXTextField txtValidadeLote;
+    @FXML
+    private JFXTextField txtQtdeLote;
+    @FXML
+    private JFXTextField txtQtdeReman;
+    @FXML
+    private JFXTextField txtCodigoLote;
 
     /**
      * Initializes the controller class.
@@ -81,11 +95,13 @@ public class GerenciarProdutoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        MaskFieldUtil.dateField(txtValidadeLote);
+        MaskFieldUtil.monetaryField(txtPreco);
+        MaskFieldUtil.monetaryField(txtPrecoBase);
         ProdutoControl pc = new ProdutoControl();
         inicializa(true);
         try {
             carregacbCategoria();
-            carregacbLote();
             carregacbMarca();
             carregacbUm();
         } catch (ControlException ex) {
@@ -102,10 +118,19 @@ public class GerenciarProdutoController implements Initializable {
             txtMargem.setText(pc.retornaSelecionado().getMargemLucro()+"");
             txtQtde.setText(pc.retornaSelecionado().getQtdeEstoque()+"");
             txtQtdeMin.setText(pc.retornaSelecionado().getQtdeMin()+"");
-            cbLote.setValue(pc.retornaSelecionado().getLprod().toString());
             cbTipo.setValue(pc.retornaSelecionado().getCprod().toString());
             cbMarca.setValue(pc.retornaSelecionado().getMarca().toString());
             cbUm.setValue(pc.retornaSelecionado().getUnimed().toString());
+            if(pc.retornaSelecionado().getLprod()!=null){
+                txtCodigoLote.setText(pc.retornaSelecionado().getLprod().getCodigo().toString());
+                txtDescricaoLote.setText(pc.retornaSelecionado().getLprod().getDescricao());
+                txtNumeroLote.setText(pc.retornaSelecionado().getLprod().getNumeroLote());
+                SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+                String str = fmt.format(pc.retornaSelecionado().getLprod().getValidade());
+                txtValidadeLote.setText(str);
+                txtQtdeLote.setText(pc.retornaSelecionado().getLprod().getCodigo().toString());
+                txtQtdeReman.setText(pc.retornaSelecionado().getLprod().getCodigo().toString());
+            }
         }
         
     }    
@@ -116,9 +141,10 @@ public class GerenciarProdutoController implements Initializable {
     }
 
     @FXML
-    private void clkGravar(ActionEvent event) throws ControlException {
+    private void clkGravar(ActionEvent event) throws ControlException, ParseException {
         ProdutoControl pc = new ProdutoControl();
-        int codigo =0, qtde = 0, qtdemin = 0;
+        Date data = null;
+        int codigo =0, qtde = 0, qtdemin = 0, codigoLote = 0, qtdeLote = 0, qtdeRLote = 0;
         double preco =0.0, margem = 0.0, precobase = 0.0;
         if(txtCodigo.getText()!=null && !txtCodigo.getText().isEmpty())
             codigo = Integer.parseInt(txtCodigo.getText());
@@ -132,7 +158,17 @@ public class GerenciarProdutoController implements Initializable {
             precobase = Double.parseDouble(txtPrecoBase.getText());
         if(txtMargem.getText()!=null && !txtMargem.getText().isEmpty())
             margem = Double.parseDouble(txtMargem.getText());
-        int result = pc.gravaProduto(codigo, txtDescricao.getText(), cbTipo.getValue(), cbLote.getValue(), cbMarca.getValue(), cbUm.getValue(), precobase, preco, margem, qtde, qtdemin);
+        if(txtCodigoLote.getText()!=null && !txtCodigoLote.getText().isEmpty())
+            codigoLote = Integer.parseInt(txtCodigoLote.getText());
+        if(txtQtdeLote.getText()!=null && !txtQtdeLote.getText().isEmpty())
+            qtdeLote = Integer.parseInt(txtQtdeLote.getText());
+        if(txtQtdeReman.getText()!=null && !txtQtdeReman.getText().isEmpty())
+            qtdeRLote = Integer.parseInt(txtQtdeReman.getText());
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        if(txtValidadeLote.getText()!=null)
+            data = new java.sql.Date(format.parse(txtValidadeLote.getText()).getTime());
+        int result = pc.gravaProduto(codigo, txtDescricao.getText(), cbTipo.getValue(),  cbMarca.getValue(), cbUm.getValue(), precobase, preco, margem, qtde, qtdemin, 
+                pc.gravaLote(codigo, txtDescricaoLote.getText(), txtNumeroLote.getText(), data, qtdeLote, qtdeRLote));
         if(result>0){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Resposta do Servidor");
@@ -217,10 +253,15 @@ public class GerenciarProdutoController implements Initializable {
         txtMargem.setDisable(estado);
         txtQtde.setDisable(estado);
         txtQtdeMin.setDisable(estado);
-        cbLote.setDisable(estado);
         cbTipo.setDisable(estado);
         cbMarca.setDisable(estado);
         cbUm.setDisable(estado);
+        txtCodigoLote.setDisable(estado);
+        txtDescricaoLote.setDisable(estado);
+        txtNumeroLote.setDisable(estado);
+        txtValidadeLote.setDisable(estado);
+        txtQtdeLote.setDisable(estado);
+        txtQtdeReman.setDisable(estado);
     }
     
     public void limpatela(){
@@ -232,10 +273,15 @@ public class GerenciarProdutoController implements Initializable {
         txtQtde.setText("");
         txtQtdeMin.setText("");
         txtCodigo.setText("");
-        cbLote.setValue("");
         cbTipo.setValue("");
         cbMarca.setValue("");
         cbUm.setValue("");
+        txtCodigoLote.setText("");
+        txtDescricaoLote.setText("");
+        txtNumeroLote.setText("");
+        txtValidadeLote.setText("");
+        txtQtdeLote.setText("");
+        txtQtdeReman.setText("");
     }
     
     public void carregacbMarca() throws ControlException, EntidadeException{
@@ -244,14 +290,6 @@ public class GerenciarProdutoController implements Initializable {
         lista = pc.buscaMarcas();
         ObservableList<String> colection = FXCollections.observableArrayList(lista);
         cbMarca.getItems().addAll(colection);
-    }
-    
-    public void carregacbLote() throws ControlException, EntidadeException{
-        ProdutoControl pc = new ProdutoControl();
-        List<String> lista = new ArrayList<>();
-        lista = pc.buscaLote();
-        ObservableList<String> colection = FXCollections.observableArrayList(lista);
-        cbLote.getItems().addAll(colection);
     }
     
     public void carregacbUm() throws ControlException, EntidadeException{

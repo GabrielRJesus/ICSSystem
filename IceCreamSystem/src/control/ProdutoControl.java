@@ -4,6 +4,7 @@ import entidade.*;
 import exception.ControlException;
 import exception.EntidadeException;
 import java.sql.Connection;
+import java.util.Date;
 import java.util.List;
 import sql.Banco;
 import util.Erro;
@@ -29,7 +30,7 @@ public class ProdutoControl {
         return new LoteProduto().listaString(con);
     }
     
-    public int gravaProduto(Integer codigo, String descricao, String c, String lote, String ma, String um, double precobase, double preco, double margem, int qtde, int qtdmin)throws ControlException{
+    public int gravaProduto(Integer codigo, String descricao, String c, String ma, String um, double precobase, double preco, double margem, int qtde, int qtdmin, int lote)throws ControlException{
 
         Erro e = new Erro();
         CategoriaProduto cp = new CategoriaProduto();
@@ -47,8 +48,6 @@ public class ProdutoControl {
             e.add("Selecione uma marca para o produto");
         if(um==null)
             e.add("Selecione a unidade de medida do  produto");
-        if(lote==null)
-            e.add("Selecione o lote do produto");
         if(qtde<0)
             e.add("insira a quantidade do produto no estoque");
         if(qtdmin <0)
@@ -69,11 +68,16 @@ public class ProdutoControl {
             try{
                 marca.setNome(ma);
                 ume.setAbreviacao(um);
-                lp.setNumeroLote(lote);
+                if(lote>0){
+                    lp.setCodigo(lote);
+                    p.setLprod(lp.select(con));
+                }
+                else
+                    p.setLprod(null);
                 cp.setDescricao(c);
                 cp = cp.select(con);
                 p.setCprod(cp);
-                p.setLprod(lp.select(con));
+                
                 p.setMarca(marca.select(con));
                 p.setUnimed(ume.select(con));
                 if(p.getCodigo()!=null && p.getCodigo()!=0)
@@ -120,5 +124,46 @@ public class ProdutoControl {
         }catch(EntidadeException ex){
             throw new ControlException(ex.getMessage());
         }
+    }
+    
+    //----------------- Lote do Produto -------------------------------------------------
+    
+    public int gravaLote(Integer codigo, String descricao, String numero, Date data, int qtdt, int qtdr) throws ControlException{
+        LoteProduto lp = new LoteProduto();
+        Erro e = new Erro();
+        
+        if(descricao==null || descricao.isEmpty())
+            e.add("Preencha o campo descricao");
+        if(descricao.length()>40)
+            e.add("Campo descricao possui muitos caracteres");
+        if(numero==null || numero.isEmpty())
+            e.add("Preencha o campo numero");
+        if(numero.length()>30)
+            e.add("Campo numero possui muitos caracteres");
+        if(data==null)
+            e.add("Preencha o campo data");
+        if(qtdt==0)
+            e.add("Preencha o campo quantidade");
+        
+        if(!e.isTemErro()){
+            lp.setDescricao(descricao);
+            lp.setNumeroLote(numero);
+            lp.setValidade(data);
+            lp.setQtdeCompra(qtdt);
+            lp.setQtdRemanescente(qtdt);
+            if(codigo!=0 && codigo!=null){
+                lp.setCodigo(codigo);
+                lp.setQtdRemanescente(qtdr);
+            }
+            try{
+                if(lp.getCodigo()!=null && lp.getCodigo()!=0)
+                    return lp.update(con);
+                else
+                    return lp.insert(con);
+            }catch(EntidadeException ex){
+                throw new ControlException(ex.getMessage());
+            }
+        }
+        return 0;
     }
 }

@@ -20,7 +20,6 @@
                   <MenuItem fx:id="gerenciarFornecedor" mnemonicParsing="false" onAction="#gerFornecedor" text="Fornecedor" />
                   <MenuItem fx:id="gerenciarProduto" mnemonicParsing="false" onAction="#gerProduto" text="Produto" />
                   <MenuItem fx:id="gerenciarMarcas" mnemonicParsing="false" onAction="#gerMarca" text="Marcas de Produtos" />
-                  <MenuItem fx:id="gerenciarLotes" mnemonicParsing="false" onAction="#gerLote" text="Lotes de Produtos" />
                   <MenuItem fx:id="gerenciarTipos" mnemonicParsing="false" onAction="#gerTipoDespesas" text="Tipos de Despesas" />
                   <MenuItem fx:id="gerenciarUnidades" mnemonicParsing="false" onAction="#gerUnidadeMedida" text="Unidades de Medidas" />
                   <MenuItem fx:id="gerenciarCategorias" mnemonicParsing="false" onAction="#gerTipoProduto" text="Categoria do Produto" />
@@ -34,7 +33,6 @@
                   <MenuItem fx:id="locFuncionario" mnemonicParsing="false" onAction="#locFuncionario" text="Funcionario" />
                   <MenuItem fx:id="locFornecedor" mnemonicParsing="false" onAction="#locFornecedor" text="Fornecedor" />
                   <MenuItem fx:id="locProduto" mnemonicParsing="false" onAction="#locProduto" text="Produto" />
-                  <MenuItem fx:id="locLoteProduto" mnemonicParsing="false" onAction="#locLoteProduto" text="Lote Produto" />
             </items>
           </Menu>
           <Menu fx:id="menuFuncoes" mnemonicParsing="false" text="Funções Fundamentais">

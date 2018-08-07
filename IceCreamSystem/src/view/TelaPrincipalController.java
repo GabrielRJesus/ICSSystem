@@ -43,8 +43,6 @@ public class TelaPrincipalController implements Initializable {
     @FXML
     private MenuItem gerenciarMarcas;
     @FXML
-    private MenuItem gerenciarLotes;
-    @FXML
     private MenuItem gerenciarTipos;
     @FXML
     private MenuItem gerenciarUnidades;
@@ -72,8 +70,6 @@ public class TelaPrincipalController implements Initializable {
     private MenuItem locFornecedor;
     @FXML
     private MenuItem locProduto;
-    @FXML
-    private MenuItem locLoteProduto;
     @FXML
     private MenuItem dadosEmpresa;
 
@@ -157,18 +153,6 @@ public class TelaPrincipalController implements Initializable {
         Stage stage = (Stage) menuBar.getScene().getWindow();
         stage.setScene(scene);
         stage.setTitle("Gerenciar Marcas");
-        stage.setResizable(false);
-        stage.showAndWait();
-        stage.close();
-    }
-
-    @FXML
-    private void gerLote(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarLoteProduto.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("Gerenciar Tipos de Despesas");
         stage.setResizable(false);
         stage.showAndWait();
         stage.close();
@@ -283,18 +267,6 @@ public class TelaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void locLoteProduto(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarLoteProdutos.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("Localizar Lotes de Produto");
-        stage.setResizable(false);
-        stage.showAndWait();
-        stage.close();
-    }
-
-    @FXML
     private void dadosEmpresa(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/DadosEmpresa.fxml"));
         Scene scene = new Scene(root);
@@ -305,5 +277,6 @@ public class TelaPrincipalController implements Initializable {
         stage.showAndWait();
         stage.close();
     }
+
     
 }

@@ -96,8 +96,6 @@ public class GerenciarProdutoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         MaskFieldUtil.dateField(txtValidadeLote);
-        MaskFieldUtil.monetaryField(txtPreco);
-        MaskFieldUtil.monetaryField(txtPrecoBase);
         ProdutoControl pc = new ProdutoControl();
         inicializa(true);
         try {
@@ -128,8 +126,8 @@ public class GerenciarProdutoController implements Initializable {
                 SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
                 String str = fmt.format(pc.retornaSelecionado().getLprod().getValidade());
                 txtValidadeLote.setText(str);
-                txtQtdeLote.setText(pc.retornaSelecionado().getLprod().getCodigo().toString());
-                txtQtdeReman.setText(pc.retornaSelecionado().getLprod().getCodigo().toString());
+                txtQtdeLote.setText(pc.retornaSelecionado().getLprod().getQtdeCompra()+"");
+                txtQtdeReman.setText(pc.retornaSelecionado().getLprod().getQtdRemanescente()+"");
             }
         }
         

@@ -15,17 +15,17 @@
             <Font name="Arial Black" size="29.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtCodigo" focusColor="#2b2553" layoutX="86.0" layoutY="78.0" prefHeight="25.0" prefWidth="89.0" promptText="Código:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtCodigo" editable="false" focusColor="#2b2553" labelFloat="true" layoutX="86.0" layoutY="78.0" prefHeight="25.0" prefWidth="89.0" promptText="Código:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtDescricao" focusColor="#2b2553" layoutX="188.0" layoutY="78.0" prefHeight="25.0" prefWidth="245.0" promptText="Descrição:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtDescricao" focusColor="#2b2553" labelFloat="true" layoutX="188.0" layoutY="78.0" prefHeight="25.0" prefWidth="245.0" promptText="Descrição:*" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtAbreviacao" focusColor="#2b2553" layoutX="445.0" layoutY="78.0" prefHeight="25.0" prefWidth="89.0" promptText="Abreviação:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtAbreviacao" focusColor="#2b2553" labelFloat="true" layoutX="445.0" layoutY="78.0" prefHeight="25.0" prefWidth="89.0" promptText="Abreviação:*" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
@@ -52,12 +52,12 @@
             <Font name="Arial" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btSair" layoutX="498.0" layoutY="485.0" onAction="#clkSair" prefWidth="90.0" text="Sair" textFill="#2b2553">
+      <JFXButton fx:id="btExcluir" layoutX="329.0" layoutY="485.0" onAction="#clkExcluir" prefWidth="90.0" text="Excluir" textFill="#2b2553">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btExcluir" layoutX="329.0" layoutY="485.0" onAction="#clkExcluir" prefWidth="90.0" text="Excluir" textFill="#2b2553">
+      <JFXButton fx:id="btSair" layoutX="498.0" layoutY="485.0" onAction="#clkSair" prefWidth="90.0" text="Sair" textFill="#2b2553">
          <font>
             <Font name="Arial" size="15.0" />
          </font>

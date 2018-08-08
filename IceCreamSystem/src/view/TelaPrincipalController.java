@@ -6,7 +6,10 @@
 package view;
 
 import com.jfoenix.controls.JFXButton;
+import control.CaixaControl;
 import control.PessoaControl;
+import entidade.Caixa;
+import exception.ControlException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -72,6 +76,22 @@ public class TelaPrincipalController implements Initializable {
     private MenuItem locProduto;
     @FXML
     private MenuItem dadosEmpresa;
+    @FXML
+    private MenuItem abrirCaixa;
+    @FXML
+    private MenuItem fecharCaixa;
+    @FXML
+    private MenuItem realizarCompra;
+    @FXML
+    private MenuItem realizarVenda;
+    @FXML
+    private MenuItem lancarContasPagar;
+    @FXML
+    private MenuItem quitarContasPagar;
+    @FXML
+    private MenuItem quitarContasReceber;
+    @FXML
+    private MenuItem baixaManual;
 
     /**
      * Initializes the controller class.
@@ -277,6 +297,74 @@ public class TelaPrincipalController implements Initializable {
         stage.showAndWait();
         stage.close();
     }
+
+    @FXML
+    private void clkAbrirCaixa(ActionEvent event) throws IOException, ControlException {
+        CaixaControl cc = new CaixaControl();
+        if(cc.retornaCaixaAberto()==null){
+            Parent root = FXMLLoader.load(getClass().getResource("/view/AbrirCaixa.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) menuBar.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Abrir Caixa");
+            stage.setResizable(false);
+            stage.showAndWait();
+            stage.close();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Resposta do Servidor");
+            alert.setHeaderText(null);
+            alert.setContentText("Ja existe um caixa aberto!");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void clkFecharCaixa(ActionEvent event) throws IOException, ControlException {
+        CaixaControl cc = new CaixaControl();
+        if(cc.retornaCaixaAberto()!=null){
+            Parent root = FXMLLoader.load(getClass().getResource("/view/FecharCaixa.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) menuBar.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Fechar Caixa");
+            stage.setResizable(false);
+            stage.showAndWait();
+            stage.close();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Resposta do Servidor");
+            alert.setHeaderText(null);
+            alert.setContentText("Não existe nenhum caixa aberto!");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void clkRealizarCompra(ActionEvent event) {
+    }
+
+    @FXML
+    private void clkRealizarVenda(ActionEvent event) {
+    }
+
+    @FXML
+    private void clkLancarContas(ActionEvent event) {
+    }
+
+    @FXML
+    private void clkQuitarContasPagar(ActionEvent event) {
+    }
+
+    @FXML
+    private void clkQuitarContasReceber(ActionEvent event) {
+    }
+
+    @FXML
+    private void clkBaixaManual(ActionEvent event) {
+    }
+
+    
 
     
 }

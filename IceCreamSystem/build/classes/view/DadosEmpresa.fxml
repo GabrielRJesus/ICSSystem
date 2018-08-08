@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -16,37 +15,36 @@
             <Font name="Arial Bold" size="50.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="tvCodigo" editable="false" focusColor="#2b2553" layoutX="63.0" layoutY="107.0" prefHeight="25.0" prefWidth="71.0" promptText="Código:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="tvCodigo" editable="false" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="107.0" prefHeight="25.0" prefWidth="71.0" promptText="Código:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="tvNome" focusColor="#2b2553" layoutX="63.0" layoutY="167.0" prefHeight="25.0" prefWidth="422.0" promptText="Nome Empresa:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="tvNome" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="167.0" prefHeight="25.0" prefWidth="422.0" promptText="*Nome Empresa:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="tvRazaoSocial" focusColor="#2b2553" layoutX="63.0" layoutY="227.0" prefHeight="25.0" prefWidth="422.0" promptText="Razão Social:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="tvRazaoSocial" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="227.0" prefHeight="25.0" prefWidth="422.0" promptText="*Razão Social:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="tvCNPJ" focusColor="#2b2553" layoutX="63.0" layoutY="287.0" prefHeight="29.0" prefWidth="275.0" promptText="CNPJ:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="tvCNPJ" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="287.0" prefHeight="29.0" prefWidth="275.0" promptText="*CNPJ:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="tvIe" focusColor="#2b2553" layoutX="63.0" layoutY="347.0" prefHeight="25.0" prefWidth="275.0" promptText="IE:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="tvIe" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="347.0" prefHeight="25.0" prefWidth="275.0" promptText="*IE:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="tvTelefone" focusColor="#2b2553" layoutX="63.0" layoutY="407.0" prefHeight="25.0" prefWidth="275.0" promptText="Telefone:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="tvTelefone" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="407.0" prefHeight="25.0" prefWidth="275.0" promptText="*Telefone:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXDatePicker fx:id="dpDtFundacao" defaultColor="#2b2553" layoutX="63.0" layoutY="467.0" prefHeight="28.0" prefWidth="275.0" promptText="Data de Fundação" styleClass="corTexto" stylesheets="@estilo.css" />
       <ImageView fitHeight="201.0" fitWidth="248.0" layoutX="424.0" layoutY="319.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Logo.jpg" />
@@ -72,5 +70,10 @@
             <Font size="15.0" />
          </font>
       </JFXButton>
+      <JFXTextField fx:id="tvData" focusColor="#2b2553" labelFloat="true" layoutX="63.0" layoutY="470.0" prefHeight="25.0" prefWidth="275.0" promptText="*Data de Fundação:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
    </children>
 </AnchorPane>

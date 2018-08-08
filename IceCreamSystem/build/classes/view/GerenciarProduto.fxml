@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="513.0" prefWidth="836.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GerenciarProdutoController">
+   <children>
+      <Label layoutX="206.0" layoutY="14.0" text="Gerenciar Produtos">
+         <font>
+            <Font name="Arial Black" size="40.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtCodigo" editable="false" focusColor="#2b2553" labelFloat="true" layoutX="44.0" layoutY="81.0" prefHeight="27.0" prefWidth="82.0" promptText="Código:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtDescricao" focusColor="#2b2553" labelFloat="true" layoutX="44.0" layoutY="125.0" prefHeight="29.0" prefWidth="651.0" promptText="Descrição:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXComboBox fx:id="cbTipo" focusColor="#2b2553" labelFloat="true" layoutX="44.0" layoutY="184.0" prefHeight="25.0" prefWidth="210.0" promptText="Tipo Produto" styleClass="corTexto" stylesheets="@estilo.css" />
+      <JFXComboBox fx:id="cbMarca" focusColor="#2b2553" labelFloat="true" layoutX="265.0" layoutY="184.0" prefHeight="25.0" prefWidth="210.0" promptText="Marca Produto" styleClass="corTexto" stylesheets="@estilo.css" />
+      <JFXComboBox fx:id="cbUm" focusColor="#2b2553" labelFloat="true" layoutX="489.0" layoutY="184.0" prefHeight="25.0" prefWidth="202.0" promptText="Unidade de Medida" styleClass="corTexto" stylesheets="@estilo.css" />
+      <Pane layoutX="29.0" layoutY="245.0" prefHeight="188.0" prefWidth="396.0" style="-fx-border-color: #2b2553;">
+         <children>
+            <JFXTextField fx:id="txtCodigoLote" editable="false" focusColor="#2b2553" labelFloat="true" layoutX="15.0" layoutY="31.0" prefHeight="29.0" prefWidth="90.0" promptText="Código:" styleClass="corTexto" stylesheets="@estilo.css">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtDescricaoLote" focusColor="#2b2553" labelFloat="true" layoutX="117.0" layoutY="31.0" prefHeight="29.0" prefWidth="251.0" promptText="Descrição Lote:" styleClass="corTexto" stylesheets="@estilo.css">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtNumeroLote" focusColor="#2b2553" labelFloat="true" layoutX="14.0" layoutY="89.0" prefHeight="29.0" prefWidth="175.0" promptText="Numero Lote:" styleClass="corTexto" stylesheets="@estilo.css">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtValidadeLote" focusColor="#2b2553" labelFloat="true" layoutX="201.0" layoutY="89.0" prefHeight="29.0" prefWidth="169.0" promptText="Validade do Lote:" styleClass="corTexto" stylesheets="@estilo.css">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtQtdeLote" focusColor="#2b2553" labelFloat="true" layoutX="15.0" layoutY="141.0" prefHeight="29.0" prefWidth="169.0" promptText="Quantidade do Lote:" styleClass="corTexto" stylesheets="@estilo.css">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtQtdeReman" focusColor="#2b2553" labelFloat="true" layoutX="191.0" layoutY="141.0" prefHeight="29.0" prefWidth="175.0" promptText="Quantidade Remanescente:" styleClass="corTexto" stylesheets="@estilo.css">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </JFXTextField>
+         </children>
+      </Pane>
+      <JFXTextField fx:id="txtPrecoBase" focusColor="#2b2553" labelFloat="true" layoutX="443.0" layoutY="277.0" prefHeight="29.0" prefWidth="169.0" promptText="Preço Base:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtPreco" focusColor="#2b2553" labelFloat="true" layoutX="622.0" layoutY="277.0" prefHeight="29.0" prefWidth="169.0" promptText="Preço:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtMargem" focusColor="#2b2553" labelFloat="true" layoutX="448.0" layoutY="331.0" prefHeight="29.0" prefWidth="169.0" promptText="Margem Lucro:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtQtde" focusColor="#2b2553" labelFloat="true" layoutX="448.0" layoutY="387.0" prefHeight="29.0" prefWidth="169.0" promptText="Quantidade Estoque:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtQtdeMin" focusColor="#2b2553" labelFloat="true" layoutX="624.0" layoutY="387.0" prefHeight="29.0" prefWidth="169.0" promptText="Quantidade Minima:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="btNovo" layoutX="40.0" layoutY="456.0" onAction="#clkNovo" prefWidth="90.0" text="Novo" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btGravar" layoutX="137.0" layoutY="456.0" onAction="#clkGravar" prefWidth="90.0" text="Gravar" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btCancelar" layoutX="235.0" layoutY="456.0" onAction="#clkCancelar" prefWidth="90.0" text="Cancelar" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btLocalizar" layoutX="335.0" layoutY="456.0" onAction="#clkLocalizar" prefWidth="90.0" text="Localizar" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btExcluir" layoutX="432.0" layoutY="456.0" onAction="#clkExcluir" prefWidth="90.0" text="Excluir" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btSair" layoutX="716.0" layoutY="456.0" onAction="#clkSair" prefWidth="90.0" text="Sair" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="40.0" layoutY="228.0" text="Lote do Produto:" textFill="#2b2553">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

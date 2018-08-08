@@ -37,14 +37,14 @@
           </Menu>
           <Menu fx:id="menuFuncoes" mnemonicParsing="false" text="Funções Fundamentais">
             <items>
-              <MenuItem mnemonicParsing="false" text="Abrir Caixa" />
-                  <MenuItem mnemonicParsing="false" text="Fechar Caixa" />
-                  <MenuItem mnemonicParsing="false" text="Realizar Compra" />
-                  <MenuItem mnemonicParsing="false" text="Realizar Venda" />
-                  <MenuItem mnemonicParsing="false" text="Lançar Contas a Pagar" />
-                  <MenuItem mnemonicParsing="false" text="Quitar Contas a Pagar" />
-                  <MenuItem mnemonicParsing="false" text="Quitar Contas a Receber" />
-                  <MenuItem mnemonicParsing="false" text="Baixa no estoque" />
+              <MenuItem fx:id="abrirCaixa" mnemonicParsing="false" onAction="#clkAbrirCaixa" text="Abrir Caixa" />
+                  <MenuItem fx:id="fecharCaixa" mnemonicParsing="false" onAction="#clkFecharCaixa" text="Fechar Caixa" />
+                  <MenuItem fx:id="realizarCompra" mnemonicParsing="false" onAction="#clkRealizarCompra" text="Realizar Compra" />
+                  <MenuItem fx:id="realizarVenda" mnemonicParsing="false" onAction="#clkRealizarVenda" text="Realizar Venda" />
+                  <MenuItem fx:id="lancarContasPagar" mnemonicParsing="false" onAction="#clkLancarContas" text="Lançar Contas a Pagar" />
+                  <MenuItem fx:id="quitarContasPagar" mnemonicParsing="false" onAction="#clkQuitarContasPagar" text="Quitar Contas a Pagar" />
+                  <MenuItem fx:id="quitarContasReceber" mnemonicParsing="false" onAction="#clkQuitarContasReceber" text="Quitar Contas a Receber" />
+                  <MenuItem fx:id="baixaManual" mnemonicParsing="false" onAction="#clkBaixaManual" text="Baixa no estoque" />
             </items>
           </Menu>
             <Menu fx:id="menuRelatorios" mnemonicParsing="false" text="Relatórios">

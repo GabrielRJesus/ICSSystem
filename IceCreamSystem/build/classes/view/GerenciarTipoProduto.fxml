@@ -15,12 +15,12 @@
             <Font name="Arial Black" size="30.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtCodigo" focusColor="#2b2553" layoutX="86.0" layoutY="78.0" prefHeight="25.0" prefWidth="89.0" promptText="Código:">
+      <JFXTextField fx:id="txtCodigo" editable="false" focusColor="#2b2553" labelFloat="true" layoutX="86.0" layoutY="78.0" prefHeight="25.0" prefWidth="89.0" promptText="Código:">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtDescricao" focusColor="#2b2553" layoutX="190.0" layoutY="78.0" prefHeight="25.0" prefWidth="326.0" promptText="Descrição:">
+      <JFXTextField fx:id="txtDescricao" focusColor="#2b2553" layoutX="190.0" layoutY="78.0" prefHeight="25.0" prefWidth="326.0" promptText="Descrição:*">
          <font>
             <Font name="Arial" size="15.0" />
          </font>

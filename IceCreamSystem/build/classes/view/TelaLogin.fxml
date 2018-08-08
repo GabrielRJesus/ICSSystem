@@ -15,11 +15,16 @@
             <Image url="@Logo.jpg" />
          </image>
       </ImageView>
-      <JFXTextField fx:id="tvLogin" alignment="CENTER" focusColor="#2b2553" layoutX="362.0" layoutY="69.0" prefHeight="25.0" prefWidth="208.0" promptText="Login:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="tvLogin" alignment="TOP_LEFT" focusColor="#2b2553" labelFloat="true" layoutX="362.0" layoutY="69.0" prefHeight="25.0" prefWidth="208.0" promptText="Login:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
+      <JFXPasswordField fx:id="tvSenha" alignment="TOP_LEFT" focusColor="#2b2553" labelFloat="true" layoutX="362.0" layoutY="126.0" prefHeight="25.0" prefWidth="208.0" promptText="Senha:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXPasswordField>
       <JFXButton fx:id="btEntrar" layoutX="362.0" layoutY="197.0" onAction="#clkEntrar" prefHeight="31.0" prefWidth="98.0" stylesheets="@estilo.css" text="Entrar" textFill="#2b2553">
          <font>
             <Font size="13.0" />
@@ -30,10 +35,5 @@
             <Font size="13.0" />
          </font>
       </JFXButton>
-      <JFXPasswordField fx:id="tvSenha" alignment="CENTER" focusColor="#2b2553" layoutX="362.0" layoutY="126.0" prefHeight="25.0" prefWidth="208.0" promptText="Senha:" styleClass="corTexto" stylesheets="@estilo.css">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </JFXPasswordField>
    </children>
 </AnchorPane>

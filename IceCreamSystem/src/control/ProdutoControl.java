@@ -4,6 +4,7 @@ import entidade.*;
 import exception.ControlException;
 import exception.EntidadeException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import sql.Banco;
@@ -122,6 +123,32 @@ public class ProdutoControl {
         try{
             return p.lista(con);
         }catch(EntidadeException ex){
+            throw new ControlException(ex.getMessage());
+        }
+    }
+    
+    public int darBaixa(Funcionario f, Produto p, String motivo, int qtde, Date data) throws ControlException, SQLException{
+        BaixaManual bm = new BaixaManual();
+        LoteProduto ltp = new LoteProduto();
+        bm.setFunc(f);
+        bm.setProd(p);
+        bm.setMotivo(motivo);
+        bm.setQtde(qtde);
+        bm.setData(data);
+        try{
+            con.setAutoCommit(false);
+            p.setQtdeEstoque(p.getQtdeEstoque()-qtde);
+            bm.darBaixa(con);
+            p.update(con);
+            ltp = p.getLprod();
+            if(ltp!=null){
+                ltp.setQtdRemanescente(ltp.getQtdRemanescente()-qtde);
+                ltp.update(con);
+            }
+            con.commit();
+            return p.getQtdeEstoque();
+        }catch(EntidadeException ex){
+            con.rollback();
             throw new ControlException(ex.getMessage());
         }
     }

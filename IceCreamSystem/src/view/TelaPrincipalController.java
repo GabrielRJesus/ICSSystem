@@ -361,7 +361,15 @@ public class TelaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void clkBaixaManual(ActionEvent event) {
+    private void clkBaixaManual(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/BaixaManual.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Baixa Manual Estoque");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
     }
 
     

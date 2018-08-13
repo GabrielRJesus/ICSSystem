@@ -16,6 +16,7 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
     private String update = "update lote_produto set ltp_descricao = ?, ltp_numero = ?, ltp_validade = ?, ltp_qtdelote = ?, ltp_qtderemanes = ? where ltp_codigo = ?";
     private String delete = "delete from lote_produto where ltp_codigo = ?";
     private String select = "select * from lote_produto";
+    private String ctrEstoque = "update lote_produto set = ltp_qtderemanes = ? where ltp_codigo = ?";
     
     @Override
     public int insert(LoteProduto obj, Connection con) throws DAOException {
@@ -342,6 +343,23 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
                     lista.add(lp.toString());
                 }
                 return lista;
+            }catch(SQLException ex){
+                throw new DAOException(ex.getMessage());
+            }
+        }else{
+            throw new DAOException("Erro na conexão!");
+        }
+    }
+    
+     public int ctrEstoque(LoteProduto obj, Connection con) throws DAOException {
+        PreparedStatement ps = null;
+        int cont = 0;
+        if(con!=null){
+            try{
+                ps = con.prepareStatement(ctrEstoque);
+                ps.setInt(++cont, obj.getQtdRemanescente());
+                ps.setInt(++cont, obj.getCodigo());
+                return ps.executeUpdate();
             }catch(SQLException ex){
                 throw new DAOException(ex.getMessage());
             }

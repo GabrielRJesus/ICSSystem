@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="607.0" styleClass="background" stylesheets="@estilo.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="view.LocProdutoBaixaController">
+   <children>
+      <Label layoutX="166.0" layoutY="14.0" text="Localiza Produto" textFill="#2b2553">
+         <font>
+            <Font name="Arial Black" size="30.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtCodigo" focusColor="#2b2553" labelFloat="true" layoutX="29.0" layoutY="77.0" promptText="Código:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtDescrição" focusColor="#2b2553" labelFloat="true" layoutX="211.0" layoutY="77.0" prefHeight="27.0" prefWidth="248.0" promptText="Descrição:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="btnLocalizar" layoutX="484.0" layoutY="77.0" onAction="#clkLocaliza" prefHeight="27.0" prefWidth="90.0" text="Localizar" />
+      <TableView fx:id="tabelaProdutos" layoutX="29.0" layoutY="117.0" onMouseClicked="#clkSeleciona" prefHeight="364.0" prefWidth="550.0">
+        <columns>
+          <TableColumn fx:id="colCodigo" prefWidth="94.0" text="Código" />
+          <TableColumn fx:id="colDescricao" prefWidth="305.0" text="Descrição" />
+            <TableColumn fx:id="colEstoque" prefWidth="150.0" text="Estoque" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="btnSair" layoutX="489.0" layoutY="490.0" onAction="#clkSair" prefHeight="27.0" prefWidth="90.0" text="Sair" />
+   </children>
+</AnchorPane>

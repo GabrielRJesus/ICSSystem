@@ -1,5 +1,6 @@
 package DAO;
 
+import entidade.BaixaManual;
 import entidade.CategoriaProduto;
 import entidade.LoteProduto;
 import entidade.Marca;
@@ -20,8 +21,13 @@ public class ProdutoDAO implements GenericDAO<Produto>{
             + " values(?,?,?,?,?,?,?,?,?,?)";
     private String update = "update produto set prod_descricao = ?, tpp_codigo = ?, ltp_codigo = ?, um_codigo = ?, mar_codigo = ?, prod_precobase = ?, prod_margemlucro = ?,"
             + " prod_preco = ?, prod_qtdemin = ?, prod_estoque = ? where prod_codigo = ?";
+    private String ctrEstoque = "update produto set prod_estoque = ? where prod_codigo = ?";
     private String delete = "delete from produto where prod_codigo = ?";
     private String select = "select * from produto";
+    
+    //Baixa manual no estoque
+    
+    private String insertBaixa = "insert into baixa_manual(bm_motivo, bm_qtde, prod_codigo, bm_data, fun_codigo) values(?,?,?,?,?)";
 
     @Override
     public int insert(Produto obj, Connection con) throws DAOException {
@@ -396,6 +402,45 @@ public class ProdutoDAO implements GenericDAO<Produto>{
             }catch(SQLException ex){
                 throw new DAOException(ex.getMessage());
             } catch (EntidadeException ex) {
+                throw new DAOException(ex.getMessage());
+            }
+        }else{
+            throw new DAOException("Erro na conexão!");
+        }
+    }
+    
+    public int updateEstoque(Produto obj, Connection con) throws DAOException{
+        PreparedStatement ps = null;
+        int cont = 0;
+        if(con!=null){
+            try{
+                ps = con.prepareStatement(ctrEstoque);
+                ps.setInt(++cont, obj.getQtdeEstoque());
+                ps.setInt(++cont, obj.getCodigo());
+                return ps.executeUpdate();
+            }catch(SQLException ex){
+                throw new DAOException(ex.getMessage());
+            }
+        }else{
+            throw new DAOException("Erro na conexão!");
+        }
+    }
+    
+    
+    // Baixa Manual no Estoque
+    public int insertBaixa(BaixaManual obj, Connection con) throws DAOException{
+        if(con!=null){
+            PreparedStatement ps = null;
+            int cont = 0;
+            try{
+                ps = con.prepareStatement(insertBaixa);
+                ps.setString(++cont, obj.getMotivo());
+                ps.setInt(++cont, obj.getQtde());
+                ps.setInt(++cont, obj.getProd().getCodigo());
+                ps.setDate(++cont, new java.sql.Date(obj.getData().getTime()));
+                ps.setInt(++cont, obj.getFunc().getCodigo());
+                return ps.executeUpdate();
+            }catch(SQLException ex){
                 throw new DAOException(ex.getMessage());
             }
         }else{

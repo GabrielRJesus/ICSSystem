@@ -71,7 +71,7 @@ public class TipoDespesasControl {
         return null;
     }
     
-    public List<TipoDespesas> listaMarca(Integer codigo, String descricao) throws ControlException{
+    public List<TipoDespesas> listaDespesas(Integer codigo, String descricao) throws ControlException{
         TipoDespesas tp = new TipoDespesas();
         Erro e = new Erro();
         if(codigo!=0 && codigo!=null)

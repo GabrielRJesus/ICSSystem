@@ -179,7 +179,7 @@ public class GerenciarTipoDespesasController implements Initializable {
         Integer codigo = 0;
         if(txtCodigo.getText()!=null && !txtCodigo.getText().isEmpty())
             codigo = Integer.parseInt(txtCodigo.getText());
-        lista = tpc.listaMarca(codigo, txtDescricao.getText());
+        lista = tpc.listaDespesas(codigo, txtDescricao.getText());
         if(lista!=null){
             ObservableList<TipoDespesas> modelo;
             modelo = FXCollections.observableArrayList(lista);

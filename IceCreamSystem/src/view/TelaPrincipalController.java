@@ -349,7 +349,15 @@ public class TelaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void clkLancarContas(ActionEvent event) {
+    private void clkLancarContas(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LancarContasPagar.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Lançar Contas à Pagar");
+        stage.setResizable(false);
+        stage.showAndWait();
+        stage.close();
     }
 
     @FXML

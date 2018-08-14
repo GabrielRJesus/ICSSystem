@@ -28,6 +28,11 @@ public class TipoDespesas {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
     
     public int insert(Connection con) throws EntidadeException{
         try{

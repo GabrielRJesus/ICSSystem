@@ -163,7 +163,7 @@ public class LancarContasPagarController implements Initializable {
 
     @FXML
     private void clkLocalizar(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarContaPagar.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarContasPagar.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage) btnCancelar.getScene().getWindow();
         stage.setScene(scene);

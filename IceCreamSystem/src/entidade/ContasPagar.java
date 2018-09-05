@@ -5,6 +5,7 @@ import exception.DAOException;
 import exception.EntidadeException;
 import java.sql.Connection;
 import java.util.Date;
+import java.util.List;
 
 public class ContasPagar {
     private Integer codigo;
@@ -116,6 +117,14 @@ public class ContasPagar {
     public int update(Connection con) throws EntidadeException{
         try{
             return new ContasPagarDAO().update(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
+    public List<ContasPagar> lista(Connection con) throws EntidadeException{
+        try{
+            return new ContasPagarDAO().lista(this,con);
         }catch(DAOException ex){
             throw new EntidadeException(ex.getMessage());
         }

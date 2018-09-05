@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="535.0" prefWidth="738.0" styleClass="background" stylesheets="@estilo.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="view.LocalizarContasPagarController">
+   <children>
+      <Label layoutX="145.0" layoutY="14.0" text="Localizar Contas à Pagar" textFill="#2b2553">
+         <font>
+            <Font name="Arial Black" size="30.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtCodigo" focusColor="#2b2553" layoutX="40.0" layoutY="79.0" prefHeight="25.0" prefWidth="97.0" promptText="Código:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtData" focusColor="#2b2553" layoutX="476.0" layoutY="78.0" prefHeight="27.0" prefWidth="124.0" promptText="Data:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXComboBox fx:id="cbDespesas" focusColor="#2b2553" layoutX="148.0" layoutY="76.0" prefHeight="30.0" prefWidth="153.0" promptText="Tipo de Despesa:" />
+      <JFXComboBox fx:id="cbPagamento" focusColor="#2b2553" layoutX="312.0" layoutY="76.0" prefHeight="30.0" prefWidth="153.0" promptText="Tipo de Pagamento:" />
+      <JFXButton fx:id="btnPesquisar" layoutX="611.0" layoutY="78.0" onAction="#clkPesquisar" prefHeight="27.0" prefWidth="90.0" text="Pesquisar" />
+      <TableView fx:id="tabelaContasPagar" layoutX="37.0" layoutY="123.0" onMouseClicked="#selecionaContasPagar" prefHeight="361.0" prefWidth="662.0">
+        <columns>
+          <TableColumn fx:id="colCodigo" prefWidth="102.0" text="Código" />
+          <TableColumn fx:id="colTipoDespesa" prefWidth="221.0" text="Tipo Despesa" />
+            <TableColumn fx:id="colDtVencimento" prefWidth="191.0" text="Data Vencimento" />
+            <TableColumn fx:id="colValor" prefWidth="147.0" text="Valor" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="btnSair" layoutX="611.0" layoutY="494.0" onAction="#clkSair" prefHeight="27.0" prefWidth="90.0" text="Sair" />
+   </children>
+</AnchorPane>

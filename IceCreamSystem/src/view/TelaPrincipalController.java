@@ -23,6 +23,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -139,13 +140,13 @@ public class TelaPrincipalController implements Initializable {
     @FXML
     private void gerFornecedor(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarFornecedor.fxml"));
+        Stage stage = new Stage();
         Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
         stage.setScene(scene);
         stage.setTitle("Gerenciar Fornecedor");
         stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
-        stage.close();
     }
 
     @FXML

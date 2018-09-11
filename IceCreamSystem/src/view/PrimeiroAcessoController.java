@@ -172,7 +172,8 @@ public class PrimeiroAcessoController implements Initializable {
         Stage stage = (Stage) btSair.getScene().getWindow();
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.show();
+        stage.showAndWait();
+        stage.close();
     }
     
     public void inicializa(boolean estado){

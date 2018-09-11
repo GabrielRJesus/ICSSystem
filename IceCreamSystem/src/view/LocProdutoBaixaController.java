@@ -89,13 +89,7 @@ public class LocProdutoBaixaController implements Initializable {
 
     @FXML
     private void clkSair(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/BaixaManual.fxml"));
-        Scene scene = new Scene(root);
         Stage stage = (Stage) btnSair.getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("Baixa Manual");
-        stage.setResizable(false);
-        stage.showAndWait();
         stage.close();
     }
     

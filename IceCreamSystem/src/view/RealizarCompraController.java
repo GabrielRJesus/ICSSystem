@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -115,6 +116,8 @@ public class RealizarCompraController implements Initializable {
 
     @FXML
     private void clkSair(ActionEvent event) {
+        Stage stage = (Stage)btnExcluir.getScene().getWindow();
+        stage.close();
     }
     
 }

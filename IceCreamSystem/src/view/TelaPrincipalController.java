@@ -116,25 +116,25 @@ public class TelaPrincipalController implements Initializable {
     @FXML
     private void gerCliente(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarCliente.fxml"));
+        Stage stage = new Stage();
         Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
         stage.setScene(scene);
         stage.setTitle("Gerenciar Cliente");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
     }
 
     @FXML
     private void gerFuncionario(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarFuncionario.fxml"));
+        Stage stage = new Stage();
         Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
         stage.setScene(scene);
         stage.setTitle("Gerenciar Funcionario");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
     }
 
     @FXML
@@ -159,144 +159,144 @@ public class TelaPrincipalController implements Initializable {
     private void gerProduto(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarProduto.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Gerenciar Produto");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
     }
 
     @FXML
     private void gerMarca(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarMarca.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Gerenciar Marcas");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
     }
 
     @FXML
     private void gerTipoDespesas(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarTipoDespesas.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Gerenciar Tipos de Despesas");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
     }
 
     @FXML
     private void gerUnidadeMedida(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarUnidadeMedida.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Gerenciar Unidade de Medida");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
     }
 
     @FXML
     private void gerTipoVenda(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarTipoVenda.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Gerenciar Tipo de Venda");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
     }
 
     @FXML
     private void gerTipoProduto(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarTipoProduto.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Gerenciar Categoria do Produto");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
     }
 
     @FXML
     private void gerTipoPagamento(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarTipoPagamento.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Gerenciar Tipo de Pagamento");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
     }
 
     @FXML
     private void locCliente(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarCliente.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Localizar Funcionário");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
     }
 
     @FXML
     private void locFuncionario(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarFuncionario.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Localizar Funcionário");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
     }
 
     @FXML
     private void locFornecedor(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarFornecedor.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Localizar Fornecedor");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
     }
 
     @FXML
     private void locProduto(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/LocalzarProduto.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Localizar Produto");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
     }
 
     @FXML
     private void dadosEmpresa(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/DadosEmpresa.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Dados da Empresa");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
     }
 
     @FXML
@@ -305,12 +305,12 @@ public class TelaPrincipalController implements Initializable {
         if(cc.retornaCaixaAberto()==null){
             Parent root = FXMLLoader.load(getClass().getResource("/view/AbrirCaixa.fxml"));
             Scene scene = new Scene(root);
-            Stage stage = (Stage) menuBar.getScene().getWindow();
+            Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("Abrir Caixa");
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
             stage.showAndWait();
-            stage.close();
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Resposta do Servidor");
@@ -326,12 +326,12 @@ public class TelaPrincipalController implements Initializable {
         if(cc.retornaCaixaAberto()!=null){
             Parent root = FXMLLoader.load(getClass().getResource("/view/FecharCaixa.fxml"));
             Scene scene = new Scene(root);
-            Stage stage = (Stage) menuBar.getScene().getWindow();
+            Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("Fechar Caixa");
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
             stage.showAndWait();
-            stage.close();
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Resposta do Servidor");
@@ -353,12 +353,12 @@ public class TelaPrincipalController implements Initializable {
     private void clkLancarContas(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/LancarContasPagar.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Lançar Contas à Pagar");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
     }
 
     @FXML
@@ -373,12 +373,12 @@ public class TelaPrincipalController implements Initializable {
     private void clkBaixaManual(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/BaixaManual.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) menuBar.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Baixa Manual Estoque");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
     }
 
     

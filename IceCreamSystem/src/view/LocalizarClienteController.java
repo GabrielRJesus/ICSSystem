@@ -98,13 +98,7 @@ public class LocalizarClienteController implements Initializable {
 
     @FXML
     private void clkSair(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarCliente.fxml"));
-        Scene scene = new Scene(root);
         Stage stage = (Stage) btSair.getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("Gerenciar Funcionario");
-        stage.setResizable(false);
-        stage.showAndWait();
         stage.close();
     }
     

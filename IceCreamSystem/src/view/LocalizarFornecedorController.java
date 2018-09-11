@@ -94,13 +94,7 @@ public class LocalizarFornecedorController implements Initializable {
 
     @FXML
     private void clkSair(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarFornecedor.fxml"));
-        Scene scene = new Scene(root);
         Stage stage = (Stage) btSair.getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("Gerenciar Fornecedor");
-        stage.setResizable(false);
-        stage.showAndWait();
         stage.close();
     }
     

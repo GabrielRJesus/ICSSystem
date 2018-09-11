@@ -179,13 +179,7 @@ public class LancarContasPagarController implements Initializable {
 
     @FXML
     private void clkSair(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/TelaPrincipal.fxml"));
-        Scene scene = new Scene(root);
         Stage stage = (Stage) btnCancelar.getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("Menu Principal");
-        stage.setResizable(false);
-        stage.showAndWait();
         stage.close();
     }
     

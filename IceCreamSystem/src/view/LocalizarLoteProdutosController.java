@@ -121,13 +121,7 @@ public class LocalizarLoteProdutosController implements Initializable {
 
     @FXML
     private void clkSair(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarLoteProduto.fxml"));
-        Scene scene = new Scene(root);
         Stage stage = (Stage) btnSair.getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("Gerenciar Lotes de Produtos");
-        stage.setResizable(false);
-        stage.showAndWait();
         stage.close();
     }
 

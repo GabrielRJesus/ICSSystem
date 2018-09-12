@@ -342,7 +342,15 @@ public class TelaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void clkRealizarCompra(ActionEvent event) {
+    private void clkRealizarCompra(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/RealizarCompra.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Realizar Compra");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.showAndWait();
     }
 
     @FXML

@@ -123,6 +123,11 @@ public class Produto {
     public static void setProdSelecionado(Produto prodSelecionado) {
         Produto.prodSelecionado = prodSelecionado;
     }
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
     
     
     

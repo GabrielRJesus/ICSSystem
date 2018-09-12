@@ -1,15 +1,20 @@
 package entidade;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Compra {
     private Integer codigo;
     private Date data;
     private double valor;
     private Fornecedor forn;
+    
+    private List<ItensCompra> produtosCompra;
 
     public Compra() {
         forn = new Fornecedor();
+        produtosCompra = new ArrayList<>();
     }
 
     public Integer getCodigo() {
@@ -43,6 +48,12 @@ public class Compra {
     public void setForn(Fornecedor forn) {
         this.forn = forn;
     }
-    
-    
+
+    public List<ItensCompra> getProdutosCompra() {
+        return produtosCompra;
+    }
+
+    public void setProdutosCompra(List<ItensCompra> produtosCompra) {
+        this.produtosCompra = produtosCompra;
+    }
 }

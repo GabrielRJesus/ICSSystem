@@ -81,14 +81,10 @@ public class LocalizarFornecedorController implements Initializable {
         if (tabFornecedor.getSelectionModel().getSelectedIndex() >= 0){
             PessoaControl pc = new PessoaControl();
             pc.guardaBusca(tabFornecedor.getSelectionModel().getSelectedItem());
-            Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarFornecedor.fxml"));
-            Scene scene = new Scene(root);
             Stage stage = (Stage) btSair.getScene().getWindow();
-            stage.setScene(scene);
-            stage.setTitle("Gerenciar Fornecedor");
-            stage.setResizable(false);
-            stage.showAndWait();
             stage.close();
+            RealizarCompraController rc = new RealizarCompraController();
+            rc.carregaFornecedor(tabFornecedor.getSelectionModel().getSelectedItem());
         }
     }
 

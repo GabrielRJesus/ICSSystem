@@ -25,6 +25,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -348,8 +349,11 @@ public class TelaPrincipalController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Realizar Compra");
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
+        stage.setX(320);
+        stage.setY(5);
         stage.showAndWait();
     }
 

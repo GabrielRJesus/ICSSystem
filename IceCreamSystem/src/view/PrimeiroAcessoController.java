@@ -98,6 +98,9 @@ public class PrimeiroAcessoController implements Initializable {
         PessoaControl pc = new PessoaControl();
         MaskFieldUtil.cepField(txtCep);
         MaskFieldUtil.cpfField(txtCpf);
+        MaskFieldUtil.dateField(dpData);
+        MaskFieldUtil.dateField(dpDataAdm);
+        MaskFieldUtil.dateField(dpDataDem);
         MaskFieldUtil.foneField(txtTelefone);
         MaskFieldUtil.foneField(txtCelular);
         inicializa(false);
@@ -167,7 +170,7 @@ public class PrimeiroAcessoController implements Initializable {
 
     @FXML
     private void clkSair(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("view/TelaLogin.fxml"));  
+        Parent root = FXMLLoader.load(getClass().getResource("/view/TelaLogin.fxml"));  
         Scene scene = new Scene(root);
         Stage stage = (Stage) btSair.getScene().getWindow();
         stage.setScene(scene);

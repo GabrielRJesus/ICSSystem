@@ -148,6 +148,7 @@ public class RealizarCompraController implements Initializable {
         stage.setY(40);
         stage.setResizable(false);
         stage.showAndWait();
+        txtFornecedor.setText(Fornecedor.getForSelecionado().getNome());
     }
 
     @FXML

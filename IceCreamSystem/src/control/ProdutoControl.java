@@ -15,6 +15,29 @@ public class ProdutoControl {
     Banco conSing = Banco.getInstancia();
     Connection con = conSing.getConexao();
     
+    public int gravarProdutoeLote(int codigo, String descricao, String categoria,  String marca, String unimed, double precobase, double preco, double margem, int qtde, int qtdemin, 
+                int codigoLote, String descrLote, String numeroLote, Date data, int qtdeLote, int qtdeRLote, String qtdEmbalagem) throws SQLException{
+        
+        try{
+            int rest = 0;
+            con.setAutoCommit(false);
+            int codigoG = gravaProduto(codigo, descricao,  categoria, marca, unimed, precobase, preco, margem, qtde, qtdemin, qtdEmbalagem);
+            if(codigoG > 0){
+                rest = gravaLote(codigoLote, descrLote, numeroLote, data, qtdeLote, qtdeRLote, codigoG);
+            }
+            if(rest > 0){
+                con.commit();
+                return 1;
+            }
+            else
+                con.rollback();
+        }catch(ControlException ex){
+            System.out.println("Erro Ao gravar!");
+            con.rollback();
+        }
+        return 0;
+    }
+    
     public List<String> buscaMarcas()throws ControlException, EntidadeException{
         return new Marca().listaString(con);
     }
@@ -27,11 +50,11 @@ public class ProdutoControl {
         return new CategoriaProduto().listaString(con);
     }
     
-    public List<String> buscaLote()throws ControlException, EntidadeException{
-        return new LoteProduto().listaString(con);
+    public List<LoteProduto> buscaLote()throws ControlException, EntidadeException{
+        return new LoteProduto().listaLotePorProduto(con);
     }
     
-    public int gravaProduto(Integer codigo, String descricao, String c, String ma, String um, double precobase, double preco, double margem, int qtde, int qtdmin, int lote)throws ControlException{
+    public int gravaProduto(Integer codigo, String descricao, String c, String ma, String um, double precobase, double preco, double margem, int qtde, int qtdmin, String qtdeEmbalagem)throws ControlException{
 
         Erro e = new Erro();
         CategoriaProduto cp = new CategoriaProduto();
@@ -53,6 +76,8 @@ public class ProdutoControl {
             e.add("insira a quantidade do produto no estoque");
         if(qtdmin <0)
             e.add("insira uma quantidade minima para o produto no estoque");
+        if(qtdeEmbalagem==null || qtdeEmbalagem.isEmpty())
+            e.add("insira a quantidade que contem na embalagem!");
         
         
         
@@ -66,15 +91,10 @@ public class ProdutoControl {
             p.setMargemLucro(margem);
             p.setQtdeEstoque(qtde);
             p.setQtdeMin(qtdmin);
+            p.setQtdeEmbalagem(qtdeEmbalagem);
             try{
                 marca.setNome(ma);
                 ume.setAbreviacao(um);
-                if(lote>0){
-                    lp.setCodigo(lote);
-                    p.setLprod(lp.select(con));
-                }
-                else
-                    p.setLprod(null);
                 cp.setDescricao(c);
                 cp = cp.select(con);
                 p.setCprod(cp);
@@ -149,7 +169,6 @@ public class ProdutoControl {
             p.setQtdeEstoque(p.getQtdeEstoque()-qtde);
             bm.darBaixa(con);
             p.update(con);
-            ltp = p.getLprod();
             if(ltp!=null){
                 ltp.setQtdRemanescente(ltp.getQtdRemanescente()-qtde);
                 ltp.update(con);
@@ -164,7 +183,7 @@ public class ProdutoControl {
     
     //----------------- Lote do Produto -------------------------------------------------
     
-    public int gravaLote(Integer codigo, String descricao, String numero, Date data, int qtdt, int qtdr) throws ControlException{
+    public int gravaLote(Integer codigo, String descricao, String numero, Date data, int qtdt, int qtdr, int codProd) throws ControlException{
         LoteProduto lp = new LoteProduto();
         Erro e = new Erro();
         
@@ -180,6 +199,8 @@ public class ProdutoControl {
             e.add("Preencha o campo data");
         if(qtdt==0)
             e.add("Preencha o campo quantidade");
+        if(codigo == null)
+            return 0;
         
         if(!e.isTemErro()){
             lp.setDescricao(descricao);
@@ -192,6 +213,15 @@ public class ProdutoControl {
                 lp.setQtdRemanescente(qtdr);
             }
             try{
+                if(codProd > 0){
+                    Produto prod = new Produto();
+                    prod.setCodigo(codProd);
+                    prod = prod.select(con);
+                    lp.setProd(prod);
+                }
+                else{
+                    lp.setProd(null);
+                }
                 if(lp.getCodigo()!=null && lp.getCodigo()!=0)
                     return lp.update(con);
                 else

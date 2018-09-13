@@ -24,7 +24,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import util.MaskFieldUtil;
 
 /**
@@ -72,14 +74,17 @@ public class BaixaManualController implements Initializable {
 
     @FXML
     private void clkLocaliza(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/LocProdutoBaixa.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LocalzarProduto.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) btnSair.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Localizar Produto");
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
+        if(Produto.getProdSelecionado()!=null)
+            txtProduto.setText(Produto.getProdSelecionado().getDescricao());
     }
 
     @FXML

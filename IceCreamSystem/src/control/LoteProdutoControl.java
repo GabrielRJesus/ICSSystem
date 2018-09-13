@@ -1,6 +1,7 @@
 package control;
 
 import entidade.LoteProduto;
+import entidade.Produto;
 import exception.ControlException;
 import exception.EntidadeException;
 import java.sql.Connection;
@@ -14,7 +15,7 @@ public class LoteProdutoControl {
     Banco conSing = Banco.getInstancia();
     Connection con = conSing.getConexao();
     
-    public List<LoteProduto> listaLotes(Integer codigo, String descricao, String numero, Date inicio, Date fim, int qtde) throws ControlException{
+    public List<LoteProduto> listaLotes(Integer codigo, String descricao, String numero, Date inicio, Date fim, int qtde, int codProd) throws ControlException{
         LoteProduto ltp = new LoteProduto();
         Erro e = new Erro();
         if(codigo!=0 && codigo!=null)
@@ -22,8 +23,13 @@ public class LoteProdutoControl {
         ltp.setDescricao(descricao);
         ltp.setNumeroLote(numero);
         ltp.setQtdRemanescente(qtde);
+        if(codProd!=0){
+            Produto p = new Produto();
+            p.setCodigo(codigo);
+            ltp.setProd(p);
+        }
         try{
-            return ltp.lista(inicio,fim,con);
+            return ltp.listaLotePorProduto(con);
         }catch(EntidadeException ex){
             throw new ControlException(ex.getMessage());
         }

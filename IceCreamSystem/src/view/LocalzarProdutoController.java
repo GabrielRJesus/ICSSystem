@@ -81,14 +81,8 @@ public class LocalzarProdutoController implements Initializable {
         if (tabProdutos.getSelectionModel().getSelectedIndex() >= 0){
             ProdutoControl pc = new ProdutoControl();
             pc.guardaSelecionado(tabProdutos.getSelectionModel().getSelectedItem());
-            Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarProduto.fxml"));
-            Scene scene = new Scene(root);
             Stage stage = (Stage) btSair.getScene().getWindow();
-            stage.setScene(scene);
-            stage.setTitle("Gerenciar Produto");
-            stage.setResizable(false);
             stage.showAndWait();
-            stage.close();
         }
     }
 

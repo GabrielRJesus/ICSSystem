@@ -17,10 +17,10 @@ import java.util.List;
 
 public class ProdutoDAO implements GenericDAO<Produto>{
     
-    private String insert = "insert into produto(prod_descricao, tpp_codigo, ltp_codigo, um_codigo, mar_codigo, prod_precobase, prod_margemlucro, prod_preco, prod_qtdemin, prod_estoque)"
+    private String insert = "insert into produto(prod_descricao, tpp_codigo, um_codigo, mar_codigo, prod_precobase, prod_margemlucro, prod_preco, prod_qtdemin, prod_estoque, prod_qtdeEmbalagem)"
             + " values(?,?,?,?,?,?,?,?,?,?)";
-    private String update = "update produto set prod_descricao = ?, tpp_codigo = ?, ltp_codigo = ?, um_codigo = ?, mar_codigo = ?, prod_precobase = ?, prod_margemlucro = ?,"
-            + " prod_preco = ?, prod_qtdemin = ?, prod_estoque = ? where prod_codigo = ?";
+    private String update = "update produto set prod_descricao = ?, tpp_codigo = ?, um_codigo = ?, mar_codigo = ?, prod_precobase = ?, prod_margemlucro = ?,"
+            + " prod_preco = ?, prod_qtdemin = ?, prod_estoque = ?, prod_qtdeEmbalagem = ? where prod_codigo = ?";
     private String ctrEstoque = "update produto set prod_estoque = ? where prod_codigo = ?";
     private String delete = "delete from produto where prod_codigo = ?";
     private String select = "select * from produto";
@@ -38,7 +38,6 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                 ps = con.prepareStatement(insert);
                 ps.setString(++cont, obj.getDescricao());
                 ps.setInt(++cont, obj.getCprod().getCodigo());
-                ps.setInt(++cont, obj.getLprod().getCodigo());
                 ps.setInt(++cont, obj.getUnimed().getCodigo());
                 ps.setInt(++cont, obj.getMarca().getCodigo());
                 ps.setDouble(++cont, obj.getPrecoBase());
@@ -46,6 +45,7 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                 ps.setDouble(++cont, obj.getPreco());
                 ps.setInt(++cont, obj.getQtdeMin());
                 ps.setInt(++cont, obj.getQtdeEstoque());
+                ps.setString(++cont, obj.getQtdeEmbalagem());
                 return ps.executeUpdate();
             }catch(SQLException ex){
                 throw new DAOException(ex.getMessage());
@@ -64,7 +64,6 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                 ps = con.prepareStatement(update);
                 ps.setString(++cont, obj.getDescricao());
                 ps.setInt(++cont, obj.getCprod().getCodigo());
-                ps.setInt(++cont, obj.getLprod().getCodigo());
                 ps.setInt(++cont, obj.getUnimed().getCodigo());
                 ps.setInt(++cont, obj.getMarca().getCodigo());
                 ps.setDouble(++cont, obj.getPrecoBase());
@@ -72,6 +71,7 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                 ps.setDouble(++cont, obj.getPreco());
                 ps.setInt(++cont, obj.getQtdeMin());
                 ps.setInt(++cont, obj.getQtdeEstoque());
+                ps.setString(++cont, obj.getQtdeEmbalagem());
                 ps.setInt(++cont, obj.getCodigo());
                 return ps.executeUpdate();
             }catch(SQLException ex){
@@ -128,14 +128,7 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                     ultimo = true;
                 }
             }
-            if(obj!=null && obj.getLprod().getCodigo()!=null && obj.getLprod().getCodigo()!=0){
-                if(ultimo)
-                    select+=" and ltp_codigo = ?";
-                else{
-                    select+=" where ltp_codigo = ?";
-                    ultimo = true;
-                }
-            }
+            
             if(obj!=null && obj.getUnimed().getCodigo()!=null && obj.getUnimed().getCodigo()!=0){
                 if(ultimo)
                     select+=" and um_codigo = ?";
@@ -190,8 +183,17 @@ public class ProdutoDAO implements GenericDAO<Produto>{
             if(obj!=null && obj.getQtdeEstoque()!=0){
                 if(ultimo)
                     select+=" and prod_estoque = ?";
-                else
+                else{
                     select+=" where prod_estoque = ?";
+                    ultimo = true;
+                }
+            }
+            
+            if(obj!=null && obj.getQtdeEmbalagem()!=null && !obj.getQtdeEmbalagem().isEmpty()){
+                if(ultimo)
+                    select+=" and prod_qtdeEmbalagem = ?";
+                else
+                    select+=" where prod_qtdeEmbalagem = ?";
             }
             
             
@@ -203,8 +205,6 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                     ps.setString(++cont, obj.getDescricao());
                 if(obj!=null && obj.getCprod().getCodigo()!=null && obj.getCprod().getCodigo()!=0)
                     ps.setInt(++cont, obj.getCprod().getCodigo());
-                if(obj!=null && obj.getLprod().getCodigo()!=null && obj.getLprod().getCodigo()!=0)
-                    ps.setInt(++cont, obj.getLprod().getCodigo());
                 if(obj!=null && obj.getUnimed().getCodigo()!=null && obj.getUnimed().getCodigo()!=0)
                     ps.setInt(++cont, obj.getUnimed().getCodigo());
                 if(obj!=null && obj.getMarca().getCodigo()!=null && obj.getMarca().getCodigo()!=0)
@@ -219,6 +219,8 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                     ps.setInt(++cont, obj.getQtdeMin());
                 if(obj!=null && obj.getQtdeEstoque()!=0)
                     ps.setInt(++cont, obj.getQtdeEstoque());
+                if(obj!=null && obj.getQtdeEmbalagem()!=null && !obj.getQtdeEmbalagem().isEmpty())
+                    ps.setString(++cont, obj.getQtdeEmbalagem());
                 rs = ps.executeQuery();
                 if(rs.next()){
                     Produto p = new Produto();
@@ -230,8 +232,6 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                     p.setDescricao(rs.getString("prod_descricao"));
                     cat.setCodigo(rs.getInt("tpp_codigo"));
                     p.setCprod(cat.select(con));
-                    ltp.setCodigo(rs.getInt("ltp_codigo"));
-                    p.setLprod(ltp.select(con));
                     um.setCodigo(rs.getInt("um_codigo"));
                     p.setUnimed(um.select(con));
                     m.setCodigo(rs.getInt("mar_codigo"));
@@ -241,6 +241,7 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                     p.setPreco(rs.getDouble("prod_preco"));
                     p.setQtdeMin(rs.getInt("prod_qtdemin"));
                     p.setQtdeEstoque(rs.getInt("prod_estoque"));
+                    p.setQtdeEmbalagem(rs.getString("prod_qtdeEmbalagem"));
                     return p;
                 }
             }catch(SQLException ex){
@@ -283,14 +284,6 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                     ultimo = true;
                 }
             }
-            if(obj!=null && obj.getLprod().getCodigo()!=null && obj.getLprod().getCodigo()!=0){
-                if(ultimo)
-                    select+=" and ltp_codigo = ?";
-                else{
-                    select+=" where ltp_codigo = ?";
-                    ultimo = true;
-                }
-            }
             if(obj!=null && obj.getUnimed().getCodigo()!=null && obj.getUnimed().getCodigo()!=0){
                 if(ultimo)
                     select+=" and um_codigo = ?";
@@ -345,8 +338,18 @@ public class ProdutoDAO implements GenericDAO<Produto>{
             if(obj!=null && obj.getQtdeEstoque()!=0){
                 if(ultimo)
                     select+=" and prod_estoque = ?";
-                else
+                else{
                     select+=" where prod_estoque = ?";
+                    ultimo = true;
+                }
+            }
+            
+            if(obj!=null && obj.getQtdeEmbalagem()!=null && !obj.getQtdeEmbalagem().isEmpty()){
+                if(ultimo)
+                    select+=" and prod_qtdeEmbalagem = ?";
+                else{
+                    select+=" where prod_qtdeEmbalagem = ?";
+                }
             }
             
             
@@ -358,8 +361,6 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                     ps.setString(++cont, obj.getDescricao());
                 if(obj!=null && obj.getCprod().getCodigo()!=null && obj.getCprod().getCodigo()!=0)
                     ps.setInt(++cont, obj.getCprod().getCodigo());
-                if(obj!=null && obj.getLprod().getCodigo()!=null && obj.getLprod().getCodigo()!=0)
-                    ps.setInt(++cont, obj.getLprod().getCodigo());
                 if(obj!=null && obj.getUnimed().getCodigo()!=null && obj.getUnimed().getCodigo()!=0)
                     ps.setInt(++cont, obj.getUnimed().getCodigo());
                 if(obj!=null && obj.getMarca().getCodigo()!=null && obj.getMarca().getCodigo()!=0)
@@ -374,6 +375,8 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                     ps.setInt(++cont, obj.getQtdeMin());
                 if(obj!=null && obj.getQtdeEstoque()!=0)
                     ps.setInt(++cont, obj.getQtdeEstoque());
+                if(obj!=null && obj.getQtdeEmbalagem()!=null && !obj.getQtdeEmbalagem().isEmpty())
+                    ps.setString(++cont, obj.getQtdeEmbalagem());
                 rs = ps.executeQuery();
                 while(rs.next()){
                     Produto p = new Produto();
@@ -385,8 +388,6 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                     p.setDescricao(rs.getString("prod_descricao"));
                     cat.setCodigo(rs.getInt("tpp_codigo"));
                     p.setCprod(cat.select(con));
-                    ltp.setCodigo(rs.getInt("ltp_codigo"));
-                    p.setLprod(ltp.select(con));
                     um.setCodigo(rs.getInt("um_codigo"));
                     p.setUnimed(um.select(con));
                     m.setCodigo(rs.getInt("mar_codigo"));
@@ -396,6 +397,7 @@ public class ProdutoDAO implements GenericDAO<Produto>{
                     p.setPreco(rs.getDouble("prod_preco"));
                     p.setQtdeMin(rs.getInt("prod_qtdemin"));
                     p.setQtdeEstoque(rs.getInt("prod_estoque"));
+                    p.setQtdeEmbalagem(rs.getString("prod_qtdeEmbalagem"));
                     lista.add(p);
                 }
                 return lista;

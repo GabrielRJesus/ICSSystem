@@ -34,7 +34,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import util.MaskFieldUtil;
 
 /**
@@ -101,7 +103,7 @@ public class GerenciarFornecedorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        PessoaControl pc = new PessoaControl();
+        
         MaskFieldUtil.cepField(txtCep);
         MaskFieldUtil.cnpjField(txtCnpj);
         MaskFieldUtil.dateField(txtInicio);
@@ -115,7 +117,22 @@ public class GerenciarFornecedorController implements Initializable {
         } catch (ControlException ex) {
             System.out.println(ex.getMessage());
         }
-        
+        carregaFornecedor();
+    }    
+
+    @FXML
+    private void selectEstado(ActionEvent event) throws ControlException {
+        if(cbEstado.getSelectionModel().getSelectedItem()!=null)
+            carregacbCidade(cbEstado.getSelectionModel().getSelectedItem().toString());
+    }
+
+    @FXML
+    private void clkNovo(ActionEvent event) {
+        inicializa(false);
+    }
+    
+    public void carregaFornecedor(){
+        PessoaControl pc = new PessoaControl();
         if(pc.retornaForBusca()!=null){
             txtCodigo.setText(pc.retornaForBusca().getCodigo()+"");
             txtNome.setText(pc.retornaForBusca().getNome());
@@ -146,18 +163,6 @@ public class GerenciarFornecedorController implements Initializable {
             txtObs.setText(pc.retornaForBusca().getObservacoes());
             txtRamo.setText(pc.retornaForBusca().getRamoAtiv());
         }
-        
-    }    
-
-    @FXML
-    private void selectEstado(ActionEvent event) throws ControlException {
-        if(cbEstado.getSelectionModel().getSelectedItem()!=null)
-            carregacbCidade(cbEstado.getSelectionModel().getSelectedItem().toString());
-    }
-
-    @FXML
-    private void clkNovo(ActionEvent event) {
-        inicializa(false);
     }
 
     @FXML
@@ -212,12 +217,14 @@ public class GerenciarFornecedorController implements Initializable {
     private void clkLocalizar(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarFornecedor.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) btSair.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Localizar Fornecedor");
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
+        carregaFornecedor();
     }
 
     @FXML

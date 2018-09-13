@@ -14,10 +14,12 @@ public class LoteProduto {
     private Date validade;
     private int qtdeCompra;
     private int qtdRemanescente;
+    private Produto prod;
     
     private static LoteProduto loteSelecionado;
 
     public LoteProduto() {
+        prod = new Produto();
     }
 
     public Integer getCodigo() {
@@ -76,6 +78,14 @@ public class LoteProduto {
         LoteProduto.loteSelecionado = loteSelecionado;
     }
 
+    public Produto getProd() {
+        return prod;
+    }
+
+    public void setProd(Produto prod) {
+        this.prod = prod;
+    }
+    
     @Override
     public String toString() {
         return  numeroLote;
@@ -123,9 +133,9 @@ public class LoteProduto {
         }
     }
     
-    public List<String> listaString(Connection con) throws EntidadeException{
+    public List<LoteProduto> listaLotePorProduto(Connection con) throws EntidadeException{
         try{
-            return new LoteProdutoDAO().listaString(this,con);
+            return new LoteProdutoDAO().listaLotePorProduto(this,con);
         }catch(DAOException ex){
             throw new EntidadeException(ex.getMessage());
         }

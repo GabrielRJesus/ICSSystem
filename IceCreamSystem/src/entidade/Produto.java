@@ -10,7 +10,6 @@ public class Produto {
     private Integer codigo;
     private String descricao;
     private CategoriaProduto cprod;
-    private LoteProduto lprod;
     private UnidadeMedida unimed;
     private Marca marca;
     private double precoBase;
@@ -18,12 +17,12 @@ public class Produto {
     private double preco;
     private int qtdeMin;
     private int qtdeEstoque;
+    private String qtdeEmbalagem;
     
     private static Produto prodSelecionado;
 
     public Produto() {
         cprod = new CategoriaProduto();
-        lprod = new LoteProduto();
         unimed = new UnidadeMedida();
         marca = new Marca();
     }
@@ -50,14 +49,6 @@ public class Produto {
 
     public void setCprod(CategoriaProduto cprod) {
         this.cprod = cprod;
-    }
-
-    public LoteProduto getLprod() {
-        return lprod;
-    }
-
-    public void setLprod(LoteProduto lprod) {
-        this.lprod = lprod;
     }
 
     public UnidadeMedida getUnimed() {
@@ -124,9 +115,17 @@ public class Produto {
         Produto.prodSelecionado = prodSelecionado;
     }
 
+    public String getQtdeEmbalagem() {
+        return qtdeEmbalagem;
+    }
+
+    public void setQtdeEmbalagem(String qtdeEmbalagem) {
+        this.qtdeEmbalagem = qtdeEmbalagem;
+    }
+
     @Override
     public String toString() {
-        return descricao;
+        return descricao+" "+qtdeEmbalagem+" "+unimed.getAbreviacao();
     }
     
     

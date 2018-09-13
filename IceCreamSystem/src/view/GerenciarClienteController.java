@@ -33,7 +33,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import util.MaskFieldUtil;
 
 /**
@@ -91,7 +93,7 @@ public class GerenciarClienteController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        PessoaControl pc = new PessoaControl();
+        
         inicializa(true);
         MaskFieldUtil.cpfField(txtCpf);
         MaskFieldUtil.dateField(txtData);
@@ -103,28 +105,7 @@ public class GerenciarClienteController implements Initializable {
         } catch (ControlException ex) {
             System.out.println(ex.getMessage());
         }
-        if(pc.retornaCliBusca()!=null){
-            txtBairro.setText(pc.retornaCliBusca().getLogradouro().getBairro());
-            txtCelular.setText(pc.retornaCliBusca().getCelular());
-            txtCep.setText(pc.retornaCliBusca().getLogradouro().getCep());
-            txtCodigo.setText(pc.retornaCliBusca().getCodigo()+"");
-            txtCpf.setText(pc.retornaCliBusca().getCpf());
-            txtEmail.setText(pc.retornaCliBusca().getEmail());
-            txtEndereco.setText(pc.retornaCliBusca().getLogradouro().getEndereco());
-            txtNome.setText(pc.retornaCliBusca().getNome());
-            txtNumero.setText(pc.retornaCliBusca().getLogradouro().getNumero());
-            txtRg.setText(pc.retornaCliBusca().getRg());
-            txtTelefone.setText(pc.retornaCliBusca().getTelefone());
-            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
-            String str = fmt.format(pc.retornaCliBusca().getDtNasc());
-            txtData.setText(str);
-            cbCidade.setValue(pc.retornaCliBusca().getLogradouro().getCidade().toString());
-            cbEstado.setValue(pc.retornaCliBusca().getLogradouro().getCidade().getEstado().toString());
-            if(pc.retornaCliBusca().getSexo()=='M')
-                cbSexo.setValue("Masculino");
-            if(pc.retornaCliBusca().getSexo()=='F')
-                cbSexo.setValue("Feminino");
-        }
+        carregaCliente();
     }    
 
     @FXML
@@ -174,12 +155,40 @@ public class GerenciarClienteController implements Initializable {
     private void clkLocalizar(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarCliente.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) btSair.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Menu Principal");
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
+        carregaCliente();
+    }
+    
+    public void carregaCliente(){
+        PessoaControl pc = new PessoaControl();
+        if(pc.retornaCliBusca()!=null){
+            txtBairro.setText(pc.retornaCliBusca().getLogradouro().getBairro());
+            txtCelular.setText(pc.retornaCliBusca().getCelular());
+            txtCep.setText(pc.retornaCliBusca().getLogradouro().getCep());
+            txtCodigo.setText(pc.retornaCliBusca().getCodigo()+"");
+            txtCpf.setText(pc.retornaCliBusca().getCpf());
+            txtEmail.setText(pc.retornaCliBusca().getEmail());
+            txtEndereco.setText(pc.retornaCliBusca().getLogradouro().getEndereco());
+            txtNome.setText(pc.retornaCliBusca().getNome());
+            txtNumero.setText(pc.retornaCliBusca().getLogradouro().getNumero());
+            txtRg.setText(pc.retornaCliBusca().getRg());
+            txtTelefone.setText(pc.retornaCliBusca().getTelefone());
+            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+            String str = fmt.format(pc.retornaCliBusca().getDtNasc());
+            txtData.setText(str);
+            cbCidade.setValue(pc.retornaCliBusca().getLogradouro().getCidade().toString());
+            cbEstado.setValue(pc.retornaCliBusca().getLogradouro().getCidade().getEstado().toString());
+            if(pc.retornaCliBusca().getSexo()=='M')
+                cbSexo.setValue("Masculino");
+            if(pc.retornaCliBusca().getSexo()=='F')
+                cbSexo.setValue("Feminino");
+        }
     }
 
     @FXML

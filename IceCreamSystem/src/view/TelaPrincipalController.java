@@ -134,6 +134,7 @@ public class TelaPrincipalController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Gerenciar Funcionario");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
     }
@@ -147,6 +148,7 @@ public class TelaPrincipalController implements Initializable {
         stage.setTitle("Gerenciar Fornecedor");
         stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.showAndWait();
     }
 
@@ -164,6 +166,7 @@ public class TelaPrincipalController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Gerenciar Produto");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
     }
@@ -176,6 +179,7 @@ public class TelaPrincipalController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Gerenciar Marcas");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
     }
@@ -188,6 +192,7 @@ public class TelaPrincipalController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Gerenciar Tipos de Despesas");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
     }
@@ -200,6 +205,7 @@ public class TelaPrincipalController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Gerenciar Unidade de Medida");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
     }
@@ -212,6 +218,7 @@ public class TelaPrincipalController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Gerenciar Tipo de Venda");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
     }
@@ -224,6 +231,7 @@ public class TelaPrincipalController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Gerenciar Categoria do Produto");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
     }
@@ -236,6 +244,7 @@ public class TelaPrincipalController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Gerenciar Tipo de Pagamento");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
     }
@@ -248,6 +257,7 @@ public class TelaPrincipalController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Localizar Funcionário");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
     }
@@ -260,6 +270,7 @@ public class TelaPrincipalController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Localizar Funcionário");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
     }
@@ -272,6 +283,7 @@ public class TelaPrincipalController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Localizar Fornecedor");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
     }
@@ -284,6 +296,7 @@ public class TelaPrincipalController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Localizar Produto");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
     }
@@ -296,6 +309,7 @@ public class TelaPrincipalController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Dados da Empresa");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
     }
@@ -310,6 +324,7 @@ public class TelaPrincipalController implements Initializable {
             stage.setScene(scene);
             stage.setTitle("Abrir Caixa");
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setResizable(false);
             stage.showAndWait();
         }else{
@@ -331,6 +346,7 @@ public class TelaPrincipalController implements Initializable {
             stage.setScene(scene);
             stage.setTitle("Fechar Caixa");
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setResizable(false);
             stage.showAndWait();
         }else{
@@ -369,6 +385,7 @@ public class TelaPrincipalController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Lançar Contas à Pagar");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
     }
@@ -389,6 +406,7 @@ public class TelaPrincipalController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Baixa Manual Estoque");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
     }

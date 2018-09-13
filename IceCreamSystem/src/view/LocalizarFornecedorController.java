@@ -83,8 +83,6 @@ public class LocalizarFornecedorController implements Initializable {
             pc.guardaBusca(tabFornecedor.getSelectionModel().getSelectedItem());
             Stage stage = (Stage) btSair.getScene().getWindow();
             stage.close();
-            RealizarCompraController rc = new RealizarCompraController();
-            rc.carregaFornecedor(tabFornecedor.getSelectionModel().getSelectedItem());
         }
     }
 

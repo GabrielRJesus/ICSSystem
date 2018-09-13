@@ -1,7 +1,9 @@
 package DAO;
 
 import entidade.LoteProduto;
+import entidade.Produto;
 import exception.DAOException;
+import exception.EntidadeException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,11 +11,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
     
-    private String insert = "insert into lote_produto(ltp_descricao, ltp_numero, ltp_validade, ltp_qtdelote, ltp_qtderemanes) values(?,?,?,?,?)";
-    private String update = "update lote_produto set ltp_descricao = ?, ltp_numero = ?, ltp_validade = ?, ltp_qtdelote = ?, ltp_qtderemanes = ? where ltp_codigo = ?";
+    private String insert = "insert into lote_produto(ltp_descricao, ltp_numero, ltp_validade, ltp_qtdelote, ltp_qtderemanes, prod_codigo) values(?,?,?,?,?,?)";
+    private String update = "update lote_produto set ltp_descricao = ?, ltp_numero = ?, ltp_validade = ?, ltp_qtdelote = ?, ltp_qtderemanes = ?, prod_codigo = ? where ltp_codigo = ?";
     private String delete = "delete from lote_produto where ltp_codigo = ?";
     private String select = "select * from lote_produto";
     private String ctrEstoque = "update lote_produto set = ltp_qtderemanes = ? where ltp_codigo = ?";
@@ -30,6 +34,7 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
                 ps.setDate(++cont, new java.sql.Date(obj.getValidade().getTime()));
                 ps.setInt(++cont, obj.getQtdeCompra());
                 ps.setInt(++cont, obj.getQtdRemanescente());
+                ps.setInt(++cont, obj.getProd().getCodigo());
                 return ps.executeUpdate();
             }catch(SQLException ex){
                 throw new DAOException(ex.getMessage());
@@ -51,6 +56,7 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
                 ps.setDate(++cont, new java.sql.Date(obj.getValidade().getTime()));
                 ps.setInt(++cont, obj.getQtdeCompra());
                 ps.setInt(++cont, obj.getQtdRemanescente());
+                ps.setInt(++cont, obj.getProd().getCodigo());
                 ps.setInt(++cont, obj.getCodigo());
                 return ps.executeUpdate();
             }catch(SQLException ex){
@@ -107,6 +113,15 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
                 }
             }
             
+            if(obj.getProd()!=null && obj.getProd().getCodigo()!=null && obj.getProd().getCodigo()!=0){
+                if(ultimo)
+                    select+=" and prod_codigo = ?";
+                else{
+                    select+=" where prod_codigo = ?";
+                    ultimo = true;
+                }
+            }
+            
             if(obj!=null && obj.getValidade()!=null){
                 if(ultimo)
                     select+=" and ltp_validade = ?";
@@ -145,21 +160,28 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
                     ps.setInt(++cont, obj.getQtdeCompra());
                 if(obj!=null && obj.getQtdRemanescente()!=0)
                     ps.setInt(++cont, obj.getQtdRemanescente());
+                if(obj.getProd()!=null && obj.getProd().getCodigo()!=null && obj.getProd().getCodigo()!=0)
+                    ps.setInt(++cont, obj.getProd().getCodigo());
                 rs = ps.executeQuery();
                 
                 if(rs.next()){
                     LoteProduto lp = new LoteProduto();
+                    Produto p = new Produto();
                     lp.setCodigo(rs.getInt("ltp_codigo"));
                     lp.setDescricao(rs.getString("ltp_descricao"));
                     lp.setNumeroLote(rs.getString("ltp_numero"));
                     lp.setValidade(rs.getDate("ltp_validade"));
                     lp.setQtdeCompra(rs.getInt("ltp_qtdelote"));
                     lp.setQtdRemanescente(rs.getInt("ltp_qtderemanes"));
+                    p.setCodigo(rs.getInt("prod_codigo"));
+                    lp.setProd(p.select(con));
                     return lp;
                 }
                 
             }catch(SQLException ex){
                 throw new DAOException(ex.getMessage());
+            } catch (EntidadeException ex) {
+                Logger.getLogger(LoteProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
             throw new DAOException("Erro na conexão!");
@@ -167,7 +189,7 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
         return null;
     }
     
-    public List<LoteProduto> lista(LoteProduto obj, Date inicio, Date fim, Connection con) throws DAOException {
+    public List<LoteProduto> lista(LoteProduto obj, Date inicio, Date fim, Connection con) throws DAOException, EntidadeException {
         List<LoteProduto> lista = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -192,6 +214,15 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
                     select+=" and ltp_numero like ?";
                 else{
                     select+=" where ltp_numero like ?";
+                    ultimo = true;
+                }
+            }
+            
+            if(obj.getProd()!=null && obj.getProd().getCodigo()!=null && obj.getProd().getCodigo()!=0){
+                if(ultimo)
+                    select+=" and prod_codigo = ?";
+                else{
+                    select+=" where prod_codigo = ?";
                     ultimo = true;
                 }
             }
@@ -253,16 +284,21 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
                     ps.setInt(++cont, obj.getQtdeCompra());
                 if(obj!=null && obj.getQtdRemanescente()!=0)
                     ps.setInt(++cont, obj.getQtdRemanescente());
+                if(obj.getProd()!=null && obj.getProd().getCodigo()!=null && obj.getProd().getCodigo()!=0)
+                    ps.setInt(++cont, obj.getProd().getCodigo());
                 rs = ps.executeQuery();
                 
                 while(rs.next()){
                     LoteProduto lp = new LoteProduto();
+                    Produto p = new Produto();
                     lp.setCodigo(rs.getInt("ltp_codigo"));
                     lp.setDescricao(rs.getString("ltp_descricao"));
                     lp.setNumeroLote(rs.getString("ltp_numero"));
                     lp.setValidade(rs.getDate("ltp_validade"));
                     lp.setQtdeCompra(rs.getInt("ltp_qtdelote"));
                     lp.setQtdRemanescente(rs.getInt("ltp_qtderemanes"));
+                    p.setCodigo(rs.getInt("prod_codigo"));
+                    lp.setProd(p.select(con));
                     lista.add(lp);
                 }
                 return lista;
@@ -274,8 +310,8 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
         }
     }
         
-    public List<String> listaString(LoteProduto obj, Connection con) throws DAOException {
-        List<String> lista = new ArrayList<>();
+    public List<LoteProduto> listaLotePorProduto(LoteProduto obj, Connection con) throws DAOException, EntidadeException {
+        List<LoteProduto> lista = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet rs = null;
         boolean ultimo = false;
@@ -307,7 +343,16 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
                 if(ultimo)
                     select+=" and ltp_qtdelote = ?";
                 else{
-                    select+=" where tp_qtdelote = ?";
+                    select+=" where ltp_qtdelote = ?";
+                    ultimo = true;
+                }
+            }
+            
+            if(obj.getProd()!=null && obj.getProd().getCodigo()!=null && obj.getProd().getCodigo()!=0){
+                if(ultimo)
+                    select+=" and prod_codigo = ?";
+                else{
+                    select+=" where prod_codigo = ?";
                     ultimo = true;
                 }
             }
@@ -316,7 +361,7 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
                 if(ultimo)
                     select+=" and ltp_qtderemanes = ?";
                 else
-                    select+=" where tp_qtderemanes = ?";
+                    select+=" where ltp_qtderemanes = ?";
             }    
             try{
                 ps = con.prepareStatement(select);
@@ -330,17 +375,22 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
                     ps.setInt(++cont, obj.getQtdeCompra());
                 if(obj!=null && obj.getQtdRemanescente()!=0)
                     ps.setInt(++cont, obj.getQtdRemanescente());
+                if(obj.getProd()!=null && obj.getProd().getCodigo()!=null && obj.getProd().getCodigo()!=0)
+                    ps.setInt(++cont, obj.getProd().getCodigo());
                 rs = ps.executeQuery();
                 
                 while(rs.next()){
                     LoteProduto lp = new LoteProduto();
+                    Produto p = new Produto();
                     lp.setCodigo(rs.getInt("ltp_codigo"));
                     lp.setDescricao(rs.getString("ltp_descricao"));
                     lp.setNumeroLote(rs.getString("ltp_numero"));
                     lp.setValidade(rs.getDate("ltp_validade"));
                     lp.setQtdeCompra(rs.getInt("ltp_qtdelote"));
                     lp.setQtdRemanescente(rs.getInt("ltp_qtderemanes"));
-                    lista.add(lp.toString());
+                    p.setCodigo(rs.getInt("prod_codigo"));
+                    lp.setProd(p.select(con));
+                    lista.add(lp);
                 }
                 return lista;
             }catch(SQLException ex){

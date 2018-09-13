@@ -8,6 +8,7 @@ package view;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import control.LoteProdutoControl;
+import control.ProdutoControl;
 import entidade.LoteProduto;
 import exception.ControlException;
 import exception.EntidadeException;
@@ -101,13 +102,7 @@ public class LocalizarLoteProdutosController implements Initializable {
             total = tabLote.getSelectionModel().getSelectedItem().getQtdeCompra();
             remanes = tabLote.getSelectionModel().getSelectedItem().getQtdRemanescente();
             tpc.guardaSelecionado(codigo,lote,numero,data,total,remanes);
-            Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarLoteProduto.fxml"));
-            Scene scene = new Scene(root);
             Stage stage = (Stage) btnPesquisar.getScene().getWindow();
-            stage.setScene(scene);
-            stage.setTitle("Gerenciar Lote Produto");
-            stage.setResizable(false);
-            stage.showAndWait();
             stage.close();
         }
         
@@ -127,9 +122,11 @@ public class LocalizarLoteProdutosController implements Initializable {
 
     public void carregaTabela() throws ControlException{
         LoteProdutoControl lpc = new LoteProdutoControl();
+        ProdutoControl pc = new ProdutoControl();
         List<LoteProduto> lista = new ArrayList<>();
         Integer codigo = 0;
         Integer qtde = 0;
+        int codigop = 0;
         Date inicio = null,fim = null;
         if(dpDataInicio.getValue()!=null)
             inicio = java.sql.Date.valueOf(dpDataInicio.getValue());
@@ -139,7 +136,9 @@ public class LocalizarLoteProdutosController implements Initializable {
             codigo = Integer.parseInt(txtCodigo.getText());
         if(txtQtde.getText()!=null && !txtQtde.getText().isEmpty())
             qtde = Integer.parseInt(txtQtde.getText());
-        lista = lpc.listaLotes(codigo, txtDescricao.getText(), txtNumeroLote.getText(), inicio, fim, qtde);
+        if(pc.retornaSelecionado()!=null)
+            codigop = pc.retornaSelecionado().getCodigo();
+        lista = lpc.listaLotes(codigo, txtDescricao.getText(), txtNumeroLote.getText(), inicio, fim, qtde, codigop);
         if(lista!=null){
             ObservableList<LoteProduto> modelo;
             modelo = FXCollections.observableArrayList(lista);

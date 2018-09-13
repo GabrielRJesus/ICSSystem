@@ -32,7 +32,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import util.MaskFieldUtil;
 
 /**
@@ -103,7 +105,7 @@ public class GerenciarFuncionarioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        PessoaControl pc = new PessoaControl();
+        
         MaskFieldUtil.cepField(txtCep);
         MaskFieldUtil.cpfField(txtCpf);
         MaskFieldUtil.foneField(txtTelefone);
@@ -115,6 +117,11 @@ public class GerenciarFuncionarioController implements Initializable {
         } catch (ControlException ex) {
             System.out.println(ex.getMessage());
         }
+        carregaFuncionario();
+    }   
+    
+    public void carregaFuncionario(){
+        PessoaControl pc = new PessoaControl();
         if(pc.retornaFuncBusca()!=null){
             LocalDate data = null, dataadm = null, datadem = null;
             if(pc.retornaFuncBusca().getDtNasc()!=null)
@@ -148,7 +155,7 @@ public class GerenciarFuncionarioController implements Initializable {
             dpDataAdm.setValue(dataadm);
             dpDataDem.setValue(datadem);
         }
-    }    
+    }
 
     @FXML
     private void clkNovo(ActionEvent event) throws ControlException {
@@ -207,12 +214,14 @@ public class GerenciarFuncionarioController implements Initializable {
     private void clkLocalizar(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarFuncionario.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage) btSair.getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Localizar Funcionario");
         stage.setResizable(false);
         stage.showAndWait();
-        stage.close();
+        carregaFuncionario();
     }
 
     @FXML

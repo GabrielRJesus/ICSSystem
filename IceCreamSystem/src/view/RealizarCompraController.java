@@ -113,6 +113,7 @@ public class RealizarCompraController implements Initializable {
         } catch (ControlException ex) {
             System.out.println(ex.getMessage());
         }
+        inicializa(true);
         carregaFornecedor(new PessoaControl().retornaForBusca());
         SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
         String str = fmt.format(new Date());
@@ -155,15 +156,25 @@ public class RealizarCompraController implements Initializable {
     private void clkPesquisaProduto(ActionEvent event) throws ControlException {
         ProdutoControl pc = new ProdutoControl();
         List<Produto> listap = pc.listaProdutos();
+        List<Produto> listaaux = new ArrayList<>();
         for(int i =0; i<listap.size(); i++){
-            if(!txtProduto.getText().equalsIgnoreCase(listap.get(i).getDescricao()))
-                listap.remove(listap.get(i));
+            if(listap.get(i).getDescricao().equalsIgnoreCase(txtProduto.getText()))
+                listaaux.add(listap.get(i));
         }
-        carregaLista(listap);
+        carregaLista(listaaux);
     }
 
     @FXML
-    private void clkInsereProduto(ActionEvent event) {
+    private void clkInsereProduto(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarProduto.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Gerenciar Produto");
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.setResizable(false);
+        stage.showAndWait();
     }
 
     @FXML
@@ -206,10 +217,12 @@ public class RealizarCompraController implements Initializable {
 
     @FXML
     private void clkNovo(ActionEvent event) {
+        inicializa(false);
     }
 
     @FXML
     private void clkCancelar(ActionEvent event) {
+        limpatela();
     }
 
     @FXML
@@ -252,6 +265,35 @@ public class RealizarCompraController implements Initializable {
             modelo = FXCollections.observableArrayList(lista);
             tabProdutosC.setItems(modelo);
         }
+    }
+    
+    public void inicializa(boolean estado){
+        txtData.setDisable(estado);
+        txtFornecedor.setDisable(estado);
+        txtProduto.setDisable(estado);
+        txtQtde.setDisable(estado);
+        txtTotal.setDisable(estado);
+        txtValor.setDisable(estado);
+        btnCancelar.setDisable(estado);
+        btnExcluir.setDisable(estado);
+        btnFinalizar.setDisable(estado);
+        btnGravar.setDisable(estado);
+        btnIncluir.setDisable(estado);
+        btnInsereProduto.setDisable(estado);
+        btnPesquisaFornecedor.setDisable(estado);
+        btnPesquisaProduto.setDisable(estado);
+        tabProdutos.setDisable(estado);
+        tabProdutosC.setDisable(estado);
+    }
+    
+    public void limpatela(){
+        txtCodigo.setText("");
+        txtData.setText("");
+        txtFornecedor.setText("");
+        txtProduto.setText("");
+        txtQtde.setText("");
+        txtTotal.setText("");
+        txtValor.setText("");
     }
     
 }

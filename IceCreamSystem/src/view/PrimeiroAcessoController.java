@@ -65,7 +65,7 @@ public class PrimeiroAcessoController implements Initializable {
     @FXML
     private JFXTextField txtCelular;
     @FXML
-    private JFXDatePicker dpData;
+    private JFXTextField dpData;
     @FXML
     private JFXComboBox<String> cbSexo;
     @FXML
@@ -75,9 +75,9 @@ public class PrimeiroAcessoController implements Initializable {
     @FXML
     private JFXPasswordField txtSenha;
     @FXML
-    private JFXDatePicker dpDataAdm;
+    private JFXTextField dpDataAdm;
     @FXML
-    private JFXDatePicker dpDataDem;
+    private JFXTextField dpDataDem;
     @FXML
     private JFXTextField txtSalario;
     @FXML
@@ -132,12 +132,12 @@ public class PrimeiroAcessoController implements Initializable {
             salario = Double.parseDouble(txtSalario.getText());
         else
             salario = 0.0;
-        if(dpData.getValue()!=null)
-            data = java.sql.Date.valueOf(dpData.getValue());
-        if(dpDataAdm!=null)
-            dataadm = java.sql.Date.valueOf(dpDataAdm.getValue());
-        if(dpDataDem.getValue()!=null)
-            datadem = java.sql.Date.valueOf(dpDataDem.getValue());
+        if(dpData.getText()!=null && !dpData.getText().isEmpty())
+            data = java.sql.Date.valueOf(dpData.getText());
+        if(dpDataAdm.getText()!=null && !dpDataAdm.getText().isEmpty())
+            dataadm = java.sql.Date.valueOf(dpDataAdm.getText());
+        if(dpDataDem.getText()!=null && !dpDataDem.getText().isEmpty())
+            datadem = java.sql.Date.valueOf(dpDataDem.getText());
         PessoaControl pc = new PessoaControl();
         int rest = pc.gravarFuncionario(codigo, txtNome.getText().toString(), txtCpf.getText().toString(), txtRg.getText().toString(), txtTelefone.getText().toString(), 
                 txtCelular.getText().toString(),data, cbSexo.getValue(), txtEmail.getText().toString(), 
@@ -217,7 +217,7 @@ public class PrimeiroAcessoController implements Initializable {
         txtNumero.setText("");
         txtRg.setText("");
         txtTelefone.setText("");
-        dpData.setValue(null);
+        dpData.setText("");
         cbCidade.setValue("");
         cbEstado.setValue("");
         cbSexo.setPromptText("Sexo");
@@ -225,8 +225,8 @@ public class PrimeiroAcessoController implements Initializable {
         txtSenha.setText("");
         txtCargo.setText("");
         txtSalario.setText("");
-        dpDataAdm.setValue(null);
-        dpDataDem.setValue(null);
+        dpDataAdm.setText("");
+        dpDataDem.setText("");
     }
     
     public void carregacb(){

@@ -16,7 +16,7 @@ public class ProdutoControl {
     Connection con = conSing.getConexao();
     
     public int gravarProdutoeLote(int codigo, String descricao, String categoria,  String marca, String unimed, double precobase, double preco, double margem, int qtde, int qtdemin, 
-                int codigoLote, String descrLote, String numeroLote, Date data, int qtdeLote, int qtdeRLote, String qtdEmbalagem) throws SQLException{
+                Integer codigoLote, String descrLote, String numeroLote, Date data, int qtdeLote, int qtdeRLote, String qtdEmbalagem) throws SQLException{
         
         try{
             int rest = 0;
@@ -25,7 +25,7 @@ public class ProdutoControl {
             if(codigoG > 0){
                 rest = gravaLote(codigoLote, descrLote, numeroLote, data, qtdeLote, qtdeRLote, codigoG);
             }
-            if(rest > 0){
+            if(codigoG > 0){
                 con.commit();
                 return 1;
             }
@@ -213,11 +213,13 @@ public class ProdutoControl {
                 lp.setQtdRemanescente(qtdr);
             }
             try{
+                Produto prod = new Produto();
                 if(codProd > 0){
-                    Produto prod = new Produto();
                     prod.setCodigo(codProd);
                     prod = prod.select(con);
+                    prod.setQtdeEstoque(prod.getQtdeEstoque()+qtdt);
                     lp.setProd(prod);
+                    prod.update(con);
                 }
                 else{
                     lp.setProd(null);

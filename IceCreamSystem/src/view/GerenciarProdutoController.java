@@ -161,7 +161,7 @@ public class GerenciarProdutoController implements Initializable {
         ProdutoControl pc = new ProdutoControl();
         Date data = null;
         int codigo =0, qtde = 0, qtdemin = 0,  qtdeLote = 0, qtdeRLote = 0;
-        Integer codigoLote = 0;
+        Integer codigoLote = null;
         double preco =0.0, margem = 0.0, precobase = 0.0;
         if(txtCodigo.getText()!=null && !txtCodigo.getText().isEmpty())
             codigo = Integer.parseInt(txtCodigo.getText());
@@ -184,9 +184,9 @@ public class GerenciarProdutoController implements Initializable {
         if(txtQtdeReman.getText()!=null && !txtQtdeReman.getText().isEmpty())
             qtdeRLote = Integer.parseInt(txtQtdeReman.getText());
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        if(txtValidadeLote.getText()!=null)
+        if(txtValidadeLote.getText()!=null && !txtValidadeLote.getText().isEmpty())
             data = new java.sql.Date(format.parse(txtValidadeLote.getText()).getTime());
-        int result = pc.gravarProdutoeLote(codigo, txtDescricao.getText(), cbTipo.getValue(),  cbMarca.getValue(), cbUm.getValue(), precobase, preco, margem, qtde, qtdemin, codigo, txtDescricaoLote.getText(), txtNumeroLote.getText(), data, qtdeLote, qtdeRLote, txtqtdEmbalagem.getText());
+        int result = pc.gravarProdutoeLote(codigo, txtDescricao.getText(), cbTipo.getValue(),  cbMarca.getValue(), cbUm.getValue(), precobase, preco, margem, qtde, qtdemin, codigoLote, txtDescricaoLote.getText(), txtNumeroLote.getText(), data, qtdeLote, qtdeRLote, txtqtdEmbalagem.getText());
         if(result>0){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Resposta do Servidor");

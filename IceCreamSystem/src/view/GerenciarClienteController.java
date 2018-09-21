@@ -99,6 +99,7 @@ public class GerenciarClienteController implements Initializable {
         MaskFieldUtil.dateField(txtData);
         MaskFieldUtil.foneField(txtCelular);
         MaskFieldUtil.foneField(txtTelefone);
+        MaskFieldUtil.cepField(txtCep);
         try {
             carregacb();
             carregacbEstado();

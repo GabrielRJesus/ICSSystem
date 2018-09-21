@@ -82,7 +82,7 @@ public class LocalzarProdutoController implements Initializable {
             ProdutoControl pc = new ProdutoControl();
             pc.guardaSelecionado(tabProdutos.getSelectionModel().getSelectedItem());
             Stage stage = (Stage) btSair.getScene().getWindow();
-            stage.showAndWait();
+            stage.close();
         }
     }
 

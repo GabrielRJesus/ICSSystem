@@ -15,9 +15,9 @@ import java.util.List;
 
 public class ContasPagarDAO implements GenericDAO<ContasPagar>{
     
-    private String insert = "insert into contas_pagar(con_data, con_valor, con_dtpgto, con_valorpago, con_parcela, com_codigo, tpc_codigo, tpp_codigo) values(?,?,?,?,?,?,?,?)";
-    private String update = "update contas_pagar set con_data = ?, con_valor = ?, con_dtpgto = ?, con_valorpago = ?, con_parcela = ?, com_codigo = ?, tpc_codigo = ?, tpp_codigo = ? where con_codigo = ?";
-    private String select = "select * from contas_pagar c inner join tipo_conta tc on tc.tpc_codigo = c.tpc_codigo inner join tipo_pagamento tp on tp.tpp_codigo = c.tpp_codigo";
+    private String insert = "insert into contas_pagar(con_data, con_valor, con_dtpgto, con_valorpago, con_parcela, com_codigo, tpc_codigo) values(?,?,?,?,?,?,?)";
+    private String update = "update contas_pagar set con_data = ?, con_valor = ?, con_dtpgto = ?, con_valorpago = ?, con_parcela = ?, com_codigo = ?, tpc_codigo = ? where con_codigo = ?";
+    private String select = "select * from contas_pagar c inner join tipo_conta tc on tc.tpc_codigo = c.tpc_codigo inner join tppagamento_cpagar tp on tp.con_codigo = c.con_coigo";
     private String delete = "delete from contas_pagar where con_codigo = ?";
     
     @Override
@@ -40,7 +40,6 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
                 else
                     ps.setNull(++cont, java.sql.Types.INTEGER);
                 ps.setInt(++cont, obj.getTpd().getCodigo());
-                ps.setInt(++cont, obj.getTpp().getCodigo());
                 return ps.executeUpdate();
             }catch(SQLException ex){
                 throw new DAOException(ex.getMessage());
@@ -70,7 +69,6 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
                 else
                     ps.setNull(++cont, java.sql.Types.INTEGER);
                 ps.setInt(++cont, obj.getTpd().getCodigo());
-                ps.setInt(++cont, obj.getTpp().getCodigo());
                 ps.setInt(++cont, obj.getCodigo());
                 return ps.executeUpdate();
             }catch(SQLException ex){
@@ -118,14 +116,6 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
                     ultimo = true;
                 }
             }
-            if(obj.getTpp()!=null && obj.getTpp().getCodigo()!=null && obj.getTpp().getCodigo()!=0){
-                if(ultimo)
-                    select+= " and tp.tpp_codigo = ?";
-                else{
-                    select+=" where tp.tpp_codigo = ?";
-                    ultimo = true;
-                }
-            }
             if(obj.getData()!=null){
                 if(ultimo)
                     select+=" and c.con_data between ? and ?";
@@ -139,8 +129,6 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
                      ps.setInt(++cont, obj.getCodigo());
                 if(obj.getTpd()!=null && obj.getTpd().getCodigo()!=null && obj.getTpd().getCodigo()!=0)
                     ps.setInt(++cont, obj.getTpd().getCodigo());
-                if(obj.getTpp()!=null && obj.getTpp().getCodigo()!=null && obj.getTpp().getCodigo()!=0)
-                    ps.setInt(++cont, obj.getTpp().getCodigo());
                 if(obj.getData()!=null){
                     ps.setDate(++cont, new java.sql.Date(obj.getData().getTime()));
                     ps.setDate(++cont, new java.sql.Date(new Date().getTime()));
@@ -153,8 +141,6 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
                     Compra c = new Compra();
                     td.setCodigo(rs.getInt("tc.tpc_codigo"));
                     td.setDescricao(rs.getString("tc.tpc_descricao"));
-                    tp.setCodigo(rs.getInt("tp.tpp_codigo"));
-                    tp.setDescricao(rs.getString("tp.tpp_descricao"));
                     cp.setCodigo(rs.getInt("c.con_codigo"));
                     cp.setData(rs.getDate("c.con_data"));
                     cp.setValor(rs.getDouble("c.con_valor"));
@@ -162,7 +148,6 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
                     cp.setValorpago(rs.getDouble("c.con_valorpago"));
                     cp.setParcela(rs.getInt("c.con_parcela"));
                     cp.setTpd(td);
-                    cp.setTpp(tp);
                     c.setCodigo(rs.getInt("c.com_codigo"));
                     cp.setCompra(c); // fazer o select
                     return cp;
@@ -196,14 +181,6 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
                     ultimo = true;
                 }
             }
-            if(obj.getTpp()!=null && obj.getTpp().getCodigo()!=null && obj.getTpp().getCodigo()!=0){
-                if(ultimo)
-                    select+= " and tp.tpp_codigo = ?";
-                else{
-                    select+=" where tp.tpp_codigo = ?";
-                    ultimo = true;
-                }
-            }
             if(obj.getData()!=null){
                 if(ultimo)
                     select+=" and c.con_data between ? and ?";
@@ -217,8 +194,6 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
                      ps.setInt(++cont, obj.getCodigo());
                 if(obj.getTpd()!=null && obj.getTpd().getCodigo()!=null && obj.getTpd().getCodigo()!=0)
                     ps.setInt(++cont, obj.getTpd().getCodigo());
-                if(obj.getTpp()!=null && obj.getTpp().getCodigo()!=null && obj.getTpp().getCodigo()!=0)
-                    ps.setInt(++cont, obj.getTpp().getCodigo());
                 if(obj.getData()!=null){
                     ps.setDate(++cont, new java.sql.Date(obj.getData().getTime()));
                     ps.setDate(++cont, new java.sql.Date(new Date().getTime()));
@@ -231,8 +206,6 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
                     Compra c = new Compra();
                     td.setCodigo(rs.getInt("tc.tpc_codigo"));
                     td.setDescricao(rs.getString("tc.tpc_descricao"));
-                    tp.setCodigo(rs.getInt("tp.tpp_codigo"));
-                    tp.setDescricao(rs.getString("tp.tpp_descricao"));
                     cp.setCodigo(rs.getInt("c.con_codigo"));
                     cp.setData(rs.getDate("c.con_data"));
                     cp.setValor(rs.getDouble("c.con_valor"));
@@ -240,7 +213,6 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
                     cp.setValorpago(rs.getDouble("c.con_valorpago"));
                     cp.setParcela(rs.getInt("c.con_parcela"));
                     cp.setTpd(td);
-                    cp.setTpp(tp);
                     c.setCodigo(rs.getInt("c.com_codigo"));
                     cp.setCompra(c); // fazer o select
                     lista.add(cp);

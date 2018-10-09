@@ -15,7 +15,7 @@ public class ContaPagarControl {
     Banco conSing = Banco.getInstancia();
     Connection con = conSing.getConexao();
     
-    public int lancaContapagar(Integer codigo, Date data, double valor, TipoDespesas td, TipoPagamento tp)throws ControlException{
+    public int lancaContapagar(Integer codigo, Date data, double valor, TipoDespesas td)throws ControlException{
         ContasPagar cp = new ContasPagar();
         if(codigo!=null && codigo!=0)
             cp.setCodigo(codigo);
@@ -23,7 +23,6 @@ public class ContaPagarControl {
         cp.setValor(valor);
         cp.setParcela(0);
         cp.setTpd(td);
-        cp.setTpp(tp);
         try{
             if(codigo!=null && codigo!=0)
                 return cp.update(con);
@@ -42,8 +41,6 @@ public class ContaPagarControl {
             cp.setData(data);
         if(td!=null && td.getCodigo()!=null && td.getCodigo()!=0)
             cp.setTpd(td);
-        if(tp!=null && tp.getCodigo()!=null && tp.getCodigo()!=0)
-            cp.setTpp(tp);
         try{
             return cp.lista(con);
         }catch(EntidadeException ex){
@@ -53,5 +50,13 @@ public class ContaPagarControl {
     
     public void guardaSelecionado(ContasPagar cp){
         ContasPagar.setCpSelecionada(cp);
+    }
+    
+    public ContasPagar retornaSelecionada(ContasPagar cp) throws ControlException{
+        return ContasPagar.getCpSelecionada();
+    }
+    
+    public int quitarContaPagar(ContasPagar cp, double total) throws ControlException{
+        return 1;
     }
 }

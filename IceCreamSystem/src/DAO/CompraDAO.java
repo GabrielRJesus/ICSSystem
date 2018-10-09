@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +26,8 @@ public class CompraDAO implements GenericDAO<Compra>{
     private String deleteic = "delete into itens_compra where com_codigo = ?";
     private String selectic = "select * from itens_compra where com_codigo = ?";
     
+    private String atualizaEstoque = "update produto set prod_estoque = ? where prod_codigo = ?";
+    
     @Override
     public int insert(Compra obj, Connection con) throws DAOException {
         if(con!=null){
@@ -34,7 +37,7 @@ public class CompraDAO implements GenericDAO<Compra>{
             int chave = -1;
             try{
                 ps = con.prepareStatement(insert, PreparedStatement.RETURN_GENERATED_KEYS);
-                ps.setDate(++cont, new java.sql.Date(obj.getData().getTime()));
+                ps.setDate(++cont, new java.sql.Date(new Date().getTime()));
                 ps.setDouble(++cont, obj.getValor());
                 ps.setInt(++cont, obj.getForn().getCodigo());
                 ps.executeUpdate();
@@ -45,6 +48,8 @@ public class CompraDAO implements GenericDAO<Compra>{
                 if(chave > -1){
                     for(int i =0; i<obj.getProdutosCompra().size(); i++){
                         PreparedStatement ps2 = null;
+                        PreparedStatement ps3 = null;
+                        int cont1 = 0;
                         cont = 0;
                         ps2 = con.prepareStatement(insertic);
                         ps2.setInt(++cont, chave);
@@ -54,7 +59,7 @@ public class CompraDAO implements GenericDAO<Compra>{
                         ps2.executeUpdate();
                     }
                 }
-                return 1;
+                return chave;
             }catch(SQLException ex){
                 throw new DAOException(ex.getMessage());
             }

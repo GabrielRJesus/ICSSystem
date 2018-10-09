@@ -169,6 +169,14 @@ public class Produto {
             throw new EntidadeException(ex.getMessage());
         }
     }
+    
+    public int updateEstoque(Connection con) throws EntidadeException{
+        try{
+            return new ProdutoDAO().updateEstoque(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
 
     
 }

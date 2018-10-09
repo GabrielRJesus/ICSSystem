@@ -49,8 +49,9 @@
         <columns>
           <TableColumn fx:id="colCodigo" prefWidth="91.0" text="Código" />
           <TableColumn fx:id="colDescricao" prefWidth="333.0" text="Descrição" />
-            <TableColumn fx:id="colUmedida" prefWidth="147.0" text="Un. Medida" />
-            <TableColumn fx:id="colValor" prefWidth="169.0" text="Valor" />
+            <TableColumn fx:id="colQtdEmbalagem" prefWidth="100.0" text="Qtd. Embalagem" />
+            <TableColumn fx:id="colUmedida" prefWidth="110.0" text="Un. Medida" />
+            <TableColumn fx:id="colValor" prefWidth="110.0" text="Valor" />
         </columns>
       </TableView>
       <TableView fx:id="tabProdutosC" layoutX="30.0" layoutY="399.0" prefHeight="194.0" prefWidth="743.0">

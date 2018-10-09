@@ -63,16 +63,14 @@ public class LancarContasPagarController implements Initializable {
     private JFXButton btnExcluir;
     @FXML
     private JFXButton btnSair;
-    @FXML
-    private JFXComboBox<TipoPagamento> cbFormaPagamento;
 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        MaskFieldUtil.monetaryField(txtValor);
         MaskFieldUtil.dateField(txtData);
         try {
                 carregaDespesas();
-                carregaTpPagamento();
             } catch (ControlException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -84,7 +82,6 @@ public class LancarContasPagarController implements Initializable {
             txtData.setText(ContasPagar.getCpSelecionada().getData().toString());
             txtValor.setText(ContasPagar.getCpSelecionada().getValor()+"");
             cbDespesas.setValue(ContasPagar.getCpSelecionada().getTpd());
-            cbFormaPagamento.setValue(ContasPagar.getCpSelecionada().getTpp());
         }
     }    
 
@@ -111,8 +108,10 @@ public class LancarContasPagarController implements Initializable {
             alert.setContentText("Digite a data do Vencimento!");
             alert.showAndWait();
         }
-        if(txtValor.getText()!=null && !txtValor.getText().isEmpty())
-            valor = Double.parseDouble(txtValor.getText());
+        if(txtValor.getText()!=null && !txtValor.getText().isEmpty()){
+            String texto = txtValor.getText().replace(",", ".");
+            valor = Double.parseDouble(texto);
+        }
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Resposta do Servidor");
@@ -127,15 +126,7 @@ public class LancarContasPagarController implements Initializable {
             alert.setContentText("Selecione um tipo de despesa!");
             alert.showAndWait();
         }
-        if(cbFormaPagamento.getValue()==null){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Resposta do Servidor");
-            alert.setHeaderText(null);
-            alert.setContentText("Selecione a forma de pagamento!");
-            alert.showAndWait();
-        }
-        
-        int result = cpc.lancaContapagar(codigo, data, valor, cbDespesas.getValue(), cbFormaPagamento.getValue());
+        int result = cpc.lancaContapagar(codigo, data, valor, cbDespesas.getValue());
         if(result>0){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Resposta do Servidor");
@@ -190,7 +181,6 @@ public class LancarContasPagarController implements Initializable {
         btnCancelar.setDisable(estado);
         btnExcluir.setDisable(estado);
         cbDespesas.setDisable(estado);
-        cbFormaPagamento.setDisable(estado);
     }
     
     public void limpatela(){
@@ -198,7 +188,6 @@ public class LancarContasPagarController implements Initializable {
         txtValor.setText("");
         cbDespesas.setValue(new TipoDespesas());
         txtCodigo.setText("");
-        cbFormaPagamento.setValue(new TipoPagamento());
     }
     
     public void carregaDespesas() throws ControlException{
@@ -207,13 +196,5 @@ public class LancarContasPagarController implements Initializable {
         lista = tdc.listaDespesas(0, "");
         ObservableList<TipoDespesas> colection = FXCollections.observableArrayList(lista);
         cbDespesas.getItems().addAll(colection);
-    }
-    
-    public void carregaTpPagamento() throws ControlException{
-        TipoPagamentoControl tpp = new TipoPagamentoControl();
-        List<TipoPagamento> lista = new ArrayList<>();
-        lista = tpp.listaTPagamento(0, "");
-        ObservableList<TipoPagamento> colection = FXCollections.observableArrayList(lista);
-        cbFormaPagamento.getItems().addAll(colection);
     }
 }

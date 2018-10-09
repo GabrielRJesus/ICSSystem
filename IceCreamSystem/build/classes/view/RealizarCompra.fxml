@@ -8,67 +8,73 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="628.0" prefWidth="637.0" styleClass="background" stylesheets="@estilo.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="view.RealizarCompraController">
+<AnchorPane id="AnchorPane" prefHeight="702.0" prefWidth="799.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RealizarCompraController">
    <children>
-      <Label layoutX="156.0" layoutY="14.0" text="Gerenciar Compra" textFill="#2b2553">
+      <Label layoutX="268.0" layoutY="14.0" text="Gerenciar Compra" textFill="#2b2553">
          <font>
             <Font name="Arial Black" size="30.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtCodigo" editable="false" focusColor="#2b2553" labelFloat="true" layoutX="30.0" layoutY="79.0" prefHeight="27.0" prefWidth="127.0" promptText="Código:">
+      <JFXTextField fx:id="txtCodigo" editable="false" focusColor="#2b2553" labelFloat="true" layoutX="30.0" layoutY="70.0" prefHeight="27.0" prefWidth="127.0" promptText="Código Compra:">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtData" editable="false" focusColor="#2b2553" labelFloat="true" layoutX="460.0" layoutY="79.0" prefHeight="27.0" prefWidth="144.0" promptText="Data:">
+      <JFXTextField fx:id="txtData" editable="false" focusColor="#2b2553" labelFloat="true" layoutX="624.0" layoutY="70.0" prefHeight="27.0" prefWidth="144.0" promptText="Data:">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtFuncionario" editable="false" focusColor="#2b2553" labelFloat="true" layoutX="30.0" layoutY="131.0" prefHeight="27.0" prefWidth="275.0" promptText="Funcionário:">
+      <JFXTextField fx:id="txtFornecedor" focusColor="#2b2553" labelFloat="true" layoutX="210.0" layoutY="70.0" prefHeight="27.0" prefWidth="275.0" promptText="Fornecedor:">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtFornecedor" focusColor="#2b2553" labelFloat="true" layoutX="30.0" layoutY="183.0" prefHeight="27.0" prefWidth="275.0" promptText="Fornecedor:">
+      <JFXButton fx:id="btnPesquisaFornecedor" layoutX="496.0" layoutY="70.0" onAction="#clkPesquisaFornecedor" prefHeight="27.0" prefWidth="38.0" text="Q" />
+      <JFXButton fx:id="btnPesquisaProduto" layoutX="269.0" layoutY="113.0" onAction="#clkPesquisaProduto" prefHeight="27.0" prefWidth="38.0" text="Q" />
+      <JFXTextField fx:id="txtProduto" focusColor="#2b2553" labelFloat="true" layoutX="30.0" layoutY="114.0" prefHeight="27.0" prefWidth="224.0" promptText="Produto:">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXButton fx:id="btnPesquisaFornecedor" layoutX="316.0" layoutY="183.0" onAction="#clkPesquisaFornecedor" prefHeight="27.0" prefWidth="38.0" text="Q" />
-      <JFXButton fx:id="btnPesquisaProduto" layoutX="269.0" layoutY="254.0" onAction="#clkPesquisaProduto" prefHeight="27.0" prefWidth="38.0" text="Q" />
-      <JFXTextField fx:id="txtProduto" focusColor="#2b2553" labelFloat="true" layoutX="30.0" layoutY="254.0" prefHeight="27.0" prefWidth="224.0" promptText="Produto:">
+      <JFXButton fx:id="btnInsereProduto" layoutX="316.0" layoutY="113.0" onAction="#clkInsereProduto" prefHeight="27.0" prefWidth="38.0" text="+" />
+      <JFXTextField fx:id="txtQtde" focusColor="#2b2553" labelFloat="true" layoutX="567.0" layoutY="364.0" prefHeight="27.0" prefWidth="99.0" promptText="Qtde:">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXButton fx:id="btnInsereProduto" layoutX="316.0" layoutY="254.0" onAction="#clkInsereProduto" prefHeight="27.0" prefWidth="38.0" text="+" />
-      <JFXTextField fx:id="txtQtde" editable="false" focusColor="#2b2553" labelFloat="true" layoutX="396.0" layoutY="254.0" prefHeight="27.0" prefWidth="99.0" promptText="Qtde:">
-         <font>
-            <Font name="Arial" size="15.0" />
-         </font>
-      </JFXTextField>
-      <JFXButton fx:id="btnExcluir" layoutX="560.0" layoutY="254.0" onAction="#clkExcluir" prefHeight="27.0" prefWidth="38.0" text="-" />
-      <JFXButton fx:id="btnIncluir" layoutX="513.0" layoutY="254.0" onAction="#clkIncluir" prefHeight="27.0" prefWidth="38.0" text="+" />
-      <TableView fx:id="tabProdutos" layoutX="30.0" layoutY="300.0" prefHeight="200.0" prefWidth="577.0">
+      <JFXButton fx:id="btnExcluir" layoutX="731.0" layoutY="364.0" onAction="#clkExcluir" prefHeight="27.0" prefWidth="38.0" text="-" />
+      <JFXButton fx:id="btnIncluir" layoutX="684.0" layoutY="364.0" onAction="#clkIncluir" prefHeight="27.0" prefWidth="38.0" text="+" />
+      <TableView fx:id="tabProdutos" layoutX="28.0" layoutY="157.0" prefHeight="194.0" prefWidth="743.0">
         <columns>
-          <TableColumn fx:id="colCodigo" prefWidth="103.0" text="Código" />
-          <TableColumn fx:id="colDescricao" prefWidth="122.0" text="Descrição" />
-            <TableColumn fx:id="colQtde" minWidth="0.0" prefWidth="121.0" text="Quantidade" />
-            <TableColumn fx:id="colUmedida" prefWidth="121.0" text="Un. Medida" />
-            <TableColumn fx:id="colValor" prefWidth="109.0" text="Valor" />
+          <TableColumn fx:id="colCodigo" prefWidth="91.0" text="Código" />
+          <TableColumn fx:id="colDescricao" prefWidth="333.0" text="Descrição" />
+            <TableColumn fx:id="colQtdEmbalagem" prefWidth="100.0" text="Qtd. Embalagem" />
+            <TableColumn fx:id="colUmedida" prefWidth="110.0" text="Un. Medida" />
+            <TableColumn fx:id="colValor" prefWidth="110.0" text="Valor" />
         </columns>
       </TableView>
-      <JFXTextField fx:id="txtTotal" editable="false" focusColor="#2b2553" labelFloat="true" layoutX="508.0" layoutY="525.0" prefHeight="27.0" prefWidth="99.0" promptText="Total R$:">
+      <TableView fx:id="tabProdutosC" layoutX="30.0" layoutY="399.0" prefHeight="194.0" prefWidth="743.0">
+         <columns>
+            <TableColumn fx:id="colDescricaoC" prefWidth="368.0" text="Descrição" />
+            <TableColumn fx:id="colQtdeC" minWidth="0.0" prefWidth="156.0" text="Quantidade" />
+            <TableColumn fx:id="colValorC" prefWidth="218.0" text="Valor" />
+         </columns>
+      </TableView>
+      <JFXTextField fx:id="txtTotal" editable="false" focusColor="#2b2553" labelFloat="true" layoutX="673.0" layoutY="603.0" prefHeight="27.0" prefWidth="99.0" promptText="Total R$:">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXButton fx:id="btnNovo" layoutX="30.0" layoutY="583.0" onAction="#clkNovo" prefHeight="27.0" prefWidth="90.0" text="Novo" />
-      <JFXButton fx:id="btnCancelar" layoutX="129.0" layoutY="583.0" onAction="#clkCancelar" prefHeight="27.0" prefWidth="90.0" text="Cancelar" />
-      <JFXButton fx:id="btnGravar" layoutX="228.0" layoutY="583.0" onAction="#clkGravar" prefHeight="27.0" prefWidth="90.0" text="Gravar" />
-      <JFXButton fx:id="btnFinalizar" layoutX="327.0" layoutY="583.0" onAction="#clkFinalizar" prefHeight="27.0" prefWidth="90.0" text="Finalizar" />
-      <JFXButton fx:id="btnSair" layoutX="517.0" layoutY="583.0" onAction="#clkSair" prefHeight="27.0" prefWidth="90.0" text="Sair" />
+      <JFXButton fx:id="btnNovo" layoutX="30.0" layoutY="659.0" onAction="#clkNovo" prefHeight="27.0" prefWidth="90.0" text="Novo" />
+      <JFXButton fx:id="btnCancelar" layoutX="129.0" layoutY="659.0" onAction="#clkCancelar" prefHeight="27.0" prefWidth="90.0" text="Cancelar" />
+      <JFXButton fx:id="btnGravar" layoutX="228.0" layoutY="659.0" onAction="#clkGravar" prefHeight="27.0" prefWidth="90.0" text="Gravar" />
+      <JFXButton fx:id="btnFinalizar" layoutX="327.0" layoutY="659.0" onAction="#clkFinalizar" prefHeight="27.0" prefWidth="90.0" text="Finalizar" />
+      <JFXButton fx:id="btnSair" layoutX="682.0" layoutY="659.0" onAction="#clkSair" prefHeight="27.0" prefWidth="90.0" text="Sair" />
+      <JFXTextField fx:id="txtValor" focusColor="#2b2553" labelFloat="true" layoutX="438.0" layoutY="364.0" prefHeight="27.0" prefWidth="115.0" promptText="Valor R$:">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
    </children>
 </AnchorPane>

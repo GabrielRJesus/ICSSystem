@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -7,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="659.0" prefWidth="718.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GerenciarFornecedorController">
+<AnchorPane id="AnchorPane" prefHeight="659.0" prefWidth="718.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GerenciarFornecedorController">
    <children>
       <Label layoutX="180.0" layoutY="14.0" text="Gerenciar Fornecedor" textFill="#2b2553">
          <font>
@@ -49,22 +54,22 @@
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtEndereco" focusColor="#2b2553" labelFloat="true" layoutX="52.0" layoutY="278.0" prefHeight="25.0" prefWidth="429.0" promptText="Endereço:*" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtEndereco" focusColor="#2b2553" labelFloat="true" layoutX="52.0" layoutY="273.0" prefHeight="25.0" prefWidth="429.0" promptText="Endereço:*" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtNumero" focusColor="#2b2553" labelFloat="true" layoutX="497.0" layoutY="278.0" prefHeight="25.0" prefWidth="76.0" promptText="Numero:*" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtNumero" focusColor="#2b2553" labelFloat="true" layoutX="497.0" layoutY="273.0" prefHeight="25.0" prefWidth="76.0" promptText="Numero:*" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtBairro" focusColor="#2b2553" labelFloat="true" layoutX="52.0" layoutY="321.0" prefHeight="25.0" prefWidth="322.0" promptText="Bairro:*" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtBairro" focusColor="#2b2553" labelFloat="true" layoutX="52.0" layoutY="316.0" prefHeight="25.0" prefWidth="322.0" promptText="Bairro:*" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtCep" focusColor="#2b2553" labelFloat="true" layoutX="389.0" layoutY="321.0" prefHeight="25.0" prefWidth="186.0" promptText="CEP:*" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtCep" focusColor="#2b2553" labelFloat="true" layoutX="389.0" layoutY="316.0" prefHeight="25.0" prefWidth="186.0" promptText="CEP:*" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>

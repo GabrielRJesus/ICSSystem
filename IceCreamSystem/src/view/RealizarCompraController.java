@@ -7,6 +7,7 @@ package view;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import control.CompraControl;
 import control.PessoaControl;
 import control.ProdutoControl;
 import entidade.Fornecedor;
@@ -28,6 +29,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -97,6 +99,10 @@ public class RealizarCompraController implements Initializable {
     private JFXTextField txtValor;
     
     private List<ItensCompra> lista;
+    @FXML
+    private TableColumn colQtdEmbalagem;
+    
+    private CompraControl cc  = new CompraControl();
 
     /**
      * Initializes the controller class.
@@ -121,6 +127,7 @@ public class RealizarCompraController implements Initializable {
         colDescricao.setCellValueFactory(new PropertyValueFactory("descricao"));
         colUmedida.setCellValueFactory(new PropertyValueFactory("unimed"));
         colValor.setCellValueFactory(new PropertyValueFactory("precoBase"));
+        colQtdEmbalagem.setCellValueFactory(new PropertyValueFactory("qtdeEmbalagem"));
         
         tabProdutosC.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         colDescricaoC.setCellValueFactory(new PropertyValueFactory("p"));
@@ -223,11 +230,56 @@ public class RealizarCompraController implements Initializable {
     }
 
     @FXML
-    private void clkGravar(ActionEvent event) {
+    private void clkGravar(ActionEvent event) throws ControlException {
+        int codigo = 0;
+        double valor = 0;
+        if(txtTotal.getText()!=null && !txtTotal.getText().isEmpty())
+            valor = Double.parseDouble(txtTotal.getText());
+        if(txtFornecedor.getText()!=null && !txtFornecedor.getText().isEmpty()){
+            if(txtData.getText()!=null && !txtData.getText().isEmpty()){
+                if(lista!=null && !lista.isEmpty()){
+                    int result = cc.gravarCompra(0, txtFornecedor.getText(), valor, lista);
+                    if(result>0){
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Resposta do Servidor");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Compra gravada com sucesso!");
+                        alert.showAndWait();
+                        limpatela();
+                        inicializa(true);
+                    }else{
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Resposta do Servidor");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Erro na hora de gravar compra!");
+                        alert.showAndWait();
+                    }
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Resposta do Servidor");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Selecione Produtos para compra!");
+                    alert.showAndWait();
+                }
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Resposta do Servidor");
+                alert.setHeaderText(null);
+                alert.setContentText("Data invalida!");
+                alert.showAndWait();
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Resposta do Servidor");
+            alert.setHeaderText(null);
+            alert.setContentText("Selecione o fornecedor!");
+            alert.showAndWait();
+        }
     }
 
     @FXML
     private void clkFinalizar(ActionEvent event) {
+        
     }
 
     @FXML
@@ -291,6 +343,8 @@ public class RealizarCompraController implements Initializable {
         txtQtde.setText("");
         txtTotal.setText("");
         txtValor.setText("");
+        tabProdutosC.getItems().clear();
+        lista.clear();
     }
     
 }

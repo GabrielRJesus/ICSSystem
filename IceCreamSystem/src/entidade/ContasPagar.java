@@ -4,6 +4,7 @@ import DAO.ContasPagarDAO;
 import exception.DAOException;
 import exception.EntidadeException;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,14 +17,15 @@ public class ContasPagar {
     private Integer parcela;
     private Compra compra;
     private TipoDespesas tpd;
-    private TipoPagamento tpp;
+    
+    private List<TPaagamentoPagar> listaPagamentos;
     
     public static ContasPagar cpSelecionada;
 
     public ContasPagar() {
         compra = new Compra();
         tpd = new TipoDespesas();
-        tpp = new TipoPagamento();
+        listaPagamentos = new ArrayList<>();
     }
 
     public Integer getCodigo() {
@@ -90,20 +92,20 @@ public class ContasPagar {
         this.tpd = tpd;
     }
 
-    public TipoPagamento getTpp() {
-        return tpp;
-    }
-
-    public void setTpp(TipoPagamento tpp) {
-        this.tpp = tpp;
-    }
-
     public static ContasPagar getCpSelecionada() {
         return cpSelecionada;
     }
 
     public static void setCpSelecionada(ContasPagar cpSelecionada) {
         ContasPagar.cpSelecionada = cpSelecionada;
+    }
+
+    public List<TPaagamentoPagar> getListaPagamentos() {
+        return listaPagamentos;
+    }
+
+    public void setListaPagamentos(List<TPaagamentoPagar> listaPagamentos) {
+        this.listaPagamentos = listaPagamentos;
     }
     
     public int insert(Connection con) throws EntidadeException{

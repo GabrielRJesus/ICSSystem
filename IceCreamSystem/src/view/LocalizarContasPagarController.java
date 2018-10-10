@@ -54,8 +54,6 @@ public class LocalizarContasPagarController implements Initializable {
     @FXML
     private JFXComboBox<TipoDespesas> cbDespesas;
     @FXML
-    private JFXComboBox<TipoPagamento> cbPagamento;
-    @FXML
     private JFXButton btnPesquisar;
     @FXML
     private TableView<ContasPagar> tabelaContasPagar;
@@ -78,7 +76,6 @@ public class LocalizarContasPagarController implements Initializable {
         try {
             // TODO
             carregaDespesas();
-            carregaTpPagamento();
         } catch (ControlException ex) {
             System.out.println(ex.getMessage());
         }
@@ -99,26 +96,14 @@ public class LocalizarContasPagarController implements Initializable {
         if(tabelaContasPagar.getSelectionModel().getSelectedIndex()>=0){
             ContaPagarControl cc = new ContaPagarControl();
             cc.guardaSelecionado(tabelaContasPagar.getSelectionModel().getSelectedItem());
-            Parent root = FXMLLoader.load(getClass().getResource("/view/LancarContasPagar.fxml"));
-            Scene scene = new Scene(root);
             Stage stage = (Stage) btnSair.getScene().getWindow();
-            stage.setScene(scene);
-            stage.setTitle("Lançar Contas à Pagar");
-            stage.setResizable(false);
-            stage.showAndWait();
             stage.close();
         }
     }
 
     @FXML
     private void clkSair(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/LancarContasPagar.fxml"));
-        Scene scene = new Scene(root);
         Stage stage = (Stage) btnSair.getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("Menu Principal");
-        stage.setResizable(false);
-        stage.showAndWait();
         stage.close();
     }
     
@@ -128,14 +113,6 @@ public class LocalizarContasPagarController implements Initializable {
         lista = tdc.listaDespesas(0, "");
         ObservableList<TipoDespesas> colection = FXCollections.observableArrayList(lista);
         cbDespesas.getItems().addAll(colection);
-    }
-    
-    public void carregaTpPagamento() throws ControlException{
-        TipoPagamentoControl tpp = new TipoPagamentoControl();
-        List<TipoPagamento> lista = new ArrayList<>();
-        lista = tpp.listaTPagamento(0, "");
-        ObservableList<TipoPagamento> colection = FXCollections.observableArrayList(lista);
-        cbPagamento.getItems().addAll(colection);
     }
     
     public void carregaTabela() throws ControlException, ParseException{
@@ -149,7 +126,7 @@ public class LocalizarContasPagarController implements Initializable {
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             data = new java.sql.Date(format.parse(txtData.getText()).getTime());
         }
-        lista = pc.listaContas(codigo, data, cbDespesas.getValue(), cbPagamento.getValue());
+        lista = pc.listaContas(codigo, data, cbDespesas.getValue());
         if(lista!=null){
             ObservableList<ContasPagar> modelo;
             modelo = FXCollections.observableArrayList(lista);

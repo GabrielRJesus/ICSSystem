@@ -16,6 +16,7 @@ import entidade.Produto;
 import exception.ControlException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -230,7 +231,7 @@ public class RealizarCompraController implements Initializable {
     }
 
     @FXML
-    private void clkGravar(ActionEvent event) throws ControlException {
+    private void clkGravar(ActionEvent event) throws ControlException, SQLException {
         int codigo = 0;
         double valor = 0;
         if(txtTotal.getText()!=null && !txtTotal.getText().isEmpty())
@@ -238,7 +239,7 @@ public class RealizarCompraController implements Initializable {
         if(txtFornecedor.getText()!=null && !txtFornecedor.getText().isEmpty()){
             if(txtData.getText()!=null && !txtData.getText().isEmpty()){
                 if(lista!=null && !lista.isEmpty()){
-                    int result = cc.gravarCompra(0, txtFornecedor.getText(), valor, lista);
+                    int result = cc.gravarCompra(codigo, txtFornecedor.getText(), valor, lista);
                     if(result>0){
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Resposta do Servidor");

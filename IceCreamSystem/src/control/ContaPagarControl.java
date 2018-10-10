@@ -33,14 +33,12 @@ public class ContaPagarControl {
         }
     }
     
-    public List<ContasPagar> listaContas(Integer codigo, Date data, TipoDespesas td, TipoPagamento tp) throws ControlException{
+    public List<ContasPagar> listaContas(Integer codigo, Date data, TipoDespesas td) throws ControlException{
         ContasPagar cp = new ContasPagar();
         if(codigo!=null && codigo!=0)
             cp.setCodigo(codigo);
         if(data!=null)
             cp.setData(data);
-        if(td!=null && td.getCodigo()!=null && td.getCodigo()!=0)
-            cp.setTpd(td);
         try{
             return cp.lista(con);
         }catch(EntidadeException ex){

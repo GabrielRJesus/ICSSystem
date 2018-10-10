@@ -15,8 +15,8 @@ import java.util.List;
 
 public class ContasPagarDAO implements GenericDAO<ContasPagar>{
     
-    private String insert = "insert into contas_pagar(con_data, con_valor, con_dtpgto, con_valorpago, con_parcela, com_codigo, tpc_codigo) values(?,?,?,?,?,?,?)";
-    private String update = "update contas_pagar set con_data = ?, con_valor = ?, con_dtpgto = ?, con_valorpago = ?, con_parcela = ?, com_codigo = ?, tpc_codigo = ? where con_codigo = ?";
+    private String insert = "insert into contas_pagar(con_data, con_valor, con_dtpgto, con_valorpago,  com_codigo, tpc_codigo) values(?,?,?,?,?,?)";
+    private String update = "update contas_pagar set con_data = ?, con_valor = ?, con_dtpgto = ?, con_valorpago = ?,  com_codigo = ?, tpc_codigo = ? where con_codigo = ?";
     private String select = "select * from contas_pagar c inner join tipo_conta tc on tc.tpc_codigo = c.tpc_codigo inner join tppagamento_cpagar tp on tp.con_codigo = c.con_coigo";
     private String delete = "delete from contas_pagar where con_codigo = ?";
     
@@ -34,7 +34,6 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
                 else
                     ps.setNull(++cont, java.sql.Types.DATE);
                 ps.setDouble(++cont, obj.getValorpago());
-                ps.setInt(++cont, obj.getParcela());
                 if(obj.getCompra()!=null && obj.getCompra().getCodigo()!=null && obj.getCompra().getCodigo()!=0)
                     ps.setInt(++cont, obj.getCompra().getCodigo());
                 else
@@ -63,7 +62,6 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
                 else
                     ps.setNull(++cont, java.sql.Types.DATE);
                 ps.setDouble(++cont, obj.getValorpago());
-                ps.setInt(++cont, obj.getParcela());
                 if(obj.getCompra()!=null && obj.getCompra().getCodigo()!=null && obj.getCompra().getCodigo()!=0)
                     ps.setInt(++cont, obj.getCompra().getCodigo());
                 else
@@ -146,7 +144,6 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
                     cp.setValor(rs.getDouble("c.con_valor"));
                     cp.setDtpgto(rs.getDate("c.con_dtpgto"));
                     cp.setValorpago(rs.getDouble("c.con_valorpago"));
-                    cp.setParcela(rs.getInt("c.con_parcela"));
                     cp.setTpd(td);
                     c.setCodigo(rs.getInt("c.com_codigo"));
                     cp.setCompra(c); // fazer o select
@@ -211,7 +208,6 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
                     cp.setValor(rs.getDouble("c.con_valor"));
                     cp.setDtpgto(rs.getDate("c.con_dtpgto"));
                     cp.setValorpago(rs.getDouble("c.con_valorpago"));
-                    cp.setParcela(rs.getInt("c.con_parcela"));
                     cp.setTpd(td);
                     c.setCodigo(rs.getInt("c.com_codigo"));
                     cp.setCompra(c); // fazer o select

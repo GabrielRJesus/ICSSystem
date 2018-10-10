@@ -391,7 +391,16 @@ public class TelaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void clkQuitarContasPagar(ActionEvent event) {
+    private void clkQuitarContasPagar(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/QuitarContasPagar.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Quitar Contas a Pagar");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setResizable(false);
+        stage.showAndWait();
     }
 
     @FXML

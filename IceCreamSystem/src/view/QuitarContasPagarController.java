@@ -8,17 +8,26 @@ package view;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import entidade.ContasPagar;
+import entidade.Fornecedor;
 import entidade.TPaagamentoPagar;
 import entidade.TabelaQPagamento;
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import util.MaskFieldUtil;
 
 /**
@@ -95,7 +104,19 @@ public class QuitarContasPagarController implements Initializable {
     }    
 
     @FXML
-    private void clkPesquisa(ActionEvent event) {
+    private void clkPesquisa(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarContasPagar.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Localizar Contas a Pagar");
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.setX(330);
+        stage.setY(40);
+        stage.setResizable(false);
+        stage.showAndWait();
+        txtCodigo.setText(ContasPagar.cpSelecionada.getCodigo()+"");
     }
 
     @FXML

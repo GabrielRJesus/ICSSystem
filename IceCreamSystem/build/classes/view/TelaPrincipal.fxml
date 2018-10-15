@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -9,13 +16,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="900.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaPrincipalController">
-   <children>
-      <MenuBar fx:id="menuBar" prefHeight="33.0" prefWidth="900.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" stylesheets="@estilo.css">
-        <menus>
-          <Menu fx:id="menuGerenciar" mnemonicParsing="false" text="Gerenciar ">
-            <items>
-              <MenuItem fx:id="gerenciarCliente" mnemonicParsing="false" onAction="#gerCliente" text="Cliente" />
+<BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaPrincipalController">
+   <bottom>
+      <HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton fx:id="btNovaComanda" prefHeight="35.0" prefWidth="130.0" text="Nova Comanda" textFill="#2b2553" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="40.0" />
+               </HBox.margin>
+            </JFXButton>
+         </children>
+      </HBox>
+   </bottom>
+   <center>
+      <ImageView fitHeight="592.0" fitWidth="990.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@Logo.jpg" />
+         </image>
+      </ImageView>
+   </center>
+   <top>
+      <MenuBar fx:id="menuBar" prefHeight="33.0" style="-fx-border-color: #2b2553; -fx-border-width: 2;" stylesheets="@estilo.css" BorderPane.alignment="CENTER">
+         <menus>
+            <Menu fx:id="menuGerenciar" mnemonicParsing="false" text="Gerenciar ">
+               <items>
+                  <MenuItem fx:id="gerenciarCliente" mnemonicParsing="false" onAction="#gerCliente" text="Cliente" />
                   <MenuItem fx:id="gerenciarFuncionario" mnemonicParsing="false" onAction="#gerFuncionario" text="Funcionário" />
                   <MenuItem fx:id="gerenciarFornecedor" mnemonicParsing="false" onAction="#gerFornecedor" text="Fornecedor" />
                   <MenuItem fx:id="gerenciarProduto" mnemonicParsing="false" onAction="#gerProduto" text="Produto" />
@@ -25,19 +53,19 @@
                   <MenuItem fx:id="gerenciarCategorias" mnemonicParsing="false" onAction="#gerTipoProduto" text="Categoria do Produto" />
                   <MenuItem fx:id="gerenciarModalidades" mnemonicParsing="false" onAction="#gerTipoVenda" text="Modalidade de Venda" />
                   <MenuItem fx:id="gerenciarPagamentos" mnemonicParsing="false" onAction="#gerTipoPagamento" text="Tipo de Pagamento" />
-            </items>
-          </Menu>
-          <Menu fx:id="menuLocalizar" mnemonicParsing="false" text="Localizar">
-            <items>
-              <MenuItem fx:id="locCliente" mnemonicParsing="false" onAction="#locCliente" text="Cliente" />
+               </items>
+            </Menu>
+            <Menu fx:id="menuLocalizar" mnemonicParsing="false" text="Localizar">
+               <items>
+                  <MenuItem fx:id="locCliente" mnemonicParsing="false" onAction="#locCliente" text="Cliente" />
                   <MenuItem fx:id="locFuncionario" mnemonicParsing="false" onAction="#locFuncionario" text="Funcionario" />
                   <MenuItem fx:id="locFornecedor" mnemonicParsing="false" onAction="#locFornecedor" text="Fornecedor" />
                   <MenuItem fx:id="locProduto" mnemonicParsing="false" onAction="#locProduto" text="Produto" />
-            </items>
-          </Menu>
-          <Menu fx:id="menuFuncoes" mnemonicParsing="false" text="Funções Fundamentais">
-            <items>
-              <MenuItem fx:id="abrirCaixa" mnemonicParsing="false" onAction="#clkAbrirCaixa" text="Abrir Caixa" />
+               </items>
+            </Menu>
+            <Menu fx:id="menuFuncoes" mnemonicParsing="false" text="Funções Fundamentais">
+               <items>
+                  <MenuItem fx:id="abrirCaixa" mnemonicParsing="false" onAction="#clkAbrirCaixa" text="Abrir Caixa" />
                   <MenuItem fx:id="fecharCaixa" mnemonicParsing="false" onAction="#clkFecharCaixa" text="Fechar Caixa" />
                   <MenuItem fx:id="realizarCompra" mnemonicParsing="false" onAction="#clkRealizarCompra" text="Realizar Compra" />
                   <MenuItem fx:id="realizarVenda" mnemonicParsing="false" onAction="#clkRealizarVenda" text="Realizar Venda" />
@@ -45,30 +73,22 @@
                   <MenuItem fx:id="quitarContasPagar" mnemonicParsing="false" onAction="#clkQuitarContasPagar" text="Quitar Contas a Pagar" />
                   <MenuItem fx:id="quitarContasReceber" mnemonicParsing="false" onAction="#clkQuitarContasReceber" text="Quitar Contas a Receber" />
                   <MenuItem fx:id="baixaManual" mnemonicParsing="false" onAction="#clkBaixaManual" text="Baixa no estoque" />
-            </items>
-          </Menu>
+               </items>
+            </Menu>
             <Menu fx:id="menuRelatorios" mnemonicParsing="false" text="Relatórios">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Vendas" />
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Vendas" />
                   <MenuItem mnemonicParsing="false" text="Compras" />
                   <MenuItem mnemonicParsing="false" text="Fornecedores" />
-              </items>
+               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Outros">
                <items>
                   <MenuItem fx:id="dadosEmpresa" mnemonicParsing="false" onAction="#dadosEmpresa" text="Dados da Empresa" />
                   <MenuItem fx:id="menuSair" mnemonicParsing="false" onAction="#sair" text="Sair" />
-               </items></Menu>
-        </menus>
+               </items>
+            </Menu>
+         </menus>
       </MenuBar>
-      <JFXButton fx:id="btNovaComanda" layoutX="22.0" layoutY="672.0" prefHeight="35.0" prefWidth="130.0" text="Nova Comanda" textFill="#2b2553">
-         <font>
-            <Font name="Arial" size="15.0" />
-         </font></JFXButton>
-      <ImageView fitHeight="592.0" fitWidth="990.0" layoutX="86.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Logo.jpg" />
-         </image>
-      </ImageView>
-   </children>
-</AnchorPane>
+   </top>
+</BorderPane>

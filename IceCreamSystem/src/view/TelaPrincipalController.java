@@ -122,6 +122,7 @@ public class TelaPrincipalController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Gerenciar Cliente");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
     }
@@ -133,7 +134,7 @@ public class TelaPrincipalController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Gerenciar Funcionario");
-        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initModality(Modality.WINDOW_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
@@ -391,16 +392,25 @@ public class TelaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void clkQuitarContasPagar(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/QuitarContasPagar.fxml"));
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Quitar Contas a Pagar");
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setResizable(false);
-        stage.showAndWait();
+    private void clkQuitarContasPagar(ActionEvent event) throws IOException, ControlException {
+        CaixaControl cc = new CaixaControl();
+        if(cc.retornaCaixaAberto()!=null){
+            Parent root = FXMLLoader.load(getClass().getResource("/view/QuitarContasPagar.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Quitar Contas a Pagar");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setResizable(false);
+            stage.showAndWait();
+        }else{
+             Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Resposta do Servidor");
+            alert.setHeaderText(null);
+            alert.setContentText("Nenhum caixa Aberto!");
+            alert.showAndWait();
+        }
     }
 
     @FXML

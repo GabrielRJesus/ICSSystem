@@ -5,6 +5,7 @@ import entidade.ContasPagar;
 import entidade.TipoDespesas;
 import entidade.TipoPagamento;
 import exception.DAOException;
+import exception.EntidadeException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,12 +13,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ContasPagarDAO implements GenericDAO<ContasPagar>{
     
     private String insert = "insert into contas_pagar(con_data, con_valor, con_dtpgto, con_valorpago,  com_codigo, tpc_codigo) values(?,?,?,?,?,?)";
     private String update = "update contas_pagar set con_data = ?, con_valor = ?, con_dtpgto = ?, con_valorpago = ?,  com_codigo = ?, tpc_codigo = ? where con_codigo = ?";
-    private String select = "select * from contas_pagar c inner join tipo_conta tc on tc.tpc_codigo = c.tpc_codigo inner join tppagamento_cpagar tp on tp.con_codigo = c.con_coigo";
+    private String select = "select * from contas_pagar c inner join tipo_conta tc on tc.tpc_codigo = c.tpc_codigo";
     private String delete = "delete from contas_pagar where con_codigo = ?";
     
     @Override
@@ -25,8 +28,10 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
         if(con!=null){
             PreparedStatement ps = null;
             int cont = 0;
+            int chave = -1;
+            ResultSet rs = null;
             try{
-                ps = con.prepareStatement(insert);
+                ps = con.prepareStatement(insert, PreparedStatement.RETURN_GENERATED_KEYS);
                 ps.setDate(++cont, new java.sql.Date(obj.getData().getTime()));
                 ps.setDouble(++cont, obj.getValor());
                 if(obj.getDtpgto()!=null)
@@ -39,7 +44,12 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
                 else
                     ps.setNull(++cont, java.sql.Types.INTEGER);
                 ps.setInt(++cont, obj.getTpd().getCodigo());
-                return ps.executeUpdate();
+                ps.executeUpdate();
+                rs = ps.getGeneratedKeys();
+                if (rs != null && rs.next()) {
+                    chave = rs.getInt(1);
+                }
+                return chave;
             }catch(SQLException ex){
                 throw new DAOException(ex.getMessage());
             }
@@ -146,11 +156,13 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
                     cp.setValorpago(rs.getDouble("c.con_valorpago"));
                     cp.setTpd(td);
                     c.setCodigo(rs.getInt("c.com_codigo"));
-                    cp.setCompra(c); // fazer o select
+                    cp.setCompra(c.select(con)); 
                     return cp;
                 }
             }catch(SQLException ex){
                 throw new DAOException(ex.getMessage());
+            } catch (EntidadeException ex) {
+                Logger.getLogger(ContasPagarDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
             throw new DAOException("Erro na conexão!");
@@ -158,7 +170,7 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
         return null;
     }
     
-    public List<ContasPagar> lista(ContasPagar obj, Connection con) throws DAOException{
+    public List<ContasPagar> lista(ContasPagar obj, Connection con) throws DAOException, EntidadeException{
         List<ContasPagar> lista = new ArrayList<>();
         if(con!=null){
             PreparedStatement ps = null;
@@ -210,7 +222,10 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
                     cp.setValorpago(rs.getDouble("c.con_valorpago"));
                     cp.setTpd(td);
                     c.setCodigo(rs.getInt("c.com_codigo"));
-                    cp.setCompra(c); // fazer o select
+                    if(c.getCodigo()!=0)
+                        cp.setCompra(c.select(con)); 
+                    else
+                        cp.setCompra(new Compra());
                     lista.add(cp);
                 }
                 return lista;

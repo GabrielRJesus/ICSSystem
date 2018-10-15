@@ -1,5 +1,10 @@
 package entidade;
 
+import DAO.TPaagamentoPagarDAO;
+import exception.DAOException;
+import exception.EntidadeException;
+import java.sql.Connection;
+
 public class TPaagamentoPagar {
     
     private TipoPagamento tpg;
@@ -25,5 +30,12 @@ public class TPaagamentoPagar {
         this.valor = valor;
     }
     
+    public int insert(int chave, Connection con) throws EntidadeException{
+        try{
+            return new TPaagamentoPagarDAO().insert(chave, this, con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
     
 }

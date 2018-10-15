@@ -9,8 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="603.0" prefWidth="632.0" styleClass="background" stylesheets="@estilo.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="view.QuitarContasPagarController">
+<AnchorPane id="AnchorPane" prefHeight="603.0" prefWidth="632.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.QuitarContasPagarController">
    <children>
       <JFXTextField fx:id="txtCodigo" focusColor="#2b2553" labelFloat="true" layoutX="24.0" layoutY="48.0" prefHeight="27.0" prefWidth="138.0" promptText="Código:">
          <font>

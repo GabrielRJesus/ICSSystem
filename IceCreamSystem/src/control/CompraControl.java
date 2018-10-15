@@ -42,6 +42,7 @@ public class CompraControl {
                 lista.get(i).getP().setQtdeEstoque(tot);
                 lista.get(i).getP().updateEstoque(con);
             }
+            c.setCodigo(chave);
             ContasPagar cp = new ContasPagar();
             cp.setCompra(c);
             cp.setData(new Date());
@@ -49,9 +50,9 @@ public class CompraControl {
             TipoDespesas tp = new TipoDespesas();
             tp.setCodigo(5); tp.setDescricao("Compras");
             cp.setTpd(tp);
-            cp.insert(con);
+            int cpchave = cp.insert(con);
             con.commit();
-            return chave;
+            return cpchave;
         }catch(EntidadeException ex){
             con.rollback();
             throw new ControlException(ex.getMessage());
@@ -61,5 +62,18 @@ public class CompraControl {
         }
         return 0;
     }
+    
+    public Compra selecionaCompra(int codigo) throws ControlException{
+        Compra c = new Compra();
+        if(codigo!=0)
+            c.setCodigo(codigo);
+        try{
+            return c.select(con);
+        }catch(EntidadeException ex){
+            throw new ControlException(ex.getMessage());
+        }
+    }
+    
+    
     
 }

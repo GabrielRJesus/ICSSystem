@@ -131,4 +131,12 @@ public class ContasPagar {
             throw new EntidadeException(ex.getMessage());
         }
     }
+    
+    public ContasPagar select(Connection con) throws EntidadeException{
+        try{
+            return new ContasPagarDAO().select(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
 }

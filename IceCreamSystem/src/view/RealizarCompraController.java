@@ -8,8 +8,10 @@ package view;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import control.CompraControl;
+import control.ContaPagarControl;
 import control.PessoaControl;
 import control.ProdutoControl;
+import entidade.ContasPagar;
 import entidade.Fornecedor;
 import entidade.ItensCompra;
 import entidade.Produto;
@@ -279,8 +281,62 @@ public class RealizarCompraController implements Initializable {
     }
 
     @FXML
-    private void clkFinalizar(ActionEvent event) {
-        
+    private void clkFinalizar(ActionEvent event) throws ControlException, SQLException, IOException {
+        int codigo = 0;
+        double valor = 0;
+        if(txtTotal.getText()!=null && !txtTotal.getText().isEmpty())
+            valor = Double.parseDouble(txtTotal.getText());
+        if(txtFornecedor.getText()!=null && !txtFornecedor.getText().isEmpty()){
+            if(txtData.getText()!=null && !txtData.getText().isEmpty()){
+                if(lista!=null && !lista.isEmpty()){
+                    int result = cc.gravarCompra(codigo, txtFornecedor.getText(), valor, lista);
+                    if(result>0){
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Resposta do Servidor");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Compra gravada com sucesso!");
+                        alert.showAndWait();
+                        ContasPagar cpg = new ContasPagar();
+                        cpg = new ContaPagarControl().seleciona(result);
+                        ContasPagar.setCpSelecionada(cpg);
+                        Parent root = FXMLLoader.load(getClass().getResource("/view/QuitarContasPagar.fxml"));
+                        Stage stage = new Stage();
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.setTitle("Quitar Contas a Pagar");
+                        stage.initStyle(StageStyle.UNDECORATED);
+                        stage.initModality(Modality.WINDOW_MODAL);
+                        stage.setResizable(false);
+                        stage.showAndWait();
+                        stage.close();
+                    }else{
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Resposta do Servidor");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Erro na hora de gravar compra!");
+                        alert.showAndWait();
+                    }
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Resposta do Servidor");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Selecione Produtos para compra!");
+                    alert.showAndWait();
+                }
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Resposta do Servidor");
+                alert.setHeaderText(null);
+                alert.setContentText("Data invalida!");
+                alert.showAndWait();
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Resposta do Servidor");
+            alert.setHeaderText(null);
+            alert.setContentText("Selecione o fornecedor!");
+            alert.showAndWait();
+        }
     }
 
     @FXML

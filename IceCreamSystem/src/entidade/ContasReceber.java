@@ -1,6 +1,8 @@
 package entidade;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ContasReceber {
     
@@ -10,12 +12,13 @@ public class ContasReceber {
     private double valorPago;
     private Date dtPagto;
     private Venda venda;
+    
+    private List<TPagamentoReceber> listaRecebimentos;
 
     public ContasReceber() {
         venda = new Venda();
+        listaRecebimentos = new ArrayList<>();
     }
-    
-    
 
     public Integer getCodigo() {
         return codigo;
@@ -64,6 +67,12 @@ public class ContasReceber {
     public void setVenda(Venda venda) {
         this.venda = venda;
     }
-    
-    
+
+    public List<TPagamentoReceber> getListaRecebimentos() {
+        return listaRecebimentos;
+    }
+
+    public void setListaRecebimentos(List<TPagamentoReceber> listaRecebimentos) {
+        this.listaRecebimentos = listaRecebimentos;
+    }
 }

@@ -60,6 +60,4 @@ public class TabelaQPagamento {
         this.total = total;
     }
     
-    
-    
 }

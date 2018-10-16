@@ -156,6 +156,16 @@ public class ProdutoControl {
         }
     }
     
+    public Produto buscaProduto(int codigo) throws ControlException{
+        Produto p = new Produto();
+        p.setCodigo(codigo);
+        try{
+            return p.select(con);
+        }catch(EntidadeException ex){
+            throw new ControlException(ex.getMessage());
+        }
+    }
+    
     public int darBaixa(Funcionario f, Produto p, String motivo, int qtde, Date data) throws ControlException, SQLException{
         BaixaManual bm = new BaixaManual();
         LoteProduto ltp = new LoteProduto();

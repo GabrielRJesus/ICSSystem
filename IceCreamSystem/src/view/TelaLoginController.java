@@ -56,7 +56,7 @@ public class TelaLoginController implements Initializable {
                     stage.setX(300);
                     stage.setY(4);
                     stage.setResizable(false);
-                    stage.setFullScreen(true);
+                    stage.setMaximized(true);
                     stage.showAndWait();
                     stage.close();
                 }else{

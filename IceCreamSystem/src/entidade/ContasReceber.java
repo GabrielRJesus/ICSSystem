@@ -1,5 +1,9 @@
 package entidade;
 
+import DAO.ContasReceberDAO;
+import exception.DAOException;
+import exception.EntidadeException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -75,4 +79,45 @@ public class ContasReceber {
     public void setListaRecebimentos(List<TPagamentoReceber> listaRecebimentos) {
         this.listaRecebimentos = listaRecebimentos;
     }
+    
+    public int insert(Connection con) throws EntidadeException{
+        try{
+            return new ContasReceberDAO().insert(this, con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
+    public int update(Connection con) throws EntidadeException{
+        try{
+            return new ContasReceberDAO().update(this, con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
+    public int delete(Connection con) throws EntidadeException{
+        try{
+            return new ContasReceberDAO().delete(this, con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
+    public ContasReceber select(Connection con) throws EntidadeException{
+        try{
+            return new ContasReceberDAO().select(this, con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
+    public List<ContasReceber> lista(Connection con) throws EntidadeException{
+        try{
+            return new ContasReceberDAO().lista(this, con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
 }

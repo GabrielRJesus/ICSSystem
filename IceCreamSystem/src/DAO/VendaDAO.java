@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 public class VendaDAO implements GenericDAO<Venda>{
     
-    private String insert = "insert into venda(ven_comanda, ven_data, ven_total, ven_status, ven_dtentrega, tpv_codigo, cliente_cli_codigo, funcionario_cli_codigo, ven_cliNome) values(?,?,?,?,?,?,?,?,?,?)";
+    private String insert = "insert into venda(ven_comanda, ven_data, ven_total, ven_status, ven_dtentrega, tpv_codigo, cliente_cli_codigo, funcionario_cli_codigo, ven_cliNome) values(?,?,?,?,?,?,?,?,?)";
     private String insertl = "insert into itens_venda(itv_qtde, prod_codigo, ven_codigo, itv_valor) values(?,?,?,?)";
     
     private String delete = "delete from venda where ven_codigo = ?";
@@ -24,7 +24,7 @@ public class VendaDAO implements GenericDAO<Venda>{
     private String selectl = "select * from itens_venda where ven_codigo = ?";
     
     private String update = "update venda set ven_comanda = ?, ven_data = ?, ven_total = ?, ven_status = ?, ven_dtentrega = ?, tpv_codigo = ?, cliente_cli_codigo = ?, funcionario_cli_codigo = ?, ven_cliNome = ? where ven_codigo = ?";
-    private String updatel = "update itens_venda set itv_qtde = ?, prod_codigo = ?, itv_valor = ? where ven_codigo = ?";
+    private String updatel = "update itens_venda set itv_qtde = ?, itv_valor = ? where ven_codigo = ? and prod_codigo = ?";
     
     @Override
     public int insert(Venda obj, Connection con) throws DAOException {
@@ -98,14 +98,15 @@ public class VendaDAO implements GenericDAO<Venda>{
                 ps.setInt(++cont, obj.getFunc().getCodigo());
                 ps.setString(++cont, obj.getCliNome());
                 ps.setInt(++cont, obj.getCodigo());
+                
                 for(int i = 0; i<obj.getLista().size(); i++){
                     PreparedStatement ps2 = null;
                     int cont2 = 0;
-                    ps2 = con.prepareStatement(updatel);
+                    ps2 = con.prepareStatement(insertl);
                     ps2.setInt(++cont2, obj.getLista().get(i).getQtde());
                     ps2.setInt(++cont2, obj.getLista().get(i).getProd().getCodigo());
-                    ps2.setDouble(++cont2, obj.getLista().get(i).getValor());
                     ps2.setInt(++cont2, obj.getCodigo());
+                    ps2.setDouble(++cont2, obj.getLista().get(i).getValor());
                     ps2.executeUpdate();
                 }
                 return ps.executeUpdate();
@@ -129,6 +130,22 @@ public class VendaDAO implements GenericDAO<Venda>{
                 ps = con.prepareStatement(delete);
                 ps.setInt(++cont, obj.getCodigo());
                 return ps.executeUpdate();
+            }catch(SQLException ex){
+                throw new DAOException(ex.getMessage());
+            }
+        }else{
+            throw new DAOException("Erro na conexão!");
+        }
+    }
+    
+    public int deleteItens(Venda obj, Connection con) throws DAOException{
+        if(con!=null){
+            PreparedStatement ps = null, ps2 = null;
+            int cont = 0, cont2 = 0;
+            try{
+                ps2 = con.prepareStatement(deletel);
+                ps2.setInt(++cont2, obj.getCodigo());
+                return ps2.executeUpdate();
             }catch(SQLException ex){
                 throw new DAOException(ex.getMessage());
             }
@@ -239,7 +256,7 @@ public class VendaDAO implements GenericDAO<Venda>{
                         iv.setQtde(rs2.getInt("itv_qtde"));
                         p.setCodigo(rs2.getInt("prod_codigo"));
                         iv.setProd(p.select(con));
-                        iv.setValor(cont2);
+                        iv.setValor(rs2.getDouble("itv_valor"));
                         lista.add(iv);
                     }
                     v.setLista(lista);
@@ -359,7 +376,7 @@ public class VendaDAO implements GenericDAO<Venda>{
                         iv.setQtde(rs2.getInt("itv_qtde"));
                         p.setCodigo(rs2.getInt("prod_codigo"));
                         iv.setProd(p.select(con));
-                        iv.setValor(cont2);
+                        iv.setValor(rs2.getDouble("itv_valor"));
                         listaItens.add(iv);
                     }
                     v.setLista(listaItens);

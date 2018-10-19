@@ -300,11 +300,16 @@ public class RealizarVendaController implements Initializable {
             if(i>=0){
                 listat.get(i).setQtde(listat.get(i).getQtde()+tb.getQtde());
                 listat.get(i).setTotal(listat.get(i).getQtde()*listat.get(i).getPrecounit());
+                carregaTabela(listat);
             }else{
                 listat.add(tb);
+                carregaTabela(listat);
             }
-            carregaTabela(listat);
             valorTotal.setText(somaValor(listat)+"");
+            txtProduto.setText("");
+            txtQtde.setText("");
+            txtValorProduto.setText("0.00");
+            Produto.setProdSelecionado(new Produto());
         }else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Resposta do Servidor");
@@ -341,7 +346,57 @@ public class RealizarVendaController implements Initializable {
     }
 
     @FXML
-    private void clkFinalizar(ActionEvent event) {
+    private void clkFinalizar(ActionEvent event) throws ParseException, ControlException, IOException {
+        int codigo = 0;
+        double valTotal = 0;
+        java.sql.Date dataEntrega = null;
+        valTotal = Double.parseDouble(valorTotal.getText());
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        java.sql.Date data = new java.sql.Date(format.parse(txtData.getText()).getTime());
+        if(txtDtEntrega.getText()!=null && !txtDtEntrega.getText().isEmpty()){
+            dataEntrega = new java.sql.Date(format.parse(txtDtEntrega.getText()).getTime());
+        }
+        if(txtCodigo.getText()!=null && !txtCodigo.getText().isEmpty()){
+            codigo = Integer.parseInt(txtCodigo.getText());
+        }
+        if(txtComanda.getText()!=null && !txtComanda.getText().isEmpty()){
+            if(txtCliente.getText()!=null && !txtCliente.getText().isEmpty()){
+                List<ItensVenda> listaFim = new ArrayList<>();
+                listaFim = convertLista(listat);
+                int rest = vc.gravarVenda(codigo, txtComanda.getText(), data, codigocli, txtCliente.getText(), txtFuncionario.getText(), cbTipoVenda.getValue().getDescricao(), dataEntrega, listaFim, valTotal);
+                if(rest>0){
+                    Venda.setVenSelecionada(vc.seleciona(rest, "", ""));
+                    Parent root = FXMLLoader.load(getClass().getResource("/view/QuitarContasReceber.fxml"));
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.initStyle(StageStyle.UNDECORATED);
+                    stage.setTitle("Quitar Contas Receber");
+                    stage.setResizable(false);
+                    stage.showAndWait();
+                    limpaTela();
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Resposta do Servidor");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Erro ao gravar Venda!");
+                    alert.showAndWait();
+                }
+            }else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Resposta do Servidor");
+                alert.setHeaderText(null);
+                alert.setContentText("Digite o nome do cliente!");
+                alert.showAndWait();
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Resposta do Servidor");
+            alert.setHeaderText(null);
+            alert.setContentText("Digite o numero da comanda!");
+            alert.showAndWait();
+        }
     }
     
     private void limpaTela(){
@@ -363,7 +418,50 @@ public class RealizarVendaController implements Initializable {
     }
 
     @FXML
-    private void clkLocalizar(ActionEvent event) {
+    private void clkLocalizar(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarVenda.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setTitle("Localizar Venda");
+        stage.setResizable(false);
+        stage.showAndWait();
+        if(Venda.getVenSelecionada()!=null){
+            carregaVenda();
+        }
+    }
+    
+    public void carregaVenda(){
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+        String str = fmt.format(Venda.getVenSelecionada().getData());
+        txtCliente.setText(Venda.getVenSelecionada().getCliNome());
+        txtCodigo.setText(Venda.getVenSelecionada().getCodigo()+"");
+        txtData.setText(str);
+        txtFuncionario.setText(Venda.getVenSelecionada().getFunc().getNome());
+        txtComanda.setText(Venda.getVenSelecionada().getComanda());
+        cbTipoVenda.setValue(Venda.getVenSelecionada().getTpv());
+        if(Venda.getVenSelecionada().getEntrega()!=null)
+            txtDtEntrega.setText(Venda.getVenSelecionada().getEntrega().toString());
+        valorTotal.setText(Venda.getVenSelecionada().getTotal()+"");
+        listat = revert(Venda.getVenSelecionada().getLista());
+        carregaTabela(listat);
+    }
+    
+    public List<TabelaQPagamento> revert(List<ItensVenda> lista){
+        List<TabelaQPagamento> listaI = new ArrayList<>();
+        for(int i =0; i<lista.size(); i++){
+            TabelaQPagamento tb = new TabelaQPagamento();        
+            tb.setCodigo(lista.get(i).getProd().getCodigo());
+            tb.setDescricao(lista.get(i).getProd().getDescricao());
+            tb.setQtde(lista.get(i).getQtde());
+            tb.setUnimed(lista.get(i).getProd().getQtdeEmbalagem()+" "+lista.get(i).getProd().getUnimed().getAbreviacao());
+            tb.setPrecounit(lista.get(i).getProd().getPreco());
+            tb.setTotal(lista.get(i).getQtde()*lista.get(i).getValor());
+            listaI.add(tb);
+        }
+        return listaI;
     }
     
     public void carregaTabela(List<TabelaQPagamento> lista){

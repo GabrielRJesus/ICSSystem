@@ -46,31 +46,12 @@ public class VendaControl {
             v.setTpv(tpv);
             v.setStatus("aberta");
             if(codigo!=0){
+                v.deleteItens(con);
                 int ret =  v.update(con);
-                for(int j = 0; j<Venda.getVenSelecionada().getLista().size(); j++){
-                    if(Venda.getVenSelecionada().getLista().get(j).getQtde() > lista.get(j).getQtde()){
-                        Produto p = lista.get(j).getProd();
-                        int dif = Venda.getVenSelecionada().getLista().get(j).getQtde() - lista.get(j).getQtde();
-                        p.setQtdeEstoque(p.getQtdeEstoque()+dif);
-                        p.update(con);
-                    }else{
-                        Produto p = lista.get(j).getProd();
-                        int dif = lista.get(j).getQtde() - Venda.getVenSelecionada().getLista().get(j).getQtde();
-                        p.setQtdeEstoque(p.getQtdeEstoque()-dif);
-                        p.update(con);
-                    }
-                }
                 return ret;
             }
             else{
                 int chave = v.insert(con);
-                for(int i = 0; i<lista.size(); i++){
-                    Produto p = new Produto();
-                    p.setCodigo(lista.get(i).getProd().getCodigo());
-                    p = p.select(con);
-                    p.setQtdeEstoque(p.getQtdeEstoque()-lista.get(i).getQtde());
-                    p.update(con);
-                }
                 return chave;
             }
         }catch(EntidadeException ex){
@@ -106,6 +87,27 @@ public class VendaControl {
             v.setStatus(status);
         try{
             return v.select(con);
+        }catch(EntidadeException ex){
+            throw new ControlException(ex.getMessage());
+        }
+    }
+    
+    public List<Venda> listaVendas(int codigo, String cliente, String status, Integer tipo)throws ControlException, EntidadeException{
+        Venda v = new Venda();
+        if(codigo!=0)
+            v.setCodigo(codigo);
+        if(cliente!=null && !cliente.isEmpty())
+            v.setCliNome(cliente);
+        if(status!=null && !status.isEmpty())
+            v.setStatus(status);
+        if(tipo!=null && tipo!=0){
+            TipoVenda tv = new TipoVenda();
+            tv.setCodigo(tipo);
+            tv = tv.select(con);
+            v.setTpv(tv);
+        }
+        try{
+            return v.lista(con);
         }catch(EntidadeException ex){
             throw new ControlException(ex.getMessage());
         }

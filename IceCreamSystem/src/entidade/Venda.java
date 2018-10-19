@@ -151,6 +151,14 @@ public class Venda {
         }
     }
     
+    public int deleteItens(Connection con) throws EntidadeException{
+        try{
+            return new VendaDAO().deleteItens(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
     public Venda select(Connection con) throws EntidadeException{
         try{
             return new VendaDAO().select(this,con);

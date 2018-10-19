@@ -425,7 +425,25 @@ public class TelaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void clkQuitarContasReceber(ActionEvent event) {
+    private void clkQuitarContasReceber(ActionEvent event) throws ControlException, IOException {
+        CaixaControl cc = new CaixaControl();
+        if(cc.retornaCaixaAberto()!=null){
+            Parent root = FXMLLoader.load(getClass().getResource("/view/QuitarContasReceber.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Quitar Contas a Receber");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setResizable(false);
+            stage.showAndWait();
+        }else{
+             Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Resposta do Servidor");
+            alert.setHeaderText(null);
+            alert.setContentText("Nenhum caixa Aberto!");
+            alert.showAndWait();
+        }
     }
 
     @FXML

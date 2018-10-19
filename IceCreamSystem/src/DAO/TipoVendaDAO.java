@@ -72,7 +72,7 @@ public class TipoVendaDAO implements GenericDAO<TipoVenda>{
     public TipoVenda select(TipoVenda obj, Connection con) throws DAOException {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        boolean ultimo = true;
+        boolean ultimo = false;
         int cont = 0;
         if(con!=null){
             if(obj!=null && obj.getCodigo()!=null && obj.getCodigo()!=0){

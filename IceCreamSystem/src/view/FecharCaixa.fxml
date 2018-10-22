@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="431.0" prefWidth="425.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FecharCaixaController">
+<AnchorPane id="AnchorPane" prefHeight="562.0" prefWidth="425.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FecharCaixaController">
    <children>
       <Label layoutX="104.0" layoutY="20.0" text="Fecahr Caixa" textFill="#2b2553">
          <font>
@@ -19,18 +19,28 @@
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtTrocoInicial" focusColor="#2b2553" labelFloat="true" layoutX="56.0" layoutY="163.0" prefHeight="27.0" prefWidth="314.0" promptText="Troco Final:">
+      <JFXTextField fx:id="txtTrocoInicial" editable="false" focusColor="#2b2553" labelFloat="true" layoutX="56.0" layoutY="163.0" prefHeight="27.0" prefWidth="314.0" promptText="Troco Final:">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtData" focusColor="#2b2553" labelFloat="true" layoutX="56.0" layoutY="233.0" prefHeight="27.0" prefWidth="314.0" promptText="Data de Fechamento:">
+      <JFXTextField fx:id="txtData" focusColor="#2b2553" labelFloat="true" layoutX="56.0" layoutY="361.0" prefHeight="27.0" prefWidth="314.0" promptText="Data de Fechamento:">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXComboBox fx:id="cbPeriodo" focusColor="#2b2553" labelFloat="true" layoutX="56.0" layoutY="303.0" prefHeight="25.0" prefWidth="314.0" promptText="Período:" />
-      <JFXButton fx:id="btnFechar" layoutX="182.0" layoutY="374.0" onAction="#clkFechar" prefHeight="27.0" prefWidth="101.0" text="Fechar Caixa" />
-      <JFXButton fx:id="btnCancelar" layoutX="290.0" layoutY="374.0" onAction="#clkCancelar" prefHeight="27.0" prefWidth="90.0" text="Cancelar" />
+      <JFXComboBox fx:id="cbPeriodo" focusColor="#2b2553" labelFloat="true" layoutX="56.0" layoutY="431.0" prefHeight="25.0" prefWidth="314.0" promptText="Período:" />
+      <JFXButton fx:id="btnFechar" layoutX="182.0" layoutY="513.0" onAction="#clkFechar" prefHeight="27.0" prefWidth="101.0" text="Fechar Caixa" />
+      <JFXButton fx:id="btnCancelar" layoutX="290.0" layoutY="513.0" onAction="#clkCancelar" prefHeight="27.0" prefWidth="90.0" text="Cancelar" />
+      <JFXTextField fx:id="txtValorCaixa" focusColor="#2b2553" labelFloat="true" layoutX="56.0" layoutY="228.0" prefHeight="27.0" prefWidth="314.0" promptText="Valor no Caixa:">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtMotivo" focusColor="#2b2553" labelFloat="true" layoutX="56.0" layoutY="291.0" prefHeight="27.0" prefWidth="314.0" promptText="Motivo:">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
    </children>
 </AnchorPane>

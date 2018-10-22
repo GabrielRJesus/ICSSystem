@@ -49,7 +49,12 @@ public class AbrirCaixaController implements Initializable {
     private JFXButton btnAbrir;
     @FXML
     private JFXButton btnCancelar;
-
+    @FXML
+    private JFXTextField txtValorCaixa;
+    @FXML
+    private JFXTextField txtMotivo;
+    
+    private CaixaControl cc = new CaixaControl();
     /**
      * Initializes the controller class.
      */
@@ -58,7 +63,15 @@ public class AbrirCaixaController implements Initializable {
         carregacb();
         txtFuncionario.setText(Funcionario.getFuncLogado().getNome());
         MaskFieldUtil.dateField(txtData);
-        //MaskFieldUtil.monetaryField(txtTrocoInicial);
+        MaskFieldUtil.monetaryField(txtValorCaixa);
+        double valor = 0.0;
+        try{
+            valor = cc.ultimoCaixa();
+            txtTrocoInicial.setText(valor+"");
+        }catch(ControlException ex){
+            System.out.println(ex.getMessage());
+        }
+        
     }
 
     @FXML
@@ -66,6 +79,8 @@ public class AbrirCaixaController implements Initializable {
         txtData.setText("");
         txtFuncionario.setText("");
         txtTrocoInicial.setText("");
+        txtMotivo.setText("");
+        txtValorCaixa.setText("");
         Stage stage = (Stage) btnCancelar.getScene().getWindow();
         stage.close();
     }
@@ -83,29 +98,75 @@ public class AbrirCaixaController implements Initializable {
     private void clkAbrirCaixa(ActionEvent event) throws ParseException, ControlException, IOException {
         CaixaControl cc = new CaixaControl();
         Double troco = 0.0;
+        double inicial = Double.parseDouble(txtTrocoInicial.getText());
         java.sql.Date data = null;
         if(txtData.getText()!=null && !txtData.getText().isEmpty()){
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             data = new java.sql.Date(format.parse(txtData.getText()).getTime());
         }
-        if(txtTrocoInicial.getText()!=null && !txtTrocoInicial.getText().isEmpty()){
-            troco = Double.parseDouble(txtTrocoInicial.getText());
-        }
-        int retorno = cc.abrirCaixa(Funcionario.getFuncLogado(), troco, data, cbPeriodo.getValue());
-        if(retorno>0){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Resposta do Servidor");
-            alert.setHeaderText(null);
-            alert.setContentText("Caixa Aberto com sucesso!");
-            alert.showAndWait();
-            clkCancelar(event);
+        if(txtValorCaixa.getText()!=null && !txtValorCaixa.getText().isEmpty()){
+            String texto = txtValorCaixa.getText().replace(",", ".");
+            troco = Double.parseDouble(texto);
+            if(inicial > troco || troco > inicial){
+                txtMotivo.setDisable(false);
+                if(txtMotivo.getText()!=null && !txtMotivo.getText().isEmpty()){
+                    int retorno = cc.abrirCaixa(Funcionario.getFuncLogado(), troco, data, cbPeriodo.getValue(), txtMotivo.getText());
+                    if(retorno>0){
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Resposta do Servidor");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Caixa Aberto com sucesso!");
+                        alert.showAndWait();
+                        clkCancelar(event);
+                    }else{
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Resposta do Servidor");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Erro na hora de abrir o caixa!");
+                        alert.showAndWait();
+                    }
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Resposta do Servidor");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Digite o motivo da diferença!");
+                    alert.showAndWait();
+                }
+            }else{
+                int retorno = cc.abrirCaixa(Funcionario.getFuncLogado(), troco, data, cbPeriodo.getValue(), txtMotivo.getText());
+                if(retorno>0){
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Resposta do Servidor");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Caixa Aberto com sucesso!");
+                    alert.showAndWait();
+                    clkCancelar(event);
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Resposta do Servidor");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Erro na hora de abrir o caixa!");
+                    alert.showAndWait();
+                }
+            }
         }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Resposta do Servidor");
-            alert.setHeaderText(null);
-            alert.setContentText("Erro na hora de abrir o caixa!");
-            alert.showAndWait();
+            int retorno = cc.abrirCaixa(Funcionario.getFuncLogado(), inicial, data, cbPeriodo.getValue(), txtMotivo.getText());
+            if(retorno>0){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Resposta do Servidor");
+                alert.setHeaderText(null);
+                alert.setContentText("Caixa Aberto com sucesso!");
+                alert.showAndWait();
+                clkCancelar(event);
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Resposta do Servidor");
+                alert.setHeaderText(null);
+                alert.setContentText("Erro na hora de abrir o caixa!");
+                alert.showAndWait();
+            }
         }
+        
     }
     
 }

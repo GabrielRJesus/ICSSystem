@@ -191,6 +191,7 @@ public class QuitarContasReceberController implements Initializable {
             listap.add(tp);
             carregaTabPagamentos();
             valores();
+            txtValorPag.setText("");
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");
@@ -227,6 +228,8 @@ public class QuitarContasReceberController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("A conta não foi toda paga!");
             alert.showAndWait();
+            limpatela();
+            Venda.setVenSelecionada(new Venda());
         }else{
             int rest = crc.gravrConta(listap, Venda.getVenSelecionada().getTotal());
             if(rest>0){

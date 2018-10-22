@@ -15,6 +15,8 @@ public class Caixa {
     private double troco;
     private double trocoFinal;
     private Funcionario func;
+    private String motEntrada;
+    private String motSaida;
 
     public Caixa() {
         func = new Funcionario();
@@ -83,6 +85,22 @@ public class Caixa {
     public void setTrocoFinal(double trocoFinal) {
         this.trocoFinal = trocoFinal;
     }
+
+    public String getMotEntrada() {
+        return motEntrada;
+    }
+
+    public void setMotEntrada(String motEntrada) {
+        this.motEntrada = motEntrada;
+    }
+
+    public String getMotSaida() {
+        return motSaida;
+    }
+
+    public void setMotSaida(String motSaida) {
+        this.motSaida = motSaida;
+    }
     
     public int abrirCaixa(Connection con) throws EntidadeException{
         try{
@@ -108,4 +126,27 @@ public class Caixa {
         }
     }
     
+    public double valorReceber(Connection con) throws EntidadeException{
+         try{
+            return new CaixaDAO().valorReceber(this, con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
+    public double valorPagar(Connection con) throws EntidadeException{
+         try{
+            return new CaixaDAO().valorPagar(this, con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
+    public double ultimoCaixa(Connection con) throws EntidadeException{
+        try{
+            return new CaixaDAO().ultimoCaixa(this, con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
 }

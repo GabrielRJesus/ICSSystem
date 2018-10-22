@@ -20,6 +20,7 @@ public class ContasReceberControl {
     public int gravrConta(List<TPagamentoReceber> lista, double total) throws ControlException, SQLException{
         ContasReceber cr = new ContasReceber();
         Caixa caixa = new Caixa();
+        LoteProduto ltp = new LoteProduto();
         Movimentacao m = new Movimentacao();
         cr.setListaRecebimentos(lista);
         cr.setVenda(Venda.getVenSelecionada());
@@ -54,6 +55,12 @@ public class ContasReceberControl {
                 p = listat.get(i).getProd();
                 p.setQtdeEstoque(p.getCodigo()-listat.get(i).getQtde());
                 p.update(con);
+                ltp.setProd(p);
+                ltp = ltp.selectT(con);
+                if(ltp!=null){
+                    ltp.setQtdRemanescente(ltp.getQtdRemanescente() - listat.get(i).getQtde());
+                    ltp.update(con);
+                }
             }
             con.commit();
             return chave;

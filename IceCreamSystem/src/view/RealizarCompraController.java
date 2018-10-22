@@ -37,6 +37,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -402,6 +403,24 @@ public class RealizarCompraController implements Initializable {
         txtValor.setText("");
         tabProdutosC.getItems().clear();
         lista.clear();
+    }
+
+    @FXML
+    private void criaLote(MouseEvent event) throws IOException {
+        if(tabProdutosC.getSelectionModel().getSelectedItem()!=null){
+            ProdutoControl pc = new ProdutoControl();
+            pc.guardaSelecionado(tabProdutosC.getSelectionModel().getSelectedItem().getP());
+            Parent root = FXMLLoader.load(getClass().getResource("/view/GerenciarProduto.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Gerenciar Produto");
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setResizable(false);
+            stage.showAndWait();
+            //pintar tela
+        }
     }
     
 }

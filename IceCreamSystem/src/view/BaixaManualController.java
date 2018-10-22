@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import control.ProdutoControl;
 import entidade.Funcionario;
+import entidade.LoteProduto;
 import entidade.Produto;
 import exception.ControlException;
 import java.io.IOException;
@@ -56,6 +57,10 @@ public class BaixaManualController implements Initializable {
     private JFXButton btnCancelar;
     @FXML
     private JFXButton btnSair;
+    @FXML
+    private JFXTextField txtLote;
+    @FXML
+    private JFXButton btnLocalizaLote;
 
     /**
      * Initializes the controller class.
@@ -132,7 +137,7 @@ public class BaixaManualController implements Initializable {
             alert.setContentText("Escolha um produto!");
             alert.showAndWait();
         }
-        int result = pc.darBaixa(Funcionario.getFuncLogado(), Produto.getProdSelecionado(), txtMotivo.getText(), qtde, data);
+        int result = pc.darBaixa(Funcionario.getFuncLogado(), Produto.getProdSelecionado(), txtMotivo.getText(), qtde, data, txtLote.getText());
         if(result>0){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Resposta do Servidor");
@@ -188,6 +193,29 @@ public class BaixaManualController implements Initializable {
         txtProduto.setText("");
         Produto.setProdSelecionado(new Produto());
         txtQtde.setText("");
+    }
+
+    @FXML
+    private void clkLocalizaLote(ActionEvent event) throws IOException {
+        if(Produto.getProdSelecionado()!=null){
+            Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarLoteProdutos.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Localizar Lote");
+            stage.setResizable(false);
+            stage.showAndWait();
+            if(LoteProduto.getLoteSelecionado()!=null)
+                txtLote.setText(LoteProduto.getLoteSelecionado().getCodigo()+"");
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Resposta do Servidor");
+            alert.setHeaderText(null);
+            alert.setContentText("Selecione um produto primeiro");
+            alert.showAndWait();
+        }
     }
     
 }

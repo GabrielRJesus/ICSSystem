@@ -189,6 +189,42 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
         return null;
     }
     
+    public LoteProduto selectT(LoteProduto obj, Connection con) throws DAOException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean ultimo = false;
+        int cont = 0;
+        String sql = "select min(ltp_codigo), ltp_validade from lote_produto where prod_codigo = ? and ltp_qtderemanes > 0";
+        if(con!=null){
+            try{
+                ps = con.prepareStatement(select);
+                if(obj.getProd()!=null && obj.getProd().getCodigo()!=null && obj.getProd().getCodigo()!=0)
+                    ps.setInt(++cont, obj.getProd().getCodigo());
+                rs = ps.executeQuery();
+                if(rs.next()){
+                    LoteProduto lp = new LoteProduto();
+                    Produto p = new Produto();
+                    lp.setCodigo(rs.getInt("ltp_codigo"));
+                    lp.setDescricao(rs.getString("ltp_descricao"));
+                    lp.setNumeroLote(rs.getString("ltp_numero"));
+                    lp.setValidade(rs.getDate("ltp_validade"));
+                    lp.setQtdeCompra(rs.getInt("ltp_qtdelote"));
+                    lp.setQtdRemanescente(rs.getInt("ltp_qtderemanes"));
+                    p.setCodigo(rs.getInt("prod_codigo"));
+                    lp.setProd(p.select(con));
+                    return lp;
+                }
+            }catch(SQLException ex){
+                throw new DAOException(ex.getMessage());
+            } catch (EntidadeException ex) {
+                Logger.getLogger(LoteProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            throw new DAOException("Erro na conexão!");
+        }
+        return null;
+    }
+    
     public List<LoteProduto> lista(LoteProduto obj, Date inicio, Date fim, Connection con) throws DAOException, EntidadeException {
         List<LoteProduto> lista = new ArrayList<>();
         PreparedStatement ps = null;

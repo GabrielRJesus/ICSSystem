@@ -16,6 +16,8 @@ import exception.EntidadeException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -119,11 +121,11 @@ public class PrimeiroAcessoController implements Initializable {
     }
 
     @FXML
-    private void clkGravar(ActionEvent event) throws ControlException, SQLException, EntidadeException, IOException {
+    private void clkGravar(ActionEvent event) throws ControlException, SQLException, EntidadeException, IOException, ParseException {
         Integer codigo;
         Double salario;
         Date datadem = null, dataadm = null, data = null;
-        
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         if(txtCodigo.getText()!=null && !txtCodigo.getText().isEmpty())
             codigo = Integer.parseInt(txtCodigo.getText());
         else
@@ -133,11 +135,11 @@ public class PrimeiroAcessoController implements Initializable {
         else
             salario = 0.0;
         if(dpData.getText()!=null && !dpData.getText().isEmpty())
-            data = java.sql.Date.valueOf(dpData.getText());
+            data = new java.sql.Date(format.parse(dpData.getText()).getTime());
         if(dpDataAdm.getText()!=null && !dpDataAdm.getText().isEmpty())
-            dataadm = java.sql.Date.valueOf(dpDataAdm.getText());
+            dataadm = new java.sql.Date(format.parse(dpDataAdm.getText()).getTime());
         if(dpDataDem.getText()!=null && !dpDataDem.getText().isEmpty())
-            datadem = java.sql.Date.valueOf(dpDataDem.getText());
+            datadem = new java.sql.Date(format.parse(dpDataDem.getText()).getTime());
         PessoaControl pc = new PessoaControl();
         int rest = pc.gravarFuncionario(codigo, txtNome.getText().toString(), txtCpf.getText().toString(), txtRg.getText().toString(), txtTelefone.getText().toString(), 
                 txtCelular.getText().toString(),data, cbSexo.getValue(), txtEmail.getText().toString(), 

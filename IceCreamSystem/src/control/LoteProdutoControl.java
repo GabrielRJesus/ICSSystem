@@ -25,7 +25,7 @@ public class LoteProdutoControl {
         ltp.setQtdRemanescente(qtde);
         if(codProd!=0){
             Produto p = new Produto();
-            p.setCodigo(codigo);
+            p.setCodigo(codProd);
             ltp.setProd(p);
         }
         try{

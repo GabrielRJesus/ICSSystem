@@ -289,32 +289,49 @@ public class RealizarVendaController implements Initializable {
     @FXML
     private void clkInclui(ActionEvent event) {
         if(txtQtde.getText()!=null && !txtQtde.getText().isEmpty()){
-            TabelaQPagamento tb = new TabelaQPagamento();        
-            tb.setCodigo(codProd);
-            tb.setDescricao(txtProduto.getText());
-            tb.setQtde(Integer.parseInt(txtQtde.getText()));
-            tb.setUnimed(Produto.getProdSelecionado().getQtdeEmbalagem()+" "+Produto.getProdSelecionado().getUnimed().getAbreviacao());
-            tb.setPrecounit(Produto.getProdSelecionado().getPreco());
-            tb.setTotal(tb.getPrecounit()*tb.getQtde());
-            int i = verificaLista(listat, tb);
-            if(i>=0){
-                listat.get(i).setQtde(listat.get(i).getQtde()+tb.getQtde());
-                listat.get(i).setTotal(listat.get(i).getQtde()*listat.get(i).getPrecounit());
-                carregaTabela(listat);
+            if(Produto.getProdSelecionado().getQtdeEstoque() >= Integer.parseInt(txtQtde.getText())){
+                TabelaQPagamento tb = new TabelaQPagamento();        
+                tb.setCodigo(codProd);
+                tb.setDescricao(txtProduto.getText());
+                tb.setQtde(Integer.parseInt(txtQtde.getText()));
+                tb.setUnimed(Produto.getProdSelecionado().getQtdeEmbalagem()+" "+Produto.getProdSelecionado().getUnimed().getAbreviacao());
+                tb.setPrecounit(Produto.getProdSelecionado().getPreco());
+                tb.setTotal(tb.getPrecounit()*tb.getQtde());
+                int i = verificaLista(listat, tb);
+                if(i>=0){
+                    if(Produto.getProdSelecionado().getQtdeEstoque() >= listat.get(i).getQtde()+tb.getQtde()){
+                        listat.get(i).setQtde(listat.get(i).getQtde()+tb.getQtde());
+                        listat.get(i).setTotal(listat.get(i).getQtde()*listat.get(i).getPrecounit());
+                        carregaTabela(listat);
+                    }else{
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Resposta do Servidor");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Quantidade maior que no estoque!");
+                        alert.showAndWait();
+                        carregaTabela(listat);
+                    }
+                }else{
+                    listat.add(tb);
+                    carregaTabela(listat);
+                }
+                valorTotal.setText(somaValor(listat)+"");
+                txtProduto.setText("");
+                txtQtde.setText("");
+                txtValorProduto.setText("0.00");
+                Produto.setProdSelecionado(new Produto());
             }else{
-                listat.add(tb);
-                carregaTabela(listat);
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Resposta do Servidor");
+                alert.setHeaderText(null);
+                alert.setContentText("Quantidade maior que no estoque!");
+                alert.showAndWait();
             }
-            valorTotal.setText(somaValor(listat)+"");
-            txtProduto.setText("");
-            txtQtde.setText("");
-            txtValorProduto.setText("0.00");
-            Produto.setProdSelecionado(new Produto());
         }else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Resposta do Servidor");
             alert.setHeaderText(null);
-            alert.setContentText("Digite a quantidade!");
+            alert.setContentText("Digite a Quantidade!");
             alert.showAndWait();
         }
         

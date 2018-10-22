@@ -166,7 +166,7 @@ public class ProdutoControl {
         }
     }
     
-    public int darBaixa(Funcionario f, Produto p, String motivo, int qtde, Date data) throws ControlException, SQLException{
+    public int darBaixa(Funcionario f, Produto p, String motivo, int qtde, Date data,String lote) throws ControlException, SQLException{
         BaixaManual bm = new BaixaManual();
         LoteProduto ltp = new LoteProduto();
         bm.setFunc(f);
@@ -179,7 +179,9 @@ public class ProdutoControl {
             p.setQtdeEstoque(p.getQtdeEstoque()-qtde);
             bm.darBaixa(con);
             p.update(con);
-            if(ltp!=null){
+            if(lote!=null && !lote.isEmpty()){
+                ltp.setCodigo(Integer.parseInt(lote));
+                ltp = ltp.select(con);
                 ltp.setQtdRemanescente(ltp.getQtdRemanescente()-qtde);
                 ltp.update(con);
             }

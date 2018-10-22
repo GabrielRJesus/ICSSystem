@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXTextField;
 import control.LoteProdutoControl;
 import control.ProdutoControl;
 import entidade.LoteProduto;
+import entidade.Produto;
 import exception.ControlException;
 import exception.EntidadeException;
 import java.io.IOException;
@@ -85,6 +86,7 @@ public class LocalizarLoteProdutosController implements Initializable {
         colValidade.setCellValueFactory(new PropertyValueFactory("validade"));
         colEstTotal.setCellValueFactory(new PropertyValueFactory("qtdeCompra"));
         colEstoque.setCellValueFactory(new PropertyValueFactory("qtdRemanescente"));
+            
     }    
 
     @FXML
@@ -136,8 +138,8 @@ public class LocalizarLoteProdutosController implements Initializable {
             codigo = Integer.parseInt(txtCodigo.getText());
         if(txtQtde.getText()!=null && !txtQtde.getText().isEmpty())
             qtde = Integer.parseInt(txtQtde.getText());
-        if(pc.retornaSelecionado()!=null)
-            codigop = pc.retornaSelecionado().getCodigo();
+        if(Produto.getProdSelecionado()!=null)
+            codigop = Produto.getProdSelecionado().getCodigo();
         lista = lpc.listaLotes(codigo, txtDescricao.getText(), txtNumeroLote.getText(), inicio, fim, qtde, codigop);
         if(lista!=null){
             ObservableList<LoteProduto> modelo;

@@ -8,12 +8,12 @@ package view;
 import com.jfoenix.controls.JFXButton;
 import control.CaixaControl;
 import control.PessoaControl;
-import entidade.Caixa;
 import exception.ControlException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +23,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -94,6 +95,8 @@ public class TelaPrincipalController implements Initializable {
     private MenuItem quitarContasReceber;
     @FXML
     private MenuItem baixaManual;
+    @FXML
+    private ImageView panePrincipal;
 
     /**
      * Initializes the controller class.
@@ -112,7 +115,11 @@ public class TelaPrincipalController implements Initializable {
                 locFuncionario.setVisible(false);
             }
         }
-    }    
+        
+        
+        
+    } 
+    
 
     @FXML
     private void gerCliente(ActionEvent event) throws IOException {
@@ -456,6 +463,21 @@ public class TelaPrincipalController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
+        stage.showAndWait();
+    }
+
+    @FXML
+    private void clkNovaVenda(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/RealizarVenda.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Realizar Venda");
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.setX(320);
+        stage.setY(40);
         stage.showAndWait();
     }
 

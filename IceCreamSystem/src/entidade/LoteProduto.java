@@ -125,6 +125,14 @@ public class LoteProduto {
         }
     }
     
+    public LoteProduto selectT(Connection con) throws EntidadeException{
+        try{
+            return new LoteProdutoDAO().selectT(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
     public List<LoteProduto> lista(Date inicio, Date fim, Connection con) throws EntidadeException{
         try{
             return new LoteProdutoDAO().lista(this,inicio,fim,con);

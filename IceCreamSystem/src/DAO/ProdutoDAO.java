@@ -27,7 +27,7 @@ public class ProdutoDAO implements GenericDAO<Produto>{
     
     //Baixa manual no estoque
     
-    private String insertBaixa = "insert into baixa_manual(bm_motivo, bm_qtde, prod_codigo, bm_data, fun_codigo) values(?,?,?,?,?)";
+    private String insertBaixa = "insert into baixa_manual(bm_motivo, bm_qtde, prod_codigo, bm_data, cli_codigo) values(?,?,?,?,?)";
 
     @Override
     public int insert(Produto obj, Connection con) throws DAOException {
@@ -449,5 +449,6 @@ public class ProdutoDAO implements GenericDAO<Produto>{
             throw new DAOException("Erro na conexão!");
         }
     }
+    
     
 }

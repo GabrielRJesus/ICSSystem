@@ -11,6 +11,11 @@ import control.PessoaControl;
 import exception.ControlException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,6 +32,11 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.view.JasperViewer;
+import sql.Banco;
 
 /**
  * FXML Controller class
@@ -481,7 +491,43 @@ public class TelaPrincipalController implements Initializable {
         stage.showAndWait();
     }
 
-    
+    @FXML
+    private void relProduto(ActionEvent event) throws SQLException {
+        String sql = "SELECT\n" +
+"     produto.`prod_codigo` AS produto_prod_codigo,\n" +
+"     produto.`prod_descricao` AS produto_prod_descricao,\n" +
+"     produto.`prod_qtdeEmbalagem` AS produto_prod_qtdeEmbalagem,\n" +
+"     produto.`prod_preco` AS produto_prod_preco,\n" +
+"     produto.`prod_estoque` AS produto_prod_estoque,\n" +
+"     unidade_medida.`um_sigla` AS unidade_medida_um_sigla\n" +
+"FROM\n" +
+"     `unidade_medida` unidade_medida INNER JOIN `produto` produto ON unidade_medida.`um_codigo` = produto.`um_codigo`";
+        
+        gerarRelatorio(sql, "Relatorios//Produtos.jasper");
+    }
+
+    private void gerarRelatorio(String sql,String relat) throws SQLException
+   {
+    try
+    { //sql para obter os dados para o relatorio
+        Banco conSing = Banco.getInstancia();
+       Connection con = conSing.getConexao();
+        Statement st = con.createStatement();
+      ResultSet rs = st.executeQuery(sql);
+      //implementação da interface JRDataSource para DataSource ResultSet
+      JRResultSetDataSource jrRS;
+      jrRS= new JRResultSetDataSource(rs);
+      //chamando o relatório
+      String jasperPrint =          
+      JasperFillManager.fillReportToFile(relat,null, jrRS);
+      JasperViewer viewer = new JasperViewer(jasperPrint, false, false);
+      viewer.setExtendedState(JasperViewer.MAXIMIZED_BOTH);//maximizado
+      viewer.setTitle("Relatório de Alunos");//titulo do relatório
+      viewer.setVisible(true);
+    } catch (JRException erro)
+    {  erro.printStackTrace(); }
+
+   }
 
     
 }

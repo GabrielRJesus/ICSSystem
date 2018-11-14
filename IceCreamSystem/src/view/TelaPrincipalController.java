@@ -616,7 +616,20 @@ public class TelaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void clkEstoque(ActionEvent event) {
+    private void clkEstoque(ActionEvent event) throws SQLException {
+        String sql = "SELECT\n" +
+        "     produto.`prod_codigo` AS produto_prod_codigo,\n" +
+        "     produto.`prod_descricao` AS produto_prod_descricao,\n" +
+        "     produto.`prod_qtdeEmbalagem` AS produto_prod_qtdeEmbalagem,\n" +
+        "     produto.`prod_preco` AS produto_prod_preco,\n" +
+        "     produto.`prod_estoque` AS produto_prod_estoque,\n" +
+        "     unidade_medida.`um_sigla` AS unidade_medida_um_sigla\n" +
+        "FROM\n" +
+        "     `unidade_medida` unidade_medida INNER JOIN `produto` produto ON unidade_medida.`um_codigo` = produto.`um_codigo` where produto.prod_estoque < produto.prod_qtdemin";
+        
+        gerarRelatorio(sql, "Relatorios//Produtos.jasper");
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML

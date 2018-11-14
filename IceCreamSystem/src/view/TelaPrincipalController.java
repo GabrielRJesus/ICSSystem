@@ -105,6 +105,12 @@ public class TelaPrincipalController implements Initializable {
     private MenuItem baixaManual;
     @FXML
     private ImageView panePrincipal;
+    @FXML
+    private MenuItem mnValorCaixa;
+    @FXML
+    private JFXButton btnEstoque;
+    @FXML
+    private JFXButton btnContas;
 
     /**
      * Initializes the controller class.
@@ -113,6 +119,8 @@ public class TelaPrincipalController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         PessoaControl pc = new PessoaControl();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
         if(pc.retornaSelecionado()!=null){
             if(pc.retornaSelecionado().getCargo().equalsIgnoreCase("Funcionario")){
                 gerenciarFuncionario.setVisible(false);
@@ -524,6 +532,27 @@ public class TelaPrincipalController implements Initializable {
     {  erro.printStackTrace(); }
 
    }
+
+    @FXML
+    private void clkValorCaixa(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LocValorCaixa.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Valor no Caixa");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setResizable(false);
+        stage.showAndWait();
+    }
+
+    @FXML
+    private void clkEstoque(ActionEvent event) {
+    }
+
+    @FXML
+    private void clkContas(ActionEvent event) {
+    }
 
     
 }

@@ -66,7 +66,6 @@ public class PrimeiroAcessoController implements Initializable {
     private JFXTextField txtTelefone;
     @FXML
     private JFXTextField txtCelular;
-    @FXML
     private JFXTextField dpData;
     @FXML
     private JFXComboBox<String> cbSexo;
@@ -76,9 +75,7 @@ public class PrimeiroAcessoController implements Initializable {
     private JFXTextField txtLogin;
     @FXML
     private JFXPasswordField txtSenha;
-    @FXML
     private JFXTextField dpDataAdm;
-    @FXML
     private JFXTextField dpDataDem;
     @FXML
     private JFXTextField txtSalario;
@@ -90,6 +87,12 @@ public class PrimeiroAcessoController implements Initializable {
     private JFXButton btCancelar;
     @FXML
     private JFXButton btSair;
+    @FXML
+    private JFXTextField txtDataNascimento;
+    @FXML
+    private JFXTextField txtDataAdmis;
+    @FXML
+    private JFXTextField txtDataDemis;
 
     /**
      * Initializes the controller class.
@@ -100,9 +103,9 @@ public class PrimeiroAcessoController implements Initializable {
         PessoaControl pc = new PessoaControl();
         MaskFieldUtil.cepField(txtCep);
         MaskFieldUtil.cpfField(txtCpf);
-        MaskFieldUtil.dateField(dpData);
-        MaskFieldUtil.dateField(dpDataAdm);
-        MaskFieldUtil.dateField(dpDataDem);
+        MaskFieldUtil.dateField(txtDataNascimento);
+        MaskFieldUtil.dateField(txtDataAdmis);
+        MaskFieldUtil.dateField(txtDataDemis);
         MaskFieldUtil.foneField(txtTelefone);
         MaskFieldUtil.foneField(txtCelular);
         inicializa(false);

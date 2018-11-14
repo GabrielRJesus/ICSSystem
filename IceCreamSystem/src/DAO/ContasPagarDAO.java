@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -236,5 +237,52 @@ public class ContasPagarDAO implements GenericDAO<ContasPagar>{
             throw new DAOException("Erro na conexão!");
         }
     }
+    
+//    public List<ContasPagar> listaVencendo(ContasPagar obj, Connection con) throws DAOException{
+//        List<ContasPagar> lista = new ArrayList<>();
+//        if(con!=null){
+//            PreparedStatement ps = null;
+//            int cont = 0;
+//            ResultSet rs = null;
+//            boolean ultimo = false;
+//            Date data = new Date();
+//            Date venc = new Date();
+//            Calendar c = Calendar.getInstance();
+//            c.setTime(venc);
+//            c.add(Calendar.DATE, +2);
+//            venc = c.getTime();
+//            String sql = "select * from con"
+//            try{
+//                ps = con.prepareStatement(select);
+//                
+//                rs = ps.executeQuery();
+//                while(rs.next()){
+//                    ContasPagar cp = new ContasPagar();
+//                    TipoDespesas td = new TipoDespesas();
+//                    TipoPagamento tp = new TipoPagamento();
+//                    Compra c = new Compra();
+//                    td.setCodigo(rs.getInt("tc.tpc_codigo"));
+//                    td.setDescricao(rs.getString("tc.tpc_descricao"));
+//                    cp.setCodigo(rs.getInt("c.con_codigo"));
+//                    cp.setData(rs.getDate("c.con_data"));
+//                    cp.setValor(rs.getDouble("c.con_valor"));
+//                    cp.setDtpgto(rs.getDate("c.con_dtpgto"));
+//                    cp.setValorpago(rs.getDouble("c.con_valorpago"));
+//                    cp.setTpd(td);
+//                    c.setCodigo(rs.getInt("c.com_codigo"));
+//                    if(c.getCodigo()!=0)
+//                        cp.setCompra(c.select(con)); 
+//                    else
+//                        cp.setCompra(new Compra());
+//                    lista.add(cp);
+//                }
+//                return lista;
+//            }catch(SQLException ex){
+//                throw new DAOException(ex.getMessage());
+//            }
+//        }else{
+//            throw new DAOException("Erro na conexão!");
+//        }
+//    }
     
 }

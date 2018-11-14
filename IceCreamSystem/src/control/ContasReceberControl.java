@@ -53,13 +53,28 @@ public class ContasReceberControl {
             for(int i = 0; i<listat.size(); i++){
                 Produto p = new Produto();
                 p = listat.get(i).getProd();
-                p.setQtdeEstoque(p.getCodigo()-listat.get(i).getQtde());
+                p.setQtdeEstoque(p.getQtdeEstoque()-listat.get(i).getQtde());
                 p.update(con);
+                ltp = new LoteProduto();
                 ltp.setProd(p);
                 ltp = ltp.selectT(con);
                 if(ltp!=null){
                     ltp.setQtdRemanescente(ltp.getQtdRemanescente() - listat.get(i).getQtde());
                     ltp.update(con);
+                }
+                if(p.getReferencia()!=0){
+                    Produto prod = new Produto();
+                    prod.setCodigo(p.getReferencia());
+                    prod = prod.select(con);
+                    prod.setQtdeEstoque(prod.getQtdeEstoque()-1);
+                    prod.update(con);
+                    ltp = new LoteProduto();
+                    ltp.setProd(prod);
+                    ltp = ltp.selectT(con);
+                    if(ltp!=null){
+                        ltp.setQtdRemanescente(ltp.getQtdRemanescente() - 1);
+                        ltp.update(con);
+                    }
                 }
             }
             con.commit();

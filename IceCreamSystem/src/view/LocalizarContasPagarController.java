@@ -7,6 +7,7 @@ package view;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import control.ContaPagarControl;
 import control.TipoDespesasControl;
@@ -67,6 +68,10 @@ public class LocalizarContasPagarController implements Initializable {
     private TableColumn colValor;
     @FXML
     private JFXButton btnSair;
+    @FXML
+    private JFXRadioButton rbPagas;
+    @FXML
+    private JFXRadioButton rbNPagas;
 
     /**
      * Initializes the controller class.
@@ -116,6 +121,11 @@ public class LocalizarContasPagarController implements Initializable {
     }
     
     public void carregaTabela() throws ControlException, ParseException{
+        Boolean pagas = null;
+        if(rbPagas.isSelected())
+            pagas = true;
+        if(rbNPagas.isSelected())
+            pagas = false;
         ContaPagarControl pc = new ContaPagarControl();
         List<ContasPagar> lista = new ArrayList<>();
         Integer codigo = 0;
@@ -126,12 +136,25 @@ public class LocalizarContasPagarController implements Initializable {
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             data = new java.sql.Date(format.parse(txtData.getText()).getTime());
         }
-        lista = pc.listaContas(codigo, data, cbDespesas.getValue());
+        lista = pc.listaContas(codigo, data, cbDespesas.getValue(), pagas);
+        
         if(lista!=null){
             ObservableList<ContasPagar> modelo;
             modelo = FXCollections.observableArrayList(lista);
             tabelaContasPagar.setItems(modelo);
         }
+    }
+
+    @FXML
+    private void clkPagas(ActionEvent event) {
+        rbNPagas.setSelected(false);
+        rbPagas.setSelected(true);
+    }
+
+    @FXML
+    private void clkNPagas(ActionEvent event) {
+        rbNPagas.setSelected(true);
+        rbPagas.setSelected(false);
     }
     
 }

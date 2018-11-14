@@ -124,9 +124,9 @@ public class ContasPagar {
         }
     }
     
-    public List<ContasPagar> lista(Connection con) throws EntidadeException{
+    public List<ContasPagar> lista(Boolean pagas,Connection con) throws EntidadeException{
         try{
-            return new ContasPagarDAO().lista(this,con);
+            return new ContasPagarDAO().lista(this,pagas,con);
         }catch(DAOException ex){
             throw new EntidadeException(ex.getMessage());
         }
@@ -135,6 +135,14 @@ public class ContasPagar {
     public ContasPagar select(Connection con) throws EntidadeException{
         try{
             return new ContasPagarDAO().select(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
+    
+    public List<ContasPagar> listaVencendo(Connection con) throws EntidadeException{
+        try{
+            return new ContasPagarDAO().listaVencendo(this,con);
         }catch(DAOException ex){
             throw new EntidadeException(ex.getMessage());
         }

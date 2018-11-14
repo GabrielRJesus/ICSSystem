@@ -20,12 +20,12 @@
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtData" focusColor="#2b2553" layoutX="390.0" layoutY="79.0" prefHeight="27.0" prefWidth="166.0" promptText="Data:" styleClass="corTexto" stylesheets="@estilo.css">
+      <JFXTextField fx:id="txtData" focusColor="#2b2553" layoutX="344.0" layoutY="79.0" prefHeight="27.0" prefWidth="140.0" promptText="Data:" styleClass="corTexto" stylesheets="@estilo.css">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXComboBox fx:id="cbDespesas" focusColor="#2b2553" layoutX="171.0" layoutY="77.0" prefHeight="30.0" prefWidth="200.0" promptText="Tipo de Despesa:" />
+      <JFXComboBox fx:id="cbDespesas" focusColor="#2b2553" layoutX="151.0" layoutY="77.0" prefHeight="30.0" prefWidth="181.0" promptText="Tipo de Despesa:" />
       <JFXButton fx:id="btnPesquisar" layoutX="611.0" layoutY="78.0" onAction="#clkPesquisar" prefHeight="27.0" prefWidth="90.0" text="Pesquisar" />
       <TableView fx:id="tabelaContasPagar" layoutX="37.0" layoutY="123.0" onMouseClicked="#selecionaContasPagar" prefHeight="361.0" prefWidth="662.0">
         <columns>
@@ -36,5 +36,7 @@
         </columns>
       </TableView>
       <JFXButton fx:id="btnSair" layoutX="611.0" layoutY="494.0" onAction="#clkSair" prefHeight="27.0" prefWidth="90.0" text="Sair" />
+      <JFXRadioButton fx:id="rbPagas" layoutX="499.0" layoutY="69.0" onAction="#clkPagas" text="Pagas" />
+      <JFXRadioButton fx:id="rbNPagas" layoutX="499.0" layoutY="98.0" onAction="#clkNPagas" text="Não Pagas" />
    </children>
 </AnchorPane>

@@ -34,14 +34,23 @@ public class ContaPagarControl {
         }
     }
     
-    public List<ContasPagar> listaContas(Integer codigo, Date data, TipoDespesas td) throws ControlException{
+    public List<ContasPagar> listaContas(Integer codigo, Date data, TipoDespesas td, Boolean pagas) throws ControlException{
         ContasPagar cp = new ContasPagar();
         if(codigo!=null && codigo!=0)
             cp.setCodigo(codigo);
         if(data!=null)
             cp.setData(data);
         try{
-            return cp.lista(con);
+            return cp.lista(pagas,con);
+        }catch(EntidadeException ex){
+            throw new ControlException(ex.getMessage());
+        }
+    }
+    
+    public List<ContasPagar> listaVencendo() throws ControlException{
+        ContasPagar cp = new ContasPagar();
+        try{
+            return cp.listaVencendo(con);
         }catch(EntidadeException ex){
             throw new ControlException(ex.getMessage());
         }
@@ -65,7 +74,7 @@ public class ContaPagarControl {
         return ContasPagar.getCpSelecionada();
     }
     
-    public int quitarContaPagar(ContasPagar cp, List<TPaagamentoPagar> lista) throws ControlException, SQLException{
+    public int quitarContaPagar(ContasPagar cp, List<TPaagamentoPagar> lista, boolean var) throws ControlException, SQLException{
         Caixa caixa = new Caixa();
         double total = 0;
         for(int i=0; i<lista.size(); i++){
@@ -76,14 +85,17 @@ public class ContaPagarControl {
         caixa = new CaixaControl().retornaCaixaAberto();
         if(caixa!=null && caixa.getCodigo()!=null && caixa.getCodigo()!=0){
             Movimentacao m = new Movimentacao();
-            m.setCaixa(caixa);
-            m.setCp(cp);
-            m.setData(new Date());
-            m.setDescricao("Contas a Pagar");
-            m.setValor(total);
+            if(var){
+                m.setCaixa(caixa);
+                m.setCp(cp);
+                m.setData(new Date());
+                m.setDescricao("Contas a Pagar");
+                m.setValor(total);
+            }
             try{
                 con.setAutoCommit(false);
-                m.insert(con);
+                if(var)
+                    m.insert(con);
                 cp.update(con);
                 for(int j =0; j<lista.size();j++){
                     lista.get(j).insert(cp.getCodigo(), con);

@@ -38,6 +38,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -108,6 +109,8 @@ public class QuitarContasPagarController implements Initializable {
     private List<TabelaQPagamento> lista = new ArrayList<>();
     private List<TPaagamentoPagar> listap = new ArrayList<>();
     private ContaPagarControl cpc = new ContaPagarControl();
+    @FXML
+    private CheckBox chRetiraCaixa;
 
     /**
      * Initializes the controller class.
@@ -142,13 +145,17 @@ public class QuitarContasPagarController implements Initializable {
             txtCodigo.setText(ContasPagar.cpSelecionada.getCodigo()+"");
             txtTotal.setText(ContasPagar.cpSelecionada.getValor()+"");
             txtRestante.setText(ContasPagar.cpSelecionada.getValor()+"");
-            if(ContasPagar.cpSelecionada.getCompra()!=null && ContasPagar.cpSelecionada.getCompra().getCodigo()!=0){
+            if(ContasPagar.cpSelecionada.getCompra()!=null && ContasPagar.cpSelecionada.getCompra().getCodigo()!=null && ContasPagar.cpSelecionada.getCompra().getCodigo()!=0){
                 try {
                     preencheFornecedor(ContasPagar.cpSelecionada.getCompra().getCodigo());
                 } catch (ControlException ex) {
                     Logger.getLogger(QuitarContasPagarController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 carregaTabela(ContasPagar.cpSelecionada.getCompra());
+            }
+            if(ContasPagar.cpSelecionada.getTpd().getDescricao().equalsIgnoreCase("Sangria")){
+                chRetiraCaixa.setSelected(true);
+                chRetiraCaixa.setDisable(true);
             }
         }
         
@@ -170,9 +177,13 @@ public class QuitarContasPagarController implements Initializable {
         txtCodigo.setText(ContasPagar.cpSelecionada.getCodigo()+"");
         txtTotal.setText(ContasPagar.cpSelecionada.getValor()+"");
         txtRestante.setText(ContasPagar.cpSelecionada.getValor()+"");
-        if(ContasPagar.cpSelecionada.getCompra()!=null && ContasPagar.cpSelecionada.getCompra().getCodigo()!=0){
+        if(ContasPagar.cpSelecionada.getCompra()!=null && ContasPagar.cpSelecionada.getCompra().getCodigo()!=null && ContasPagar.cpSelecionada.getCompra().getCodigo()!=0){
             preencheFornecedor(ContasPagar.cpSelecionada.getCompra().getCodigo());
             carregaTabela(ContasPagar.cpSelecionada.getCompra());
+        }
+        if(ContasPagar.cpSelecionada.getTpd().getDescricao().equalsIgnoreCase("Sangria")){
+            chRetiraCaixa.setSelected(true);
+            chRetiraCaixa.setDisable(true);
         }
     }
     
@@ -243,8 +254,11 @@ public class QuitarContasPagarController implements Initializable {
 
     @FXML
     private void clkFinalizar(ActionEvent event) throws ControlException, SQLException {
+        boolean caixa = false;
+        if(chRetiraCaixa.isSelected())
+            caixa = true;
         if(txtCodigo.getText()!=null && !txtCodigo.getText().isEmpty()){
-            int result = cpc.quitarContaPagar(ContasPagar.cpSelecionada, listap);
+            int result = cpc.quitarContaPagar(ContasPagar.cpSelecionada, listap, caixa);
             if(result>0){
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Resposta do Servidor");

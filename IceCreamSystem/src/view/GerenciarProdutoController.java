@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import control.LoteProdutoControl;
 import control.ProdutoControl;
+import entidade.Produto;
 import exception.ControlException;
 import exception.EntidadeException;
 import java.io.IOException;
@@ -96,7 +97,13 @@ public class GerenciarProdutoController implements Initializable {
     private JFXButton btLocalizarProduto;
     @FXML
     private JFXButton btLocalizarLote;
-
+    @FXML
+    private JFXTextField txtReferencia;
+    @FXML
+    private JFXButton btnLocalizaReferencia;
+    
+    private int codReferencia = 0;
+    private int codProd = 0;
     /**
      * Initializes the controller class.
      */
@@ -133,6 +140,7 @@ public class GerenciarProdutoController implements Initializable {
             cbMarca.setValue(pc.retornaSelecionado().getMarca().toString());
             cbUm.setValue(pc.retornaSelecionado().getUnimed().toString());
             txtqtdEmbalagem.setText(pc.retornaSelecionado().getQtdeEmbalagem());
+            codProd = pc.retornaSelecionado().getCodigo();
         }
     }
     
@@ -186,7 +194,9 @@ public class GerenciarProdutoController implements Initializable {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         if(txtValidadeLote.getText()!=null && !txtValidadeLote.getText().isEmpty())
             data = new java.sql.Date(format.parse(txtValidadeLote.getText()).getTime());
-        int result = pc.gravarProdutoeLote(codigo, txtDescricao.getText(), cbTipo.getValue(),  cbMarca.getValue(), cbUm.getValue(), precobase, preco, margem, qtde, qtdemin, codigoLote, txtDescricaoLote.getText(), txtNumeroLote.getText(), data, qtdeLote, qtdeRLote, txtqtdEmbalagem.getText());
+        if(txtReferencia.getText()!=null && !txtReferencia.getText().isEmpty())
+            codReferencia = codReferencia;
+        int result = pc.gravarProdutoeLote(codigo, txtDescricao.getText(), cbTipo.getValue(),  cbMarca.getValue(), cbUm.getValue(), precobase, preco, margem, qtde, qtdemin, codigoLote, txtDescricaoLote.getText(), txtNumeroLote.getText(), data, qtdeLote, qtdeRLote, txtqtdEmbalagem.getText(), codReferencia);
         if(result>0){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Resposta do Servidor");
@@ -354,7 +364,7 @@ public class GerenciarProdutoController implements Initializable {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         if(txtValidadeLote.getText()!=null)
             data = new java.sql.Date(format.parse(txtValidadeLote.getText()).getTime());
-        int result = pc.gravaLote(codigoLote, txtDescricaoLote.getText(), txtNumeroLote.getText(), data, qtde, qtdr, pc.retornaSelecionado().getCodigo());
+        int result = pc.gravaLote(codigoLote, txtDescricaoLote.getText(), txtNumeroLote.getText(), data, qtde, qtdr, codProd);
         if(result>0){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Resposta do Servidor");
@@ -399,6 +409,23 @@ public class GerenciarProdutoController implements Initializable {
         stage.setResizable(false);
         stage.showAndWait();
         carregaLote();
+    }
+
+    @FXML
+    private void clkLocalizarReferencia(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LocalzarProduto.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setTitle("Localizar Produto");
+        stage.setResizable(false);
+        stage.showAndWait();
+        if(Produto.getProdSelecionado()!=null){
+            txtReferencia.setText(Produto.getProdSelecionado().getDescricao());
+            codReferencia = Produto.getProdSelecionado().getCodigo();
+        }
     }
     
     

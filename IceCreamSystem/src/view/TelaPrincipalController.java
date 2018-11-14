@@ -7,8 +7,11 @@ package view;
 
 import com.jfoenix.controls.JFXButton;
 import control.CaixaControl;
+import control.ContaPagarControl;
 import control.PessoaControl;
+import control.ProdutoControl;
 import exception.ControlException;
+import java.awt.Color;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -16,6 +19,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -111,7 +116,9 @@ public class TelaPrincipalController implements Initializable {
     private JFXButton btnEstoque;
     @FXML
     private JFXButton btnContas;
-
+    
+    private ContaPagarControl cpc = new ContaPagarControl();
+    private ProdutoControl pcc = new ProdutoControl();
     /**
      * Initializes the controller class.
      */
@@ -131,6 +138,18 @@ public class TelaPrincipalController implements Initializable {
                 locFuncionario.setVisible(false);
             }
         }
+        try {
+            if(cpc.listaVencendo().size()>0){
+                btnContas.setVisible(true);
+                btnContas.setStyle("-fx-background-color:Red");
+            }
+            if(pcc.listaFaltas().size()>0){
+                btnEstoque.setVisible(true);
+                btnEstoque.setStyle("-fx-background-color:Red");
+            }
+        } catch (ControlException ex) {
+            System.out.println(ex.getMessage());
+        }
         
     } 
     
@@ -146,6 +165,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -159,6 +180,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -172,6 +195,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -191,6 +216,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -204,6 +231,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -217,6 +246,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -230,6 +261,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -243,6 +276,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -256,6 +291,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -269,6 +306,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -282,6 +321,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -295,6 +336,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -308,6 +351,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -321,6 +366,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -334,6 +381,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -349,6 +398,8 @@ public class TelaPrincipalController implements Initializable {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setResizable(false);
             stage.showAndWait();
+            btnContas.setVisible(false);
+            btnEstoque.setVisible(false);
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Resposta do Servidor");
@@ -371,6 +422,8 @@ public class TelaPrincipalController implements Initializable {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setResizable(false);
             stage.showAndWait();
+            btnContas.setVisible(false);
+            btnEstoque.setVisible(false);
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Resposta do Servidor");
@@ -393,6 +446,8 @@ public class TelaPrincipalController implements Initializable {
         stage.setX(320);
         stage.setY(35);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -408,6 +463,8 @@ public class TelaPrincipalController implements Initializable {
         stage.setX(320);
         stage.setY(40);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -421,6 +478,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -436,6 +495,8 @@ public class TelaPrincipalController implements Initializable {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setResizable(false);
             stage.showAndWait();
+            btnContas.setVisible(false);
+            btnEstoque.setVisible(false);
         }else{
              Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Resposta do Servidor");
@@ -458,6 +519,8 @@ public class TelaPrincipalController implements Initializable {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setResizable(false);
             stage.showAndWait();
+            btnContas.setVisible(false);
+            btnEstoque.setVisible(false);
         }else{
              Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Resposta do Servidor");
@@ -478,6 +541,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
@@ -493,19 +558,21 @@ public class TelaPrincipalController implements Initializable {
         stage.setX(320);
         stage.setY(40);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
     private void relProduto(ActionEvent event) throws SQLException {
         String sql = "SELECT\n" +
-"     produto.`prod_codigo` AS produto_prod_codigo,\n" +
-"     produto.`prod_descricao` AS produto_prod_descricao,\n" +
-"     produto.`prod_qtdeEmbalagem` AS produto_prod_qtdeEmbalagem,\n" +
-"     produto.`prod_preco` AS produto_prod_preco,\n" +
-"     produto.`prod_estoque` AS produto_prod_estoque,\n" +
-"     unidade_medida.`um_sigla` AS unidade_medida_um_sigla\n" +
-"FROM\n" +
-"     `unidade_medida` unidade_medida INNER JOIN `produto` produto ON unidade_medida.`um_codigo` = produto.`um_codigo`";
+        "     produto.`prod_codigo` AS produto_prod_codigo,\n" +
+        "     produto.`prod_descricao` AS produto_prod_descricao,\n" +
+        "     produto.`prod_qtdeEmbalagem` AS produto_prod_qtdeEmbalagem,\n" +
+        "     produto.`prod_preco` AS produto_prod_preco,\n" +
+        "     produto.`prod_estoque` AS produto_prod_estoque,\n" +
+        "     unidade_medida.`um_sigla` AS unidade_medida_um_sigla\n" +
+        "FROM\n" +
+        "     `unidade_medida` unidade_medida INNER JOIN `produto` produto ON unidade_medida.`um_codigo` = produto.`um_codigo`";
         
         gerarRelatorio(sql, "Relatorios//Produtos.jasper");
     }
@@ -544,6 +611,8 @@ public class TelaPrincipalController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML

@@ -18,6 +18,7 @@ public class Produto {
     private int qtdeMin;
     private int qtdeEstoque;
     private String qtdeEmbalagem;
+    private int referencia;
     
     private static Produto prodSelecionado;
 
@@ -123,6 +124,14 @@ public class Produto {
         this.qtdeEmbalagem = qtdeEmbalagem;
     }
 
+    public int getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(int referencia) {
+        this.referencia = referencia;
+    }
+
     @Override
     public String toString() {
         return descricao+" "+qtdeEmbalagem+" "+unimed.getAbreviacao();
@@ -178,5 +187,12 @@ public class Produto {
         }
     }
 
+    public List<Produto> listaFalta(Connection con) throws EntidadeException{
+        try{
+            return new ProdutoDAO().listaFalta(this,con);
+        }catch(DAOException ex){
+            throw new EntidadeException(ex.getMessage());
+        }
+    }
     
 }

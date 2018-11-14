@@ -194,10 +194,10 @@ public class LoteProdutoDAO implements GenericDAO<LoteProduto>{
         ResultSet rs = null;
         boolean ultimo = false;
         int cont = 0;
-        String sql = "select min(ltp_codigo), ltp_validade from lote_produto where prod_codigo = ? and ltp_qtderemanes > 0";
+        String sql = "select * from lote_produto where prod_codigo = ? and ltp_codigo = (Select min(ltp_codigo) from lote_produto where ltp_qtderemanes > 0)";
         if(con!=null){
             try{
-                ps = con.prepareStatement(select);
+                ps = con.prepareStatement(sql);
                 if(obj.getProd()!=null && obj.getProd().getCodigo()!=null && obj.getProd().getCodigo()!=0)
                     ps.setInt(++cont, obj.getProd().getCodigo());
                 rs = ps.executeQuery();

@@ -16,12 +16,12 @@ public class ProdutoControl {
     Connection con = conSing.getConexao();
     
     public int gravarProdutoeLote(int codigo, String descricao, String categoria,  String marca, String unimed, double precobase, double preco, double margem, int qtde, int qtdemin, 
-                Integer codigoLote, String descrLote, String numeroLote, Date data, int qtdeLote, int qtdeRLote, String qtdEmbalagem) throws SQLException{
+                Integer codigoLote, String descrLote, String numeroLote, Date data, int qtdeLote, int qtdeRLote, String qtdEmbalagem, int referencia) throws SQLException{
         
         try{
             int rest = 0;
             con.setAutoCommit(false);
-            int codigoG = gravaProduto(codigo, descricao,  categoria, marca, unimed, precobase, preco, margem, qtde, qtdemin, qtdEmbalagem);
+            int codigoG = gravaProduto(codigo, descricao,  categoria, marca, unimed, precobase, preco, margem, qtde, qtdemin, qtdEmbalagem, referencia);
             if(codigoG > 0){
                 rest = gravaLote(codigoLote, descrLote, numeroLote, data, qtdeLote, qtdeRLote, codigoG);
             }
@@ -54,7 +54,7 @@ public class ProdutoControl {
         return new LoteProduto().listaLotePorProduto(con);
     }
     
-    public int gravaProduto(Integer codigo, String descricao, String c, String ma, String um, double precobase, double preco, double margem, int qtde, int qtdmin, String qtdeEmbalagem)throws ControlException{
+    public int gravaProduto(Integer codigo, String descricao, String c, String ma, String um, double precobase, double preco, double margem, int qtde, int qtdmin, String qtdeEmbalagem, int referencia)throws ControlException{
 
         Erro e = new Erro();
         CategoriaProduto cp = new CategoriaProduto();
@@ -92,6 +92,8 @@ public class ProdutoControl {
             p.setQtdeEstoque(qtde);
             p.setQtdeMin(qtdmin);
             p.setQtdeEmbalagem(qtdeEmbalagem);
+            if(referencia> 0)
+                p.setReferencia(referencia);
             try{
                 marca.setNome(ma);
                 ume.setAbreviacao(um);
@@ -161,6 +163,15 @@ public class ProdutoControl {
         p.setCodigo(codigo);
         try{
             return p.select(con);
+        }catch(EntidadeException ex){
+            throw new ControlException(ex.getMessage());
+        }
+    }
+    
+    public List<Produto> listaFaltas() throws ControlException{
+        Produto p = new Produto();
+        try{
+            return p.listaFalta(con);
         }catch(EntidadeException ex){
             throw new ControlException(ex.getMessage());
         }

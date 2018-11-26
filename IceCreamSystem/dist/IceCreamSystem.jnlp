@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="IceCreamSystem.jar" size="490310" download="eager" />
+    <jar href="IceCreamSystem.jar" size="490494" download="eager" />
     <jar href="lib\commons-beanutils-1.9.0.jar" size="230951" download="eager" />
     <jar href="lib\commons-collections-3.2.1.jar" size="575389" download="eager" />
     <jar href="lib\commons-digester-2.1.jar" size="196768" download="eager" />
@@ -18,6 +18,7 @@
     <jar href="lib\iText-2.1.7.js2.jar" size="1130575" download="eager" />
     <jar href="lib\jasperreports-6.1.0.jar" size="5231490" download="eager" />
     <jar href="lib\jfoenix-8.0.4.jar" size="2487326" download="eager" />
+    <jar href="lib\mysql-connector-java-5.1.23-bin.jar" size="834126" download="eager" />
     <jar href="lib\mysql-connector-java-5.1.47.jar" size="1007502" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="IceCreamSystem" >

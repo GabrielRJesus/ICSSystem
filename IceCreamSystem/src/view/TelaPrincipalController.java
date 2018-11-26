@@ -11,7 +11,6 @@ import control.ContaPagarControl;
 import control.PessoaControl;
 import control.ProdutoControl;
 import exception.ControlException;
-import java.awt.Color;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -19,8 +18,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -119,6 +116,16 @@ public class TelaPrincipalController implements Initializable {
     
     private ContaPagarControl cpc = new ContaPagarControl();
     private ProdutoControl pcc = new ProdutoControl();
+    @FXML
+    private MenuItem relroduto;
+    @FXML
+    private MenuItem relDespesas;
+    @FXML
+    private MenuItem relVendas;
+    @FXML
+    private MenuItem relEntregas;
+    @FXML
+    private MenuItem relFornecedor;
     /**
      * Initializes the controller class.
      */
@@ -633,7 +640,34 @@ public class TelaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void clkContas(ActionEvent event) {
+    private void clkContas(ActionEvent event) throws SQLException {
+        String sql = "SELECT\n" +
+        "     contas_pagar.`con_codigo` AS contas_pagar_con_codigo,\n" +
+        "     contas_pagar.`con_data` AS contas_pagar_con_data,\n" +
+        "     contas_pagar.`con_valor` AS contas_pagar_con_valor,\n" +
+        "     contas_pagar.`com_codigo` AS contas_pagar_com_codigo,\n" +
+        "     tipo_conta.`tpc_descricao` AS tipo_conta_tpc_descricao\n" +
+        "FROM\n" +
+        "     `tipo_conta` tipo_conta INNER JOIN `contas_pagar` contas_pagar ON tipo_conta.`tpc_codigo` = contas_pagar.`tpc_codigo`";
+        gerarRelatorio(sql, "Relatorios//Despesas.jasper");
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
+    }
+
+    @FXML
+    private void relDespesas(ActionEvent event) {
+    }
+
+    @FXML
+    private void relVendas(ActionEvent event) {
+    }
+
+    @FXML
+    private void relEntregas(ActionEvent event) {
+    }
+
+    @FXML
+    private void relFornecedor(ActionEvent event) {
     }
 
     

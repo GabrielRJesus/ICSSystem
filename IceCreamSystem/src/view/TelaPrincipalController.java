@@ -574,22 +574,21 @@ public class TelaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void relProduto(ActionEvent event) throws SQLException {
-        String sql = "SELECT\n" +
-        "     produto.`prod_codigo` AS produto_prod_codigo,\n" +
-        "     produto.`prod_descricao` AS produto_prod_descricao,\n" +
-        "     produto.`prod_qtdeEmbalagem` AS produto_prod_qtdeEmbalagem,\n" +
-        "     produto.`prod_preco` AS produto_prod_preco,\n" +
-        "     produto.`prod_estoque` AS produto_prod_estoque,\n" +
-        "     unidade_medida.`um_sigla` AS unidade_medida_um_sigla\n" +
-        "FROM\n" +
-        "     `unidade_medida` unidade_medida INNER JOIN `produto` produto ON unidade_medida.`um_codigo` = produto.`um_codigo`";
-        
-        gerarRelatorio(sql, "Relatorios//Produtos.jasper");
+    private void relProduto(ActionEvent event) throws SQLException, IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/RelatorioProdutos.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Relatorio Produtos");
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
-    private void gerarRelatorio(String sql,String relat) throws SQLException
-   {
+    private void gerarRelatorio(String sql,String relat) throws SQLException{
     try
     { //sql para obter os dados para o relatorio
         Banco conSing = Banco.getInstancia();
@@ -659,7 +658,18 @@ public class TelaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void relDespesas(ActionEvent event) {
+    private void relDespesas(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/RelatorioDespesas.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Relatorio Despesas");
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML

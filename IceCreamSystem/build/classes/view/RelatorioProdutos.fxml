@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="356.0" prefWidth="687.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RelatorioProdutosController">
+   <children>
+      <Label layoutX="165.0" layoutY="14.0" text="Relatorio de Produtos" textFill="#2b2553">
+         <font>
+            <Font name="Arial Black" size="30.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtProduto" layoutX="47.0" layoutY="77.0" prefHeight="25.0" prefWidth="211.0" promptText="Produto:" styleClass="corTexto" stylesheets="@estilo.css">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXComboBox fx:id="cbMarca" layoutX="47.0" layoutY="140.0" prefHeight="30.0" prefWidth="211.0" promptText="Marca:" />
+      <JFXComboBox fx:id="cbTipo" layoutX="47.0" layoutY="211.0" prefHeight="30.0" prefWidth="211.0" promptText="Tipo Produto" />
+      <JFXButton fx:id="btCancelar" layoutX="47.0" layoutY="287.0" onAction="#clkCancelar" prefHeight="27.0" prefWidth="90.0" text="Cancelar">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btGerarRelatorio" layoutX="165.0" layoutY="287.0" onAction="#clkGerar" prefHeight="27.0" prefWidth="152.0" text="Gerar Relatório">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btSair" layoutX="552.0" layoutY="287.0" onAction="#clkSair" prefHeight="27.0" prefWidth="90.0" text="Sair">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXRadioButton fx:id="rbProdFalta" layoutX="437.0" layoutY="82.0" text="Produtos em Falta">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXRadioButton>
+   </children>
+</AnchorPane>

@@ -164,12 +164,16 @@ public class RealizarCompraController implements Initializable {
     private void clkPesquisaProduto(ActionEvent event) throws ControlException {
         ProdutoControl pc = new ProdutoControl();
         List<Produto> listap = pc.listaProdutos();
-        List<Produto> listaaux = new ArrayList<>();
-        for(int i =0; i<listap.size(); i++){
-            if(listap.get(i).getDescricao().equalsIgnoreCase(txtProduto.getText()))
-                listaaux.add(listap.get(i));
+        if(txtProduto.getText()!=null && !txtProduto.getText().isEmpty()){
+            List<Produto> listaaux = new ArrayList<>();
+            for(int i =0; i<listap.size(); i++){
+                if(listap.get(i).getDescricao().contains(txtProduto.getText()))
+                    listaaux.add(listap.get(i));
+            }
+            carregaLista(listaaux);
+        }else{
+            carregaLista(listap);
         }
-        carregaLista(listaaux);
     }
 
     @FXML

@@ -143,6 +143,10 @@ public class TelaPrincipalController implements Initializable {
                 gerenciarFornecedor.setVisible(false);
                 locFornecedor.setVisible(false);
                 locFuncionario.setVisible(false);
+                realizarCompra.setVisible(false);
+                lancarContasPagar.setVisible(false);
+                quitarContasPagar.setVisible(false);
+                menuRelatorios.setVisible(false);
             }
         }
         try {
@@ -632,7 +636,7 @@ public class TelaPrincipalController implements Initializable {
         "     produto.`prod_estoque` AS produto_prod_estoque,\n" +
         "     unidade_medida.`um_sigla` AS unidade_medida_um_sigla\n" +
         "FROM\n" +
-        "     `unidade_medida` unidade_medida INNER JOIN `produto` produto ON unidade_medida.`um_codigo` = produto.`um_codigo` where produto.prod_estoque < produto.prod_qtdemin";
+        "     `unidade_medida` unidade_medida INNER JOIN `produto` produto ON unidade_medida.`um_codigo` = produto.`um_codigo` where produto.prod_qtdemin > 0 and produto.prod_estoque < produto.prod_qtdemin";
         
         gerarRelatorio(sql, "Relatorios//Produtos.jasper");
         btnContas.setVisible(false);

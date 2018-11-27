@@ -39,7 +39,7 @@ FROM
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="26" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Contas proximas ao Vencimento]]></text>
+					<text><![CDATA[Contas à Pagar]]></text>
 				</staticText>
 			</frame>
 		</band>

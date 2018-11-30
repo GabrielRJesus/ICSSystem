@@ -88,6 +88,9 @@
                   <MenuItem fx:id="relVendas" mnemonicParsing="false" onAction="#relVendas" text="Vendas" />
                   <MenuItem fx:id="relEntregas" mnemonicParsing="false" onAction="#relEntregas" text="Entregas" />
                   <MenuItem fx:id="relFornecedor" mnemonicParsing="false" onAction="#relFornecedor" text="Fornecedor" />
+                  <MenuItem fx:id="relClientes" mnemonicParsing="false" onAction="#relClientes" text="Clientes" />
+                  <MenuItem fx:id="relLucros" mnemonicParsing="false" onAction="#relLucros" text="Lucros" />
+                  <MenuItem fx:id="relCompras" mnemonicParsing="false" onAction="#relCompras" text="Compras" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Outros">

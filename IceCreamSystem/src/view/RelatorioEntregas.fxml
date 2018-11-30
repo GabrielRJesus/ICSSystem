@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="277.0" prefWidth="554.0" styleClass="background" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RelatorioEntregasController">
+   <children>
+      <Label layoutX="99.0" layoutY="14.0" text="Relatorio de entregas">
+         <font>
+            <Font name="Arial Black" size="30.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btCancelar" layoutX="75.0" layoutY="231.0" onAction="#clkCancelar" prefHeight="27.0" prefWidth="90.0" text="Cancelar">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btGerarRelatorio" layoutX="193.0" layoutY="231.0" onAction="#clkGerar" prefHeight="27.0" prefWidth="152.0" text="Gerar Relatório">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btSair" layoutX="390.0" layoutY="231.0" onAction="#clkSair" prefHeight="27.0" prefWidth="90.0" text="Sair">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXCheckBox fx:id="chbDia" checkedColor="#2b2553" layoutX="193.0" layoutY="73.0" onAction="#clkDia" text="Entregas do dia">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="chbEfetuadas" checkedColor="#2b2553" layoutX="193.0" layoutY="116.0" onAction="#clkEfetuadas" text="Entregas efetuadas">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="chbProximas" checkedColor="#2b2553" layoutX="194.0" layoutY="160.0" onAction="#clkProximas" text="Entregas agendadas">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXCheckBox>
+   </children>
+</AnchorPane>

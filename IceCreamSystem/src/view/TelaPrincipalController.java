@@ -126,6 +126,12 @@ public class TelaPrincipalController implements Initializable {
     private MenuItem relEntregas;
     @FXML
     private MenuItem relFornecedor;
+    @FXML
+    private MenuItem relClientes;
+    @FXML
+    private MenuItem relLucros;
+    @FXML
+    private MenuItem relCompras;
     /**
      * Initializes the controller class.
      */
@@ -673,15 +679,93 @@ public class TelaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void relVendas(ActionEvent event) {
+    private void relVendas(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/RelatorioVendas.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Relatorio Vendas");
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
-    private void relEntregas(ActionEvent event) {
+    private void relEntregas(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/RelatorioEntregas.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Relatorio Entregas");
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     @FXML
-    private void relFornecedor(ActionEvent event) {
+    private void relFornecedor(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/RelatorioFornecedor.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Relatorio Fornecedor");
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
+    }
+
+    @FXML
+    private void relClientes(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/RelatorioClientes.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Relatorio Clientes");
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
+    }
+
+    @FXML
+    private void relLucros(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/RelatorioLucros.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Relatorio Lucros");
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
+    }
+
+    @FXML
+    private void relCompras(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/RelatorioCompras.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Relatorio Compras");
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.showAndWait();
+        btnContas.setVisible(false);
+        btnEstoque.setVisible(false);
     }
 
     

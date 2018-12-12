@@ -77,6 +77,8 @@ public class ContasReceberControl {
                     }
                 }
             }
+            Venda.getVenSelecionada().setStatus("fechada");
+            Venda.getVenSelecionada().update(con);
             con.commit();
             return chave;
         }catch(EntidadeException ex){

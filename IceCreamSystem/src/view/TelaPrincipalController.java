@@ -11,6 +11,8 @@ import control.ContaPagarControl;
 import control.PessoaControl;
 import control.ProdutoControl;
 import exception.ControlException;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -132,6 +134,8 @@ public class TelaPrincipalController implements Initializable {
     private MenuItem relLucros;
     @FXML
     private MenuItem relCompras;
+    @FXML
+    private MenuItem menuAjuda;
     /**
      * Initializes the controller class.
      */
@@ -766,6 +770,11 @@ public class TelaPrincipalController implements Initializable {
         stage.showAndWait();
         btnContas.setVisible(false);
         btnEstoque.setVisible(false);
+    }
+
+    @FXML
+    private void clkAjuda(ActionEvent event) throws IOException {
+        Desktop.getDesktop().open((new File("Ice Cream System.pdf")));
     }
 
     

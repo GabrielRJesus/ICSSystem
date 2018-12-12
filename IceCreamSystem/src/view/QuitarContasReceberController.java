@@ -238,6 +238,8 @@ public class QuitarContasReceberController implements Initializable {
                 alert.setHeaderText(null);
                 alert.setContentText("Recebimento finalizado com sucesso!");
                 alert.showAndWait();
+                Stage stage = (Stage) btnCancelar.getScene().getWindow();
+                stage.close();
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Resposta do Servidor");

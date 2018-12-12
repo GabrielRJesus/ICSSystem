@@ -48,7 +48,7 @@ public class CompraControl {
             cp.setData(new Date());
             cp.setValor(valor);
             TipoDespesas tp = new TipoDespesas();
-            tp.setCodigo(5); tp.setDescricao("Compras");
+            tp.setCodigo(1); tp.setDescricao("Compras");
             cp.setTpd(tp);
             int cpchave = cp.insert(con);
             con.commit();

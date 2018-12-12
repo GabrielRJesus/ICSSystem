@@ -314,6 +314,7 @@ public class RealizarCompraController implements Initializable {
                         stage.setResizable(false);
                         stage.showAndWait();
                         stage.close();
+                        limpatela();
                     }else{
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Resposta do Servidor");

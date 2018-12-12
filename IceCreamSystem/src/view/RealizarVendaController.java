@@ -13,6 +13,7 @@ import entidade.*;
 import exception.ControlException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,7 +36,6 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.InputMethodEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -136,7 +136,7 @@ public class RealizarVendaController implements Initializable {
 
 
     @FXML
-    private void clkGravar(ActionEvent event) throws ParseException, ControlException{
+    private void clkGravar(ActionEvent event) throws ParseException, ControlException, SQLException{
         int codigo = 0;
         double valTotal = 0;
         java.sql.Date dataEntrega = null;
@@ -240,7 +240,7 @@ public class RealizarVendaController implements Initializable {
 
     @FXML
     private void clkPesqCli(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/LocalzarCliente.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LocalizarCliente.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
@@ -289,43 +289,76 @@ public class RealizarVendaController implements Initializable {
     @FXML
     private void clkInclui(ActionEvent event) {
         if(txtQtde.getText()!=null && !txtQtde.getText().isEmpty()){
-            if(Produto.getProdSelecionado().getQtdeEstoque() >= Integer.parseInt(txtQtde.getText())){
-                TabelaQPagamento tb = new TabelaQPagamento();        
-                tb.setCodigo(codProd);
-                tb.setDescricao(txtProduto.getText());
-                tb.setQtde(Integer.parseInt(txtQtde.getText()));
-                tb.setUnimed(Produto.getProdSelecionado().getQtdeEmbalagem()+" "+Produto.getProdSelecionado().getUnimed().getAbreviacao());
-                tb.setPrecounit(Produto.getProdSelecionado().getPreco());
-                tb.setTotal(tb.getPrecounit()*tb.getQtde());
-                int i = verificaLista(listat, tb);
-                if(i>=0){
-                    if(Produto.getProdSelecionado().getQtdeEstoque() >= listat.get(i).getQtde()+tb.getQtde()){
-                        listat.get(i).setQtde(listat.get(i).getQtde()+tb.getQtde());
-                        listat.get(i).setTotal(listat.get(i).getQtde()*listat.get(i).getPrecounit());
-                        carregaTabela(listat);
+            if(Produto.getProdSelecionado().getQtdeMin()!=0){
+                if(Produto.getProdSelecionado().getQtdeEstoque() >= Integer.parseInt(txtQtde.getText())){
+                    TabelaQPagamento tb = new TabelaQPagamento();        
+                    tb.setCodigo(codProd);
+                    tb.setDescricao(txtProduto.getText());
+                    tb.setQtde(Integer.parseInt(txtQtde.getText()));
+                    tb.setUnimed(Produto.getProdSelecionado().getQtdeEmbalagem()+" "+Produto.getProdSelecionado().getUnimed().getAbreviacao());
+                    tb.setPrecounit(Produto.getProdSelecionado().getPreco());
+                    tb.setTotal(tb.getPrecounit()*tb.getQtde());
+                    int i = verificaLista(listat, tb);
+                    if(i>=0){
+                        if(Produto.getProdSelecionado().getQtdeEstoque() >= listat.get(i).getQtde()+tb.getQtde()){
+                            listat.get(i).setQtde(listat.get(i).getQtde()+tb.getQtde());
+                            listat.get(i).setTotal(listat.get(i).getQtde()*listat.get(i).getPrecounit());
+                            carregaTabela(listat);
+                        }else{
+                            Alert alert = new Alert(Alert.AlertType.WARNING);
+                            alert.setTitle("Resposta do Servidor");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Quantidade maior que no estoque!");
+                            alert.showAndWait();
+                            carregaTabela(listat);
+                        }
                     }else{
-                        Alert alert = new Alert(Alert.AlertType.WARNING);
-                        alert.setTitle("Resposta do Servidor");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Quantidade maior que no estoque!");
-                        alert.showAndWait();
+                        listat.add(tb);
                         carregaTabela(listat);
                     }
+                    valorTotal.setText(somaValor(listat)+"");
+                    txtProduto.setText("");
+                    txtQtde.setText("");
+                    txtValorProduto.setText("0.00");
+                    Produto.setProdSelecionado(new Produto());
                 }else{
-                    listat.add(tb);
-                    carregaTabela(listat);
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Resposta do Servidor");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Quantidade maior que no estoque!");
+                    alert.showAndWait();
                 }
-                valorTotal.setText(somaValor(listat)+"");
-                txtProduto.setText("");
-                txtQtde.setText("");
-                txtValorProduto.setText("0.00");
-                Produto.setProdSelecionado(new Produto());
             }else{
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Resposta do Servidor");
-                alert.setHeaderText(null);
-                alert.setContentText("Quantidade maior que no estoque!");
-                alert.showAndWait();
+                TabelaQPagamento tb = new TabelaQPagamento();        
+                    tb.setCodigo(codProd);
+                    tb.setDescricao(txtProduto.getText());
+                    tb.setQtde(Integer.parseInt(txtQtde.getText()));
+                    tb.setUnimed(Produto.getProdSelecionado().getQtdeEmbalagem()+" "+Produto.getProdSelecionado().getUnimed().getAbreviacao());
+                    tb.setPrecounit(Produto.getProdSelecionado().getPreco());
+                    tb.setTotal(tb.getPrecounit()*tb.getQtde());
+                    int i = verificaLista(listat, tb);
+                    if(i>=0){
+                        if(Produto.getProdSelecionado().getQtdeEstoque() >= listat.get(i).getQtde()+tb.getQtde()){
+                            listat.get(i).setQtde(listat.get(i).getQtde()+tb.getQtde());
+                            listat.get(i).setTotal(listat.get(i).getQtde()*listat.get(i).getPrecounit());
+                            carregaTabela(listat);
+                        }else{
+                            Alert alert = new Alert(Alert.AlertType.WARNING);
+                            alert.setTitle("Resposta do Servidor");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Quantidade maior que no estoque!");
+                            alert.showAndWait();
+                            carregaTabela(listat);
+                        }
+                    }else{
+                        listat.add(tb);
+                        carregaTabela(listat);
+                    }
+                    valorTotal.setText(somaValor(listat)+"");
+                    txtProduto.setText("");
+                    txtQtde.setText("");
+                    txtValorProduto.setText("0.00");
+                    Produto.setProdSelecionado(new Produto());
             }
         }else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -363,7 +396,7 @@ public class RealizarVendaController implements Initializable {
     }
 
     @FXML
-    private void clkFinalizar(ActionEvent event) throws ParseException, ControlException, IOException {
+    private void clkFinalizar(ActionEvent event) throws ParseException, ControlException, IOException, SQLException {
         int codigo = 0;
         double valTotal = 0;
         java.sql.Date dataEntrega = null;
@@ -382,7 +415,7 @@ public class RealizarVendaController implements Initializable {
                 listaFim = convertLista(listat);
                 int rest = vc.gravarVenda(codigo, txtComanda.getText(), data, codigocli, txtCliente.getText(), txtFuncionario.getText(), cbTipoVenda.getValue().getDescricao(), dataEntrega, listaFim, valTotal);
                 if(rest>0){
-                    Venda.setVenSelecionada(vc.seleciona(rest, "", ""));
+                    //Venda.setVenSelecionada(vc.seleciona(rest, "", ""));
                     Parent root = FXMLLoader.load(getClass().getResource("/view/QuitarContasReceber.fxml"));
                     Scene scene = new Scene(root);
                     Stage stage = new Stage();

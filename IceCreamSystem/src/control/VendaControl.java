@@ -4,8 +4,11 @@ import entidade.*;
 import exception.ControlException;
 import exception.EntidadeException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sql.Banco;
 
 public class VendaControl {
@@ -13,11 +16,12 @@ public class VendaControl {
     Banco conSing = Banco.getInstancia();
     Connection con = conSing.getConexao();
     
-    public int gravarVenda(int codigo,String comanda, Date data, int clicodigo, String cliente, String funcionario, String tipo, Date entrega, List<ItensVenda> lista, double total) throws ControlException{
+    public int gravarVenda(int codigo,String comanda, Date data, int clicodigo, String cliente, String funcionario, String tipo, Date entrega, List<ItensVenda> lista, double total) throws ControlException, SQLException{
         Venda v = new Venda();
         Cliente c = new Cliente();
         Funcionario f = new Funcionario();
         TipoVenda tpv = new TipoVenda();
+        int chave = 0, ret=0;
         if(codigo!=0)
             v.setCodigo(codigo);
         if(comanda!=null && !comanda.isEmpty())
@@ -28,7 +32,7 @@ public class VendaControl {
         }
         v.setCliNome(cliente);
         if(funcionario!=null && !funcionario.isEmpty())
-            f.setCodigo(codigo);
+            f.setNome(funcionario);
         if(tipo!=null && !tipo.isEmpty())
             tpv.setDescricao(tipo);
         v.setTotal(total);
@@ -36,6 +40,7 @@ public class VendaControl {
         if(entrega!=null)
             v.setEntrega(entrega);
         try{
+            con.setAutoCommit(false);
             f = f.select(con);
             v.setFunc(f);
             if(c.getCodigo()!=null && c.getCodigo()!=0){
@@ -45,18 +50,31 @@ public class VendaControl {
             tpv = tpv.select(con);
             v.setTpv(tpv);
             v.setStatus("aberta");
+            
             if(codigo!=0){
                 v.deleteItens(con);
-                int ret =  v.update(con);
+                ret =  v.update(con);
                 return ret;
             }
             else{
-                int chave = v.insert(con);
+                chave = v.insert(con);
                 return chave;
             }
+            
+            
         }catch(EntidadeException ex){
+            con.rollback();
             throw new ControlException(ex.getMessage());
+        } catch (SQLException ex) {
+            con.rollback();
+            Logger.getLogger(VendaControl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        con.commit();
+        if(chave>0)
+            return chave;
+        else
+            return ret;
+        
     }
     
     public int excluirVenda(int codigo) throws ControlException{

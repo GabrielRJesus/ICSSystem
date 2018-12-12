@@ -14,6 +14,8 @@ import exception.EntidadeException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -57,8 +59,6 @@ public class GerenciarFuncionarioController implements Initializable {
     @FXML
     private JFXTextField txtCelular;
     @FXML
-    private JFXDatePicker dpData;
-    @FXML
     private JFXComboBox<String> cbSexo;
     @FXML
     private JFXTextField txtEmail;
@@ -87,10 +87,6 @@ public class GerenciarFuncionarioController implements Initializable {
     @FXML
     private JFXPasswordField txtSenha;
     @FXML
-    private JFXDatePicker dpDataAdm;
-    @FXML
-    private JFXDatePicker dpDataDem;
-    @FXML
     private JFXTextField txtSalario;
     @FXML
     private JFXTextField txtCargo;
@@ -98,6 +94,12 @@ public class GerenciarFuncionarioController implements Initializable {
     private JFXButton btCancelar;
     @FXML
     private JFXButton btExcluir;
+    @FXML
+    private JFXTextField txtDataN;
+    @FXML
+    private JFXTextField txtDataAdmissao;
+    @FXML
+    private JFXTextField txtDataDemissao;
 
     /**
      * Initializes the controller class.
@@ -108,6 +110,9 @@ public class GerenciarFuncionarioController implements Initializable {
         
         MaskFieldUtil.cepField(txtCep);
         MaskFieldUtil.cpfField(txtCpf);
+        MaskFieldUtil.dateField(txtDataN);
+        MaskFieldUtil.dateField(txtDataAdmissao);
+        MaskFieldUtil.dateField(txtDataDemissao);
         MaskFieldUtil.foneField(txtTelefone);
         MaskFieldUtil.foneField(txtCelular);
         inicializa(true);
@@ -121,6 +126,8 @@ public class GerenciarFuncionarioController implements Initializable {
     }   
     
     public void carregaFuncionario(){
+         SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+         
         PessoaControl pc = new PessoaControl();
         if(pc.retornaFuncBusca()!=null){
             LocalDate data = null, dataadm = null, datadem = null;
@@ -141,7 +148,8 @@ public class GerenciarFuncionarioController implements Initializable {
             txtNumero.setText(pc.retornaFuncBusca().getLogradouro().getNumero());
             txtRg.setText(pc.retornaFuncBusca().getRg());
             txtTelefone.setText(pc.retornaFuncBusca().getTelefone());
-            dpData.setValue(data);
+            String str = fmt.format(data);
+            txtDataN.setText(str);
             cbCidade.setValue(pc.retornaFuncBusca().getLogradouro().getCidade().toString());
             cbEstado.setValue(pc.retornaFuncBusca().getLogradouro().getCidade().getEstado().toString());
             if(pc.retornaFuncBusca().getSexo()=='M')
@@ -152,8 +160,10 @@ public class GerenciarFuncionarioController implements Initializable {
             txtSenha.setText(pc.retornaFuncBusca().getSenha());
             txtCargo.setText(pc.retornaFuncBusca().getCargo());
             txtSalario.setText(pc.retornaFuncBusca().getSalario()+"");
-            dpDataAdm.setValue(dataadm);
-            dpDataDem.setValue(datadem);
+            String stra = fmt.format(dataadm);
+            txtDataAdmissao.setText(stra);
+            String strd = fmt.format(datadem);
+            txtDataDemissao.setText(strd);
         }
     }
 
@@ -163,11 +173,11 @@ public class GerenciarFuncionarioController implements Initializable {
     }
 
     @FXML
-    private void clkGravar(ActionEvent event) throws ControlException, SQLException, EntidadeException {
+    private void clkGravar(ActionEvent event) throws ControlException, SQLException, EntidadeException, ParseException {
         Integer codigo;
         Double salario;
         Date datadem = null, dataadm = null, data = null;
-        
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         if(txtCodigo.getText()!=null && !txtCodigo.getText().isEmpty())
             codigo = Integer.parseInt(txtCodigo.getText());
         else
@@ -176,12 +186,12 @@ public class GerenciarFuncionarioController implements Initializable {
             salario = Double.parseDouble(txtSalario.getText());
         else
             salario = 0.0;
-        if(dpData.getValue()!=null)
-            data = java.sql.Date.valueOf(dpData.getValue());
-        if(dpDataAdm!=null)
-            dataadm = java.sql.Date.valueOf(dpDataAdm.getValue());
-        if(dpDataDem.getValue()!=null)
-            datadem = java.sql.Date.valueOf(dpDataDem.getValue());
+        if(txtDataN.getText()!=null && !txtDataN.getText().isEmpty())
+            data = new java.sql.Date(format.parse(txtDataN.getText()).getTime());
+        if(txtDataAdmissao.getText()!=null && !txtDataAdmissao.getText().isEmpty())
+            dataadm = new java.sql.Date(format.parse(txtDataAdmissao.getText()).getTime());;
+        if(txtDataDemissao.getText()!=null && !txtDataDemissao.getText().isEmpty())
+            datadem = new java.sql.Date(format.parse(txtDataDemissao.getText()).getTime());
         PessoaControl pc = new PessoaControl();
         int rest = pc.gravarFuncionario(codigo, txtNome.getText().toString(), txtCpf.getText().toString(), txtRg.getText().toString(), txtTelefone.getText().toString(), 
                 txtCelular.getText().toString(),data, cbSexo.getValue(), txtEmail.getText().toString(), 
@@ -242,7 +252,6 @@ public class GerenciarFuncionarioController implements Initializable {
         txtNumero.setDisable(estado);
         txtRg.setDisable(estado);
         txtTelefone.setDisable(estado);
-        dpData.setDisable(estado);
         cbCidade.setDisable(estado);
         cbEstado.setDisable(estado);
         cbSexo.setDisable(estado);
@@ -252,9 +261,9 @@ public class GerenciarFuncionarioController implements Initializable {
         txtSenha.setDisable(estado);
         txtCargo.setDisable(estado);
         txtSalario.setDisable(estado);
-        dpDataAdm.setDisable(estado);
-        dpDataDem.setDisable(estado);
-        
+        txtDataN.setDisable(estado);
+        txtDataAdmissao.setDisable(estado);
+        txtDataDemissao.setDisable(estado);
     }
     
     public void limpatela(){
@@ -269,7 +278,6 @@ public class GerenciarFuncionarioController implements Initializable {
         txtNumero.setText("");
         txtRg.setText("");
         txtTelefone.setText("");
-        dpData.setValue(null);
         cbCidade.setValue("");
         cbEstado.setValue("");
         cbSexo.setPromptText("Sexo");
@@ -277,8 +285,9 @@ public class GerenciarFuncionarioController implements Initializable {
         txtSenha.setText("");
         txtCargo.setText("");
         txtSalario.setText("");
-        dpDataAdm.setValue(null);
-        dpDataDem.setValue(null);
+        txtDataN.setText((""));
+        txtDataAdmissao.setText((""));
+        txtDataDemissao.setText((""));
     }
     
     public void carregacb(){

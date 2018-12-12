@@ -137,12 +137,12 @@ public class PrimeiroAcessoController implements Initializable {
             salario = Double.parseDouble(txtSalario.getText());
         else
             salario = 0.0;
-        if(dpData.getText()!=null && !dpData.getText().isEmpty())
-            data = new java.sql.Date(format.parse(dpData.getText()).getTime());
-        if(dpDataAdm.getText()!=null && !dpDataAdm.getText().isEmpty())
-            dataadm = new java.sql.Date(format.parse(dpDataAdm.getText()).getTime());
-        if(dpDataDem.getText()!=null && !dpDataDem.getText().isEmpty())
-            datadem = new java.sql.Date(format.parse(dpDataDem.getText()).getTime());
+        if(txtDataNascimento.getText()!=null && !txtDataNascimento.getText().isEmpty())
+            data = new java.sql.Date(format.parse(txtDataNascimento.getText()).getTime());
+        if(txtDataAdmis.getText()!=null && !txtDataAdmis.getText().isEmpty())
+            dataadm = new java.sql.Date(format.parse(txtDataAdmis.getText()).getTime());
+        if(txtDataDemis.getText()!=null && !txtDataDemis.getText().isEmpty())
+            datadem = new java.sql.Date(format.parse(txtDataDemis.getText()).getTime());
         PessoaControl pc = new PessoaControl();
         int rest = pc.gravarFuncionario(codigo, txtNome.getText().toString(), txtCpf.getText().toString(), txtRg.getText().toString(), txtTelefone.getText().toString(), 
                 txtCelular.getText().toString(),data, cbSexo.getValue(), txtEmail.getText().toString(), 
@@ -196,7 +196,6 @@ public class PrimeiroAcessoController implements Initializable {
         txtNumero.setDisable(estado);
         txtRg.setDisable(estado);
         txtTelefone.setDisable(estado);
-        dpData.setDisable(estado);
         cbCidade.setDisable(estado);
         cbEstado.setDisable(estado);
         cbSexo.setDisable(estado);
@@ -205,8 +204,6 @@ public class PrimeiroAcessoController implements Initializable {
         txtSenha.setDisable(estado);
         txtCargo.setDisable(estado);
         txtSalario.setDisable(estado);
-        dpDataAdm.setDisable(estado);
-        dpDataDem.setDisable(estado);
         
     }
     
